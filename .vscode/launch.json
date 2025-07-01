@@ -1,0 +1,41 @@
+{
+    "version": "0.2.0",
+    "configurations": 
+    [
+        {
+            "name": "STM32L151",
+            "cwd": "${workspaceRoot}",
+            "executable": "build/${workspaceFolderBasename}.elf",
+            "request": "launch",
+            "type": "cortex-debug",
+            "servertype": "openocd",
+            "preLaunchTask": "build",
+            "gdbPath": "arm-none-eabi-gdb",
+             "svdFile": "${workspaceRoot}/STM32L151.svd", // Add you svd file
+            // Set you programmer and target controller
+            "configFiles": 
+            [
+                "interface/cmsis-dap.cfg",
+                //"interface/stlink.cfg",
+                "target/stm32l1.cfg"
+            ],
+            "runToEntryPoint": "main",
+            "showDevDebugOutput": "none",
+            "swoConfig": 
+            {
+                "enabled": true,
+                "swoFrequency": 240000,
+                "cpuFrequency": 32000000,
+                "decoders": 
+                [
+                    {
+                        "label": "RTT channel 0",
+                        "port": 0,
+                        "timestamp": true,
+                        "type": "console"
+                    }
+                ]
+            }
+        }
+    ]
+}

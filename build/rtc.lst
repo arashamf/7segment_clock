@@ -1,0 +1,1195 @@
+ARM GAS  /tmp/cc9ip7Hy.s 			page 1
+
+
+   1              		.cpu cortex-m3
+   2              		.arch armv7-m
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"rtc.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.RTC_ConvertToDec,"ax",%progbits
+  18              		.align	1
+  19              		.syntax unified
+  20              		.thumb
+  21              		.thumb_func
+  23              	RTC_ConvertToDec:
+  24              	.LVL0:
+  25              	.LFB714:
+  26              		.file 1 "Core/Src/rtc.c"
+   1:Core/Src/rtc.c **** // Includes--------------------------------------------------------------------------//
+   2:Core/Src/rtc.c **** #include "rtc.h"
+   3:Core/Src/rtc.c **** #include "i2c.h"
+   4:Core/Src/rtc.c **** #include "time64.h"
+   5:Core/Src/rtc.c **** 
+   6:Core/Src/rtc.c **** // DEFINES---------------------------------------------------------------------------//
+   7:Core/Src/rtc.c **** 
+   8:Core/Src/rtc.c **** // TYPEDEFS--------------------------------------------------------------------------//
+   9:Core/Src/rtc.c **** 
+  10:Core/Src/rtc.c **** //STATIC PROTOTYPES------------------------------------------------------------------//
+  11:Core/Src/rtc.c **** static uint8_t RTC_ConvertToDec(uint8_t );
+  12:Core/Src/rtc.c **** static uint8_t RTC_ConvertToBinDec(uint8_t );
+  13:Core/Src/rtc.c **** 
+  14:Core/Src/rtc.c **** // STATIC VARIABLES------------------------------------------------------------------//
+  15:Core/Src/rtc.c **** I2C_TypeDef * RTC_I2C = I2C1;
+  16:Core/Src/rtc.c **** struct TM TimeStamp;
+  17:Core/Src/rtc.c **** 
+  18:Core/Src/rtc.c **** //массив с количеством дней в предыдущем месяце, [0][12] - �
+  19:Core/Src/rtc.c **** const unsigned int pred_sum [2] [12] =	
+  20:Core/Src/rtc.c **** { 
+  21:Core/Src/rtc.c **** 	{0,31,59,90,120,151,181,212,243,273,304,334}, 
+  22:Core/Src/rtc.c **** 	{0,31,60,91,121,152,182,213,244,274,305,335} 
+  23:Core/Src/rtc.c **** };
+  24:Core/Src/rtc.c **** 
+  25:Core/Src/rtc.c **** //FUNCTIONS---------------------------------------------------------------------------//
+  26:Core/Src/rtc.c **** uint8_t GetTime (uint8_t RTC_adress, uint8_t registr_adress, uint8_t sizebuf, uint8_t * RTC_buffer)
+  27:Core/Src/rtc.c **** {
+  28:Core/Src/rtc.c **** 
+  29:Core/Src/rtc.c **** 	if (HAL_I2C_Master_Transmit(&hi2c1, (uint16_t)RTC_adress, &registr_adress, 1, (uint32_t)0xFFFF)!= 
+  30:Core/Src/rtc.c **** 	{	return  HAL_ERROR;	}
+  31:Core/Src/rtc.c **** 	
+  32:Core/Src/rtc.c **** 	while(HAL_I2C_GetState(&hi2c1) != HAL_I2C_STATE_READY){} //ожидание готовности �
+ARM GAS  /tmp/cc9ip7Hy.s 			page 2
+
+
+  33:Core/Src/rtc.c **** 		
+  34:Core/Src/rtc.c **** 	if(HAL_I2C_Master_Receive (&hi2c1, (uint16_t) RTC_adress, (uint8_t*)RTC_buffer, (uint16_t) sizebuf
+  35:Core/Src/rtc.c **** 	{	return  HAL_ERROR;	}
+  36:Core/Src/rtc.c **** //	i2c_read_array ((uint16_t)RTC_adress, registr_adress, RTC_buffer, sizebuf);
+  37:Core/Src/rtc.c **** 	
+  38:Core/Src/rtc.c **** 	for (uint8_t count = 0; count < sizebuf; count++)
+  39:Core/Src/rtc.c **** 	{
+  40:Core/Src/rtc.c **** 		*RTC_buffer = RTC_ConvertToDec(*RTC_buffer); //перевод числа из двоично-де
+  41:Core/Src/rtc.c **** 		RTC_buffer++;
+  42:Core/Src/rtc.c **** 	}
+  43:Core/Src/rtc.c **** 	
+  44:Core/Src/rtc.c **** 	return  HAL_OK;
+  45:Core/Src/rtc.c **** }
+  46:Core/Src/rtc.c **** 
+  47:Core/Src/rtc.c **** //-------------------------------------------------------------------------------------------------
+  48:Core/Src/rtc.c **** uint8_t GetTemp (uint8_t  RTC_adress, uint8_t registr_adress,  uint8_t * temp_buffer)
+  49:Core/Src/rtc.c **** {
+  50:Core/Src/rtc.c **** 	
+  51:Core/Src/rtc.c **** 	if (HAL_I2C_Master_Transmit(&hi2c1, (uint16_t)RTC_adress, &registr_adress, 1, (uint32_t)0xFFFF)!= 
+  52:Core/Src/rtc.c **** 	{	return  HAL_ERROR;	}
+  53:Core/Src/rtc.c **** 	
+  54:Core/Src/rtc.c **** 	while(HAL_I2C_GetState(&hi2c1) != HAL_I2C_STATE_READY){} //ожидание готовности �
+  55:Core/Src/rtc.c **** 		
+  56:Core/Src/rtc.c **** 	if (HAL_I2C_Master_Receive (&hi2c1, (uint16_t) RTC_adress, temp_buffer, 1, (uint32_t)0xFFFF)!=HAL_
+  57:Core/Src/rtc.c **** 	{	return  HAL_ERROR;	}
+  58:Core/Src/rtc.c **** 	
+  59:Core/Src/rtc.c **** 	return  HAL_OK;
+  60:Core/Src/rtc.c **** }
+  61:Core/Src/rtc.c **** 
+  62:Core/Src/rtc.c **** //-------------------------------------------------------------------------------------------------
+  63:Core/Src/rtc.c **** uint8_t SetTime (uint8_t RTC_adress, uint8_t registr_adress, char *time)
+  64:Core/Src/rtc.c **** {
+  65:Core/Src/rtc.c **** 	//формирование сообщения для RTC	
+  66:Core/Src/rtc.c **** 	uint8_t I2C_RTC_buffer [4] = {0}; //массив c отформатированными данны
+  67:Core/Src/rtc.c **** 	//uint8_t * ptr_RTC_buffer = I2C_RTC_buffer;
+  68:Core/Src/rtc.c **** 	signed char ptr = 1;
+  69:Core/Src/rtc.c **** 	char buf_ch;
+  70:Core/Src/rtc.c **** 	
+  71:Core/Src/rtc.c **** 	for (signed char count = 0; count < 6; count++) 
+  72:Core/Src/rtc.c **** 	{
+  73:Core/Src/rtc.c **** 		buf_ch = *(time+count);
+  74:Core/Src/rtc.c **** 		if ((buf_ch >= 0x30) && (buf_ch <= 0x39))
+  75:Core/Src/rtc.c **** 		{
+  76:Core/Src/rtc.c **** 			if (!(count%2)) //при i=0, 2, 4
+  77:Core/Src/rtc.c **** 			{
+  78:Core/Src/rtc.c **** 				I2C_RTC_buffer [ptr] += 10 * (buf_ch - 48); //десятый разряд секунды, ми�
+  79:Core/Src/rtc.c **** 			}
+  80:Core/Src/rtc.c **** 			else
+  81:Core/Src/rtc.c **** 			{
+  82:Core/Src/rtc.c **** 				I2C_RTC_buffer [ptr] += buf_ch - 48; //единичный разряд секунды, мину
+  83:Core/Src/rtc.c **** 				I2C_RTC_buffer [ptr] = RTC_ConvertToBinDec(I2C_RTC_buffer [ptr]); //перевод в двои�
+  84:Core/Src/rtc.c **** 				ptr++;
+  85:Core/Src/rtc.c **** 			}
+  86:Core/Src/rtc.c **** 		}
+  87:Core/Src/rtc.c **** 		else
+  88:Core/Src/rtc.c **** 		{	return  HAL_ERROR;	}
+  89:Core/Src/rtc.c **** 	}
+ARM GAS  /tmp/cc9ip7Hy.s 			page 3
+
+
+  90:Core/Src/rtc.c **** 	I2C_RTC_buffer [0] = registr_adress; //в первый элемент массива - адрес 
+  91:Core/Src/rtc.c **** 	
+  92:Core/Src/rtc.c **** 	if (HAL_I2C_Master_Transmit(&hi2c1, (uint16_t) RTC_adress, (uint8_t*)I2C_RTC_buffer, 4, (uint32_t)
+  93:Core/Src/rtc.c **** 	{	return  HAL_ERROR;	}
+  94:Core/Src/rtc.c **** 	
+  95:Core/Src/rtc.c **** 	return  HAL_OK;
+  96:Core/Src/rtc.c **** }
+  97:Core/Src/rtc.c **** 
+  98:Core/Src/rtc.c **** //---------ф-я перевода числа из двоично-десятичного предс�
+  99:Core/Src/rtc.c **** static uint8_t RTC_ConvertToDec(uint8_t digit)
+ 100:Core/Src/rtc.c **** {
+  27              		.loc 1 100 1 view -0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 0
+  30              		@ frame_needed = 0, uses_anonymous_args = 0
+  31              		@ link register save eliminated.
+ 101:Core/Src/rtc.c **** 	uint8_t ch = ((digit>>4)*10 + (0x0F & digit));
+  32              		.loc 1 101 2 view .LVU1
+  33              		.loc 1 101 30 is_stmt 0 view .LVU2
+  34 0000 0309     		lsrs	r3, r0, #4
+  35 0002 03EB8303 		add	r3, r3, r3, lsl #2
+  36              		.loc 1 101 38 view .LVU3
+  37 0006 00F00F00 		and	r0, r0, #15
+  38              	.LVL1:
+  39              		.loc 1 101 10 view .LVU4
+  40 000a 00EB4300 		add	r0, r0, r3, lsl #1
+  41              	.LVL2:
+ 102:Core/Src/rtc.c **** 	return ch;
+  42              		.loc 1 102 2 is_stmt 1 view .LVU5
+ 103:Core/Src/rtc.c **** }
+  43              		.loc 1 103 1 is_stmt 0 view .LVU6
+  44 000e C0B2     		uxtb	r0, r0
+  45              		.loc 1 103 1 view .LVU7
+  46 0010 7047     		bx	lr
+  47              		.cfi_endproc
+  48              	.LFE714:
+  50              		.section	.text.RTC_ConvertToBinDec,"ax",%progbits
+  51              		.align	1
+  52              		.syntax unified
+  53              		.thumb
+  54              		.thumb_func
+  56              	RTC_ConvertToBinDec:
+  57              	.LVL3:
+  58              	.LFB715:
+ 104:Core/Src/rtc.c **** 
+ 105:Core/Src/rtc.c **** //---------ф-я перевода числа из обычного в двоично-десятич
+ 106:Core/Src/rtc.c **** static uint8_t RTC_ConvertToBinDec(uint8_t digit)
+ 107:Core/Src/rtc.c **** {
+  59              		.loc 1 107 1 is_stmt 1 view -0
+  60              		.cfi_startproc
+  61              		@ args = 0, pretend = 0, frame = 0
+  62              		@ frame_needed = 0, uses_anonymous_args = 0
+  63              		@ link register save eliminated.
+ 108:Core/Src/rtc.c **** 	uint8_t ch = ((digit/10) << 4) + (digit%10);
+  64              		.loc 1 108 2 view .LVU9
+  65              		.loc 1 108 27 is_stmt 0 view .LVU10
+  66 0000 064B     		ldr	r3, .L3
+ARM GAS  /tmp/cc9ip7Hy.s 			page 4
+
+
+  67 0002 A3FB0023 		umull	r2, r3, r3, r0
+  68 0006 DB08     		lsrs	r3, r3, #3
+  69 0008 1A01     		lsls	r2, r3, #4
+  70 000a D2B2     		uxtb	r2, r2
+  71              		.loc 1 108 33 view .LVU11
+  72 000c 03EB8303 		add	r3, r3, r3, lsl #2
+  73 0010 A0EB4300 		sub	r0, r0, r3, lsl #1
+  74              	.LVL4:
+  75              		.loc 1 108 33 view .LVU12
+  76 0014 C0B2     		uxtb	r0, r0
+  77              		.loc 1 108 10 view .LVU13
+  78 0016 1044     		add	r0, r0, r2
+  79              	.LVL5:
+ 109:Core/Src/rtc.c **** 	return ch;
+  80              		.loc 1 109 2 is_stmt 1 view .LVU14
+ 110:Core/Src/rtc.c **** }
+  81              		.loc 1 110 1 is_stmt 0 view .LVU15
+  82 0018 C0B2     		uxtb	r0, r0
+  83              		.loc 1 110 1 view .LVU16
+  84 001a 7047     		bx	lr
+  85              	.L4:
+  86              		.align	2
+  87              	.L3:
+  88 001c CDCCCCCC 		.word	-858993459
+  89              		.cfi_endproc
+  90              	.LFE715:
+  92              		.section	.text.GetTime,"ax",%progbits
+  93              		.align	1
+  94              		.global	GetTime
+  95              		.syntax unified
+  96              		.thumb
+  97              		.thumb_func
+  99              	GetTime:
+ 100              	.LVL6:
+ 101              	.LFB711:
+  27:Core/Src/rtc.c **** 
+ 102              		.loc 1 27 1 is_stmt 1 view -0
+ 103              		.cfi_startproc
+ 104              		@ args = 0, pretend = 0, frame = 8
+ 105              		@ frame_needed = 0, uses_anonymous_args = 0
+  27:Core/Src/rtc.c **** 
+ 106              		.loc 1 27 1 is_stmt 0 view .LVU18
+ 107 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 108              	.LCFI0:
+ 109              		.cfi_def_cfa_offset 20
+ 110              		.cfi_offset 4, -20
+ 111              		.cfi_offset 5, -16
+ 112              		.cfi_offset 6, -12
+ 113              		.cfi_offset 7, -8
+ 114              		.cfi_offset 14, -4
+ 115 0002 85B0     		sub	sp, sp, #20
+ 116              	.LCFI1:
+ 117              		.cfi_def_cfa_offset 40
+ 118 0004 1646     		mov	r6, r2
+ 119 0006 1D46     		mov	r5, r3
+ 120 0008 8DF80F10 		strb	r1, [sp, #15]
+  29:Core/Src/rtc.c **** 	{	return  HAL_ERROR;	}
+ARM GAS  /tmp/cc9ip7Hy.s 			page 5
+
+
+ 121              		.loc 1 29 2 is_stmt 1 view .LVU19
+  29:Core/Src/rtc.c **** 	{	return  HAL_ERROR;	}
+ 122              		.loc 1 29 6 is_stmt 0 view .LVU20
+ 123 000c 0446     		mov	r4, r0
+ 124 000e 4FF6FF73 		movw	r3, #65535
+ 125              	.LVL7:
+  29:Core/Src/rtc.c **** 	{	return  HAL_ERROR;	}
+ 126              		.loc 1 29 6 view .LVU21
+ 127 0012 0093     		str	r3, [sp]
+ 128 0014 0123     		movs	r3, #1
+ 129 0016 0DF10F02 		add	r2, sp, #15
+ 130              	.LVL8:
+  29:Core/Src/rtc.c **** 	{	return  HAL_ERROR;	}
+ 131              		.loc 1 29 6 view .LVU22
+ 132 001a 0146     		mov	r1, r0
+ 133              	.LVL9:
+  29:Core/Src/rtc.c **** 	{	return  HAL_ERROR;	}
+ 134              		.loc 1 29 6 view .LVU23
+ 135 001c 1248     		ldr	r0, .L13
+ 136              	.LVL10:
+  29:Core/Src/rtc.c **** 	{	return  HAL_ERROR;	}
+ 137              		.loc 1 29 6 view .LVU24
+ 138 001e FFF7FEFF 		bl	HAL_I2C_Master_Transmit
+ 139              	.LVL11:
+  29:Core/Src/rtc.c **** 	{	return  HAL_ERROR;	}
+ 140              		.loc 1 29 5 view .LVU25
+ 141 0022 E8B9     		cbnz	r0, .L10
+ 142              	.L7:
+  32:Core/Src/rtc.c **** 		
+ 143              		.loc 1 32 57 is_stmt 1 discriminator 1 view .LVU26
+  32:Core/Src/rtc.c **** 		
+ 144              		.loc 1 32 7 discriminator 1 view .LVU27
+  32:Core/Src/rtc.c **** 		
+ 145              		.loc 1 32 8 is_stmt 0 discriminator 1 view .LVU28
+ 146 0024 1048     		ldr	r0, .L13
+ 147 0026 FFF7FEFF 		bl	HAL_I2C_GetState
+ 148              	.LVL12:
+  32:Core/Src/rtc.c **** 		
+ 149              		.loc 1 32 7 discriminator 1 view .LVU29
+ 150 002a 2028     		cmp	r0, #32
+ 151 002c FAD1     		bne	.L7
+  34:Core/Src/rtc.c **** 	{	return  HAL_ERROR;	}
+ 152              		.loc 1 34 2 is_stmt 1 view .LVU30
+  34:Core/Src/rtc.c **** 	{	return  HAL_ERROR;	}
+ 153              		.loc 1 34 5 is_stmt 0 view .LVU31
+ 154 002e 4FF6FF73 		movw	r3, #65535
+ 155 0032 0093     		str	r3, [sp]
+ 156 0034 3346     		mov	r3, r6
+ 157 0036 2A46     		mov	r2, r5
+ 158 0038 2146     		mov	r1, r4
+ 159 003a 0B48     		ldr	r0, .L13
+ 160 003c FFF7FEFF 		bl	HAL_I2C_Master_Receive
+ 161              	.LVL13:
+  34:Core/Src/rtc.c **** 	{	return  HAL_ERROR;	}
+ 162              		.loc 1 34 4 view .LVU32
+ 163 0040 0746     		mov	r7, r0
+ 164 0042 78B9     		cbnz	r0, .L11
+ARM GAS  /tmp/cc9ip7Hy.s 			page 6
+
+
+ 165              	.LBB2:
+  38:Core/Src/rtc.c **** 	{
+ 166              		.loc 1 38 15 view .LVU33
+ 167 0044 0446     		mov	r4, r0
+ 168 0046 06E0     		b	.L8
+ 169              	.LVL14:
+ 170              	.L9:
+  40:Core/Src/rtc.c **** 		RTC_buffer++;
+ 171              		.loc 1 40 3 is_stmt 1 discriminator 3 view .LVU34
+  40:Core/Src/rtc.c **** 		RTC_buffer++;
+ 172              		.loc 1 40 17 is_stmt 0 discriminator 3 view .LVU35
+ 173 0048 2878     		ldrb	r0, [r5]	@ zero_extendqisi2
+ 174 004a FFF7FEFF 		bl	RTC_ConvertToDec
+ 175              	.LVL15:
+  40:Core/Src/rtc.c **** 		RTC_buffer++;
+ 176              		.loc 1 40 15 discriminator 3 view .LVU36
+ 177 004e 05F8010B 		strb	r0, [r5], #1
+ 178              	.LVL16:
+  41:Core/Src/rtc.c **** 	}
+ 179              		.loc 1 41 3 is_stmt 1 discriminator 3 view .LVU37
+  38:Core/Src/rtc.c **** 	{
+ 180              		.loc 1 38 43 discriminator 3 view .LVU38
+  38:Core/Src/rtc.c **** 	{
+ 181              		.loc 1 38 48 is_stmt 0 discriminator 3 view .LVU39
+ 182 0052 0134     		adds	r4, r4, #1
+ 183              	.LVL17:
+  38:Core/Src/rtc.c **** 	{
+ 184              		.loc 1 38 48 discriminator 3 view .LVU40
+ 185 0054 E4B2     		uxtb	r4, r4
+ 186              	.LVL18:
+ 187              	.L8:
+  38:Core/Src/rtc.c **** 	{
+ 188              		.loc 1 38 26 is_stmt 1 discriminator 1 view .LVU41
+  38:Core/Src/rtc.c **** 	{
+ 189              		.loc 1 38 2 is_stmt 0 discriminator 1 view .LVU42
+ 190 0056 B442     		cmp	r4, r6
+ 191 0058 F6D3     		bcc	.L9
+ 192              	.LVL19:
+ 193              	.L6:
+  38:Core/Src/rtc.c **** 	{
+ 194              		.loc 1 38 2 discriminator 1 view .LVU43
+ 195              	.LBE2:
+  45:Core/Src/rtc.c **** 
+ 196              		.loc 1 45 1 view .LVU44
+ 197 005a 3846     		mov	r0, r7
+ 198 005c 05B0     		add	sp, sp, #20
+ 199              	.LCFI2:
+ 200              		.cfi_remember_state
+ 201              		.cfi_def_cfa_offset 20
+ 202              		@ sp needed
+ 203 005e F0BD     		pop	{r4, r5, r6, r7, pc}
+ 204              	.LVL20:
+ 205              	.L10:
+ 206              	.LCFI3:
+ 207              		.cfi_restore_state
+  30:Core/Src/rtc.c **** 	
+ 208              		.loc 1 30 12 view .LVU45
+ARM GAS  /tmp/cc9ip7Hy.s 			page 7
+
+
+ 209 0060 0127     		movs	r7, #1
+ 210 0062 FAE7     		b	.L6
+ 211              	.L11:
+  35:Core/Src/rtc.c **** //	i2c_read_array ((uint16_t)RTC_adress, registr_adress, RTC_buffer, sizebuf);
+ 212              		.loc 1 35 12 view .LVU46
+ 213 0064 0127     		movs	r7, #1
+ 214 0066 F8E7     		b	.L6
+ 215              	.L14:
+ 216              		.align	2
+ 217              	.L13:
+ 218 0068 00000000 		.word	hi2c1
+ 219              		.cfi_endproc
+ 220              	.LFE711:
+ 222              		.section	.text.GetTemp,"ax",%progbits
+ 223              		.align	1
+ 224              		.global	GetTemp
+ 225              		.syntax unified
+ 226              		.thumb
+ 227              		.thumb_func
+ 229              	GetTemp:
+ 230              	.LVL21:
+ 231              	.LFB712:
+  49:Core/Src/rtc.c **** 	
+ 232              		.loc 1 49 1 is_stmt 1 view -0
+ 233              		.cfi_startproc
+ 234              		@ args = 0, pretend = 0, frame = 8
+ 235              		@ frame_needed = 0, uses_anonymous_args = 0
+  49:Core/Src/rtc.c **** 	
+ 236              		.loc 1 49 1 is_stmt 0 view .LVU48
+ 237 0000 30B5     		push	{r4, r5, lr}
+ 238              	.LCFI4:
+ 239              		.cfi_def_cfa_offset 12
+ 240              		.cfi_offset 4, -12
+ 241              		.cfi_offset 5, -8
+ 242              		.cfi_offset 14, -4
+ 243 0002 85B0     		sub	sp, sp, #20
+ 244              	.LCFI5:
+ 245              		.cfi_def_cfa_offset 32
+ 246 0004 1546     		mov	r5, r2
+ 247 0006 8DF80F10 		strb	r1, [sp, #15]
+  51:Core/Src/rtc.c **** 	{	return  HAL_ERROR;	}
+ 248              		.loc 1 51 2 is_stmt 1 view .LVU49
+  51:Core/Src/rtc.c **** 	{	return  HAL_ERROR;	}
+ 249              		.loc 1 51 6 is_stmt 0 view .LVU50
+ 250 000a 0446     		mov	r4, r0
+ 251 000c 4FF6FF73 		movw	r3, #65535
+ 252 0010 0093     		str	r3, [sp]
+ 253 0012 0123     		movs	r3, #1
+ 254 0014 0DF10F02 		add	r2, sp, #15
+ 255              	.LVL22:
+  51:Core/Src/rtc.c **** 	{	return  HAL_ERROR;	}
+ 256              		.loc 1 51 6 view .LVU51
+ 257 0018 0146     		mov	r1, r0
+ 258              	.LVL23:
+  51:Core/Src/rtc.c **** 	{	return  HAL_ERROR;	}
+ 259              		.loc 1 51 6 view .LVU52
+ 260 001a 0C48     		ldr	r0, .L22
+ARM GAS  /tmp/cc9ip7Hy.s 			page 8
+
+
+ 261              	.LVL24:
+  51:Core/Src/rtc.c **** 	{	return  HAL_ERROR;	}
+ 262              		.loc 1 51 6 view .LVU53
+ 263 001c FFF7FEFF 		bl	HAL_I2C_Master_Transmit
+ 264              	.LVL25:
+  51:Core/Src/rtc.c **** 	{	return  HAL_ERROR;	}
+ 265              		.loc 1 51 5 view .LVU54
+ 266 0020 80B9     		cbnz	r0, .L18
+ 267              	.L17:
+  54:Core/Src/rtc.c **** 		
+ 268              		.loc 1 54 57 is_stmt 1 discriminator 1 view .LVU55
+  54:Core/Src/rtc.c **** 		
+ 269              		.loc 1 54 7 discriminator 1 view .LVU56
+  54:Core/Src/rtc.c **** 		
+ 270              		.loc 1 54 8 is_stmt 0 discriminator 1 view .LVU57
+ 271 0022 0A48     		ldr	r0, .L22
+ 272 0024 FFF7FEFF 		bl	HAL_I2C_GetState
+ 273              	.LVL26:
+  54:Core/Src/rtc.c **** 		
+ 274              		.loc 1 54 7 discriminator 1 view .LVU58
+ 275 0028 2028     		cmp	r0, #32
+ 276 002a FAD1     		bne	.L17
+  56:Core/Src/rtc.c **** 	{	return  HAL_ERROR;	}
+ 277              		.loc 1 56 2 is_stmt 1 view .LVU59
+  56:Core/Src/rtc.c **** 	{	return  HAL_ERROR;	}
+ 278              		.loc 1 56 6 is_stmt 0 view .LVU60
+ 279 002c 4FF6FF73 		movw	r3, #65535
+ 280 0030 0093     		str	r3, [sp]
+ 281 0032 0123     		movs	r3, #1
+ 282 0034 2A46     		mov	r2, r5
+ 283 0036 2146     		mov	r1, r4
+ 284 0038 0448     		ldr	r0, .L22
+ 285 003a FFF7FEFF 		bl	HAL_I2C_Master_Receive
+ 286              	.LVL27:
+  56:Core/Src/rtc.c **** 	{	return  HAL_ERROR;	}
+ 287              		.loc 1 56 5 view .LVU61
+ 288 003e 18B9     		cbnz	r0, .L21
+ 289              	.L16:
+  60:Core/Src/rtc.c **** 
+ 290              		.loc 1 60 1 view .LVU62
+ 291 0040 05B0     		add	sp, sp, #20
+ 292              	.LCFI6:
+ 293              		.cfi_remember_state
+ 294              		.cfi_def_cfa_offset 12
+ 295              		@ sp needed
+ 296 0042 30BD     		pop	{r4, r5, pc}
+ 297              	.LVL28:
+ 298              	.L18:
+ 299              	.LCFI7:
+ 300              		.cfi_restore_state
+  52:Core/Src/rtc.c **** 	
+ 301              		.loc 1 52 12 view .LVU63
+ 302 0044 0120     		movs	r0, #1
+ 303 0046 FBE7     		b	.L16
+ 304              	.L21:
+  57:Core/Src/rtc.c **** 	
+ 305              		.loc 1 57 12 view .LVU64
+ARM GAS  /tmp/cc9ip7Hy.s 			page 9
+
+
+ 306 0048 0120     		movs	r0, #1
+ 307 004a F9E7     		b	.L16
+ 308              	.L23:
+ 309              		.align	2
+ 310              	.L22:
+ 311 004c 00000000 		.word	hi2c1
+ 312              		.cfi_endproc
+ 313              	.LFE712:
+ 315              		.section	.text.SetTime,"ax",%progbits
+ 316              		.align	1
+ 317              		.global	SetTime
+ 318              		.syntax unified
+ 319              		.thumb
+ 320              		.thumb_func
+ 322              	SetTime:
+ 323              	.LVL29:
+ 324              	.LFB713:
+  64:Core/Src/rtc.c **** 	//формирование сообщения для RTC	
+ 325              		.loc 1 64 1 is_stmt 1 view -0
+ 326              		.cfi_startproc
+ 327              		@ args = 0, pretend = 0, frame = 8
+ 328              		@ frame_needed = 0, uses_anonymous_args = 0
+  64:Core/Src/rtc.c **** 	//формирование сообщения для RTC	
+ 329              		.loc 1 64 1 is_stmt 0 view .LVU66
+ 330 0000 2DE9F043 		push	{r4, r5, r6, r7, r8, r9, lr}
+ 331              	.LCFI8:
+ 332              		.cfi_def_cfa_offset 28
+ 333              		.cfi_offset 4, -28
+ 334              		.cfi_offset 5, -24
+ 335              		.cfi_offset 6, -20
+ 336              		.cfi_offset 7, -16
+ 337              		.cfi_offset 8, -12
+ 338              		.cfi_offset 9, -8
+ 339              		.cfi_offset 14, -4
+ 340 0004 85B0     		sub	sp, sp, #20
+ 341              	.LCFI9:
+ 342              		.cfi_def_cfa_offset 48
+ 343 0006 0546     		mov	r5, r0
+ 344 0008 0E46     		mov	r6, r1
+ 345 000a 1446     		mov	r4, r2
+  66:Core/Src/rtc.c **** 	//uint8_t * ptr_RTC_buffer = I2C_RTC_buffer;
+ 346              		.loc 1 66 2 is_stmt 1 view .LVU67
+  66:Core/Src/rtc.c **** 	//uint8_t * ptr_RTC_buffer = I2C_RTC_buffer;
+ 347              		.loc 1 66 10 is_stmt 0 view .LVU68
+ 348 000c 0023     		movs	r3, #0
+ 349 000e 0393     		str	r3, [sp, #12]
+  68:Core/Src/rtc.c **** 	char buf_ch;
+ 350              		.loc 1 68 2 is_stmt 1 view .LVU69
+ 351              	.LVL30:
+  69:Core/Src/rtc.c **** 	
+ 352              		.loc 1 69 2 view .LVU70
+  71:Core/Src/rtc.c **** 	{
+ 353              		.loc 1 71 2 view .LVU71
+ 354              	.LBB3:
+  71:Core/Src/rtc.c **** 	{
+ 355              		.loc 1 71 7 view .LVU72
+  71:Core/Src/rtc.c **** 	{
+ARM GAS  /tmp/cc9ip7Hy.s 			page 10
+
+
+ 356              		.loc 1 71 19 is_stmt 0 view .LVU73
+ 357 0010 9C46     		mov	ip, r3
+ 358              	.LBE3:
+  68:Core/Src/rtc.c **** 	char buf_ch;
+ 359              		.loc 1 68 14 view .LVU74
+ 360 0012 0127     		movs	r7, #1
+ 361              	.LBB4:
+  71:Core/Src/rtc.c **** 	{
+ 362              		.loc 1 71 2 view .LVU75
+ 363 0014 14E0     		b	.L25
+ 364              	.LVL31:
+ 365              	.L27:
+  82:Core/Src/rtc.c **** 				I2C_RTC_buffer [ptr] = RTC_ConvertToBinDec(I2C_RTC_buffer [ptr]); //перевод в двои�
+ 366              		.loc 1 82 5 is_stmt 1 view .LVU76
+  82:Core/Src/rtc.c **** 				I2C_RTC_buffer [ptr] = RTC_ConvertToBinDec(I2C_RTC_buffer [ptr]); //перевод в двои�
+ 367              		.loc 1 82 26 is_stmt 0 view .LVU77
+ 368 0016 07F11003 		add	r3, r7, #16
+ 369 001a 0DEB0309 		add	r9, sp, r3
+ 370 001e 19F8043C 		ldrb	r3, [r9, #-4]	@ zero_extendqisi2
+ 371 0022 1844     		add	r0, r0, r3
+ 372              	.LVL32:
+  82:Core/Src/rtc.c **** 				I2C_RTC_buffer [ptr] = RTC_ConvertToBinDec(I2C_RTC_buffer [ptr]); //перевод в двои�
+ 373              		.loc 1 82 26 view .LVU78
+ 374 0024 3038     		subs	r0, r0, #48
+ 375 0026 C0B2     		uxtb	r0, r0
+ 376 0028 09F8040C 		strb	r0, [r9, #-4]
+ 377              	.LVL33:
+  83:Core/Src/rtc.c **** 				ptr++;
+ 378              		.loc 1 83 5 is_stmt 1 view .LVU79
+  83:Core/Src/rtc.c **** 				ptr++;
+ 379              		.loc 1 83 28 is_stmt 0 view .LVU80
+ 380 002c FFF7FEFF 		bl	RTC_ConvertToBinDec
+ 381              	.LVL34:
+  83:Core/Src/rtc.c **** 				ptr++;
+ 382              		.loc 1 83 26 view .LVU81
+ 383 0030 09F8040C 		strb	r0, [r9, #-4]
+  84:Core/Src/rtc.c **** 			}
+ 384              		.loc 1 84 5 is_stmt 1 view .LVU82
+  84:Core/Src/rtc.c **** 			}
+ 385              		.loc 1 84 8 is_stmt 0 view .LVU83
+ 386 0034 0137     		adds	r7, r7, #1
+ 387              	.LVL35:
+  84:Core/Src/rtc.c **** 			}
+ 388              		.loc 1 84 8 view .LVU84
+ 389 0036 7FB2     		sxtb	r7, r7
+ 390              	.LVL36:
+ 391              	.L28:
+  71:Core/Src/rtc.c **** 	{
+ 392              		.loc 1 71 41 is_stmt 1 discriminator 2 view .LVU85
+  71:Core/Src/rtc.c **** 	{
+ 393              		.loc 1 71 46 is_stmt 0 discriminator 2 view .LVU86
+ 394 0038 08F1010C 		add	ip, r8, #1
+ 395 003c 4FFA8CFC 		sxtb	ip, ip
+ 396              	.LVL37:
+ 397              	.L25:
+  71:Core/Src/rtc.c **** 	{
+ 398              		.loc 1 71 30 is_stmt 1 discriminator 1 view .LVU87
+ARM GAS  /tmp/cc9ip7Hy.s 			page 11
+
+
+  71:Core/Src/rtc.c **** 	{
+ 399              		.loc 1 71 2 is_stmt 0 discriminator 1 view .LVU88
+ 400 0040 BCF1050F 		cmp	ip, #5
+ 401 0044 17DC     		bgt	.L33
+  73:Core/Src/rtc.c **** 		if ((buf_ch >= 0x30) && (buf_ch <= 0x39))
+ 402              		.loc 1 73 3 is_stmt 1 view .LVU89
+  73:Core/Src/rtc.c **** 		if ((buf_ch >= 0x30) && (buf_ch <= 0x39))
+ 403              		.loc 1 73 10 is_stmt 0 view .LVU90
+ 404 0046 14F80C00 		ldrb	r0, [r4, ip]	@ zero_extendqisi2
+ 405              	.LVL38:
+  74:Core/Src/rtc.c **** 		{
+ 406              		.loc 1 74 3 is_stmt 1 view .LVU91
+  74:Core/Src/rtc.c **** 		{
+ 407              		.loc 1 74 24 is_stmt 0 view .LVU92
+ 408 004a A0F13003 		sub	r3, r0, #48
+ 409 004e DBB2     		uxtb	r3, r3
+  74:Core/Src/rtc.c **** 		{
+ 410              		.loc 1 74 6 view .LVU93
+ 411 0050 092B     		cmp	r3, #9
+ 412 0052 1FD8     		bhi	.L30
+  76:Core/Src/rtc.c **** 			{
+ 413              		.loc 1 76 4 is_stmt 1 view .LVU94
+  76:Core/Src/rtc.c **** 			{
+ 414              		.loc 1 76 8 is_stmt 0 view .LVU95
+ 415 0054 5FFA8CF8 		uxtb	r8, ip
+  76:Core/Src/rtc.c **** 			{
+ 416              		.loc 1 76 7 view .LVU96
+ 417 0058 1CF0010F 		tst	ip, #1
+ 418 005c DBD1     		bne	.L27
+  78:Core/Src/rtc.c **** 			}
+ 419              		.loc 1 78 5 is_stmt 1 view .LVU97
+  78:Core/Src/rtc.c **** 			}
+ 420              		.loc 1 78 26 is_stmt 0 view .LVU98
+ 421 005e 03EB8303 		add	r3, r3, r3, lsl #2
+ 422 0062 07F11002 		add	r2, r7, #16
+ 423 0066 6A44     		add	r2, sp, r2
+ 424 0068 12F8041C 		ldrb	r1, [r2, #-4]	@ zero_extendqisi2
+ 425 006c 01EB4303 		add	r3, r1, r3, lsl #1
+ 426 0070 02F8043C 		strb	r3, [r2, #-4]
+ 427 0074 E0E7     		b	.L28
+ 428              	.LVL39:
+ 429              	.L33:
+  78:Core/Src/rtc.c **** 			}
+ 430              		.loc 1 78 26 view .LVU99
+ 431              	.LBE4:
+  90:Core/Src/rtc.c **** 	
+ 432              		.loc 1 90 2 is_stmt 1 view .LVU100
+  90:Core/Src/rtc.c **** 	
+ 433              		.loc 1 90 21 is_stmt 0 view .LVU101
+ 434 0076 8DF80C60 		strb	r6, [sp, #12]
+  92:Core/Src/rtc.c **** 	{	return  HAL_ERROR;	}
+ 435              		.loc 1 92 2 is_stmt 1 view .LVU102
+  92:Core/Src/rtc.c **** 	{	return  HAL_ERROR;	}
+ 436              		.loc 1 92 6 is_stmt 0 view .LVU103
+ 437 007a 4FF6FF73 		movw	r3, #65535
+ 438 007e 0093     		str	r3, [sp]
+ 439 0080 0423     		movs	r3, #4
+ARM GAS  /tmp/cc9ip7Hy.s 			page 12
+
+
+ 440 0082 03AA     		add	r2, sp, #12
+ 441 0084 2946     		mov	r1, r5
+ 442 0086 0548     		ldr	r0, .L35
+ 443 0088 FFF7FEFF 		bl	HAL_I2C_Master_Transmit
+ 444              	.LVL40:
+  92:Core/Src/rtc.c **** 	{	return  HAL_ERROR;	}
+ 445              		.loc 1 92 5 view .LVU104
+ 446 008c 20B9     		cbnz	r0, .L34
+ 447              	.L26:
+  96:Core/Src/rtc.c **** 
+ 448              		.loc 1 96 1 view .LVU105
+ 449 008e 05B0     		add	sp, sp, #20
+ 450              	.LCFI10:
+ 451              		.cfi_remember_state
+ 452              		.cfi_def_cfa_offset 28
+ 453              		@ sp needed
+ 454 0090 BDE8F083 		pop	{r4, r5, r6, r7, r8, r9, pc}
+ 455              	.LVL41:
+ 456              	.L30:
+ 457              	.LCFI11:
+ 458              		.cfi_restore_state
+ 459              	.LBB5:
+  88:Core/Src/rtc.c **** 	}
+ 460              		.loc 1 88 13 view .LVU106
+ 461 0094 0120     		movs	r0, #1
+ 462              	.LVL42:
+  88:Core/Src/rtc.c **** 	}
+ 463              		.loc 1 88 13 view .LVU107
+ 464 0096 FAE7     		b	.L26
+ 465              	.LVL43:
+ 466              	.L34:
+  88:Core/Src/rtc.c **** 	}
+ 467              		.loc 1 88 13 view .LVU108
+ 468              	.LBE5:
+  93:Core/Src/rtc.c **** 	
+ 469              		.loc 1 93 12 view .LVU109
+ 470 0098 0120     		movs	r0, #1
+ 471 009a F8E7     		b	.L26
+ 472              	.L36:
+ 473              		.align	2
+ 474              	.L35:
+ 475 009c 00000000 		.word	hi2c1
+ 476              		.cfi_endproc
+ 477              	.LFE713:
+ 479              		.section	.text.read_reg_RTC,"ax",%progbits
+ 480              		.align	1
+ 481              		.global	read_reg_RTC
+ 482              		.syntax unified
+ 483              		.thumb
+ 484              		.thumb_func
+ 486              	read_reg_RTC:
+ 487              	.LVL44:
+ 488              	.LFB716:
+ 111:Core/Src/rtc.c **** 
+ 112:Core/Src/rtc.c **** 
+ 113:Core/Src/rtc.c **** //-------------------------------------------------------------------------------------------------
+ 114:Core/Src/rtc.c **** uint8_t read_reg_RTC (uint8_t adress, uint8_t sizebuf)
+ARM GAS  /tmp/cc9ip7Hy.s 			page 13
+
+
+ 115:Core/Src/rtc.c **** {
+ 489              		.loc 1 115 1 is_stmt 1 view -0
+ 490              		.cfi_startproc
+ 491              		@ args = 0, pretend = 0, frame = 8
+ 492              		@ frame_needed = 1, uses_anonymous_args = 0
+ 493              		.loc 1 115 1 is_stmt 0 view .LVU111
+ 494 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 495              	.LCFI12:
+ 496              		.cfi_def_cfa_offset 24
+ 497              		.cfi_offset 4, -24
+ 498              		.cfi_offset 5, -20
+ 499              		.cfi_offset 6, -16
+ 500              		.cfi_offset 7, -12
+ 501              		.cfi_offset 8, -8
+ 502              		.cfi_offset 14, -4
+ 503 0004 84B0     		sub	sp, sp, #16
+ 504              	.LCFI13:
+ 505              		.cfi_def_cfa_offset 40
+ 506 0006 02AF     		add	r7, sp, #8
+ 507              	.LCFI14:
+ 508              		.cfi_def_cfa 7, 32
+ 509 0008 0E46     		mov	r6, r1
+ 116:Core/Src/rtc.c **** 	uint8_t reg_adr = 0x02; //адрес регистра RTC 
+ 510              		.loc 1 116 2 is_stmt 1 view .LVU112
+ 511              		.loc 1 116 10 is_stmt 0 view .LVU113
+ 512 000a 0223     		movs	r3, #2
+ 513 000c FB71     		strb	r3, [r7, #7]
+ 117:Core/Src/rtc.c **** 	uint8_t I2C_RTC_buffer [sizebuf];
+ 514              		.loc 1 117 2 is_stmt 1 view .LVU114
+ 515              	.LVL45:
+ 516              		.loc 1 117 10 is_stmt 0 view .LVU115
+ 517 000e CB1D     		adds	r3, r1, #7
+ 518 0010 03F4FC73 		and	r3, r3, #504
+ 519 0014 ADEB030D 		sub	sp, sp, r3
+ 520 0018 6D46     		mov	r5, sp
+ 521              	.LVL46:
+ 118:Core/Src/rtc.c **** 	
+ 119:Core/Src/rtc.c **** 	if(HAL_I2C_Master_Transmit(&hi2c1, (uint16_t)adress, &reg_adr, 1, (uint32_t)0xFFFF)!= HAL_OK) //п
+ 522              		.loc 1 119 2 is_stmt 1 view .LVU116
+ 523              		.loc 1 119 5 is_stmt 0 view .LVU117
+ 524 001a 0446     		mov	r4, r0
+ 525 001c 4FF6FF73 		movw	r3, #65535
+ 526 0020 45F8083B 		str	r3, [r5], #8
+ 527              	.LVL47:
+ 528              		.loc 1 119 5 view .LVU118
+ 529 0024 0123     		movs	r3, #1
+ 530 0026 FA1D     		adds	r2, r7, #7
+ 531 0028 0146     		mov	r1, r0
+ 532              	.LVL48:
+ 533              		.loc 1 119 5 view .LVU119
+ 534 002a 1348     		ldr	r0, .L45
+ 535              	.LVL49:
+ 536              		.loc 1 119 5 view .LVU120
+ 537 002c FFF7FEFF 		bl	HAL_I2C_Master_Transmit
+ 538              	.LVL50:
+ 539              		.loc 1 119 4 view .LVU121
+ 540 0030 20B1     		cbz	r0, .L38
+ARM GAS  /tmp/cc9ip7Hy.s 			page 14
+
+
+ 541              	.L39:
+ 120:Core/Src/rtc.c **** 	
+ 121:Core/Src/rtc.c **** 	while(HAL_I2C_GetState(&hi2c1)!=HAL_I2C_STATE_READY){}
+ 542              		.loc 1 121 55 is_stmt 1 discriminator 1 view .LVU122
+ 543              		.loc 1 121 7 discriminator 1 view .LVU123
+ 544              		.loc 1 121 8 is_stmt 0 discriminator 1 view .LVU124
+ 545 0032 1148     		ldr	r0, .L45
+ 546 0034 FFF7FEFF 		bl	HAL_I2C_GetState
+ 547              	.LVL51:
+ 548              		.loc 1 121 7 discriminator 1 view .LVU125
+ 549 0038 2028     		cmp	r0, #32
+ 550 003a FAD1     		bne	.L39
+ 551              	.L38:
+ 122:Core/Src/rtc.c **** 		
+ 123:Core/Src/rtc.c **** 	if (HAL_I2C_Master_Receive (&hi2c1, (uint16_t) adress, (uint8_t*)I2C_RTC_buffer, (uint16_t) sizebu
+ 552              		.loc 1 123 2 is_stmt 1 view .LVU126
+ 553              		.loc 1 123 6 is_stmt 0 view .LVU127
+ 554 003c 4FF6FF73 		movw	r3, #65535
+ 555 0040 0093     		str	r3, [sp]
+ 556 0042 3346     		mov	r3, r6
+ 557 0044 2A46     		mov	r2, r5
+ 558 0046 2146     		mov	r1, r4
+ 559 0048 0B48     		ldr	r0, .L45
+ 560 004a FFF7FEFF 		bl	HAL_I2C_Master_Receive
+ 561              	.LVL52:
+ 562              		.loc 1 123 5 view .LVU128
+ 563 004e 8046     		mov	r8, r0
+ 564 0050 70B9     		cbnz	r0, .L43
+ 565              	.LBB6:
+ 124:Core/Src/rtc.c **** 	{	return  HAL_ERROR;	}
+ 125:Core/Src/rtc.c **** 	
+ 126:Core/Src/rtc.c **** 	for (uint8_t count = 0; count < sizebuf; count++) //перевод числа из двоично-
+ 566              		.loc 1 126 15 view .LVU129
+ 567 0052 0446     		mov	r4, r0
+ 568 0054 05E0     		b	.L41
+ 569              	.LVL53:
+ 570              	.L42:
+ 127:Core/Src/rtc.c **** 	{	I2C_RTC_buffer[count] = RTC_ConvertToDec(I2C_RTC_buffer[count]);	}
+ 571              		.loc 1 127 4 is_stmt 1 discriminator 3 view .LVU130
+ 572              		.loc 1 127 28 is_stmt 0 discriminator 3 view .LVU131
+ 573 0056 285D     		ldrb	r0, [r5, r4]	@ zero_extendqisi2
+ 574 0058 FFF7FEFF 		bl	RTC_ConvertToDec
+ 575              	.LVL54:
+ 576              		.loc 1 127 26 discriminator 3 view .LVU132
+ 577 005c 2855     		strb	r0, [r5, r4]
+ 126:Core/Src/rtc.c **** 	{	I2C_RTC_buffer[count] = RTC_ConvertToDec(I2C_RTC_buffer[count]);	}
+ 578              		.loc 1 126 43 is_stmt 1 discriminator 3 view .LVU133
+ 126:Core/Src/rtc.c **** 	{	I2C_RTC_buffer[count] = RTC_ConvertToDec(I2C_RTC_buffer[count]);	}
+ 579              		.loc 1 126 48 is_stmt 0 discriminator 3 view .LVU134
+ 580 005e 0134     		adds	r4, r4, #1
+ 581              	.LVL55:
+ 126:Core/Src/rtc.c **** 	{	I2C_RTC_buffer[count] = RTC_ConvertToDec(I2C_RTC_buffer[count]);	}
+ 582              		.loc 1 126 48 discriminator 3 view .LVU135
+ 583 0060 E4B2     		uxtb	r4, r4
+ 584              	.LVL56:
+ 585              	.L41:
+ 126:Core/Src/rtc.c **** 	{	I2C_RTC_buffer[count] = RTC_ConvertToDec(I2C_RTC_buffer[count]);	}
+ARM GAS  /tmp/cc9ip7Hy.s 			page 15
+
+
+ 586              		.loc 1 126 26 is_stmt 1 discriminator 1 view .LVU136
+ 126:Core/Src/rtc.c **** 	{	I2C_RTC_buffer[count] = RTC_ConvertToDec(I2C_RTC_buffer[count]);	}
+ 587              		.loc 1 126 2 is_stmt 0 discriminator 1 view .LVU137
+ 588 0062 B442     		cmp	r4, r6
+ 589 0064 F7D3     		bcc	.L42
+ 590              	.LVL57:
+ 591              	.L40:
+ 126:Core/Src/rtc.c **** 	{	I2C_RTC_buffer[count] = RTC_ConvertToDec(I2C_RTC_buffer[count]);	}
+ 592              		.loc 1 126 2 discriminator 1 view .LVU138
+ 593              	.LBE6:
+ 128:Core/Src/rtc.c **** 	
+ 129:Core/Src/rtc.c **** 	return  HAL_OK;
+ 130:Core/Src/rtc.c **** }
+ 594              		.loc 1 130 1 view .LVU139
+ 595 0066 4046     		mov	r0, r8
+ 596 0068 0837     		adds	r7, r7, #8
+ 597              	.LCFI15:
+ 598              		.cfi_remember_state
+ 599              		.cfi_def_cfa_offset 24
+ 600 006a BD46     		mov	sp, r7
+ 601              	.LCFI16:
+ 602              		.cfi_def_cfa_register 13
+ 603              		@ sp needed
+ 604 006c BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 605              	.LVL58:
+ 606              	.L43:
+ 607              	.LCFI17:
+ 608              		.cfi_restore_state
+ 124:Core/Src/rtc.c **** 	
+ 609              		.loc 1 124 12 view .LVU140
+ 610 0070 4FF00108 		mov	r8, #1
+ 611 0074 F7E7     		b	.L40
+ 612              	.L46:
+ 613 0076 00BF     		.align	2
+ 614              	.L45:
+ 615 0078 00000000 		.word	hi2c1
+ 616              		.cfi_endproc
+ 617              	.LFE716:
+ 619              		.section	.text.edit_RTC_data,"ax",%progbits
+ 620              		.align	1
+ 621              		.global	edit_RTC_data
+ 622              		.syntax unified
+ 623              		.thumb
+ 624              		.thumb_func
+ 626              	edit_RTC_data:
+ 627              	.LVL59:
+ 628              	.LFB717:
+ 131:Core/Src/rtc.c **** 
+ 132:Core/Src/rtc.c **** //----------------------------------------------------------------------------------//
+ 133:Core/Src/rtc.c **** void edit_RTC_data (uint8_t adress,  char * time)
+ 134:Core/Src/rtc.c **** {	
+ 629              		.loc 1 134 1 is_stmt 1 view -0
+ 630              		.cfi_startproc
+ 631              		@ args = 0, pretend = 0, frame = 0
+ 632              		@ frame_needed = 0, uses_anonymous_args = 0
+ 633              		@ link register save eliminated.
+ 135:Core/Src/rtc.c **** 
+ARM GAS  /tmp/cc9ip7Hy.s 			page 16
+
+
+ 136:Core/Src/rtc.c **** }
+ 634              		.loc 1 136 1 view .LVU142
+ 635 0000 7047     		bx	lr
+ 636              		.cfi_endproc
+ 637              	.LFE717:
+ 639              		.section	.text.get_file_title,"ax",%progbits
+ 640              		.align	1
+ 641              		.global	get_file_title
+ 642              		.syntax unified
+ 643              		.thumb
+ 644              		.thumb_func
+ 646              	get_file_title:
+ 647              	.LFB718:
+ 137:Core/Src/rtc.c **** 
+ 138:Core/Src/rtc.c **** //----------------------------------------------------------------------------------//
+ 139:Core/Src/rtc.c **** uint8_t get_file_title (void)
+ 140:Core/Src/rtc.c **** {
+ 648              		.loc 1 140 1 view -0
+ 649              		.cfi_startproc
+ 650              		@ args = 0, pretend = 0, frame = 8
+ 651              		@ frame_needed = 0, uses_anonymous_args = 0
+ 652 0000 00B5     		push	{lr}
+ 653              	.LCFI18:
+ 654              		.cfi_def_cfa_offset 4
+ 655              		.cfi_offset 14, -4
+ 656 0002 83B0     		sub	sp, sp, #12
+ 657              	.LCFI19:
+ 658              		.cfi_def_cfa_offset 16
+ 141:Core/Src/rtc.c **** 	uint8_t Date [3]; 
+ 659              		.loc 1 141 2 view .LVU144
+ 142:Core/Src/rtc.c **** 	uint8_t file_title = 0;
+ 660              		.loc 1 142 2 view .LVU145
+ 661              	.LVL60:
+ 143:Core/Src/rtc.c **** 	
+ 144:Core/Src/rtc.c **** 	GetTime (RTC_ADDRESS,  FIRST_REGISTR_DATE, 3, Date); //чтение регистров 0х4-0х6 (
+ 662              		.loc 1 144 2 view .LVU146
+ 663 0004 01AB     		add	r3, sp, #4
+ 664 0006 0322     		movs	r2, #3
+ 665 0008 0421     		movs	r1, #4
+ 666 000a D020     		movs	r0, #208
+ 667 000c FFF7FEFF 		bl	GetTime
+ 668              	.LVL61:
+ 145:Core/Src/rtc.c **** 	file_title = ((pred_sum [0][*(Date+1)-1] )+ *Date); //извлечение не високосно
+ 669              		.loc 1 145 2 view .LVU147
+ 670              		.loc 1 145 30 is_stmt 0 view .LVU148
+ 671 0010 9DF80530 		ldrb	r3, [sp, #5]	@ zero_extendqisi2
+ 672              		.loc 1 145 39 view .LVU149
+ 673 0014 013B     		subs	r3, r3, #1
+ 674              		.loc 1 145 44 view .LVU150
+ 675 0016 054A     		ldr	r2, .L50
+ 676 0018 12F82300 		ldrb	r0, [r2, r3, lsl #2]	@ zero_extendqisi2
+ 677              		.loc 1 145 46 view .LVU151
+ 678 001c 9DF80430 		ldrb	r3, [sp, #4]	@ zero_extendqisi2
+ 679              		.loc 1 145 13 view .LVU152
+ 680 0020 1844     		add	r0, r0, r3
+ 681              	.LVL62:
+ 146:Core/Src/rtc.c **** 	
+ARM GAS  /tmp/cc9ip7Hy.s 			page 17
+
+
+ 147:Core/Src/rtc.c **** 	return file_title;
+ 682              		.loc 1 147 2 is_stmt 1 view .LVU153
+ 148:Core/Src/rtc.c **** }
+ 683              		.loc 1 148 1 is_stmt 0 view .LVU154
+ 684 0022 C0B2     		uxtb	r0, r0
+ 685              		.loc 1 148 1 view .LVU155
+ 686 0024 03B0     		add	sp, sp, #12
+ 687              	.LCFI20:
+ 688              		.cfi_def_cfa_offset 4
+ 689              		@ sp needed
+ 690 0026 5DF804FB 		ldr	pc, [sp], #4
+ 691              	.L51:
+ 692 002a 00BF     		.align	2
+ 693              	.L50:
+ 694 002c 00000000 		.word	.LANCHOR0
+ 695              		.cfi_endproc
+ 696              	.LFE718:
+ 698              		.section	.text.convert_time,"ax",%progbits
+ 699              		.align	1
+ 700              		.global	convert_time
+ 701              		.syntax unified
+ 702              		.thumb
+ 703              		.thumb_func
+ 705              	convert_time:
+ 706              	.LVL63:
+ 707              	.LFB719:
+ 149:Core/Src/rtc.c **** 
+ 150:Core/Src/rtc.c **** //------------------перевод данных времени из числовой в симво�
+ 151:Core/Src/rtc.c **** void convert_time (char * mod_time_data, uint8_t * time_data, uint8_t time_size)
+ 152:Core/Src/rtc.c **** {
+ 708              		.loc 1 152 1 is_stmt 1 view -0
+ 709              		.cfi_startproc
+ 710              		@ args = 0, pretend = 0, frame = 0
+ 711              		@ frame_needed = 0, uses_anonymous_args = 0
+ 153:Core/Src/rtc.c **** 		
+ 154:Core/Src/rtc.c **** 	for (int8_t count = (time_size-1); count >= 0; count--)
+ 712              		.loc 1 154 2 view .LVU157
+ 713              	.LBB7:
+ 714              		.loc 1 154 7 view .LVU158
+ 715              		.loc 1 154 32 is_stmt 0 view .LVU159
+ 716 0000 02F1FF3C 		add	ip, r2, #-1
+ 717              		.loc 1 154 14 view .LVU160
+ 718 0004 4FFA8CFC 		sxtb	ip, ip
+ 719              	.LVL64:
+ 720              		.loc 1 154 37 is_stmt 1 view .LVU161
+ 721              		.loc 1 154 2 is_stmt 0 view .LVU162
+ 722 0008 BCF1000F 		cmp	ip, #0
+ 723 000c 1EDB     		blt	.L58
+ 724              	.LBE7:
+ 152:Core/Src/rtc.c **** 		
+ 725              		.loc 1 152 1 view .LVU163
+ 726 000e 10B5     		push	{r4, lr}
+ 727              	.LCFI21:
+ 728              		.cfi_def_cfa_offset 8
+ 729              		.cfi_offset 4, -8
+ 730              		.cfi_offset 14, -4
+ 731              	.LVL65:
+ARM GAS  /tmp/cc9ip7Hy.s 			page 18
+
+
+ 732              	.L54:
+ 733              	.LBB8:
+ 155:Core/Src/rtc.c **** 	{
+ 156:Core/Src/rtc.c **** 		*mod_time_data++ = (*(time_data + count) / 10) + 0x30; //сначала часы
+ 734              		.loc 1 156 3 is_stmt 1 discriminator 3 view .LVU164
+ 735              		.loc 1 156 23 is_stmt 0 discriminator 3 view .LVU165
+ 736 0010 11F80C20 		ldrb	r2, [r1, ip]	@ zero_extendqisi2
+ 737              	.LVL66:
+ 738              		.loc 1 156 50 discriminator 3 view .LVU166
+ 739 0014 0E4B     		ldr	r3, .L59
+ 740 0016 A3FB02E2 		umull	lr, r2, r3, r2
+ 741 001a D208     		lsrs	r2, r2, #3
+ 742 001c 3032     		adds	r2, r2, #48
+ 743              		.loc 1 156 20 discriminator 3 view .LVU167
+ 744 001e 8646     		mov	lr, r0
+ 745 0020 0EF8022B 		strb	r2, [lr], #2
+ 157:Core/Src/rtc.c **** 		*mod_time_data++ = (*(time_data + count) % 10) + 0x30;
+ 746              		.loc 1 157 3 is_stmt 1 discriminator 3 view .LVU168
+ 747              		.loc 1 157 23 is_stmt 0 discriminator 3 view .LVU169
+ 748 0024 11F80C20 		ldrb	r2, [r1, ip]	@ zero_extendqisi2
+ 749              	.LVL67:
+ 750              		.loc 1 157 50 discriminator 3 view .LVU170
+ 751 0028 A3FB0243 		umull	r4, r3, r3, r2
+ 752 002c DB08     		lsrs	r3, r3, #3
+ 753 002e 03EB8303 		add	r3, r3, r3, lsl #2
+ 754 0032 A2EB4303 		sub	r3, r2, r3, lsl #1
+ 755 0036 3033     		adds	r3, r3, #48
+ 756              		.loc 1 157 20 discriminator 3 view .LVU171
+ 757 0038 4370     		strb	r3, [r0, #1]
+ 154:Core/Src/rtc.c **** 	{
+ 758              		.loc 1 154 49 is_stmt 1 discriminator 3 view .LVU172
+ 154:Core/Src/rtc.c **** 	{
+ 759              		.loc 1 154 54 is_stmt 0 discriminator 3 view .LVU173
+ 760 003a 0CF1FF3C 		add	ip, ip, #-1
+ 761              	.LVL68:
+ 154:Core/Src/rtc.c **** 	{
+ 762              		.loc 1 154 54 discriminator 3 view .LVU174
+ 763 003e 4FFA8CFC 		sxtb	ip, ip
+ 764              	.LVL69:
+ 765              		.loc 1 157 17 discriminator 3 view .LVU175
+ 766 0042 7046     		mov	r0, lr
+ 154:Core/Src/rtc.c **** 	{
+ 767              		.loc 1 154 37 is_stmt 1 discriminator 3 view .LVU176
+ 154:Core/Src/rtc.c **** 	{
+ 768              		.loc 1 154 2 is_stmt 0 discriminator 3 view .LVU177
+ 769 0044 BCF1000F 		cmp	ip, #0
+ 770 0048 E2DA     		bge	.L54
+ 771              	.LBE8:
+ 158:Core/Src/rtc.c **** 		
+ 159:Core/Src/rtc.c **** 		//if (count > 0)
+ 160:Core/Src/rtc.c **** 		//{	*mod_time_data++ = ':'; } //добавление знака ':'
+ 161:Core/Src/rtc.c **** 	}
+ 162:Core/Src/rtc.c **** }
+ 772              		.loc 1 162 1 view .LVU178
+ 773 004a 10BD     		pop	{r4, pc}
+ 774              	.LVL70:
+ 775              	.L58:
+ARM GAS  /tmp/cc9ip7Hy.s 			page 19
+
+
+ 776              	.LCFI22:
+ 777              		.cfi_def_cfa_offset 0
+ 778              		.cfi_restore 4
+ 779              		.cfi_restore 14
+ 780              		.loc 1 162 1 view .LVU179
+ 781 004c 7047     		bx	lr
+ 782              	.L60:
+ 783 004e 00BF     		.align	2
+ 784              	.L59:
+ 785 0050 CDCCCCCC 		.word	-858993459
+ 786              		.cfi_endproc
+ 787              	.LFE719:
+ 789              		.global	pred_sum
+ 790              		.global	TimeStamp
+ 791              		.global	RTC_I2C
+ 792              		.section	.bss.TimeStamp,"aw",%nobits
+ 793              		.align	2
+ 796              	TimeStamp:
+ 797 0000 00000000 		.space	36
+ 797      00000000 
+ 797      00000000 
+ 797      00000000 
+ 797      00000000 
+ 798              		.section	.data.RTC_I2C,"aw"
+ 799              		.align	2
+ 802              	RTC_I2C:
+ 803 0000 00540040 		.word	1073763328
+ 804              		.section	.rodata.pred_sum,"a"
+ 805              		.align	2
+ 806              		.set	.LANCHOR0,. + 0
+ 809              	pred_sum:
+ 810 0000 00000000 		.word	0
+ 811 0004 1F000000 		.word	31
+ 812 0008 3B000000 		.word	59
+ 813 000c 5A000000 		.word	90
+ 814 0010 78000000 		.word	120
+ 815 0014 97000000 		.word	151
+ 816 0018 B5000000 		.word	181
+ 817 001c D4000000 		.word	212
+ 818 0020 F3000000 		.word	243
+ 819 0024 11010000 		.word	273
+ 820 0028 30010000 		.word	304
+ 821 002c 4E010000 		.word	334
+ 822 0030 00000000 		.word	0
+ 823 0034 1F000000 		.word	31
+ 824 0038 3C000000 		.word	60
+ 825 003c 5B000000 		.word	91
+ 826 0040 79000000 		.word	121
+ 827 0044 98000000 		.word	152
+ 828 0048 B6000000 		.word	182
+ 829 004c D5000000 		.word	213
+ 830 0050 F4000000 		.word	244
+ 831 0054 12010000 		.word	274
+ 832 0058 31010000 		.word	305
+ 833 005c 4F010000 		.word	335
+ 834              		.text
+ 835              	.Letext0:
+ARM GAS  /tmp/cc9ip7Hy.s 			page 20
+
+
+ 836              		.file 2 "/home/arashamf/soft/ARM_toolchains/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/m
+ 837              		.file 3 "/home/arashamf/soft/ARM_toolchains/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/s
+ 838              		.file 4 "Drivers/CMSIS/Device/ST/STM32L1xx/Include/stm32l151xb.h"
+ 839              		.file 5 "Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_def.h"
+ 840              		.file 6 "Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_dma.h"
+ 841              		.file 7 "Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_i2c.h"
+ 842              		.file 8 "Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h"
+ 843              		.file 9 "Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_tim.h"
+ 844              		.file 10 "/home/arashamf/soft/ARM_toolchains/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/
+ 845              		.file 11 "Core/Inc/i2c.h"
+ARM GAS  /tmp/cc9ip7Hy.s 			page 21
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 rtc.c
+     /tmp/cc9ip7Hy.s:18     .text.RTC_ConvertToDec:0000000000000000 $t
+     /tmp/cc9ip7Hy.s:23     .text.RTC_ConvertToDec:0000000000000000 RTC_ConvertToDec
+     /tmp/cc9ip7Hy.s:51     .text.RTC_ConvertToBinDec:0000000000000000 $t
+     /tmp/cc9ip7Hy.s:56     .text.RTC_ConvertToBinDec:0000000000000000 RTC_ConvertToBinDec
+     /tmp/cc9ip7Hy.s:88     .text.RTC_ConvertToBinDec:000000000000001c $d
+     /tmp/cc9ip7Hy.s:93     .text.GetTime:0000000000000000 $t
+     /tmp/cc9ip7Hy.s:99     .text.GetTime:0000000000000000 GetTime
+     /tmp/cc9ip7Hy.s:218    .text.GetTime:0000000000000068 $d
+     /tmp/cc9ip7Hy.s:223    .text.GetTemp:0000000000000000 $t
+     /tmp/cc9ip7Hy.s:229    .text.GetTemp:0000000000000000 GetTemp
+     /tmp/cc9ip7Hy.s:311    .text.GetTemp:000000000000004c $d
+     /tmp/cc9ip7Hy.s:316    .text.SetTime:0000000000000000 $t
+     /tmp/cc9ip7Hy.s:322    .text.SetTime:0000000000000000 SetTime
+     /tmp/cc9ip7Hy.s:475    .text.SetTime:000000000000009c $d
+     /tmp/cc9ip7Hy.s:480    .text.read_reg_RTC:0000000000000000 $t
+     /tmp/cc9ip7Hy.s:486    .text.read_reg_RTC:0000000000000000 read_reg_RTC
+     /tmp/cc9ip7Hy.s:615    .text.read_reg_RTC:0000000000000078 $d
+     /tmp/cc9ip7Hy.s:620    .text.edit_RTC_data:0000000000000000 $t
+     /tmp/cc9ip7Hy.s:626    .text.edit_RTC_data:0000000000000000 edit_RTC_data
+     /tmp/cc9ip7Hy.s:640    .text.get_file_title:0000000000000000 $t
+     /tmp/cc9ip7Hy.s:646    .text.get_file_title:0000000000000000 get_file_title
+     /tmp/cc9ip7Hy.s:694    .text.get_file_title:000000000000002c $d
+     /tmp/cc9ip7Hy.s:699    .text.convert_time:0000000000000000 $t
+     /tmp/cc9ip7Hy.s:705    .text.convert_time:0000000000000000 convert_time
+     /tmp/cc9ip7Hy.s:785    .text.convert_time:0000000000000050 $d
+     /tmp/cc9ip7Hy.s:809    .rodata.pred_sum:0000000000000000 pred_sum
+     /tmp/cc9ip7Hy.s:796    .bss.TimeStamp:0000000000000000 TimeStamp
+     /tmp/cc9ip7Hy.s:802    .data.RTC_I2C:0000000000000000 RTC_I2C
+     /tmp/cc9ip7Hy.s:793    .bss.TimeStamp:0000000000000000 $d
+     /tmp/cc9ip7Hy.s:799    .data.RTC_I2C:0000000000000000 $d
+     /tmp/cc9ip7Hy.s:805    .rodata.pred_sum:0000000000000000 $d
+
+UNDEFINED SYMBOLS
+HAL_I2C_Master_Transmit
+HAL_I2C_GetState
+HAL_I2C_Master_Receive
+hi2c1
