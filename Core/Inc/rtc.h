@@ -5,17 +5,13 @@
 extern "C" {
 #endif
 
-//Private includes ----------------------------------------------------------------//
+//Includes ------------------------------------------------------------------------//
 #include "main.h"	
 
-//Private define ------------------------------------------------------------------//
-#define FIRST_REGISTR_TIME 		0x00
-#define FIRST_REGISTR_DATE 		0x04
-#define RTC_REGISTR_TEMP 		0x11	
-#define RTC_ADDRESS 			0xD0 //i2c-адрес мк RTC со сдвигом влево на один разряд 
+//Define --------------------------------------------------------------------------//
 #define TIME_NUMBER             3
 
-//--------------------------------------------------------------------------------//
+//Typedefs-------------------------------------------------------------------------//
 typedef struct
 {
     uint8_t DS3231_data [6];
@@ -23,7 +19,7 @@ typedef struct
     uint8_t digital;
 } rtc_data;
 
-//Private prototypes ---------------------------------------------------------------//
+//Prototypes ---------------------------------------------------------------------//
 uint8_t GetTime (uint8_t , uint8_t , uint8_t , uint8_t * );
 uint8_t GetTemp (uint8_t  , uint8_t ,  uint8_t * );
 uint8_t SetTime (uint8_t , uint8_t , char *);

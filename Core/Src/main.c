@@ -27,6 +27,7 @@
 /* USER CODE BEGIN Includes */
 #include "LED_display.h"
 #include "rtc.h"
+#include "typedef.h"
 #include <stdio.h>
 /* USER CODE END Includes */
 
@@ -77,7 +78,15 @@ int main(void)
   /* MCU Configuration--------------------------------------------------------*/
 
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
-  HAL_Init();
+  LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_COMP);
+  LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_SYSCFG);
+  LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_PWR);
+
+  /* System interrupt init*/
+  NVIC_SetPriorityGrouping(NVIC_PRIORITYGROUP_4);
+
+  /* SysTick_IRQn interrupt configuration */
+  NVIC_SetPriority(SysTick_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(),15, 0));
 
   /* USER CODE BEGIN Init */
 
@@ -98,13 +107,9 @@ int main(void)
   /* USER CODE BEGIN 2 */
   timers_ini ();
 
-  #ifdef __USE_DBG
-		snprintf (DBG_buffer,  BUFFER_SIZE, "start\r\n");
-		DBG_PutString(DBG_buffer);
-	#endif
-
-  if (GetTime (RTC_ADDRESS, FIRST_REGISTR_TIME, TIME_NUMBER, data.DS3231_data) == 0) //получение данных времени  ч/м/с
-	{	convert_time (data.time, data.DS3231_data, TIME_NUMBER);	}
+  GetTime (RTC_ADDRESS, FIRST_REGISTR_TIME, TIME_NUMBER, data.DS3231_data);  //получение данных времени  ч/м/с
+	convert_time (data.time, data.DS3231_data, TIME_NUMBER);	
+  UART_msg_ini ();
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -114,12 +119,23 @@ int main(void)
     for (uint8_t j = 0; j < 6; j++)
     {
       select_number (j);
-      data.digital = (data.time[j] - 0x30) ;
+      if (data.time[j] >= 0x30)
+      {  data.digital = (data.time[j] - 0x30); }
+      else
+      {  data.digital = 0;  }
       select_digit (data.digital);
-      delay_us(1500); 
-      reset_number (j);
-      reset_all_digit (); 
-      delay_us(750); 
+
+      check_ring_buffer ();
+
+      if (j <4)
+      {  delay_us(500); }
+      else
+      {  delay_us(250); }
+
+      check_ring_buffer ();
+
+      reset_all_digit ();
+      delay_us(500);
     }
     /* USER CODE END WHILE */
 
@@ -170,20 +186,18 @@ void SystemClock_Config(void)
   {
 
   }
-  LL_SetSystemCoreClock(32000000);
 
-   /* Update the time base */
-  if (HAL_InitTick (TICK_INT_PRIORITY) != HAL_OK)
-  {
-    Error_Handler();
-  }
+  LL_Init1msTick(32000000);
+
+  LL_SetSystemCoreClock(32000000);
 }
 
 /* USER CODE BEGIN 4 */
 void SysTimerCallback (void)
 {
-    if (GetTime (RTC_ADDRESS, FIRST_REGISTR_TIME, TIME_NUMBER, data.DS3231_data) == 0) //получение данных времени  ч/м/с
-	  {	convert_time (data.time, data.DS3231_data, TIME_NUMBER);	}
+	GetTime (RTC_ADDRESS, FIRST_REGISTR_TIME, TIME_NUMBER, data.DS3231_data); //получение данных времени  ч/м/с
+  //GetTime (RTC_ADDRESS, FIRST_REGISTR_DATE, TIME_NUMBER, data.DS3231_data); //получение данных времени  ч/м/с
+  {	convert_time (data.time, data.DS3231_data, TIME_NUMBER);	}
 }
 /* USER CODE END 4 */
 

@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cc0jUNJw.s 			page 1
+ARM GAS  /tmp/ccR3fC14.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,7 +58,7 @@ ARM GAS  /tmp/cc0jUNJw.s 			page 1
   29:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_ll_gpio.c **** /** @addtogroup STM32L1xx_LL_Driver
   30:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_ll_gpio.c ****   * @{
   31:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_ll_gpio.c ****   */
-ARM GAS  /tmp/cc0jUNJw.s 			page 2
+ARM GAS  /tmp/ccR3fC14.s 			page 2
 
 
   32:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_ll_gpio.c **** 
@@ -118,7 +118,7 @@ ARM GAS  /tmp/cc0jUNJw.s 			page 1
   86:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_ll_gpio.c **** 
   87:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_ll_gpio.c **** /* Exported functions --------------------------------------------------------*/
   88:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_ll_gpio.c **** /** @addtogroup GPIO_LL_Exported_Functions
-ARM GAS  /tmp/cc0jUNJw.s 			page 3
+ARM GAS  /tmp/ccR3fC14.s 			page 3
 
 
   89:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_ll_gpio.c ****   * @{
@@ -178,7 +178,7 @@ ARM GAS  /tmp/cc0jUNJw.s 			page 1
   49 0010 22D0     		beq	.L11
  122:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_ll_gpio.c ****   {
  123:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_ll_gpio.c ****     LL_AHB1_GRP1_ForceReset(LL_AHB1_GRP1_PERIPH_GPIOC);
-ARM GAS  /tmp/cc0jUNJw.s 			page 4
+ARM GAS  /tmp/ccR3fC14.s 			page 4
 
 
  124:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_ll_gpio.c ****     LL_AHB1_GRP1_ReleaseReset(LL_AHB1_GRP1_PERIPH_GPIOC);
@@ -238,7 +238,7 @@ ARM GAS  /tmp/cc0jUNJw.s 			page 1
  163:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_ll_gpio.c ****     status = ERROR;
   65              		.loc 1 163 12 view .LVU15
   66 0024 0120     		movs	r0, #1
-ARM GAS  /tmp/cc0jUNJw.s 			page 5
+ARM GAS  /tmp/ccR3fC14.s 			page 5
 
 
   67              	.LVL1:
@@ -298,7 +298,7 @@ ARM GAS  /tmp/cc0jUNJw.s 			page 1
   40:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h **** extern "C" {
   41:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h **** #endif
   42:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h **** 
-ARM GAS  /tmp/cc0jUNJw.s 			page 6
+ARM GAS  /tmp/ccR3fC14.s 			page 6
 
 
   43:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h **** /* Includes ------------------------------------------------------------------*/
@@ -358,7 +358,7 @@ ARM GAS  /tmp/cc0jUNJw.s 			page 1
   97:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h **** #if defined(FSMC_Bank1)
   98:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h **** #define LL_AHB1_GRP1_PERIPH_FSMC           RCC_AHBENR_FSMCEN
   99:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h **** #endif/*FSMC_Bank1*/
-ARM GAS  /tmp/cc0jUNJw.s 			page 7
+ARM GAS  /tmp/ccR3fC14.s 			page 7
 
 
  100:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h **** /**
@@ -418,7 +418,7 @@ ARM GAS  /tmp/cc0jUNJw.s 			page 1
  154:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h **** #define LL_APB2_GRP1_PERIPH_ADC1           RCC_APB2ENR_ADC1EN
  155:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h **** #if defined(SDIO)
  156:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h **** #define LL_APB2_GRP1_PERIPH_SDIO           RCC_APB2ENR_SDIOEN
-ARM GAS  /tmp/cc0jUNJw.s 			page 8
+ARM GAS  /tmp/ccR3fC14.s 			page 8
 
 
  157:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h **** #endif /*SDIO*/
@@ -478,7 +478,7 @@ ARM GAS  /tmp/cc0jUNJw.s 			page 1
  211:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h ****   *         (*) value not defined in all devices.
  212:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h ****   * @retval None
  213:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h **** */
-ARM GAS  /tmp/cc0jUNJw.s 			page 9
+ARM GAS  /tmp/ccR3fC14.s 			page 9
 
 
  214:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h **** __STATIC_INLINE void LL_AHB1_GRP1_EnableClock(uint32_t Periphs)
@@ -538,7 +538,7 @@ ARM GAS  /tmp/cc0jUNJw.s 			page 1
  268:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h ****   *         AHBENR       GPIODEN       LL_AHB1_GRP1_DisableClock\n
  269:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h ****   *         AHBENR       GPIOEEN       LL_AHB1_GRP1_DisableClock\n
  270:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h ****   *         AHBENR       GPIOHEN       LL_AHB1_GRP1_DisableClock\n
-ARM GAS  /tmp/cc0jUNJw.s 			page 10
+ARM GAS  /tmp/ccR3fC14.s 			page 10
 
 
  271:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h ****   *         AHBENR       GPIOFEN       LL_AHB1_GRP1_DisableClock\n
@@ -598,7 +598,7 @@ ARM GAS  /tmp/cc0jUNJw.s 			page 1
  325:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h ****   *         @arg @ref LL_AHB1_GRP1_PERIPH_GPIOE (*)
  326:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h ****   *         @arg @ref LL_AHB1_GRP1_PERIPH_GPIOH
  327:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h ****   *         @arg @ref LL_AHB1_GRP1_PERIPH_GPIOF (*)
-ARM GAS  /tmp/cc0jUNJw.s 			page 11
+ARM GAS  /tmp/ccR3fC14.s 			page 11
 
 
  328:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h ****   *         @arg @ref LL_AHB1_GRP1_PERIPH_GPIOG (*)
@@ -658,7 +658,7 @@ ARM GAS  /tmp/cc0jUNJw.s 			page 1
  367:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h ****   *         @arg @ref LL_AHB1_GRP1_PERIPH_GPIOH
  368:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h ****   *         @arg @ref LL_AHB1_GRP1_PERIPH_GPIOF (*)
  369:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h ****   *         @arg @ref LL_AHB1_GRP1_PERIPH_GPIOG (*)
-ARM GAS  /tmp/cc0jUNJw.s 			page 12
+ARM GAS  /tmp/ccR3fC14.s 			page 12
 
 
  370:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h ****   *         @arg @ref LL_AHB1_GRP1_PERIPH_CRC
@@ -718,7 +718,7 @@ ARM GAS  /tmp/cc0jUNJw.s 			page 1
  125              		.loc 1 119 5 is_stmt 1 view .LVU32
  126              	.LBB64:
  127              	.LBI64:
-ARM GAS  /tmp/cc0jUNJw.s 			page 13
+ARM GAS  /tmp/ccR3fC14.s 			page 13
 
 
  380:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h **** {
@@ -778,7 +778,7 @@ ARM GAS  /tmp/cc0jUNJw.s 			page 1
  172              	.LBE70:
  105:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_ll_gpio.c **** 
  173              		.loc 1 105 15 is_stmt 0 view .LVU45
-ARM GAS  /tmp/cc0jUNJw.s 			page 14
+ARM GAS  /tmp/ccR3fC14.s 			page 14
 
 
  174 006c 0020     		movs	r0, #0
@@ -838,7 +838,7 @@ ARM GAS  /tmp/cc0jUNJw.s 			page 1
  220              	.LBE78:
  221              	.LBE79:
  136:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_ll_gpio.c ****     LL_AHB1_GRP1_ReleaseReset(LL_AHB1_GRP1_PERIPH_GPIOE);
-ARM GAS  /tmp/cc0jUNJw.s 			page 15
+ARM GAS  /tmp/ccR3fC14.s 			page 15
 
 
  222              		.loc 1 136 5 is_stmt 1 view .LVU58
@@ -898,7 +898,7 @@ ARM GAS  /tmp/cc0jUNJw.s 			page 1
  266 00a4 1A69     		ldr	r2, [r3, #16]
  267 00a6 42F02002 		orr	r2, r2, #32
  268 00aa 1A61     		str	r2, [r3, #16]
-ARM GAS  /tmp/cc0jUNJw.s 			page 16
+ARM GAS  /tmp/ccR3fC14.s 			page 16
 
 
  269              	.LVL18:
@@ -958,7 +958,7 @@ ARM GAS  /tmp/cc0jUNJw.s 			page 1
  173:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_ll_gpio.c ****   *         that contains the configuration information for the specified GPIO peripheral.
  174:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_ll_gpio.c ****   * @retval An ErrorStatus enumeration value:
  175:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_ll_gpio.c ****   *          - SUCCESS: GPIO registers are initialized according to GPIO_InitStruct content
-ARM GAS  /tmp/cc0jUNJw.s 			page 17
+ARM GAS  /tmp/ccR3fC14.s 			page 17
 
 
  176:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_ll_gpio.c ****   *          - ERROR:   Not applicable
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/cc0jUNJw.s 			page 1
   22:Drivers/CMSIS/Include/cmsis_gcc.h ****  * limitations under the License.
   23:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
   24:Drivers/CMSIS/Include/cmsis_gcc.h **** 
-ARM GAS  /tmp/cc0jUNJw.s 			page 18
+ARM GAS  /tmp/ccR3fC14.s 			page 18
 
 
   25:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef __CMSIS_GCC_H
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/cc0jUNJw.s 			page 1
   79:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic push
   80:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wpacked"
   81:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wattributes"
-ARM GAS  /tmp/cc0jUNJw.s 			page 19
+ARM GAS  /tmp/ccR3fC14.s 			page 19
 
 
   82:Drivers/CMSIS/Include/cmsis_gcc.h ****   __PACKED_STRUCT T_UINT16_WRITE { uint16_t v; };
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/cc0jUNJw.s 			page 1
  136:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Disable IRQ Interrupts
  137:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Disables IRQ interrupts by setting the I-bit in the CPSR.
  138:Drivers/CMSIS/Include/cmsis_gcc.h ****            Can only be executed in Privileged modes.
-ARM GAS  /tmp/cc0jUNJw.s 			page 20
+ARM GAS  /tmp/ccR3fC14.s 			page 20
 
 
  139:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/cc0jUNJw.s 			page 1
  193:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __TZ_set_CONTROL_NS(uint32_t control)
  194:Drivers/CMSIS/Include/cmsis_gcc.h **** {
  195:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MSR control_ns, %0" : : "r" (control) : "memory");
-ARM GAS  /tmp/cc0jUNJw.s 			page 21
+ARM GAS  /tmp/ccR3fC14.s 			page 21
 
 
  196:Drivers/CMSIS/Include/cmsis_gcc.h **** }
@@ -1258,7 +1258,7 @@ ARM GAS  /tmp/cc0jUNJw.s 			page 1
  250:Drivers/CMSIS/Include/cmsis_gcc.h **** 
  251:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MRS %0, psp"  : "=r" (result) );
  252:Drivers/CMSIS/Include/cmsis_gcc.h ****   return(result);
-ARM GAS  /tmp/cc0jUNJw.s 			page 22
+ARM GAS  /tmp/ccR3fC14.s 			page 22
 
 
  253:Drivers/CMSIS/Include/cmsis_gcc.h **** }
@@ -1318,7 +1318,7 @@ ARM GAS  /tmp/cc0jUNJw.s 			page 1
  307:Drivers/CMSIS/Include/cmsis_gcc.h **** }
  308:Drivers/CMSIS/Include/cmsis_gcc.h **** 
  309:Drivers/CMSIS/Include/cmsis_gcc.h **** 
-ARM GAS  /tmp/cc0jUNJw.s 			page 23
+ARM GAS  /tmp/ccR3fC14.s 			page 23
 
 
  310:Drivers/CMSIS/Include/cmsis_gcc.h **** #if (defined (__ARM_FEATURE_CMSE ) && (__ARM_FEATURE_CMSE == 3))
@@ -1378,7 +1378,7 @@ ARM GAS  /tmp/cc0jUNJw.s 			page 1
  364:Drivers/CMSIS/Include/cmsis_gcc.h **** 
  365:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
  366:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Set Stack Pointer (non-secure)
-ARM GAS  /tmp/cc0jUNJw.s 			page 24
+ARM GAS  /tmp/ccR3fC14.s 			page 24
 
 
  367:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Assigns the given value to the non-secure Stack Pointer (SP) when in secure state.
@@ -1438,7 +1438,7 @@ ARM GAS  /tmp/cc0jUNJw.s 			page 1
  421:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Assigns the given value to the non-secure Priority Mask Register when in secure state.
  422:Drivers/CMSIS/Include/cmsis_gcc.h ****   \param [in]    priMask  Priority Mask
  423:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
-ARM GAS  /tmp/cc0jUNJw.s 			page 25
+ARM GAS  /tmp/ccR3fC14.s 			page 25
 
 
  424:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __TZ_set_PRIMASK_NS(uint32_t priMask)
@@ -1498,7 +1498,7 @@ ARM GAS  /tmp/cc0jUNJw.s 			page 1
  478:Drivers/CMSIS/Include/cmsis_gcc.h ****   uint32_t result;
  479:Drivers/CMSIS/Include/cmsis_gcc.h **** 
  480:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MRS %0, basepri_ns" : "=r" (result) );
-ARM GAS  /tmp/cc0jUNJw.s 			page 26
+ARM GAS  /tmp/ccR3fC14.s 			page 26
 
 
  481:Drivers/CMSIS/Include/cmsis_gcc.h ****   return(result);
@@ -1558,7 +1558,7 @@ ARM GAS  /tmp/cc0jUNJw.s 			page 1
  535:Drivers/CMSIS/Include/cmsis_gcc.h **** 
  536:Drivers/CMSIS/Include/cmsis_gcc.h **** #if (defined (__ARM_FEATURE_CMSE ) && (__ARM_FEATURE_CMSE == 3))
  537:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
-ARM GAS  /tmp/cc0jUNJw.s 			page 27
+ARM GAS  /tmp/ccR3fC14.s 			page 27
 
 
  538:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Get Fault Mask (non-secure)
@@ -1618,7 +1618,7 @@ ARM GAS  /tmp/cc0jUNJw.s 			page 1
  592:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __get_PSPLIM(void)
  593:Drivers/CMSIS/Include/cmsis_gcc.h **** {
  594:Drivers/CMSIS/Include/cmsis_gcc.h **** #if (!(defined (__ARM_ARCH_8M_MAIN__ ) && (__ARM_ARCH_8M_MAIN__ == 1)) && \
-ARM GAS  /tmp/cc0jUNJw.s 			page 28
+ARM GAS  /tmp/ccR3fC14.s 			page 28
 
 
  595:Drivers/CMSIS/Include/cmsis_gcc.h ****     (!defined (__ARM_FEATURE_CMSE) || (__ARM_FEATURE_CMSE < 3)))
@@ -1678,7 +1678,7 @@ ARM GAS  /tmp/cc0jUNJw.s 			page 1
  649:Drivers/CMSIS/Include/cmsis_gcc.h **** #if (defined (__ARM_FEATURE_CMSE  ) && (__ARM_FEATURE_CMSE   == 3))
  650:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
  651:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Set Process Stack Pointer (non-secure)
-ARM GAS  /tmp/cc0jUNJw.s 			page 29
+ARM GAS  /tmp/ccR3fC14.s 			page 29
 
 
  652:Drivers/CMSIS/Include/cmsis_gcc.h ****   Devices without ARMv8-M Main Extensions (i.e. Cortex-M23) lack the non-secure
@@ -1738,7 +1738,7 @@ ARM GAS  /tmp/cc0jUNJw.s 			page 1
  706:Drivers/CMSIS/Include/cmsis_gcc.h ****   return 0U;
  707:Drivers/CMSIS/Include/cmsis_gcc.h **** #else
  708:Drivers/CMSIS/Include/cmsis_gcc.h ****   uint32_t result;
-ARM GAS  /tmp/cc0jUNJw.s 			page 30
+ARM GAS  /tmp/ccR3fC14.s 			page 30
 
 
  709:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MRS %0, msplim_ns" : "=r" (result) );
@@ -1798,7 +1798,7 @@ ARM GAS  /tmp/cc0jUNJw.s 			page 1
  763:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Returns the current value of the Floating Point Status/Control register.
  764:Drivers/CMSIS/Include/cmsis_gcc.h ****   \return               Floating Point Status/Control register value
  765:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
-ARM GAS  /tmp/cc0jUNJw.s 			page 31
+ARM GAS  /tmp/ccR3fC14.s 			page 31
 
 
  766:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __get_FPSCR(void)
@@ -1858,7 +1858,7 @@ ARM GAS  /tmp/cc0jUNJw.s 			page 1
  820:Drivers/CMSIS/Include/cmsis_gcc.h ****  * For thumb1, use low register (r0-r7), specified by constraint "l"
  821:Drivers/CMSIS/Include/cmsis_gcc.h ****  * Otherwise, use general registers, specified by constraint "r" */
  822:Drivers/CMSIS/Include/cmsis_gcc.h **** #if defined (__thumb__) && !defined (__thumb2__)
-ARM GAS  /tmp/cc0jUNJw.s 			page 32
+ARM GAS  /tmp/ccR3fC14.s 			page 32
 
 
  823:Drivers/CMSIS/Include/cmsis_gcc.h **** #define __CMSIS_GCC_OUT_REG(r) "=l" (r)
@@ -1918,7 +1918,7 @@ ARM GAS  /tmp/cc0jUNJw.s 			page 1
  877:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __DSB(void)
  878:Drivers/CMSIS/Include/cmsis_gcc.h **** {
  879:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("dsb 0xF":::"memory");
-ARM GAS  /tmp/cc0jUNJw.s 			page 33
+ARM GAS  /tmp/ccR3fC14.s 			page 33
 
 
  880:Drivers/CMSIS/Include/cmsis_gcc.h **** }
@@ -1978,7 +1978,7 @@ ARM GAS  /tmp/cc0jUNJw.s 			page 1
  934:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE int16_t __REVSH(int16_t value)
  935:Drivers/CMSIS/Include/cmsis_gcc.h **** {
  936:Drivers/CMSIS/Include/cmsis_gcc.h **** #if (__GNUC__ > 4) || (__GNUC__ == 4 && __GNUC_MINOR__ >= 8)
-ARM GAS  /tmp/cc0jUNJw.s 			page 34
+ARM GAS  /tmp/ccR3fC14.s 			page 34
 
 
  937:Drivers/CMSIS/Include/cmsis_gcc.h ****   return (int16_t)__builtin_bswap16(value);
@@ -2038,7 +2038,7 @@ ARM GAS  /tmp/cc0jUNJw.s 			page 1
  988:Drivers/CMSIS/Include/cmsis_gcc.h ****    __ASM volatile ("rbit %0, %1" : "=r" (result) : "r" (value) );
  335              		.loc 3 988 4 view .LVU88
  336              		.syntax unified
-ARM GAS  /tmp/cc0jUNJw.s 			page 35
+ARM GAS  /tmp/ccR3fC14.s 			page 35
 
 
  337              	@ 988 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
@@ -2098,7 +2098,7 @@ ARM GAS  /tmp/cc0jUNJw.s 			page 1
  208:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_ll_gpio.c ****         LL_GPIO_SetPinSpeed(GPIOx, currentpin, GPIO_InitStruct->Speed);
  362              		.loc 1 208 9 view .LVU95
  363 000c 8D68     		ldr	r5, [r1, #8]
-ARM GAS  /tmp/cc0jUNJw.s 			page 36
+ARM GAS  /tmp/ccR3fC14.s 			page 36
 
 
  364              	.LVL25:
@@ -2158,7 +2158,7 @@ ARM GAS  /tmp/cc0jUNJw.s 			page 1
   51:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   */
   52:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** #endif /*USE_FULL_LL_DRIVER*/
   53:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** 
-ARM GAS  /tmp/cc0jUNJw.s 			page 37
+ARM GAS  /tmp/ccR3fC14.s 			page 37
 
 
   54:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** /* Exported types ------------------------------------------------------------*/
@@ -2218,7 +2218,7 @@ ARM GAS  /tmp/cc0jUNJw.s 			page 1
  108:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** #define LL_GPIO_PIN_1                      GPIO_BSRR_BS_1 /*!< Select pin 1 */
  109:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** #define LL_GPIO_PIN_2                      GPIO_BSRR_BS_2 /*!< Select pin 2 */
  110:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** #define LL_GPIO_PIN_3                      GPIO_BSRR_BS_3 /*!< Select pin 3 */
-ARM GAS  /tmp/cc0jUNJw.s 			page 38
+ARM GAS  /tmp/ccR3fC14.s 			page 38
 
 
  111:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** #define LL_GPIO_PIN_4                      GPIO_BSRR_BS_4 /*!< Select pin 4 */
@@ -2278,7 +2278,7 @@ ARM GAS  /tmp/cc0jUNJw.s 			page 1
  165:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   * @{
  166:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   */
  167:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** #define LL_GPIO_PULL_NO                    (0x00000000U) /*!< Select I/O no pull */
-ARM GAS  /tmp/cc0jUNJw.s 			page 39
+ARM GAS  /tmp/ccR3fC14.s 			page 39
 
 
  168:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** #define LL_GPIO_PULL_UP                    GPIO_PUPDR_PUPDR0_0 /*!< Select I/O pull up */
@@ -2338,7 +2338,7 @@ ARM GAS  /tmp/cc0jUNJw.s 			page 1
  222:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   * @param  __REG__ Register to be read
  223:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   * @retval Register value
  224:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   */
-ARM GAS  /tmp/cc0jUNJw.s 			page 40
+ARM GAS  /tmp/ccR3fC14.s 			page 40
 
 
  225:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** #define LL_GPIO_ReadReg(__INSTANCE__, __REG__) READ_REG(__INSTANCE__->__REG__)
@@ -2398,7 +2398,7 @@ ARM GAS  /tmp/cc0jUNJw.s 			page 1
  279:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   * @brief  Return gpio mode for a dedicated pin on dedicated port.
  280:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   * @note   I/O mode can be Input mode, General purpose output, Alternate function mode or Analog.
  281:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   * @note   Warning: only one pin can be passed as parameter.
-ARM GAS  /tmp/cc0jUNJw.s 			page 41
+ARM GAS  /tmp/ccR3fC14.s 			page 41
 
 
  282:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   * @rmtoll MODER        MODEy         LL_GPIO_GetPinMode
@@ -2458,7 +2458,7 @@ ARM GAS  /tmp/cc0jUNJw.s 			page 1
  336:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_ALL
  337:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   * @param  OutputType This parameter can be one of the following values:
  338:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_OUTPUT_PUSHPULL
-ARM GAS  /tmp/cc0jUNJw.s 			page 42
+ARM GAS  /tmp/ccR3fC14.s 			page 42
 
 
  339:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_OUTPUT_OPENDRAIN
@@ -2518,7 +2518,7 @@ ARM GAS  /tmp/cc0jUNJw.s 			page 1
  393:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_3
  394:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_4
  395:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_5
-ARM GAS  /tmp/cc0jUNJw.s 			page 43
+ARM GAS  /tmp/ccR3fC14.s 			page 43
 
 
  396:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_6
@@ -2578,7 +2578,7 @@ ARM GAS  /tmp/cc0jUNJw.s 			page 1
  981:Drivers/CMSIS/Include/cmsis_gcc.h **** {
  399              		.loc 3 981 31 is_stmt 1 view .LVU104
  400              	.LBB135:
-ARM GAS  /tmp/cc0jUNJw.s 			page 44
+ARM GAS  /tmp/ccR3fC14.s 			page 44
 
 
  983:Drivers/CMSIS/Include/cmsis_gcc.h **** 
@@ -2638,7 +2638,7 @@ ARM GAS  /tmp/cc0jUNJw.s 			page 1
  443              	.LVL34:
  444              	.L34:
  345:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** 
-ARM GAS  /tmp/cc0jUNJw.s 			page 45
+ARM GAS  /tmp/ccR3fC14.s 			page 45
 
 
  445              		.loc 4 345 1 view .LVU117
@@ -2698,7 +2698,7 @@ ARM GAS  /tmp/cc0jUNJw.s 			page 1
  421:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   * @note   I/O speed can be Low, Medium, Fast or High speed.
  422:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   * @note   Warning: only one pin can be passed as parameter.
  423:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   * @note   Refer to datasheet for frequency specifications and the power
-ARM GAS  /tmp/cc0jUNJw.s 			page 46
+ARM GAS  /tmp/ccR3fC14.s 			page 46
 
 
  424:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         supply and load conditions for each speed.
@@ -2758,7 +2758,7 @@ ARM GAS  /tmp/cc0jUNJw.s 			page 1
  478:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   * @param  Pull This parameter can be one of the following values:
  479:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PULL_NO
  480:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PULL_UP
-ARM GAS  /tmp/cc0jUNJw.s 			page 47
+ARM GAS  /tmp/ccR3fC14.s 			page 47
 
 
  481:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PULL_DOWN
@@ -2818,7 +2818,7 @@ ARM GAS  /tmp/cc0jUNJw.s 			page 1
  535:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_6
  536:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_7
  537:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   * @param  Alternate This parameter can be one of the following values:
-ARM GAS  /tmp/cc0jUNJw.s 			page 48
+ARM GAS  /tmp/ccR3fC14.s 			page 48
 
 
  538:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_0
@@ -2878,7 +2878,7 @@ ARM GAS  /tmp/cc0jUNJw.s 			page 1
  507              	.LBI144:
  981:Drivers/CMSIS/Include/cmsis_gcc.h **** {
  508              		.loc 3 981 31 is_stmt 1 view .LVU136
-ARM GAS  /tmp/cc0jUNJw.s 			page 49
+ARM GAS  /tmp/ccR3fC14.s 			page 49
 
 
  509              	.LBB145:
@@ -2938,7 +2938,7 @@ ARM GAS  /tmp/cc0jUNJw.s 			page 1
  575:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   * @retval Returned value can be one of the following values:
  576:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_0
  577:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_1
-ARM GAS  /tmp/cc0jUNJw.s 			page 50
+ARM GAS  /tmp/ccR3fC14.s 			page 50
 
 
  578:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_2
@@ -2998,7 +2998,7 @@ ARM GAS  /tmp/cc0jUNJw.s 			page 1
  632:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   */
  633:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** __STATIC_INLINE void LL_GPIO_SetAFPin_8_15(GPIO_TypeDef *GPIOx, uint32_t Pin, uint32_t Alternate)
  541              		.loc 4 633 22 view .LVU145
-ARM GAS  /tmp/cc0jUNJw.s 			page 51
+ARM GAS  /tmp/ccR3fC14.s 			page 51
 
 
  542              	.LBB147:
@@ -3058,7 +3058,7 @@ ARM GAS  /tmp/cc0jUNJw.s 			page 1
  588              		.loc 4 635 3 view .LVU158
  589 00a2 B2FA82F2 		clz	r2, r2
  590 00a6 9200     		lsls	r2, r2, #2
-ARM GAS  /tmp/cc0jUNJw.s 			page 52
+ARM GAS  /tmp/ccR3fC14.s 			page 52
 
 
  591 00a8 04FA02F2 		lsl	r2, r4, r2
@@ -3118,7 +3118,7 @@ ARM GAS  /tmp/cc0jUNJw.s 			page 1
  626              		.loc 1 197 5 is_stmt 1 view .LVU169
  197:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_ll_gpio.c **** 
  627              		.loc 1 197 56 is_stmt 0 view .LVU170
-ARM GAS  /tmp/cc0jUNJw.s 			page 53
+ARM GAS  /tmp/ccR3fC14.s 			page 53
 
 
  628 00c2 0122     		movs	r2, #1
@@ -3178,7 +3178,7 @@ ARM GAS  /tmp/cc0jUNJw.s 			page 1
  988:Drivers/CMSIS/Include/cmsis_gcc.h **** #else
  669              		.loc 3 988 4 view .LVU184
  670              		.syntax unified
-ARM GAS  /tmp/cc0jUNJw.s 			page 54
+ARM GAS  /tmp/ccR3fC14.s 			page 54
 
 
  671              	@ 988 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
@@ -3238,7 +3238,7 @@ ARM GAS  /tmp/cc0jUNJw.s 			page 1
  717              		.loc 1 220 26 is_stmt 0 view .LVU196
  718 0100 4A68     		ldr	r2, [r1, #4]
  220:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_ll_gpio.c ****       {
-ARM GAS  /tmp/cc0jUNJw.s 			page 55
+ARM GAS  /tmp/ccR3fC14.s 			page 55
 
 
  719              		.loc 1 220 10 view .LVU197
@@ -3298,7 +3298,7 @@ ARM GAS  /tmp/cc0jUNJw.s 			page 1
  763              		.syntax unified
  764              	@ 988 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
  765 0120 93FAA3F3 		rbit r3, r3
-ARM GAS  /tmp/cc0jUNJw.s 			page 56
+ARM GAS  /tmp/ccR3fC14.s 			page 56
 
 
  766              	@ 0 "" 2
@@ -3358,7 +3358,7 @@ ARM GAS  /tmp/cc0jUNJw.s 			page 1
  808              	.L31:
  809              	.LCFI3:
  810              		.cfi_def_cfa_offset 0
-ARM GAS  /tmp/cc0jUNJw.s 			page 57
+ARM GAS  /tmp/ccR3fC14.s 			page 57
 
 
  811              		.cfi_restore 4
@@ -3418,7 +3418,7 @@ ARM GAS  /tmp/cc0jUNJw.s 			page 1
  851              		.loc 1 258 3 is_stmt 1 view .LVU234
  852              		.loc 1 258 31 is_stmt 0 view .LVU235
  853 000e C360     		str	r3, [r0, #12]
-ARM GAS  /tmp/cc0jUNJw.s 			page 58
+ARM GAS  /tmp/ccR3fC14.s 			page 58
 
 
  259:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_ll_gpio.c ****   GPIO_InitStruct->Pull       = LL_GPIO_PULL_NO;
@@ -3440,17 +3440,17 @@ ARM GAS  /tmp/cc0jUNJw.s 			page 1
  868              		.file 6 "/home/arashamf/soft/ARM_toolchains/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/s
  869              		.file 7 "Drivers/CMSIS/Device/ST/STM32L1xx/Include/stm32l151xb.h"
  870              		.file 8 "Drivers/CMSIS/Device/ST/STM32L1xx/Include/stm32l1xx.h"
-ARM GAS  /tmp/cc0jUNJw.s 			page 59
+ARM GAS  /tmp/ccR3fC14.s 			page 59
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 stm32l1xx_ll_gpio.c
-     /tmp/cc0jUNJw.s:18     .text.LL_GPIO_DeInit:0000000000000000 $t
-     /tmp/cc0jUNJw.s:24     .text.LL_GPIO_DeInit:0000000000000000 LL_GPIO_DeInit
-     /tmp/cc0jUNJw.s:294    .text.LL_GPIO_DeInit:00000000000000b8 $d
-     /tmp/cc0jUNJw.s:306    .text.LL_GPIO_Init:0000000000000000 $t
-     /tmp/cc0jUNJw.s:312    .text.LL_GPIO_Init:0000000000000000 LL_GPIO_Init
-     /tmp/cc0jUNJw.s:825    .text.LL_GPIO_StructInit:0000000000000000 $t
-     /tmp/cc0jUNJw.s:831    .text.LL_GPIO_StructInit:0000000000000000 LL_GPIO_StructInit
+     /tmp/ccR3fC14.s:18     .text.LL_GPIO_DeInit:0000000000000000 $t
+     /tmp/ccR3fC14.s:24     .text.LL_GPIO_DeInit:0000000000000000 LL_GPIO_DeInit
+     /tmp/ccR3fC14.s:294    .text.LL_GPIO_DeInit:00000000000000b8 $d
+     /tmp/ccR3fC14.s:306    .text.LL_GPIO_Init:0000000000000000 $t
+     /tmp/ccR3fC14.s:312    .text.LL_GPIO_Init:0000000000000000 LL_GPIO_Init
+     /tmp/ccR3fC14.s:825    .text.LL_GPIO_StructInit:0000000000000000 $t
+     /tmp/ccR3fC14.s:831    .text.LL_GPIO_StructInit:0000000000000000 LL_GPIO_StructInit
 
 NO UNDEFINED SYMBOLS

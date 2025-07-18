@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccvIhNRD.s 			page 1
+ARM GAS  /tmp/ccjSP2i1.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -25,7 +25,7 @@ ARM GAS  /tmp/ccvIhNRD.s 			page 1
   22              		.thumb_func
   24              	reset_number:
   25              	.LVL0:
-  26              	.LFB711:
+  26              	.LFB814:
   27              		.file 1 "Core/Src/LED_display.c"
    1:Core/Src/LED_display.c **** //Includes ------------------------------------------------------------------//
    2:Core/Src/LED_display.c **** #include "LED_display.h"
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccvIhNRD.s 			page 1
   11:Core/Src/LED_display.c ****             NUMBER_0 (OFF);
   46              		.loc 1 11 13 view .LVU2
   47              	.LVL1:
-ARM GAS  /tmp/ccvIhNRD.s 			page 2
+ARM GAS  /tmp/ccjSP2i1.s 			page 2
 
 
   48              	.LBB152:
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccvIhNRD.s 			page 1
   52:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** #endif /*USE_FULL_LL_DRIVER*/
   53:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** 
   54:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** /* Exported types ------------------------------------------------------------*/
-ARM GAS  /tmp/ccvIhNRD.s 			page 3
+ARM GAS  /tmp/ccjSP2i1.s 			page 3
 
 
   55:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** #if defined(USE_FULL_LL_DRIVER)
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccvIhNRD.s 			page 1
  109:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** #define LL_GPIO_PIN_2                      GPIO_BSRR_BS_2 /*!< Select pin 2 */
  110:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** #define LL_GPIO_PIN_3                      GPIO_BSRR_BS_3 /*!< Select pin 3 */
  111:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** #define LL_GPIO_PIN_4                      GPIO_BSRR_BS_4 /*!< Select pin 4 */
-ARM GAS  /tmp/ccvIhNRD.s 			page 4
+ARM GAS  /tmp/ccjSP2i1.s 			page 4
 
 
  112:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** #define LL_GPIO_PIN_5                      GPIO_BSRR_BS_5 /*!< Select pin 5 */
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccvIhNRD.s 			page 1
  166:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   */
  167:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** #define LL_GPIO_PULL_NO                    (0x00000000U) /*!< Select I/O no pull */
  168:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** #define LL_GPIO_PULL_UP                    GPIO_PUPDR_PUPDR0_0 /*!< Select I/O pull up */
-ARM GAS  /tmp/ccvIhNRD.s 			page 5
+ARM GAS  /tmp/ccjSP2i1.s 			page 5
 
 
  169:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** #define LL_GPIO_PULL_DOWN                  GPIO_PUPDR_PUPDR0_1 /*!< Select I/O pull down */
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccvIhNRD.s 			page 1
  223:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   * @retval Register value
  224:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   */
  225:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** #define LL_GPIO_ReadReg(__INSTANCE__, __REG__) READ_REG(__INSTANCE__->__REG__)
-ARM GAS  /tmp/ccvIhNRD.s 			page 6
+ARM GAS  /tmp/ccjSP2i1.s 			page 6
 
 
  226:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** /**
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccvIhNRD.s 			page 1
  280:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   * @note   I/O mode can be Input mode, General purpose output, Alternate function mode or Analog.
  281:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   * @note   Warning: only one pin can be passed as parameter.
  282:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   * @rmtoll MODER        MODEy         LL_GPIO_GetPinMode
-ARM GAS  /tmp/ccvIhNRD.s 			page 7
+ARM GAS  /tmp/ccjSP2i1.s 			page 7
 
 
  283:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   * @param  GPIOx GPIO Port
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccvIhNRD.s 			page 1
  337:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   * @param  OutputType This parameter can be one of the following values:
  338:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_OUTPUT_PUSHPULL
  339:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_OUTPUT_OPENDRAIN
-ARM GAS  /tmp/ccvIhNRD.s 			page 8
+ARM GAS  /tmp/ccjSP2i1.s 			page 8
 
 
  340:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   * @retval None
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccvIhNRD.s 			page 1
  394:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_4
  395:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_5
  396:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_6
-ARM GAS  /tmp/ccvIhNRD.s 			page 9
+ARM GAS  /tmp/ccjSP2i1.s 			page 9
 
 
  397:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_7
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccvIhNRD.s 			page 1
  451:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** {
  452:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   return (uint32_t)(READ_BIT(GPIOx->OSPEEDR,
  453:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****                              (GPIO_OSPEEDER_OSPEEDR0 << (POSITION_VAL(Pin) * 2U))) >> (POSITION_VAL
-ARM GAS  /tmp/ccvIhNRD.s 			page 10
+ARM GAS  /tmp/ccjSP2i1.s 			page 10
 
 
  454:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** }
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccvIhNRD.s 			page 1
  508:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_13
  509:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_14
  510:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_15
-ARM GAS  /tmp/ccvIhNRD.s 			page 11
+ARM GAS  /tmp/ccjSP2i1.s 			page 11
 
 
  511:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   * @retval Returned value can be one of the following values:
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccvIhNRD.s 			page 1
  565:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   * @param  GPIOx GPIO Port
  566:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   * @param  Pin This parameter can be one of the following values:
  567:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_0
-ARM GAS  /tmp/ccvIhNRD.s 			page 12
+ARM GAS  /tmp/ccjSP2i1.s 			page 12
 
 
  568:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_1
@@ -718,7 +718,7 @@ ARM GAS  /tmp/ccvIhNRD.s 			page 1
  622:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_7
  623:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_8
  624:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_9
-ARM GAS  /tmp/ccvIhNRD.s 			page 13
+ARM GAS  /tmp/ccjSP2i1.s 			page 13
 
 
  625:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_10
@@ -778,7 +778,7 @@ ARM GAS  /tmp/ccvIhNRD.s 			page 1
  679:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   * @brief  Lock configuration of several pins for a dedicated port.
  680:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   * @note   When the lock sequence has been applied on a port bit, the
  681:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         value of this port bit can no longer be modified until the
-ARM GAS  /tmp/ccvIhNRD.s 			page 14
+ARM GAS  /tmp/ccjSP2i1.s 			page 14
 
 
  682:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         next reset.
@@ -838,7 +838,7 @@ ARM GAS  /tmp/ccvIhNRD.s 			page 1
  736:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_13
  737:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_14
  738:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_15
-ARM GAS  /tmp/ccvIhNRD.s 			page 15
+ARM GAS  /tmp/ccjSP2i1.s 			page 15
 
 
  739:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_ALL
@@ -898,7 +898,7 @@ ARM GAS  /tmp/ccvIhNRD.s 			page 1
  793:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_11
  794:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_12
  795:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_13
-ARM GAS  /tmp/ccvIhNRD.s 			page 16
+ARM GAS  /tmp/ccjSP2i1.s 			page 16
 
 
  796:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_14
@@ -958,7 +958,7 @@ ARM GAS  /tmp/ccvIhNRD.s 			page 1
  850:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_ALL
  851:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   * @retval State of bit (1 or 0).
  852:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   */
-ARM GAS  /tmp/ccvIhNRD.s 			page 17
+ARM GAS  /tmp/ccjSP2i1.s 			page 17
 
 
  853:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** __STATIC_INLINE uint32_t LL_GPIO_IsOutputPinSet(GPIO_TypeDef *GPIOx, uint32_t PinMask)
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/ccvIhNRD.s 			page 1
  907:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_14
  908:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_15
  909:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_ALL
-ARM GAS  /tmp/ccvIhNRD.s 			page 18
+ARM GAS  /tmp/ccjSP2i1.s 			page 18
 
 
  910:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   * @retval None
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/ccvIhNRD.s 			page 1
   84              	.LBB157:
  917:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** #endif /* GPIO_BRR_BR_0 */
   85              		.loc 2 917 3 view .LVU14
-ARM GAS  /tmp/ccvIhNRD.s 			page 19
+ARM GAS  /tmp/ccjSP2i1.s 			page 19
 
 
   86 0022 0A4B     		ldr	r3, .L10
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/ccvIhNRD.s 			page 1
   28:Core/Src/LED_display.c ****             break;
   29:Core/Src/LED_display.c ****       
   30:Core/Src/LED_display.c ****         case 5:
-ARM GAS  /tmp/ccvIhNRD.s 			page 20
+ARM GAS  /tmp/ccjSP2i1.s 			page 20
 
 
   31:Core/Src/LED_display.c ****             NUMBER_5 (OFF);
@@ -1172,7 +1172,7 @@ ARM GAS  /tmp/ccvIhNRD.s 			page 1
  146              	.L10:
  147 004c 00000240 		.word	1073872896
  148              		.cfi_endproc
- 149              	.LFE711:
+ 149              	.LFE814:
  151              		.section	.text.reset_all_number,"ax",%progbits
  152              		.align	1
  153              		.global	reset_all_number
@@ -1180,7 +1180,7 @@ ARM GAS  /tmp/ccvIhNRD.s 			page 1
  155              		.thumb
  156              		.thumb_func
  158              	reset_all_number:
- 159              	.LFB712:
+ 159              	.LFB815:
   38:Core/Src/LED_display.c **** 
   39:Core/Src/LED_display.c **** //---------------------------------------------------------------------------//
   40:Core/Src/LED_display.c **** void reset_all_number (void)
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/ccvIhNRD.s 			page 1
  912:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** {
  169              		.loc 2 912 22 view .LVU34
  170              	.LBB165:
-ARM GAS  /tmp/ccvIhNRD.s 			page 21
+ARM GAS  /tmp/ccjSP2i1.s 			page 21
 
 
  917:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** #endif /* GPIO_BRR_BR_0 */
@@ -1258,7 +1258,7 @@ ARM GAS  /tmp/ccvIhNRD.s 			page 1
  917:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** #endif /* GPIO_BRR_BR_0 */
  212              		.loc 2 917 3 is_stmt 0 view .LVU48
  213              	.LBE171:
-ARM GAS  /tmp/ccvIhNRD.s 			page 22
+ARM GAS  /tmp/ccjSP2i1.s 			page 22
 
 
  214              	.LBE170:
@@ -1302,7 +1302,7 @@ ARM GAS  /tmp/ccvIhNRD.s 			page 1
  243              	.L13:
  244 0028 00000240 		.word	1073872896
  245              		.cfi_endproc
- 246              	.LFE712:
+ 246              	.LFE815:
  248              		.section	.text.select_number,"ax",%progbits
  249              		.align	1
  250              		.global	select_number
@@ -1311,14 +1311,14 @@ ARM GAS  /tmp/ccvIhNRD.s 			page 1
  253              		.thumb_func
  255              	select_number:
  256              	.LVL15:
- 257              	.LFB713:
+ 257              	.LFB816:
   49:Core/Src/LED_display.c **** 
   50:Core/Src/LED_display.c **** //---------------------------------------------------------------------------//
   51:Core/Src/LED_display.c **** void select_number (uint8_t numb)
   52:Core/Src/LED_display.c **** {
  258              		.loc 1 52 1 is_stmt 1 view -0
  259              		.cfi_startproc
-ARM GAS  /tmp/ccvIhNRD.s 			page 23
+ARM GAS  /tmp/ccjSP2i1.s 			page 23
 
 
  260              		@ args = 0, pretend = 0, frame = 0
@@ -1378,7 +1378,7 @@ ARM GAS  /tmp/ccvIhNRD.s 			page 1
   64:Core/Src/LED_display.c ****         case 2:
   65:Core/Src/LED_display.c ****             NUMBER_2 (ON);
   66:Core/Src/LED_display.c ****             break;
-ARM GAS  /tmp/ccvIhNRD.s 			page 24
+ARM GAS  /tmp/ccjSP2i1.s 			page 24
 
 
   67:Core/Src/LED_display.c ****       
@@ -1438,7 +1438,7 @@ ARM GAS  /tmp/ccvIhNRD.s 			page 1
  885:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** 
  329              		.loc 2 885 1 is_stmt 0 view .LVU75
  330 002c F6E7     		b	.L15
-ARM GAS  /tmp/ccvIhNRD.s 			page 25
+ARM GAS  /tmp/ccjSP2i1.s 			page 25
 
 
  331              	.LVL21:
@@ -1498,7 +1498,7 @@ ARM GAS  /tmp/ccvIhNRD.s 			page 1
  372              	.LBB187:
  884:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** }
  373              		.loc 2 884 3 view .LVU89
-ARM GAS  /tmp/ccvIhNRD.s 			page 26
+ARM GAS  /tmp/ccjSP2i1.s 			page 26
 
 
  374 003e 024B     		ldr	r3, .L25
@@ -1516,7 +1516,7 @@ ARM GAS  /tmp/ccvIhNRD.s 			page 1
  385              	.L25:
  386 0048 00000240 		.word	1073872896
  387              		.cfi_endproc
- 388              	.LFE713:
+ 388              	.LFE816:
  390              		.section	.text.reset_all_digit,"ax",%progbits
  391              		.align	1
  392              		.global	reset_all_digit
@@ -1524,7 +1524,7 @@ ARM GAS  /tmp/ccvIhNRD.s 			page 1
  394              		.thumb
  395              		.thumb_func
  397              	reset_all_digit:
- 398              	.LFB714:
+ 398              	.LFB817:
   84:Core/Src/LED_display.c **** 
   85:Core/Src/LED_display.c **** //---------------------------------------------------------------------------//
   86:Core/Src/LED_display.c **** void reset_all_digit (void)
@@ -1558,7 +1558,7 @@ ARM GAS  /tmp/ccvIhNRD.s 			page 1
  420              	.LBI190:
  912:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** {
  421              		.loc 2 912 22 view .LVU98
-ARM GAS  /tmp/ccvIhNRD.s 			page 27
+ARM GAS  /tmp/ccjSP2i1.s 			page 27
 
 
  422              	.LBB191:
@@ -1618,7 +1618,7 @@ ARM GAS  /tmp/ccvIhNRD.s 			page 1
  917:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** #endif /* GPIO_BRR_BR_0 */
  463              		.loc 2 917 3 is_stmt 0 view .LVU112
  464              	.LBE197:
-ARM GAS  /tmp/ccvIhNRD.s 			page 28
+ARM GAS  /tmp/ccjSP2i1.s 			page 28
 
 
  465              	.LBE196:
@@ -1678,10 +1678,10 @@ ARM GAS  /tmp/ccvIhNRD.s 			page 1
  506              	.L28:
  507 0034 00040240 		.word	1073873920
  508              		.cfi_endproc
-ARM GAS  /tmp/ccvIhNRD.s 			page 29
+ARM GAS  /tmp/ccjSP2i1.s 			page 29
 
 
- 509              	.LFE714:
+ 509              	.LFE817:
  511              		.section	.text.digit_0,"ax",%progbits
  512              		.align	1
  513              		.global	digit_0
@@ -1689,7 +1689,7 @@ ARM GAS  /tmp/ccvIhNRD.s 			page 1
  515              		.thumb
  516              		.thumb_func
  518              	digit_0:
- 519              	.LFB715:
+ 519              	.LFB818:
   97:Core/Src/LED_display.c **** 
   98:Core/Src/LED_display.c **** //---------------------------------------------------------------------------//
   99:Core/Src/LED_display.c **** void digit_0 (void)
@@ -1738,7 +1738,7 @@ ARM GAS  /tmp/ccvIhNRD.s 			page 1
  552              	.LBB208:
  553              	.LBI208:
  882:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** {
-ARM GAS  /tmp/ccvIhNRD.s 			page 30
+ARM GAS  /tmp/ccjSP2i1.s 			page 30
 
 
  554              		.loc 2 882 22 view .LVU136
@@ -1798,7 +1798,7 @@ ARM GAS  /tmp/ccvIhNRD.s 			page 1
  595              	.LVL40:
  884:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** }
  596              		.loc 2 884 3 is_stmt 0 view .LVU150
-ARM GAS  /tmp/ccvIhNRD.s 			page 31
+ARM GAS  /tmp/ccjSP2i1.s 			page 31
 
 
  597              	.LBE215:
@@ -1811,7 +1811,7 @@ ARM GAS  /tmp/ccvIhNRD.s 			page 1
  603              	.L31:
  604 0020 00040240 		.word	1073873920
  605              		.cfi_endproc
- 606              	.LFE715:
+ 606              	.LFE818:
  608              		.section	.text.digit_1,"ax",%progbits
  609              		.align	1
  610              		.global	digit_1
@@ -1819,7 +1819,7 @@ ARM GAS  /tmp/ccvIhNRD.s 			page 1
  612              		.thumb
  613              		.thumb_func
  615              	digit_1:
- 616              	.LFB716:
+ 616              	.LFB819:
  108:Core/Src/LED_display.c **** 
  109:Core/Src/LED_display.c **** //---------------------------------------------------------------------------//
  110:Core/Src/LED_display.c **** void digit_1 (void)
@@ -1858,7 +1858,7 @@ ARM GAS  /tmp/ccvIhNRD.s 			page 1
  641              		.loc 2 884 3 view .LVU159
  642 0006 0822     		movs	r2, #8
  643 0008 9A61     		str	r2, [r3, #24]
-ARM GAS  /tmp/ccvIhNRD.s 			page 32
+ARM GAS  /tmp/ccjSP2i1.s 			page 32
 
 
  644              	.LVL43:
@@ -1874,7 +1874,7 @@ ARM GAS  /tmp/ccvIhNRD.s 			page 1
  652              	.L34:
  653 000c 00040240 		.word	1073873920
  654              		.cfi_endproc
- 655              	.LFE716:
+ 655              	.LFE819:
  657              		.section	.text.digit_2,"ax",%progbits
  658              		.align	1
  659              		.global	digit_2
@@ -1882,7 +1882,7 @@ ARM GAS  /tmp/ccvIhNRD.s 			page 1
  661              		.thumb
  662              		.thumb_func
  664              	digit_2:
- 665              	.LFB717:
+ 665              	.LFB820:
  115:Core/Src/LED_display.c **** 
  116:Core/Src/LED_display.c **** //---------------------------------------------------------------------------//
  117:Core/Src/LED_display.c **** void digit_2 (void)
@@ -1918,7 +1918,7 @@ ARM GAS  /tmp/ccvIhNRD.s 			page 1
  688              		.loc 2 882 22 view .LVU168
  689              	.LBB223:
  884:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** }
-ARM GAS  /tmp/ccvIhNRD.s 			page 33
+ARM GAS  /tmp/ccjSP2i1.s 			page 33
 
 
  690              		.loc 2 884 3 view .LVU169
@@ -1978,7 +1978,7 @@ ARM GAS  /tmp/ccvIhNRD.s 			page 1
  731              	.LBE229:
  732              	.LBE228:
  124:Core/Src/LED_display.c **** }
-ARM GAS  /tmp/ccvIhNRD.s 			page 34
+ARM GAS  /tmp/ccjSP2i1.s 			page 34
 
 
  733              		.loc 1 124 1 view .LVU183
@@ -1988,7 +1988,7 @@ ARM GAS  /tmp/ccvIhNRD.s 			page 1
  737              	.L37:
  738 001c 00040240 		.word	1073873920
  739              		.cfi_endproc
- 740              	.LFE717:
+ 740              	.LFE820:
  742              		.section	.text.digit_3,"ax",%progbits
  743              		.align	1
  744              		.global	digit_3
@@ -1996,7 +1996,7 @@ ARM GAS  /tmp/ccvIhNRD.s 			page 1
  746              		.thumb
  747              		.thumb_func
  749              	digit_3:
- 750              	.LFB718:
+ 750              	.LFB821:
  125:Core/Src/LED_display.c **** 
  126:Core/Src/LED_display.c **** //---------------------------------------------------------------------------//
  127:Core/Src/LED_display.c **** void digit_3 (void)
@@ -2038,7 +2038,7 @@ ARM GAS  /tmp/ccvIhNRD.s 			page 1
  778              	.LVL52:
  884:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** }
  779              		.loc 2 884 3 is_stmt 0 view .LVU192
-ARM GAS  /tmp/ccvIhNRD.s 			page 35
+ARM GAS  /tmp/ccjSP2i1.s 			page 35
 
 
  780              	.LBE233:
@@ -2098,11 +2098,11 @@ ARM GAS  /tmp/ccvIhNRD.s 			page 1
  821 001a 00BF     		.align	2
  822              	.L40:
  823 001c 00040240 		.word	1073873920
-ARM GAS  /tmp/ccvIhNRD.s 			page 36
+ARM GAS  /tmp/ccjSP2i1.s 			page 36
 
 
  824              		.cfi_endproc
- 825              	.LFE718:
+ 825              	.LFE821:
  827              		.section	.text.digit_4,"ax",%progbits
  828              		.align	1
  829              		.global	digit_4
@@ -2110,7 +2110,7 @@ ARM GAS  /tmp/ccvIhNRD.s 			page 1
  831              		.thumb
  832              		.thumb_func
  834              	digit_4:
- 835              	.LFB719:
+ 835              	.LFB822:
  135:Core/Src/LED_display.c **** 
  136:Core/Src/LED_display.c **** //---------------------------------------------------------------------------//
  137:Core/Src/LED_display.c **** void digit_4 (void)
@@ -2158,7 +2158,7 @@ ARM GAS  /tmp/ccvIhNRD.s 			page 1
  867              		.loc 1 141 3 is_stmt 1 view .LVU215
  868              	.LBB244:
  869              	.LBI244:
-ARM GAS  /tmp/ccvIhNRD.s 			page 37
+ARM GAS  /tmp/ccjSP2i1.s 			page 37
 
 
  882:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** {
@@ -2197,7 +2197,7 @@ ARM GAS  /tmp/ccvIhNRD.s 			page 1
  895              	.L43:
  896 0018 00040240 		.word	1073873920
  897              		.cfi_endproc
- 898              	.LFE719:
+ 898              	.LFE822:
  900              		.section	.text.digit_5,"ax",%progbits
  901              		.align	1
  902              		.global	digit_5
@@ -2205,7 +2205,7 @@ ARM GAS  /tmp/ccvIhNRD.s 			page 1
  904              		.thumb
  905              		.thumb_func
  907              	digit_5:
- 908              	.LFB720:
+ 908              	.LFB823:
  144:Core/Src/LED_display.c **** 
  145:Core/Src/LED_display.c **** //---------------------------------------------------------------------------//
  146:Core/Src/LED_display.c **** void digit_5 (void)
@@ -2218,7 +2218,7 @@ ARM GAS  /tmp/ccvIhNRD.s 			page 1
  148:Core/Src/LED_display.c ****   Segment_A(ON);
  914              		.loc 1 148 3 view .LVU225
  915              	.LVL61:
-ARM GAS  /tmp/ccvIhNRD.s 			page 38
+ARM GAS  /tmp/ccjSP2i1.s 			page 38
 
 
  916              	.LBB248:
@@ -2278,7 +2278,7 @@ ARM GAS  /tmp/ccvIhNRD.s 			page 1
  884:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** }
  957              		.loc 2 884 3 view .LVU239
  958 0012 0822     		movs	r2, #8
-ARM GAS  /tmp/ccvIhNRD.s 			page 39
+ARM GAS  /tmp/ccjSP2i1.s 			page 39
 
 
  959 0014 9A61     		str	r2, [r3, #24]
@@ -2311,7 +2311,7 @@ ARM GAS  /tmp/ccvIhNRD.s 			page 1
  980              	.L46:
  981 001c 00040240 		.word	1073873920
  982              		.cfi_endproc
- 983              	.LFE720:
+ 983              	.LFE823:
  985              		.section	.text.digit_6,"ax",%progbits
  986              		.align	1
  987              		.global	digit_6
@@ -2319,7 +2319,7 @@ ARM GAS  /tmp/ccvIhNRD.s 			page 1
  989              		.thumb
  990              		.thumb_func
  992              	digit_6:
- 993              	.LFB721:
+ 993              	.LFB824:
  154:Core/Src/LED_display.c **** 
  155:Core/Src/LED_display.c **** //---------------------------------------------------------------------------//
  156:Core/Src/LED_display.c **** void digit_6(void)
@@ -2338,7 +2338,7 @@ ARM GAS  /tmp/ccvIhNRD.s 			page 1
  1003              		.loc 2 882 22 view .LVU248
  1004              	.LBB259:
  884:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** }
-ARM GAS  /tmp/ccvIhNRD.s 			page 40
+ARM GAS  /tmp/ccjSP2i1.s 			page 40
 
 
  1005              		.loc 2 884 3 view .LVU249
@@ -2398,7 +2398,7 @@ ARM GAS  /tmp/ccvIhNRD.s 			page 1
  1046              		.loc 2 884 3 is_stmt 0 view .LVU262
  1047              	.LBE265:
  1048              	.LBE264:
-ARM GAS  /tmp/ccvIhNRD.s 			page 41
+ARM GAS  /tmp/ccjSP2i1.s 			page 41
 
 
  162:Core/Src/LED_display.c ****   Segment_F(ON);
@@ -2441,7 +2441,7 @@ ARM GAS  /tmp/ccvIhNRD.s 			page 1
  1077              	.L49:
  1078 0020 00040240 		.word	1073873920
  1079              		.cfi_endproc
- 1080              	.LFE721:
+ 1080              	.LFE824:
  1082              		.section	.text.digit_7,"ax",%progbits
  1083              		.align	1
  1084              		.global	digit_7
@@ -2449,7 +2449,7 @@ ARM GAS  /tmp/ccvIhNRD.s 			page 1
  1086              		.thumb
  1087              		.thumb_func
  1089              	digit_7:
- 1090              	.LFB722:
+ 1090              	.LFB825:
  165:Core/Src/LED_display.c **** 
  166:Core/Src/LED_display.c **** //---------------------------------------------------------------------------//
  167:Core/Src/LED_display.c **** void digit_7 (void)
@@ -2458,7 +2458,7 @@ ARM GAS  /tmp/ccvIhNRD.s 			page 1
  1092              		.cfi_startproc
  1093              		@ args = 0, pretend = 0, frame = 0
  1094              		@ frame_needed = 0, uses_anonymous_args = 0
-ARM GAS  /tmp/ccvIhNRD.s 			page 42
+ARM GAS  /tmp/ccjSP2i1.s 			page 42
 
 
  1095              		@ link register save eliminated.
@@ -2518,12 +2518,12 @@ ARM GAS  /tmp/ccvIhNRD.s 			page 1
  1136              	.L53:
  1137              		.align	2
  1138              	.L52:
-ARM GAS  /tmp/ccvIhNRD.s 			page 43
+ARM GAS  /tmp/ccjSP2i1.s 			page 43
 
 
  1139 0010 00040240 		.word	1073873920
  1140              		.cfi_endproc
- 1141              	.LFE722:
+ 1141              	.LFE825:
  1143              		.section	.text.digit_8,"ax",%progbits
  1144              		.align	1
  1145              		.global	digit_8
@@ -2531,7 +2531,7 @@ ARM GAS  /tmp/ccvIhNRD.s 			page 1
  1147              		.thumb
  1148              		.thumb_func
  1150              	digit_8:
- 1151              	.LFB723:
+ 1151              	.LFB826:
  173:Core/Src/LED_display.c **** 
  174:Core/Src/LED_display.c **** //---------------------------------------------------------------------------//
  175:Core/Src/LED_display.c **** void digit_8 (void)
@@ -2578,7 +2578,7 @@ ARM GAS  /tmp/ccvIhNRD.s 			page 1
  179:Core/Src/LED_display.c ****   Segment_C(ON);
  1183              		.loc 1 179 3 is_stmt 1 view .LVU295
  1184              	.LBB280:
-ARM GAS  /tmp/ccvIhNRD.s 			page 44
+ARM GAS  /tmp/ccjSP2i1.s 			page 44
 
 
  1185              	.LBI280:
@@ -2638,7 +2638,7 @@ ARM GAS  /tmp/ccvIhNRD.s 			page 1
  1225 0016 4FF48072 		mov	r2, #256
  1226 001a 9A61     		str	r2, [r3, #24]
  1227              	.LVL84:
-ARM GAS  /tmp/ccvIhNRD.s 			page 45
+ARM GAS  /tmp/ccjSP2i1.s 			page 45
 
 
  884:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** }
@@ -2669,7 +2669,7 @@ ARM GAS  /tmp/ccvIhNRD.s 			page 1
  1247              	.L55:
  1248 0024 00040240 		.word	1073873920
  1249              		.cfi_endproc
- 1250              	.LFE723:
+ 1250              	.LFE826:
  1252              		.section	.text.digit_9,"ax",%progbits
  1253              		.align	1
  1254              		.global	digit_9
@@ -2677,7 +2677,7 @@ ARM GAS  /tmp/ccvIhNRD.s 			page 1
  1256              		.thumb
  1257              		.thumb_func
  1259              	digit_9:
- 1260              	.LFB724:
+ 1260              	.LFB827:
  185:Core/Src/LED_display.c **** 
  186:Core/Src/LED_display.c **** //---------------------------------------------------------------------------//
  187:Core/Src/LED_display.c **** void digit_9 (void)
@@ -2698,7 +2698,7 @@ ARM GAS  /tmp/ccvIhNRD.s 			page 1
  884:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** }
  1272              		.loc 2 884 3 view .LVU319
  1273 0000 074B     		ldr	r3, .L58
-ARM GAS  /tmp/ccvIhNRD.s 			page 46
+ARM GAS  /tmp/ccjSP2i1.s 			page 46
 
 
  1274 0002 0222     		movs	r2, #2
@@ -2758,7 +2758,7 @@ ARM GAS  /tmp/ccvIhNRD.s 			page 1
  1315              	.LBE296:
  193:Core/Src/LED_display.c ****   Segment_F(ON);
  1316              		.loc 1 193 3 is_stmt 1 view .LVU333
-ARM GAS  /tmp/ccvIhNRD.s 			page 47
+ARM GAS  /tmp/ccjSP2i1.s 			page 47
 
 
  1317              	.LBB298:
@@ -2799,7 +2799,7 @@ ARM GAS  /tmp/ccvIhNRD.s 			page 1
  1344              	.L58:
  1345 0020 00040240 		.word	1073873920
  1346              		.cfi_endproc
- 1347              	.LFE724:
+ 1347              	.LFE827:
  1349              		.section	.text.select_digit,"ax",%progbits
  1350              		.align	1
  1351              		.global	select_digit
@@ -2808,7 +2808,7 @@ ARM GAS  /tmp/ccvIhNRD.s 			page 1
  1354              		.thumb_func
  1356              	select_digit:
  1357              	.LVL93:
- 1358              	.LFB725:
+ 1358              	.LFB828:
  196:Core/Src/LED_display.c **** 
  197:Core/Src/LED_display.c **** //---------------------------------------------------------------------------//
  198:Core/Src/LED_display.c **** void select_digit (uint8_t digit)
@@ -2818,7 +2818,7 @@ ARM GAS  /tmp/ccvIhNRD.s 			page 1
  1361              		@ args = 0, pretend = 0, frame = 0
  1362              		@ frame_needed = 0, uses_anonymous_args = 0
  1363              		.loc 1 199 1 is_stmt 0 view .LVU343
-ARM GAS  /tmp/ccvIhNRD.s 			page 48
+ARM GAS  /tmp/ccjSP2i1.s 			page 48
 
 
  1364 0000 10B5     		push	{r4, lr}
@@ -2878,7 +2878,7 @@ ARM GAS  /tmp/ccvIhNRD.s 			page 1
  223:Core/Src/LED_display.c ****         case 5:
  224:Core/Src/LED_display.c ****             digit_5 ();
  225:Core/Src/LED_display.c ****             break; 
-ARM GAS  /tmp/ccvIhNRD.s 			page 49
+ARM GAS  /tmp/ccjSP2i1.s 			page 49
 
 
  226:Core/Src/LED_display.c **** 
@@ -2938,7 +2938,7 @@ ARM GAS  /tmp/ccvIhNRD.s 			page 1
  1420 0036 F2E7     		b	.L60
  1421              	.L67:
  224:Core/Src/LED_display.c ****             break; 
-ARM GAS  /tmp/ccvIhNRD.s 			page 50
+ARM GAS  /tmp/ccjSP2i1.s 			page 50
 
 
  1422              		.loc 1 224 13 view .LVU357
@@ -2981,7 +2981,7 @@ ARM GAS  /tmp/ccvIhNRD.s 			page 1
  1450              		.loc 1 246 1 is_stmt 0 view .LVU367
  1451 0054 E3E7     		b	.L60
  1452              		.cfi_endproc
- 1453              	.LFE725:
+ 1453              	.LFE828:
  1455              		.text
  1456              	.Letext0:
  1457              		.file 3 "/home/arashamf/soft/ARM_toolchains/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/m
@@ -2989,60 +2989,60 @@ ARM GAS  /tmp/ccvIhNRD.s 			page 1
  1459              		.file 5 "Drivers/CMSIS/Device/ST/STM32L1xx/Include/stm32l151xb.h"
  1460              		.file 6 "Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h"
  1461              		.file 7 "Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_tim.h"
-ARM GAS  /tmp/ccvIhNRD.s 			page 51
+ARM GAS  /tmp/ccjSP2i1.s 			page 51
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 LED_display.c
-     /tmp/ccvIhNRD.s:18     .text.reset_number:0000000000000000 $t
-     /tmp/ccvIhNRD.s:24     .text.reset_number:0000000000000000 reset_number
-     /tmp/ccvIhNRD.s:38     .text.reset_number:0000000000000008 $d
-     /tmp/ccvIhNRD.s:44     .text.reset_number:000000000000000e $t
-     /tmp/ccvIhNRD.s:147    .text.reset_number:000000000000004c $d
-     /tmp/ccvIhNRD.s:152    .text.reset_all_number:0000000000000000 $t
-     /tmp/ccvIhNRD.s:158    .text.reset_all_number:0000000000000000 reset_all_number
-     /tmp/ccvIhNRD.s:244    .text.reset_all_number:0000000000000028 $d
-     /tmp/ccvIhNRD.s:249    .text.select_number:0000000000000000 $t
-     /tmp/ccvIhNRD.s:255    .text.select_number:0000000000000000 select_number
-     /tmp/ccvIhNRD.s:277    .text.select_number:0000000000000010 $d
-     /tmp/ccvIhNRD.s:283    .text.select_number:0000000000000016 $t
-     /tmp/ccvIhNRD.s:386    .text.select_number:0000000000000048 $d
-     /tmp/ccvIhNRD.s:391    .text.reset_all_digit:0000000000000000 $t
-     /tmp/ccvIhNRD.s:397    .text.reset_all_digit:0000000000000000 reset_all_digit
-     /tmp/ccvIhNRD.s:507    .text.reset_all_digit:0000000000000034 $d
-     /tmp/ccvIhNRD.s:512    .text.digit_0:0000000000000000 $t
-     /tmp/ccvIhNRD.s:518    .text.digit_0:0000000000000000 digit_0
-     /tmp/ccvIhNRD.s:604    .text.digit_0:0000000000000020 $d
-     /tmp/ccvIhNRD.s:609    .text.digit_1:0000000000000000 $t
-     /tmp/ccvIhNRD.s:615    .text.digit_1:0000000000000000 digit_1
-     /tmp/ccvIhNRD.s:653    .text.digit_1:000000000000000c $d
-     /tmp/ccvIhNRD.s:658    .text.digit_2:0000000000000000 $t
-     /tmp/ccvIhNRD.s:664    .text.digit_2:0000000000000000 digit_2
-     /tmp/ccvIhNRD.s:738    .text.digit_2:000000000000001c $d
-     /tmp/ccvIhNRD.s:743    .text.digit_3:0000000000000000 $t
-     /tmp/ccvIhNRD.s:749    .text.digit_3:0000000000000000 digit_3
-     /tmp/ccvIhNRD.s:823    .text.digit_3:000000000000001c $d
-     /tmp/ccvIhNRD.s:828    .text.digit_4:0000000000000000 $t
-     /tmp/ccvIhNRD.s:834    .text.digit_4:0000000000000000 digit_4
-     /tmp/ccvIhNRD.s:896    .text.digit_4:0000000000000018 $d
-     /tmp/ccvIhNRD.s:901    .text.digit_5:0000000000000000 $t
-     /tmp/ccvIhNRD.s:907    .text.digit_5:0000000000000000 digit_5
-     /tmp/ccvIhNRD.s:981    .text.digit_5:000000000000001c $d
-     /tmp/ccvIhNRD.s:986    .text.digit_6:0000000000000000 $t
-     /tmp/ccvIhNRD.s:992    .text.digit_6:0000000000000000 digit_6
-     /tmp/ccvIhNRD.s:1078   .text.digit_6:0000000000000020 $d
-     /tmp/ccvIhNRD.s:1083   .text.digit_7:0000000000000000 $t
-     /tmp/ccvIhNRD.s:1089   .text.digit_7:0000000000000000 digit_7
-     /tmp/ccvIhNRD.s:1139   .text.digit_7:0000000000000010 $d
-     /tmp/ccvIhNRD.s:1144   .text.digit_8:0000000000000000 $t
-     /tmp/ccvIhNRD.s:1150   .text.digit_8:0000000000000000 digit_8
-     /tmp/ccvIhNRD.s:1248   .text.digit_8:0000000000000024 $d
-     /tmp/ccvIhNRD.s:1253   .text.digit_9:0000000000000000 $t
-     /tmp/ccvIhNRD.s:1259   .text.digit_9:0000000000000000 digit_9
-     /tmp/ccvIhNRD.s:1345   .text.digit_9:0000000000000020 $d
-     /tmp/ccvIhNRD.s:1350   .text.select_digit:0000000000000000 $t
-     /tmp/ccvIhNRD.s:1356   .text.select_digit:0000000000000000 select_digit
-     /tmp/ccvIhNRD.s:1378   .text.select_digit:0000000000000010 $d
-     /tmp/ccvIhNRD.s:1388   .text.select_digit:000000000000001a $t
+     /tmp/ccjSP2i1.s:18     .text.reset_number:0000000000000000 $t
+     /tmp/ccjSP2i1.s:24     .text.reset_number:0000000000000000 reset_number
+     /tmp/ccjSP2i1.s:38     .text.reset_number:0000000000000008 $d
+     /tmp/ccjSP2i1.s:44     .text.reset_number:000000000000000e $t
+     /tmp/ccjSP2i1.s:147    .text.reset_number:000000000000004c $d
+     /tmp/ccjSP2i1.s:152    .text.reset_all_number:0000000000000000 $t
+     /tmp/ccjSP2i1.s:158    .text.reset_all_number:0000000000000000 reset_all_number
+     /tmp/ccjSP2i1.s:244    .text.reset_all_number:0000000000000028 $d
+     /tmp/ccjSP2i1.s:249    .text.select_number:0000000000000000 $t
+     /tmp/ccjSP2i1.s:255    .text.select_number:0000000000000000 select_number
+     /tmp/ccjSP2i1.s:277    .text.select_number:0000000000000010 $d
+     /tmp/ccjSP2i1.s:283    .text.select_number:0000000000000016 $t
+     /tmp/ccjSP2i1.s:386    .text.select_number:0000000000000048 $d
+     /tmp/ccjSP2i1.s:391    .text.reset_all_digit:0000000000000000 $t
+     /tmp/ccjSP2i1.s:397    .text.reset_all_digit:0000000000000000 reset_all_digit
+     /tmp/ccjSP2i1.s:507    .text.reset_all_digit:0000000000000034 $d
+     /tmp/ccjSP2i1.s:512    .text.digit_0:0000000000000000 $t
+     /tmp/ccjSP2i1.s:518    .text.digit_0:0000000000000000 digit_0
+     /tmp/ccjSP2i1.s:604    .text.digit_0:0000000000000020 $d
+     /tmp/ccjSP2i1.s:609    .text.digit_1:0000000000000000 $t
+     /tmp/ccjSP2i1.s:615    .text.digit_1:0000000000000000 digit_1
+     /tmp/ccjSP2i1.s:653    .text.digit_1:000000000000000c $d
+     /tmp/ccjSP2i1.s:658    .text.digit_2:0000000000000000 $t
+     /tmp/ccjSP2i1.s:664    .text.digit_2:0000000000000000 digit_2
+     /tmp/ccjSP2i1.s:738    .text.digit_2:000000000000001c $d
+     /tmp/ccjSP2i1.s:743    .text.digit_3:0000000000000000 $t
+     /tmp/ccjSP2i1.s:749    .text.digit_3:0000000000000000 digit_3
+     /tmp/ccjSP2i1.s:823    .text.digit_3:000000000000001c $d
+     /tmp/ccjSP2i1.s:828    .text.digit_4:0000000000000000 $t
+     /tmp/ccjSP2i1.s:834    .text.digit_4:0000000000000000 digit_4
+     /tmp/ccjSP2i1.s:896    .text.digit_4:0000000000000018 $d
+     /tmp/ccjSP2i1.s:901    .text.digit_5:0000000000000000 $t
+     /tmp/ccjSP2i1.s:907    .text.digit_5:0000000000000000 digit_5
+     /tmp/ccjSP2i1.s:981    .text.digit_5:000000000000001c $d
+     /tmp/ccjSP2i1.s:986    .text.digit_6:0000000000000000 $t
+     /tmp/ccjSP2i1.s:992    .text.digit_6:0000000000000000 digit_6
+     /tmp/ccjSP2i1.s:1078   .text.digit_6:0000000000000020 $d
+     /tmp/ccjSP2i1.s:1083   .text.digit_7:0000000000000000 $t
+     /tmp/ccjSP2i1.s:1089   .text.digit_7:0000000000000000 digit_7
+     /tmp/ccjSP2i1.s:1139   .text.digit_7:0000000000000010 $d
+     /tmp/ccjSP2i1.s:1144   .text.digit_8:0000000000000000 $t
+     /tmp/ccjSP2i1.s:1150   .text.digit_8:0000000000000000 digit_8
+     /tmp/ccjSP2i1.s:1248   .text.digit_8:0000000000000024 $d
+     /tmp/ccjSP2i1.s:1253   .text.digit_9:0000000000000000 $t
+     /tmp/ccjSP2i1.s:1259   .text.digit_9:0000000000000000 digit_9
+     /tmp/ccjSP2i1.s:1345   .text.digit_9:0000000000000020 $d
+     /tmp/ccjSP2i1.s:1350   .text.select_digit:0000000000000000 $t
+     /tmp/ccjSP2i1.s:1356   .text.select_digit:0000000000000000 select_digit
+     /tmp/ccjSP2i1.s:1378   .text.select_digit:0000000000000010 $d
+     /tmp/ccjSP2i1.s:1388   .text.select_digit:000000000000001a $t
 
 NO UNDEFINED SYMBOLS

@@ -29,20 +29,23 @@ extern "C" {
 #include "main.h"
 
 /* USER CODE BEGIN Includes */
-
+#include "ring_buffer.h"
 /* USER CODE END Includes */
 
 /* USER CODE BEGIN Private defines */
-#define		BUFFER_SIZE		      40
+
 /* USER CODE END Private defines */
 
 void MX_USART1_UART_Init(void);
 
 /* USER CODE BEGIN Prototypes */
 #ifdef __USE_DBG
-  void DBG_PutString(const char *);
-  extern char DBG_buffer[];
+void DBG_PutString(const char *);
 #endif
+void UART_PutString (const char *);
+void UART_CharReception_Callback (void);
+void UART_msg_ini (void);
+void check_ring_buffer (void);
 /* USER CODE END Prototypes */
 
 #ifdef __cplusplus

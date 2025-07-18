@@ -1,6 +1,7 @@
 // Includes--------------------------------------------------------------------------//
 #include "rtc.h"
 #include "i2c.h"
+#include "typedef.h"
 #include "time64.h"
 
 // DEFINES---------------------------------------------------------------------------//
@@ -25,38 +26,35 @@ const unsigned int pred_sum [2] [12] =
 //FUNCTIONS---------------------------------------------------------------------------//
 uint8_t GetTime (uint8_t RTC_adress, uint8_t registr_adress, uint8_t sizebuf, uint8_t * RTC_buffer)
 {
+	uint8_t I2C_status = I2C_OK;
 
-	if (HAL_I2C_Master_Transmit(&hi2c1, (uint16_t)RTC_adress, &registr_adress, 1, (uint32_t)0xFFFF)!= HAL_OK)
-	{	return  HAL_ERROR;	}
-	
-	while(HAL_I2C_GetState(&hi2c1) != HAL_I2C_STATE_READY){} //ожидание готовности приёма
-		
-	if(HAL_I2C_Master_Receive (&hi2c1, (uint16_t) RTC_adress, (uint8_t*)RTC_buffer, (uint16_t) sizebuf, (uint32_t)0xFFFF)!=HAL_OK) //запись показателей времени	
-	{	return  HAL_ERROR;	}
-//	i2c_read_array ((uint16_t)RTC_adress, registr_adress, RTC_buffer, sizebuf);
-	
-	for (uint8_t count = 0; count < sizebuf; count++)
+	if ((I2C_status = I2C_ReadBuffer (registr_adress,  (uint8_t*)RTC_buffer, (uint16_t) sizebuf)) == I2C_OK)
 	{
-		*RTC_buffer = RTC_ConvertToDec(*RTC_buffer); //перевод числа из двоично-десятичного представления  в обычное
-		RTC_buffer++;
+		for (uint8_t count = 0; count < sizebuf; count++)
+		{
+			*RTC_buffer++ = RTC_ConvertToDec(*RTC_buffer); //перевод числа из двоично-десятичного представления  в обычное
+		}
 	}
-	
-	return  HAL_OK;
+	else
+	{
+		for (uint8_t count = 0; count < sizebuf; count++)
+		{
+			*RTC_buffer++ = 0; //перевод числа из двоично-десятичного представления  в обычное
+		}
+	}
+	return  I2C_status;
 }
 
 //---------------------------------------------------------------------------------------------------------//
 uint8_t GetTemp (uint8_t  RTC_adress, uint8_t registr_adress,  uint8_t * temp_buffer)
 {
+	uint8_t I2C_status = I2C_OK;
+	if ((I2C_status = I2C_ReadByte (registr_adress,  temp_buffer)) != I2C_OK)
+	{
+		*temp_buffer = 0;
+	}
 	
-	if (HAL_I2C_Master_Transmit(&hi2c1, (uint16_t)RTC_adress, &registr_adress, 1, (uint32_t)0xFFFF)!= HAL_OK)
-	{	return  HAL_ERROR;	}
-	
-	while(HAL_I2C_GetState(&hi2c1) != HAL_I2C_STATE_READY){} //ожидание готовности приёма
-		
-	if (HAL_I2C_Master_Receive (&hi2c1, (uint16_t) RTC_adress, temp_buffer, 1, (uint32_t)0xFFFF)!=HAL_OK)
-	{	return  HAL_ERROR;	}
-	
-	return  HAL_OK;
+	return  I2C_status;
 }
 
 //---------------------------------------------------------------------------------------------------------//
@@ -85,14 +83,14 @@ uint8_t SetTime (uint8_t RTC_adress, uint8_t registr_adress, char *time)
 			}
 		}
 		else
-		{	return  HAL_ERROR;	}
+		{	return  1;	}
 	}
 	I2C_RTC_buffer [0] = registr_adress; //в первый элемент массива - адрес регистра RTC	
 	
-	if (HAL_I2C_Master_Transmit(&hi2c1, (uint16_t) RTC_adress, (uint8_t*)I2C_RTC_buffer, 4, (uint32_t)0xFFFF)!= HAL_OK) //отправка данных
-	{	return  HAL_ERROR;	}
+	/*if (HAL_I2C_Master_Transmit(&hi2c1, (uint16_t) RTC_adress, (uint8_t*)I2C_RTC_buffer, 4, (uint32_t)0xFFFF)!= HAL_OK) //отправка данных
+	{	return  1;	}*/
 	
-	return  HAL_OK;
+	return  0;
 }
 
 //---------ф-я перевода числа из двоично-десятичного представления  в обычное---------//
@@ -116,17 +114,17 @@ uint8_t read_reg_RTC (uint8_t adress, uint8_t sizebuf)
 	uint8_t reg_adr = 0x02; //адрес регистра RTC 
 	uint8_t I2C_RTC_buffer [sizebuf];
 	
-	if(HAL_I2C_Master_Transmit(&hi2c1, (uint16_t)adress, &reg_adr, 1, (uint32_t)0xFFFF)!= HAL_OK) //передача адреса RTC DS3231
+	/*if(HAL_I2C_Master_Transmit(&hi2c1, (uint16_t)adress, &reg_adr, 1, (uint32_t)0xFFFF)!= HAL_OK) //передача адреса RTC DS3231
 	
 	while(HAL_I2C_GetState(&hi2c1)!=HAL_I2C_STATE_READY){}
 		
 	if (HAL_I2C_Master_Receive (&hi2c1, (uint16_t) adress, (uint8_t*)I2C_RTC_buffer, (uint16_t) sizebuf, (uint32_t)0xFFFF)!=HAL_OK)
-	{	return  HAL_ERROR;	}
+	{	return 1;	}*/
 	
 	for (uint8_t count = 0; count < sizebuf; count++) //перевод числа из двоично-десятичного представления  в обычное
 	{	I2C_RTC_buffer[count] = RTC_ConvertToDec(I2C_RTC_buffer[count]);	}
 	
-	return  HAL_OK;
+	return  0;
 }
 
 //----------------------------------------------------------------------------------//
