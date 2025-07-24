@@ -45,10 +45,15 @@ static xTimerHandle xSysTimer;
 uint8_t flag_end_delay = 0;
 
 // Functions --------------------------------------------------------------------//
+#ifdef __cplusplus
+extern "C" {
+#endif
 static void TimerMs_init (void);
 static void SysTimer_init (void);
 static void vSysTimerCallback(xTimerHandle xTimer); 
-
+#ifdef __cplusplus
+}
+#endif
 /* USER CODE END 0 */
 
 /* TIM7 init function */

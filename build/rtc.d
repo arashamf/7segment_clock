@@ -18,7 +18,7 @@ build/rtc.o: Core/Src/rtc.c Core/Inc/rtc.h Core/Inc/main.h \
  Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h \
  Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h Core/Inc/i2c.h \
  Core/Inc/typedef.h Core/Inc/ring_buffer.h timer64/time64.h \
- timer64/time64_config.h
+ timer64/time64_config.h Core/Inc/usart.h
 Core/Inc/rtc.h:
 Core/Inc/main.h:
 Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h:
@@ -46,3 +46,4 @@ Core/Inc/typedef.h:
 Core/Inc/ring_buffer.h:
 timer64/time64.h:
 timer64/time64_config.h:
+Core/Inc/usart.h:

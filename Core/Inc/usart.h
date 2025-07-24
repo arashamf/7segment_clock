@@ -39,13 +39,18 @@ extern "C" {
 void MX_USART1_UART_Init(void);
 
 /* USER CODE BEGIN Prototypes */
+
 #ifdef __USE_DBG
 void DBG_PutString(const char *);
+extern char DBG_buffer[];
 #endif
+
 void UART_PutString (const char *);
 void UART_CharReception_Callback (void);
 void UART_msg_ini (void);
-void check_ring_buffer (void);
+uint8_t check_ring_buffer (void);
+uint32_t return_UNIXtimeNTP (void);
+
 /* USER CODE END Prototypes */
 
 #ifdef __cplusplus

@@ -34,13 +34,21 @@
 #endif
 
 RING_buffer_t RING_buffer; //структура с кольцевым буффером
-UART_msg_t UART_msg ;
+UART_msg_t UART_msg ; //структура необходимая для парсинга полученного по UART сообщения
 uint8_t uart_buffer[BUFFER_SIZE]; //массив для кольцевого буффера
 uint8_t * ptr_PDTmsg = UART_msg.PDT_struct.raw_bytes;
 
 //static prototypes-----------------------------------------------------------------//
+#ifdef __cplusplus
+extern "C" {
+#endif
 static void UART_PutByte(char );
 static uint8_t calc_CRC8 (uint8_t * );
+static uint32_t calc_UNIXtime (uint8_t * );
+#ifdef __cplusplus
+}
+#endif
+
 /* USER CODE END 0 */
 
 /* USART1 init function */
@@ -132,9 +140,7 @@ void UART_PutString (const char *str)
 {
 	char c;
 	while((c = *str++))
-	{
-		UART_PutByte(c);
-	}
+	{ UART_PutByte(c);  }
 }
 
 //-------------------------------получение символа по UART1-----------------------------------//
@@ -150,27 +156,27 @@ void UART_msg_ini (void)
 {
   UART_msg.machine_state = __START_BYTE;
   UART_msg.ptr_RINGbuff = &RING_buffer;
-  ptr_PDTmsg[0]= '$';
-  ptr_PDTmsg[1]= 'P';
-  ptr_PDTmsg[2]= 'D';
-  ptr_PDTmsg[3]= 'T';
-  ptr_PDTmsg[4]= ',';
-  ptr_PDTmsg[5]= '1';
-  ptr_PDTmsg[6]= ',';
+  ptr_PDTmsg[0]=  '$';
+  ptr_PDTmsg[1]=  'P';
+  ptr_PDTmsg[2]=  'D';
+  ptr_PDTmsg[3]=  'T';
+  ptr_PDTmsg[4]=  ',';
+  ptr_PDTmsg[5]=  '1';
+  ptr_PDTmsg[6]=  ',';
   ptr_PDTmsg[15]= '*';
 }
 //------------------------------проверка состояние буффера UARTа------------------------------//
-void check_ring_buffer (void)
+uint8_t check_ring_buffer (void)
 {
-    uint8_t CRC8 = 0;
-    static uint8_t count=0; //счётчик принятых байтов тела сообщения
-    static uint8_t divider = 0x10;
+    uint8_t buffer_status =  NO_MSG;
+    uint8_t CRC8 = 0; //переменная для хранения CRC
+    static uint8_t count  = 0; //счётчик принятых байтов тела сообщения
+    static uint8_t divider = 0x10; //делитель для перевода в 16чный формат
     uint8_t byte; //полученный из кольцевого буффера байт
 
     if (RING_GetCount(UART_msg.ptr_RINGbuff) > 0)
     {
       byte = RING_Pop(UART_msg.ptr_RINGbuff);
-      //UART_PutByte(byte);
       switch (UART_msg.machine_state) //проверка стадии получения сообщения
 		  { 
         case __START_BYTE: 
@@ -257,28 +263,15 @@ void check_ring_buffer (void)
           {
             if ((CRC8 = calc_CRC8 ( &ptr_PDTmsg[1])) == UART_msg.msg_CRC)
             {
-              #ifdef __USE_DBG
-		            snprintf (DBG_buffer,  BUFFER_SIZE, "CRC8=%x OK! get=%c%c, crc=%x\r\n", CRC8, ptr_PDTmsg[16],
-                ptr_PDTmsg[17], UART_msg.msg_CRC);
-		            DBG_PutString(DBG_buffer);
-	            #endif
-            }
-            else
-            {
-              #ifdef __USE_DBG
-		            snprintf (DBG_buffer,  BUFFER_SIZE, "CRC8=%x ERROR! get=%c%c, crc=%x\r\n", CRC8, ptr_PDTmsg[16],
-                ptr_PDTmsg[17], UART_msg.msg_CRC);
-		            DBG_PutString(DBG_buffer);
-	            #endif
+              UART_msg.ntp_UNIXtime = calc_UNIXtime (&ptr_PDTmsg[7]);          
             }
             count = 0;
             UART_msg.machine_state = __START_BYTE;
-
+            buffer_status =  GET_MSG;
             #ifdef __USE_DBG
-		          snprintf (DBG_buffer,  BUFFER_SIZE, "msg=$PDT,1,%c%c%c%c%c%c%c%c*%c%c\r\n", ptr_PDTmsg[7], ptr_PDTmsg[8],
+		          snprintf (DBG_buffer,  BUFFER_SIZE, "msg=$PDT,1,%c%c%c%c%c%c%c%c*%c%c, UT=%lu\r\n", ptr_PDTmsg[7], ptr_PDTmsg[8],
               ptr_PDTmsg[9], ptr_PDTmsg[10],ptr_PDTmsg[11], ptr_PDTmsg[12],ptr_PDTmsg[13], 
-              ptr_PDTmsg[14], ptr_PDTmsg[16], ptr_PDTmsg[17]);
-		          
+              ptr_PDTmsg[14], ptr_PDTmsg[16], ptr_PDTmsg[17], UART_msg.ntp_UNIXtime);	          
               DBG_PutString(DBG_buffer);
 	          #endif
           }
@@ -286,30 +279,46 @@ void check_ring_buffer (void)
         break;
       }
     }
+  return buffer_status;
 }
 
 //----------------------------------------------------------------------------//
 static uint8_t calc_CRC8 (uint8_t * ptr_msg)
 {
     uint8_t CRC8 = *ptr_msg;
-    /*#ifdef __USE_DBG
-		  snprintf (DBG_buffer,  BUFFER_SIZE, "%c", *ptr_msg);        
-      DBG_PutString(DBG_buffer);
-	  #endif*/
-    while (*(++ptr_msg) != '*') 
-    {
-      CRC8 = CRC8 ^ (*ptr_msg) ;
-     /* #ifdef __USE_DBG
-		    snprintf (DBG_buffer,  BUFFER_SIZE, "%c", *ptr_msg);        
-        DBG_PutString(DBG_buffer);
-	    #endif*/
-    }
 
-   /* #ifdef __USE_DBG
-		  snprintf (DBG_buffer,  BUFFER_SIZE, "\r\n");        
-      DBG_PutString(DBG_buffer);
-	  #endif*/
+    while (*(++ptr_msg) != '*') 
+    { CRC8 = CRC8 ^ (*ptr_msg);  }
 
     return CRC8;
+}
+
+//----------------------------------------------------------------------------//
+static uint32_t calc_UNIXtime (uint8_t * ptr_msg)
+{
+  uint8_t byte = 0;
+  uint32_t UNIXtime = 0;
+  uint32_t divider = 1;
+  for (uint8_t count = 0; count < 9; count++)
+  {
+    byte = *(ptr_msg + (7 - count)) ;
+    if ((byte >= '0') && (byte <= '9')) //проверка диапазона принятого символа
+    {
+      UNIXtime |= (byte-0x30)*divider;
+    }
+    else
+    {
+      if ((byte >= 'A') && (byte <= 'F'))
+      { UNIXtime |= (byte-0x37)*divider;  }
+    }
+    divider *= 0x10;
+  }
+ return UNIXtime;
+}
+
+//-----------------------------------------------------------------------------------------------//
+uint32_t return_UNIXtimeNTP (void)
+{
+  return UART_msg.ntp_UNIXtime;
 }
 /* USER CODE END 1 */

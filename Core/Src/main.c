@@ -49,7 +49,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-
+uint32_t TimeUART=0;
 rtc_data data = {0};
 /* USER CODE END PV */
 
@@ -107,8 +107,8 @@ int main(void)
   /* USER CODE BEGIN 2 */
   timers_ini ();
 
-  GetTime (RTC_ADDRESS, FIRST_REGISTR_TIME, TIME_NUMBER, data.DS3231_data);  //получение данных времени  ч/м/с
-	convert_time (data.time, data.DS3231_data, TIME_NUMBER);	
+  GetTime (RTC_ADDRESS, FIRST_REGISTR_TIME, TIME_NUMBER, data.DS3231_getdata);  //получение данных времени  ч/м/с
+	convert_time (data.time, data.DS3231_getdata, TIME_NUMBER);	
   UART_msg_ini ();
   /* USER CODE END 2 */
 
@@ -125,17 +125,34 @@ int main(void)
       {  data.digital = 0;  }
       select_digit (data.digital);
 
-      check_ring_buffer ();
-
       if (j <4)
-      {  delay_us(500); }
+      {  delay_us(1000); }
       else
-      {  delay_us(250); }
-
-      check_ring_buffer ();
+      {  delay_us(750); }
 
       reset_all_digit ();
-      delay_us(500);
+      if (check_ring_buffer () == GET_MSG)
+      {
+        GetTime (RTC_ADDRESS, FIRST_REGISTR_TIME, TIME_NUMBER, data.DS3231_getdata); //получение данных времени сек/мин/чч
+        GetTime (RTC_ADDRESS, FIRST_REGISTR_DATE, TIME_NUMBER, data.DS3231_getdata+3); //получение данных времени день/мес/год      
+        CalcUNIXtime_from_DS3231 (&data.DS3231_UNIXtime, data.DS3231_getdata);
+        TimeUART = return_UNIXtimeNTP ();
+        if (data.DS3231_UNIXtime != TimeUART)
+        {
+          #ifdef __USE_DBG
+	          snprintf (DBG_buffer,  BUFFER_SIZE, "DS3231=%lu, NTP=%lu\r\n", data.DS3231_UNIXtime, TimeUART);		          
+            DBG_PutString(DBG_buffer);
+	        #endif
+          CalcTimeStamp_from_UART (TimeUART);
+          copy_TMdata( data.DS3231_putdata);
+          SetTime (RTC_ADDRESS, FIRST_REGISTR_TIME, TIME_NUMBER, data.DS3231_putdata);
+          SetTime (RTC_ADDRESS, FIRST_REGISTR_DATE, TIME_NUMBER, data.DS3231_putdata+3);
+        }
+      }
+      else
+      {
+        delay_us(500);
+      }
     }
     /* USER CODE END WHILE */
 
@@ -195,9 +212,8 @@ void SystemClock_Config(void)
 /* USER CODE BEGIN 4 */
 void SysTimerCallback (void)
 {
-	GetTime (RTC_ADDRESS, FIRST_REGISTR_TIME, TIME_NUMBER, data.DS3231_data); //получение данных времени  ч/м/с
-  //GetTime (RTC_ADDRESS, FIRST_REGISTR_DATE, TIME_NUMBER, data.DS3231_data); //получение данных времени  ч/м/с
-  {	convert_time (data.time, data.DS3231_data, TIME_NUMBER);	}
+	GetTime (RTC_ADDRESS, FIRST_REGISTR_TIME, TIME_NUMBER, data.DS3231_getdata); //получение данных времени  ч/м/с
+  {	convert_time (data.time, data.DS3231_getdata, TIME_NUMBER);	}
 }
 /* USER CODE END 4 */
 

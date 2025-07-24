@@ -41,6 +41,9 @@
         "future": "c",
         "memory": "c",
         "ranges": "c",
-        "regex": "c"
+        "regex": "c",
+        "time64_config.h": "c",
+        "time.h": "c",
+        "timespec.h": "c"
     }
 }

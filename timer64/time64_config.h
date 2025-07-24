@@ -27,7 +27,7 @@
    let you go past year 2 billion but the struct will be incompatible
    with tm.  Conversion functions will be provided.
 */
-/* #define USE_TM64 */
+ //#define USE_TM64 
 
 
 /* Availability of system functions.
