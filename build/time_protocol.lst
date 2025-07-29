@@ -1,0 +1,1449 @@
+ARM GAS  /tmp/ccBCuFAW.s 			page 1
+
+
+   1              		.cpu cortex-m3
+   2              		.arch armv7-m
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"time_protocol.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.calc_CRC8,"ax",%progbits
+  18              		.align	1
+  19              		.syntax unified
+  20              		.thumb
+  21              		.thumb_func
+  23              	calc_CRC8:
+  24              	.LVL0:
+  25              	.LFB820:
+  26              		.file 1 "IO_drivers/time_protocol.c"
+   1:IO_drivers/time_protocol.c **** //Includes -------------------------------------------------------------------------//
+   2:IO_drivers/time_protocol.c **** #include "time_protocol.h"
+   3:IO_drivers/time_protocol.c **** #include "typedef.h"
+   4:IO_drivers/time_protocol.c **** #include "usart.h"
+   5:IO_drivers/time_protocol.c **** #include <stdio.h>
+   6:IO_drivers/time_protocol.c **** #include "rtc.h"
+   7:IO_drivers/time_protocol.c **** 
+   8:IO_drivers/time_protocol.c **** //variables-------------------------------------------------------------------------//
+   9:IO_drivers/time_protocol.c **** UART_msg_t UART_msg ; //структура необходимая для парсинга полу�
+  10:IO_drivers/time_protocol.c **** uint8_t * ptr_PDTmsg = UART_msg.PDT_struct.raw_bytes; //указатель на буфер с "сы
+  11:IO_drivers/time_protocol.c **** uint32_t TimeUART = 0; //UNIX-время полученное из PDT сообщения
+  12:IO_drivers/time_protocol.c **** RING_buffer_t RING_buffer; //структура с кольцевым буффером
+  13:IO_drivers/time_protocol.c **** 
+  14:IO_drivers/time_protocol.c **** //prototypes-----------------------------------------------------------------------//
+  15:IO_drivers/time_protocol.c **** static uint8_t calc_CRC8 (uint8_t * );
+  16:IO_drivers/time_protocol.c **** static uint32_t  calcUNIXtime_from_PDTmsg (uint8_t * );
+  17:IO_drivers/time_protocol.c **** 
+  18:IO_drivers/time_protocol.c **** //---------------------------------------------------------------------------------//
+  19:IO_drivers/time_protocol.c **** void PutChar_toRingBuf(char smb)
+  20:IO_drivers/time_protocol.c **** {
+  21:IO_drivers/time_protocol.c ****   RING_Put(&RING_buffer, smb); //отправка байта в кольцевой буффер
+  22:IO_drivers/time_protocol.c **** }
+  23:IO_drivers/time_protocol.c **** 
+  24:IO_drivers/time_protocol.c **** //---------------------------------------------------------------------------------//
+  25:IO_drivers/time_protocol.c **** void UARTbuf_init (void)
+  26:IO_drivers/time_protocol.c **** {
+  27:IO_drivers/time_protocol.c ****   UART_msg.machine_state = __START_BYTE;
+  28:IO_drivers/time_protocol.c ****   RING_Init (&RING_buffer, returnPtrUARTbuf(), BUFFER_SIZE); //инициализация коль�
+  29:IO_drivers/time_protocol.c ****   UART_msg.ptr_RINGbuff = &RING_buffer;
+  30:IO_drivers/time_protocol.c ****   ptr_PDTmsg[0]=  '$';
+  31:IO_drivers/time_protocol.c ****   ptr_PDTmsg[1]=  'P';
+  32:IO_drivers/time_protocol.c ****   ptr_PDTmsg[2]=  'D';
+ARM GAS  /tmp/ccBCuFAW.s 			page 2
+
+
+  33:IO_drivers/time_protocol.c ****   ptr_PDTmsg[3]=  'T';
+  34:IO_drivers/time_protocol.c ****   ptr_PDTmsg[4]=  ',';
+  35:IO_drivers/time_protocol.c ****   ptr_PDTmsg[5]=  '1';
+  36:IO_drivers/time_protocol.c ****   ptr_PDTmsg[6]=  ',';
+  37:IO_drivers/time_protocol.c ****   ptr_PDTmsg[15]= '*';
+  38:IO_drivers/time_protocol.c **** }
+  39:IO_drivers/time_protocol.c **** 
+  40:IO_drivers/time_protocol.c **** //------------------------------проверка состояние буффера UARTа----------
+  41:IO_drivers/time_protocol.c **** uint8_t check_ring_buffer (void)
+  42:IO_drivers/time_protocol.c **** {
+  43:IO_drivers/time_protocol.c ****     uint8_t buffer_status =  NO_MSG;
+  44:IO_drivers/time_protocol.c ****     uint8_t CRC8 = 0; //переменная для хранения CRC
+  45:IO_drivers/time_protocol.c ****     static uint8_t count  = 0; //счётчик принятых байтов тела сообще
+  46:IO_drivers/time_protocol.c ****     static uint8_t divider = 0x10; //делитель для перевода в 16чный фор�
+  47:IO_drivers/time_protocol.c ****     uint8_t byte; //полученный из кольцевого буффера байт
+  48:IO_drivers/time_protocol.c **** 
+  49:IO_drivers/time_protocol.c ****     if (RING_GetCount(UART_msg.ptr_RINGbuff) > 0)
+  50:IO_drivers/time_protocol.c ****     {
+  51:IO_drivers/time_protocol.c ****       byte = RING_Pop(UART_msg.ptr_RINGbuff);
+  52:IO_drivers/time_protocol.c ****       switch (UART_msg.machine_state) //проверка стадии получения сообщ
+  53:IO_drivers/time_protocol.c **** 		  { 
+  54:IO_drivers/time_protocol.c ****         case __START_BYTE: 
+  55:IO_drivers/time_protocol.c ****           if ( byte == ptr_PDTmsg[0]) //если полученный символ равен '$' 
+  56:IO_drivers/time_protocol.c **** 					{ UART_msg.machine_state = __SYNC_WORD1;  }
+  57:IO_drivers/time_protocol.c **** 				break;
+  58:IO_drivers/time_protocol.c **** 
+  59:IO_drivers/time_protocol.c ****         case __SYNC_WORD1: 
+  60:IO_drivers/time_protocol.c ****           if ( byte == ptr_PDTmsg[1]) //если полученный символ равен 'P' 
+  61:IO_drivers/time_protocol.c **** 					{ UART_msg.machine_state = __SYNC_WORD2;  }
+  62:IO_drivers/time_protocol.c ****           else
+  63:IO_drivers/time_protocol.c ****           { UART_msg.machine_state = __START_BYTE;  }
+  64:IO_drivers/time_protocol.c **** 				break;
+  65:IO_drivers/time_protocol.c **** 
+  66:IO_drivers/time_protocol.c ****         case __SYNC_WORD2: 
+  67:IO_drivers/time_protocol.c ****           if ( byte == ptr_PDTmsg[2]) //если полученный символ равен 'D' 
+  68:IO_drivers/time_protocol.c **** 					{ UART_msg.machine_state = __SYNC_WORD3;  }
+  69:IO_drivers/time_protocol.c ****           else
+  70:IO_drivers/time_protocol.c ****           { UART_msg.machine_state = __START_BYTE;  }
+  71:IO_drivers/time_protocol.c **** 				break;
+  72:IO_drivers/time_protocol.c **** 
+  73:IO_drivers/time_protocol.c ****         case __SYNC_WORD3: 
+  74:IO_drivers/time_protocol.c ****           if ( byte == ptr_PDTmsg[3]) //если полученный символ равен 'T' 
+  75:IO_drivers/time_protocol.c **** 					{ UART_msg.machine_state = __SYNC_COMMA1;  }
+  76:IO_drivers/time_protocol.c ****           else
+  77:IO_drivers/time_protocol.c ****           { UART_msg.machine_state = __START_BYTE;  }
+  78:IO_drivers/time_protocol.c **** 				break;
+  79:IO_drivers/time_protocol.c **** 
+  80:IO_drivers/time_protocol.c ****         case __SYNC_COMMA1: 
+  81:IO_drivers/time_protocol.c ****           if ( byte == ptr_PDTmsg[4]) //если полученный символ равен ',' 
+  82:IO_drivers/time_protocol.c **** 					{ UART_msg.machine_state = __ID_MSG;  }
+  83:IO_drivers/time_protocol.c ****           else
+  84:IO_drivers/time_protocol.c ****           { UART_msg.machine_state = __START_BYTE;  }
+  85:IO_drivers/time_protocol.c **** 				break;
+  86:IO_drivers/time_protocol.c **** 
+  87:IO_drivers/time_protocol.c ****         case __ID_MSG: 
+  88:IO_drivers/time_protocol.c ****           if ( byte == ptr_PDTmsg[5]) //если полученный символ равен '1' 
+  89:IO_drivers/time_protocol.c **** 					{ UART_msg.machine_state = __SYNC_COMMA2;  }
+ARM GAS  /tmp/ccBCuFAW.s 			page 3
+
+
+  90:IO_drivers/time_protocol.c ****           else
+  91:IO_drivers/time_protocol.c ****           { UART_msg.machine_state = __START_BYTE;  }
+  92:IO_drivers/time_protocol.c **** 				break;
+  93:IO_drivers/time_protocol.c **** 
+  94:IO_drivers/time_protocol.c ****         case __SYNC_COMMA2: 
+  95:IO_drivers/time_protocol.c ****           if ( byte == ptr_PDTmsg[6]) //если полученный символ равен ',' 
+  96:IO_drivers/time_protocol.c **** 					{ UART_msg.machine_state = __USEFUL_PART_MSG;  }
+  97:IO_drivers/time_protocol.c ****           else
+  98:IO_drivers/time_protocol.c ****           { UART_msg.machine_state = __START_BYTE;  }
+  99:IO_drivers/time_protocol.c **** 				break;
+ 100:IO_drivers/time_protocol.c **** 
+ 101:IO_drivers/time_protocol.c ****         case  __USEFUL_PART_MSG: 
+ 102:IO_drivers/time_protocol.c ****           if ( count < PDT_SIZE_MSG ) //если счётчик принятых байтов ме�
+ 103:IO_drivers/time_protocol.c **** 				  {
+ 104:IO_drivers/time_protocol.c **** 					  ptr_PDTmsg[count+7] = byte; //сохранения принятого байта					
+ 105:IO_drivers/time_protocol.c **** 					  count++;
+ 106:IO_drivers/time_protocol.c **** 				  } 
+ 107:IO_drivers/time_protocol.c **** 				  else //если полезная часть сообщения получена полнос�
+ 108:IO_drivers/time_protocol.c **** 				  {
+ 109:IO_drivers/time_protocol.c **** 					  count = 0; //сброс счётчика принятых символов
+ 110:IO_drivers/time_protocol.c **** 
+ 111:IO_drivers/time_protocol.c ****             if (( byte == ptr_PDTmsg[15])) //если полученный символ равен 
+ 112:IO_drivers/time_protocol.c **** 					  { 
+ 113:IO_drivers/time_protocol.c ****               UART_msg.machine_state = __CRC_MSG; 
+ 114:IO_drivers/time_protocol.c ****               UART_msg.msg_CRC = 0;
+ 115:IO_drivers/time_protocol.c ****               divider = 0x10;
+ 116:IO_drivers/time_protocol.c ****             } 	
+ 117:IO_drivers/time_protocol.c **** 				  } 
+ 118:IO_drivers/time_protocol.c **** 				break;	
+ 119:IO_drivers/time_protocol.c **** 
+ 120:IO_drivers/time_protocol.c ****         case  __CRC_MSG: 
+ 121:IO_drivers/time_protocol.c ****           if (count < SIZE_CRC)
+ 122:IO_drivers/time_protocol.c ****           {
+ 123:IO_drivers/time_protocol.c ****             ptr_PDTmsg[16 + count] = byte;
+ 124:IO_drivers/time_protocol.c ****             if ((byte >= '0') && (byte <= '9')) //проверка диапазона принят�
+ 125:IO_drivers/time_protocol.c ****             { UART_msg.msg_CRC |= (byte-0x30)*divider; }
+ 126:IO_drivers/time_protocol.c ****             else
+ 127:IO_drivers/time_protocol.c ****             {     
+ 128:IO_drivers/time_protocol.c ****               if ((byte >= 'A') && (byte <= 'F'))
+ 129:IO_drivers/time_protocol.c ****               { UART_msg.msg_CRC |= (byte-0x37)*divider; }
+ 130:IO_drivers/time_protocol.c ****             }
+ 131:IO_drivers/time_protocol.c ****             count++;
+ 132:IO_drivers/time_protocol.c ****             divider = (divider >> 4); //деление на 0x10
+ 133:IO_drivers/time_protocol.c ****           }
+ 134:IO_drivers/time_protocol.c ****           else 
+ 135:IO_drivers/time_protocol.c ****           {
+ 136:IO_drivers/time_protocol.c ****             if ((CRC8 = calc_CRC8 ( &ptr_PDTmsg[1])) == UART_msg.msg_CRC)
+ 137:IO_drivers/time_protocol.c ****             {
+ 138:IO_drivers/time_protocol.c ****               UART_msg.ntp_UNIXtime =  calcUNIXtime_from_PDTmsg (&ptr_PDTmsg[7]);          
+ 139:IO_drivers/time_protocol.c ****             }
+ 140:IO_drivers/time_protocol.c ****             count = 0;
+ 141:IO_drivers/time_protocol.c ****             UART_msg.machine_state = __START_BYTE;
+ 142:IO_drivers/time_protocol.c ****             buffer_status =  GET_MSG;
+ 143:IO_drivers/time_protocol.c ****             
+ 144:IO_drivers/time_protocol.c ****             #ifdef __USE_DBG
+ 145:IO_drivers/time_protocol.c **** 		          snprintf (DBG_buffer,  BUFFER_SIZE, "msg=$PDT,1,%c%c%c%c%c%c%c%c*%c%c, UT=%lu\r\n", ptr
+ 146:IO_drivers/time_protocol.c ****               ptr_PDTmsg[9], ptr_PDTmsg[10],ptr_PDTmsg[11], ptr_PDTmsg[12],ptr_PDTmsg[13], 
+ARM GAS  /tmp/ccBCuFAW.s 			page 4
+
+
+ 147:IO_drivers/time_protocol.c ****               ptr_PDTmsg[14], ptr_PDTmsg[16], ptr_PDTmsg[17], UART_msg.ntp_UNIXtime);	          
+ 148:IO_drivers/time_protocol.c ****               DBG_PutString(DBG_buffer);
+ 149:IO_drivers/time_protocol.c **** 	          #endif
+ 150:IO_drivers/time_protocol.c ****           }
+ 151:IO_drivers/time_protocol.c ****           
+ 152:IO_drivers/time_protocol.c ****         break;
+ 153:IO_drivers/time_protocol.c ****       }
+ 154:IO_drivers/time_protocol.c ****     }
+ 155:IO_drivers/time_protocol.c ****     
+ 156:IO_drivers/time_protocol.c ****     return buffer_status;
+ 157:IO_drivers/time_protocol.c **** }
+ 158:IO_drivers/time_protocol.c **** 
+ 159:IO_drivers/time_protocol.c **** //----------------------------------------------------------------------------//
+ 160:IO_drivers/time_protocol.c **** static uint8_t calc_CRC8 (uint8_t * ptr_msg)
+ 161:IO_drivers/time_protocol.c **** {
+  27              		.loc 1 161 1 view -0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 0
+  30              		@ frame_needed = 0, uses_anonymous_args = 0
+  31              		@ link register save eliminated.
+  32              		.loc 1 161 1 is_stmt 0 view .LVU1
+  33 0000 0246     		mov	r2, r0
+ 162:IO_drivers/time_protocol.c ****     uint8_t CRC8 = *ptr_msg;
+  34              		.loc 1 162 5 is_stmt 1 view .LVU2
+  35              		.loc 1 162 13 is_stmt 0 view .LVU3
+  36 0002 0078     		ldrb	r0, [r0]	@ zero_extendqisi2
+  37              	.LVL1:
+ 163:IO_drivers/time_protocol.c **** 
+ 164:IO_drivers/time_protocol.c ****     while (*(++ptr_msg) != '*') 
+  38              		.loc 1 164 5 is_stmt 1 view .LVU4
+  39              		.loc 1 164 11 is_stmt 0 view .LVU5
+  40 0004 00E0     		b	.L2
+  41              	.L3:
+ 165:IO_drivers/time_protocol.c ****     { CRC8 = CRC8 ^ (*ptr_msg);  }
+  42              		.loc 1 165 7 is_stmt 1 view .LVU6
+  43              		.loc 1 165 12 is_stmt 0 view .LVU7
+  44 0006 5840     		eors	r0, r0, r3
+  45              	.LVL2:
+  46              	.L2:
+ 164:IO_drivers/time_protocol.c ****     { CRC8 = CRC8 ^ (*ptr_msg);  }
+  47              		.loc 1 164 11 is_stmt 1 view .LVU8
+ 164:IO_drivers/time_protocol.c ****     { CRC8 = CRC8 ^ (*ptr_msg);  }
+  48              		.loc 1 164 12 is_stmt 0 view .LVU9
+  49 0008 12F8013F 		ldrb	r3, [r2, #1]!	@ zero_extendqisi2
+  50              	.LVL3:
+ 164:IO_drivers/time_protocol.c ****     { CRC8 = CRC8 ^ (*ptr_msg);  }
+  51              		.loc 1 164 11 view .LVU10
+  52 000c 2A2B     		cmp	r3, #42
+  53 000e FAD1     		bne	.L3
+ 166:IO_drivers/time_protocol.c **** 
+ 167:IO_drivers/time_protocol.c ****     return CRC8;
+  54              		.loc 1 167 5 is_stmt 1 view .LVU11
+ 168:IO_drivers/time_protocol.c **** }
+  55              		.loc 1 168 1 is_stmt 0 view .LVU12
+  56 0010 7047     		bx	lr
+  57              		.cfi_endproc
+  58              	.LFE820:
+ARM GAS  /tmp/ccBCuFAW.s 			page 5
+
+
+  60              		.section	.text.calcUNIXtime_from_PDTmsg,"ax",%progbits
+  61              		.align	1
+  62              		.syntax unified
+  63              		.thumb
+  64              		.thumb_func
+  66              	calcUNIXtime_from_PDTmsg:
+  67              	.LVL4:
+  68              	.LFB821:
+ 169:IO_drivers/time_protocol.c **** 
+ 170:IO_drivers/time_protocol.c **** //----------------------------------------------------------------------------//
+ 171:IO_drivers/time_protocol.c **** static uint32_t calcUNIXtime_from_PDTmsg (uint8_t * ptr_msg)
+ 172:IO_drivers/time_protocol.c **** {
+  69              		.loc 1 172 1 is_stmt 1 view -0
+  70              		.cfi_startproc
+  71              		@ args = 0, pretend = 0, frame = 0
+  72              		@ frame_needed = 0, uses_anonymous_args = 0
+  73              		.loc 1 172 1 is_stmt 0 view .LVU14
+  74 0000 00B5     		push	{lr}
+  75              	.LCFI0:
+  76              		.cfi_def_cfa_offset 4
+  77              		.cfi_offset 14, -4
+  78 0002 8646     		mov	lr, r0
+ 173:IO_drivers/time_protocol.c ****   uint8_t byte = 0;
+  79              		.loc 1 173 3 is_stmt 1 view .LVU15
+  80              	.LVL5:
+ 174:IO_drivers/time_protocol.c ****   uint32_t UNIXtime = 0;
+  81              		.loc 1 174 3 view .LVU16
+ 175:IO_drivers/time_protocol.c ****   uint32_t divider = 1;
+  82              		.loc 1 175 3 view .LVU17
+ 176:IO_drivers/time_protocol.c ****   
+ 177:IO_drivers/time_protocol.c ****   for (uint8_t count = 0; count < 9; count++)
+  83              		.loc 1 177 3 view .LVU18
+  84              	.LBB2:
+  85              		.loc 1 177 8 view .LVU19
+  86              		.loc 1 177 16 is_stmt 0 view .LVU20
+  87 0004 0023     		movs	r3, #0
+  88              	.LBE2:
+ 175:IO_drivers/time_protocol.c ****   uint32_t divider = 1;
+  89              		.loc 1 175 12 view .LVU21
+  90 0006 4FF0010C 		mov	ip, #1
+ 174:IO_drivers/time_protocol.c ****   uint32_t divider = 1;
+  91              		.loc 1 174 12 view .LVU22
+  92 000a 1846     		mov	r0, r3
+  93              	.LVL6:
+  94              	.LBB3:
+  95              		.loc 1 177 3 view .LVU23
+  96 000c 0CE0     		b	.L5
+  97              	.LVL7:
+  98              	.L6:
+ 178:IO_drivers/time_protocol.c ****   {
+ 179:IO_drivers/time_protocol.c ****     byte = *(ptr_msg + (7 - count)) ;
+ 180:IO_drivers/time_protocol.c ****     if ((byte >= '0') && (byte <= '9')) //проверка диапазона принятого с
+ 181:IO_drivers/time_protocol.c ****     {
+ 182:IO_drivers/time_protocol.c ****       UNIXtime |= (byte-0x30)*divider;
+ 183:IO_drivers/time_protocol.c ****     }
+ 184:IO_drivers/time_protocol.c ****     else
+ 185:IO_drivers/time_protocol.c ****     {
+ARM GAS  /tmp/ccBCuFAW.s 			page 6
+
+
+ 186:IO_drivers/time_protocol.c ****       if ((byte >= 'A') && (byte <= 'F'))
+  99              		.loc 1 186 7 is_stmt 1 view .LVU24
+ 100              		.loc 1 186 25 is_stmt 0 view .LVU25
+ 101 000e A2F14101 		sub	r1, r2, #65
+ 102 0012 C9B2     		uxtb	r1, r1
+ 103              		.loc 1 186 10 view .LVU26
+ 104 0014 0529     		cmp	r1, #5
+ 105 0016 03D8     		bhi	.L7
+ 187:IO_drivers/time_protocol.c ****       { UNIXtime |= (byte-0x37)*divider;  }
+ 106              		.loc 1 187 9 is_stmt 1 view .LVU27
+ 107              		.loc 1 187 26 is_stmt 0 view .LVU28
+ 108 0018 373A     		subs	r2, r2, #55
+ 109              	.LVL8:
+ 110              		.loc 1 187 32 view .LVU29
+ 111 001a 0CFB02F2 		mul	r2, ip, r2
+ 112              	.LVL9:
+ 113              		.loc 1 187 18 view .LVU30
+ 114 001e 1043     		orrs	r0, r0, r2
+ 115              	.LVL10:
+ 116              	.L7:
+ 188:IO_drivers/time_protocol.c ****     }
+ 189:IO_drivers/time_protocol.c ****     divider *= 0x10;
+ 117              		.loc 1 189 5 is_stmt 1 discriminator 2 view .LVU31
+ 118              		.loc 1 189 13 is_stmt 0 discriminator 2 view .LVU32
+ 119 0020 4FEA0C1C 		lsl	ip, ip, #4
+ 120              	.LVL11:
+ 177:IO_drivers/time_protocol.c ****   {
+ 121              		.loc 1 177 38 is_stmt 1 discriminator 2 view .LVU33
+ 177:IO_drivers/time_protocol.c ****   {
+ 122              		.loc 1 177 43 is_stmt 0 discriminator 2 view .LVU34
+ 123 0024 0133     		adds	r3, r3, #1
+ 124              	.LVL12:
+ 177:IO_drivers/time_protocol.c ****   {
+ 125              		.loc 1 177 43 discriminator 2 view .LVU35
+ 126 0026 DBB2     		uxtb	r3, r3
+ 127              	.LVL13:
+ 128              	.L5:
+ 177:IO_drivers/time_protocol.c ****   {
+ 129              		.loc 1 177 27 is_stmt 1 discriminator 1 view .LVU36
+ 177:IO_drivers/time_protocol.c ****   {
+ 130              		.loc 1 177 3 is_stmt 0 discriminator 1 view .LVU37
+ 131 0028 082B     		cmp	r3, #8
+ 132 002a 0DD8     		bhi	.L10
+ 179:IO_drivers/time_protocol.c ****     if ((byte >= '0') && (byte <= '9')) //проверка диапазона принятого с
+ 133              		.loc 1 179 5 is_stmt 1 view .LVU38
+ 179:IO_drivers/time_protocol.c ****     if ((byte >= '0') && (byte <= '9')) //проверка диапазона принятого с
+ 134              		.loc 1 179 27 is_stmt 0 view .LVU39
+ 135 002c C3F10702 		rsb	r2, r3, #7
+ 179:IO_drivers/time_protocol.c ****     if ((byte >= '0') && (byte <= '9')) //проверка диапазона принятого с
+ 136              		.loc 1 179 10 view .LVU40
+ 137 0030 1EF80220 		ldrb	r2, [lr, r2]	@ zero_extendqisi2
+ 138              	.LVL14:
+ 180:IO_drivers/time_protocol.c ****     {
+ 139              		.loc 1 180 5 is_stmt 1 view .LVU41
+ 180:IO_drivers/time_protocol.c ****     {
+ 140              		.loc 1 180 23 is_stmt 0 view .LVU42
+ 141 0034 A2F13001 		sub	r1, r2, #48
+ARM GAS  /tmp/ccBCuFAW.s 			page 7
+
+
+ 142 0038 C9B2     		uxtb	r1, r1
+ 180:IO_drivers/time_protocol.c ****     {
+ 143              		.loc 1 180 8 view .LVU43
+ 144 003a 0929     		cmp	r1, #9
+ 145 003c E7D8     		bhi	.L6
+ 182:IO_drivers/time_protocol.c ****     }
+ 146              		.loc 1 182 7 is_stmt 1 view .LVU44
+ 182:IO_drivers/time_protocol.c ****     }
+ 147              		.loc 1 182 24 is_stmt 0 view .LVU45
+ 148 003e 303A     		subs	r2, r2, #48
+ 149              	.LVL15:
+ 182:IO_drivers/time_protocol.c ****     }
+ 150              		.loc 1 182 30 view .LVU46
+ 151 0040 0CFB02F2 		mul	r2, ip, r2
+ 152              	.LVL16:
+ 182:IO_drivers/time_protocol.c ****     }
+ 153              		.loc 1 182 16 view .LVU47
+ 154 0044 1043     		orrs	r0, r0, r2
+ 155              	.LVL17:
+ 182:IO_drivers/time_protocol.c ****     }
+ 156              		.loc 1 182 16 view .LVU48
+ 157 0046 EBE7     		b	.L7
+ 158              	.LVL18:
+ 159              	.L10:
+ 182:IO_drivers/time_protocol.c ****     }
+ 160              		.loc 1 182 16 view .LVU49
+ 161              	.LBE3:
+ 190:IO_drivers/time_protocol.c ****   }
+ 191:IO_drivers/time_protocol.c ****  return UNIXtime;
+ 162              		.loc 1 191 2 is_stmt 1 view .LVU50
+ 192:IO_drivers/time_protocol.c **** }
+ 163              		.loc 1 192 1 is_stmt 0 view .LVU51
+ 164 0048 5DF804FB 		ldr	pc, [sp], #4
+ 165              		.cfi_endproc
+ 166              	.LFE821:
+ 168              		.section	.text.PutChar_toRingBuf,"ax",%progbits
+ 169              		.align	1
+ 170              		.global	PutChar_toRingBuf
+ 171              		.syntax unified
+ 172              		.thumb
+ 173              		.thumb_func
+ 175              	PutChar_toRingBuf:
+ 176              	.LVL19:
+ 177              	.LFB817:
+  20:IO_drivers/time_protocol.c ****   RING_Put(&RING_buffer, smb); //отправка байта в кольцевой буффер
+ 178              		.loc 1 20 1 is_stmt 1 view -0
+ 179              		.cfi_startproc
+ 180              		@ args = 0, pretend = 0, frame = 0
+ 181              		@ frame_needed = 0, uses_anonymous_args = 0
+  20:IO_drivers/time_protocol.c ****   RING_Put(&RING_buffer, smb); //отправка байта в кольцевой буффер
+ 182              		.loc 1 20 1 is_stmt 0 view .LVU53
+ 183 0000 08B5     		push	{r3, lr}
+ 184              	.LCFI1:
+ 185              		.cfi_def_cfa_offset 8
+ 186              		.cfi_offset 3, -8
+ 187              		.cfi_offset 14, -4
+ 188 0002 0146     		mov	r1, r0
+ARM GAS  /tmp/ccBCuFAW.s 			page 8
+
+
+  21:IO_drivers/time_protocol.c **** }
+ 189              		.loc 1 21 3 is_stmt 1 view .LVU54
+ 190 0004 0148     		ldr	r0, .L13
+ 191              	.LVL20:
+  21:IO_drivers/time_protocol.c **** }
+ 192              		.loc 1 21 3 is_stmt 0 view .LVU55
+ 193 0006 FFF7FEFF 		bl	RING_Put
+ 194              	.LVL21:
+  22:IO_drivers/time_protocol.c **** 
+ 195              		.loc 1 22 1 view .LVU56
+ 196 000a 08BD     		pop	{r3, pc}
+ 197              	.L14:
+ 198              		.align	2
+ 199              	.L13:
+ 200 000c 00000000 		.word	.LANCHOR0
+ 201              		.cfi_endproc
+ 202              	.LFE817:
+ 204              		.section	.text.UARTbuf_init,"ax",%progbits
+ 205              		.align	1
+ 206              		.global	UARTbuf_init
+ 207              		.syntax unified
+ 208              		.thumb
+ 209              		.thumb_func
+ 211              	UARTbuf_init:
+ 212              	.LFB818:
+  26:IO_drivers/time_protocol.c ****   UART_msg.machine_state = __START_BYTE;
+ 213              		.loc 1 26 1 is_stmt 1 view -0
+ 214              		.cfi_startproc
+ 215              		@ args = 0, pretend = 0, frame = 0
+ 216              		@ frame_needed = 0, uses_anonymous_args = 0
+ 217 0000 38B5     		push	{r3, r4, r5, lr}
+ 218              	.LCFI2:
+ 219              		.cfi_def_cfa_offset 16
+ 220              		.cfi_offset 3, -16
+ 221              		.cfi_offset 4, -12
+ 222              		.cfi_offset 5, -8
+ 223              		.cfi_offset 14, -4
+  27:IO_drivers/time_protocol.c ****   RING_Init (&RING_buffer, returnPtrUARTbuf(), BUFFER_SIZE); //инициализация коль�
+ 224              		.loc 1 27 3 view .LVU58
+  27:IO_drivers/time_protocol.c ****   RING_Init (&RING_buffer, returnPtrUARTbuf(), BUFFER_SIZE); //инициализация коль�
+ 225              		.loc 1 27 26 is_stmt 0 view .LVU59
+ 226 0002 114C     		ldr	r4, .L17
+ 227 0004 0123     		movs	r3, #1
+ 228 0006 2370     		strb	r3, [r4]
+  28:IO_drivers/time_protocol.c ****   UART_msg.ptr_RINGbuff = &RING_buffer;
+ 229              		.loc 1 28 3 is_stmt 1 view .LVU60
+ 230 0008 FFF7FEFF 		bl	returnPtrUARTbuf
+ 231              	.LVL22:
+ 232 000c 0146     		mov	r1, r0
+ 233 000e 0F4D     		ldr	r5, .L17+4
+ 234 0010 3222     		movs	r2, #50
+ 235 0012 2846     		mov	r0, r5
+ 236 0014 FFF7FEFF 		bl	RING_Init
+ 237              	.LVL23:
+  29:IO_drivers/time_protocol.c ****   ptr_PDTmsg[0]=  '$';
+ 238              		.loc 1 29 3 view .LVU61
+  29:IO_drivers/time_protocol.c ****   ptr_PDTmsg[0]=  '$';
+ARM GAS  /tmp/ccBCuFAW.s 			page 9
+
+
+ 239              		.loc 1 29 25 is_stmt 0 view .LVU62
+ 240 0018 E561     		str	r5, [r4, #28]
+  30:IO_drivers/time_protocol.c ****   ptr_PDTmsg[1]=  'P';
+ 241              		.loc 1 30 3 is_stmt 1 view .LVU63
+  30:IO_drivers/time_protocol.c ****   ptr_PDTmsg[1]=  'P';
+ 242              		.loc 1 30 13 is_stmt 0 view .LVU64
+ 243 001a 0D4B     		ldr	r3, .L17+8
+ 244 001c 1A68     		ldr	r2, [r3]
+  30:IO_drivers/time_protocol.c ****   ptr_PDTmsg[1]=  'P';
+ 245              		.loc 1 30 16 view .LVU65
+ 246 001e 2421     		movs	r1, #36
+ 247 0020 1170     		strb	r1, [r2]
+  31:IO_drivers/time_protocol.c ****   ptr_PDTmsg[2]=  'D';
+ 248              		.loc 1 31 3 is_stmt 1 view .LVU66
+  31:IO_drivers/time_protocol.c ****   ptr_PDTmsg[2]=  'D';
+ 249              		.loc 1 31 13 is_stmt 0 view .LVU67
+ 250 0022 1A68     		ldr	r2, [r3]
+  31:IO_drivers/time_protocol.c ****   ptr_PDTmsg[2]=  'D';
+ 251              		.loc 1 31 16 view .LVU68
+ 252 0024 5021     		movs	r1, #80
+ 253 0026 5170     		strb	r1, [r2, #1]
+  32:IO_drivers/time_protocol.c ****   ptr_PDTmsg[3]=  'T';
+ 254              		.loc 1 32 3 is_stmt 1 view .LVU69
+  32:IO_drivers/time_protocol.c ****   ptr_PDTmsg[3]=  'T';
+ 255              		.loc 1 32 13 is_stmt 0 view .LVU70
+ 256 0028 1A68     		ldr	r2, [r3]
+  32:IO_drivers/time_protocol.c ****   ptr_PDTmsg[3]=  'T';
+ 257              		.loc 1 32 16 view .LVU71
+ 258 002a 4421     		movs	r1, #68
+ 259 002c 9170     		strb	r1, [r2, #2]
+  33:IO_drivers/time_protocol.c ****   ptr_PDTmsg[4]=  ',';
+ 260              		.loc 1 33 3 is_stmt 1 view .LVU72
+  33:IO_drivers/time_protocol.c ****   ptr_PDTmsg[4]=  ',';
+ 261              		.loc 1 33 13 is_stmt 0 view .LVU73
+ 262 002e 1A68     		ldr	r2, [r3]
+  33:IO_drivers/time_protocol.c ****   ptr_PDTmsg[4]=  ',';
+ 263              		.loc 1 33 16 view .LVU74
+ 264 0030 5421     		movs	r1, #84
+ 265 0032 D170     		strb	r1, [r2, #3]
+  34:IO_drivers/time_protocol.c ****   ptr_PDTmsg[5]=  '1';
+ 266              		.loc 1 34 3 is_stmt 1 view .LVU75
+  34:IO_drivers/time_protocol.c ****   ptr_PDTmsg[5]=  '1';
+ 267              		.loc 1 34 13 is_stmt 0 view .LVU76
+ 268 0034 1B68     		ldr	r3, [r3]
+  34:IO_drivers/time_protocol.c ****   ptr_PDTmsg[5]=  '1';
+ 269              		.loc 1 34 16 view .LVU77
+ 270 0036 2C22     		movs	r2, #44
+ 271 0038 1A71     		strb	r2, [r3, #4]
+  35:IO_drivers/time_protocol.c ****   ptr_PDTmsg[6]=  ',';
+ 272              		.loc 1 35 3 is_stmt 1 view .LVU78
+  35:IO_drivers/time_protocol.c ****   ptr_PDTmsg[6]=  ',';
+ 273              		.loc 1 35 16 is_stmt 0 view .LVU79
+ 274 003a 3121     		movs	r1, #49
+ 275 003c 5971     		strb	r1, [r3, #5]
+  36:IO_drivers/time_protocol.c ****   ptr_PDTmsg[15]= '*';
+ 276              		.loc 1 36 3 is_stmt 1 view .LVU80
+  36:IO_drivers/time_protocol.c ****   ptr_PDTmsg[15]= '*';
+ARM GAS  /tmp/ccBCuFAW.s 			page 10
+
+
+ 277              		.loc 1 36 16 is_stmt 0 view .LVU81
+ 278 003e 9A71     		strb	r2, [r3, #6]
+  37:IO_drivers/time_protocol.c **** }
+ 279              		.loc 1 37 3 is_stmt 1 view .LVU82
+  37:IO_drivers/time_protocol.c **** }
+ 280              		.loc 1 37 17 is_stmt 0 view .LVU83
+ 281 0040 2A22     		movs	r2, #42
+ 282 0042 DA73     		strb	r2, [r3, #15]
+  38:IO_drivers/time_protocol.c **** 
+ 283              		.loc 1 38 1 view .LVU84
+ 284 0044 38BD     		pop	{r3, r4, r5, pc}
+ 285              	.L18:
+ 286 0046 00BF     		.align	2
+ 287              	.L17:
+ 288 0048 00000000 		.word	.LANCHOR1
+ 289 004c 00000000 		.word	.LANCHOR0
+ 290 0050 00000000 		.word	.LANCHOR2
+ 291              		.cfi_endproc
+ 292              	.LFE818:
+ 294              		.section	.rodata.check_ring_buffer.str1.4,"aMS",%progbits,1
+ 295              		.align	2
+ 296              	.LC0:
+ 297 0000 6D73673D 		.ascii	"msg=$PDT,1,%c%c%c%c%c%c%c%c*%c%c, UT=%lu\015\012\000"
+ 297      24504454 
+ 297      2C312C25 
+ 297      63256325 
+ 297      63256325 
+ 298              		.section	.text.check_ring_buffer,"ax",%progbits
+ 299              		.align	1
+ 300              		.global	check_ring_buffer
+ 301              		.syntax unified
+ 302              		.thumb
+ 303              		.thumb_func
+ 305              	check_ring_buffer:
+ 306              	.LFB819:
+  42:IO_drivers/time_protocol.c ****     uint8_t buffer_status =  NO_MSG;
+ 307              		.loc 1 42 1 is_stmt 1 view -0
+ 308              		.cfi_startproc
+ 309              		@ args = 0, pretend = 0, frame = 0
+ 310              		@ frame_needed = 0, uses_anonymous_args = 0
+ 311 0000 2DE9F047 		push	{r4, r5, r6, r7, r8, r9, r10, lr}
+ 312              	.LCFI3:
+ 313              		.cfi_def_cfa_offset 32
+ 314              		.cfi_offset 4, -32
+ 315              		.cfi_offset 5, -28
+ 316              		.cfi_offset 6, -24
+ 317              		.cfi_offset 7, -20
+ 318              		.cfi_offset 8, -16
+ 319              		.cfi_offset 9, -12
+ 320              		.cfi_offset 10, -8
+ 321              		.cfi_offset 14, -4
+ 322 0004 8AB0     		sub	sp, sp, #40
+ 323              	.LCFI4:
+ 324              		.cfi_def_cfa_offset 72
+  43:IO_drivers/time_protocol.c ****     uint8_t CRC8 = 0; //переменная для хранения CRC
+ 325              		.loc 1 43 5 view .LVU86
+ 326              	.LVL24:
+ARM GAS  /tmp/ccBCuFAW.s 			page 11
+
+
+  44:IO_drivers/time_protocol.c ****     static uint8_t count  = 0; //счётчик принятых байтов тела сообще
+ 327              		.loc 1 44 5 view .LVU87
+  45:IO_drivers/time_protocol.c ****     static uint8_t divider = 0x10; //делитель для перевода в 16чный фор�
+ 328              		.loc 1 45 5 view .LVU88
+  46:IO_drivers/time_protocol.c ****     uint8_t byte; //полученный из кольцевого буффера байт
+ 329              		.loc 1 46 5 view .LVU89
+  47:IO_drivers/time_protocol.c **** 
+ 330              		.loc 1 47 5 view .LVU90
+  49:IO_drivers/time_protocol.c ****     {
+ 331              		.loc 1 49 5 view .LVU91
+  49:IO_drivers/time_protocol.c ****     {
+ 332              		.loc 1 49 9 is_stmt 0 view .LVU92
+ 333 0006 874B     		ldr	r3, .L57
+ 334 0008 D869     		ldr	r0, [r3, #28]
+ 335 000a FFF7FEFF 		bl	RING_GetCount
+ 336              	.LVL25:
+  49:IO_drivers/time_protocol.c ****     {
+ 337              		.loc 1 49 8 view .LVU93
+ 338 000e 18B9     		cbnz	r0, .L47
+  43:IO_drivers/time_protocol.c ****     uint8_t CRC8 = 0; //переменная для хранения CRC
+ 339              		.loc 1 43 13 view .LVU94
+ 340 0010 0020     		movs	r0, #0
+ 341              	.LVL26:
+ 342              	.L20:
+ 156:IO_drivers/time_protocol.c **** }
+ 343              		.loc 1 156 5 is_stmt 1 view .LVU95
+ 157:IO_drivers/time_protocol.c **** 
+ 344              		.loc 1 157 1 is_stmt 0 view .LVU96
+ 345 0012 0AB0     		add	sp, sp, #40
+ 346              	.LCFI5:
+ 347              		.cfi_remember_state
+ 348              		.cfi_def_cfa_offset 32
+ 349              		@ sp needed
+ 350 0014 BDE8F087 		pop	{r4, r5, r6, r7, r8, r9, r10, pc}
+ 351              	.LVL27:
+ 352              	.L47:
+ 353              	.LCFI6:
+ 354              		.cfi_restore_state
+  51:IO_drivers/time_protocol.c ****       switch (UART_msg.machine_state) //проверка стадии получения сообщ
+ 355              		.loc 1 51 7 is_stmt 1 view .LVU97
+  51:IO_drivers/time_protocol.c ****       switch (UART_msg.machine_state) //проверка стадии получения сообщ
+ 356              		.loc 1 51 14 is_stmt 0 view .LVU98
+ 357 0018 824C     		ldr	r4, .L57
+ 358 001a E069     		ldr	r0, [r4, #28]
+ 359 001c FFF7FEFF 		bl	RING_Pop
+ 360              	.LVL28:
+  52:IO_drivers/time_protocol.c **** 		  { 
+ 361              		.loc 1 52 7 is_stmt 1 view .LVU99
+  52:IO_drivers/time_protocol.c **** 		  { 
+ 362              		.loc 1 52 23 is_stmt 0 view .LVU100
+ 363 0020 2378     		ldrb	r3, [r4]	@ zero_extendqisi2
+  52:IO_drivers/time_protocol.c **** 		  { 
+ 364              		.loc 1 52 7 view .LVU101
+ 365 0022 013B     		subs	r3, r3, #1
+ 366 0024 082B     		cmp	r3, #8
+ 367 0026 00F2FA80 		bhi	.L43
+ 368 002a DFE803F0 		tbb	[pc, r3]
+ARM GAS  /tmp/ccBCuFAW.s 			page 12
+
+
+ 369              	.L22:
+ 370 002e 05       		.byte	(.L30-.L22)/2
+ 371 002f 11       		.byte	(.L29-.L22)/2
+ 372 0030 20       		.byte	(.L28-.L22)/2
+ 373 0031 2F       		.byte	(.L27-.L22)/2
+ 374 0032 3E       		.byte	(.L26-.L22)/2
+ 375 0033 4D       		.byte	(.L25-.L22)/2
+ 376 0034 5C       		.byte	(.L24-.L22)/2
+ 377 0035 6B       		.byte	(.L23-.L22)/2
+ 378 0036 8B       		.byte	(.L21-.L22)/2
+ 379 0037 00       		.p2align 1
+ 380              	.L30:
+  55:IO_drivers/time_protocol.c **** 					{ UART_msg.machine_state = __SYNC_WORD1;  }
+ 381              		.loc 1 55 11 is_stmt 1 view .LVU102
+  55:IO_drivers/time_protocol.c **** 					{ UART_msg.machine_state = __SYNC_WORD1;  }
+ 382              		.loc 1 55 34 is_stmt 0 view .LVU103
+ 383 0038 7B4B     		ldr	r3, .L57+4
+ 384 003a 1B68     		ldr	r3, [r3]
+ 385 003c 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+  55:IO_drivers/time_protocol.c **** 					{ UART_msg.machine_state = __SYNC_WORD1;  }
+ 386              		.loc 1 55 14 view .LVU104
+ 387 003e 8342     		cmp	r3, r0
+ 388 0040 01D0     		beq	.L48
+  43:IO_drivers/time_protocol.c ****     uint8_t CRC8 = 0; //переменная для хранения CRC
+ 389              		.loc 1 43 13 view .LVU105
+ 390 0042 0020     		movs	r0, #0
+ 391              	.LVL29:
+  43:IO_drivers/time_protocol.c ****     uint8_t CRC8 = 0; //переменная для хранения CRC
+ 392              		.loc 1 43 13 view .LVU106
+ 393 0044 E5E7     		b	.L20
+ 394              	.LVL30:
+ 395              	.L48:
+  56:IO_drivers/time_protocol.c **** 				break;
+ 396              		.loc 1 56 8 is_stmt 1 view .LVU107
+  56:IO_drivers/time_protocol.c **** 				break;
+ 397              		.loc 1 56 31 is_stmt 0 view .LVU108
+ 398 0046 774B     		ldr	r3, .L57
+ 399 0048 0222     		movs	r2, #2
+ 400 004a 1A70     		strb	r2, [r3]
+  43:IO_drivers/time_protocol.c ****     uint8_t CRC8 = 0; //переменная для хранения CRC
+ 401              		.loc 1 43 13 view .LVU109
+ 402 004c 0020     		movs	r0, #0
+ 403              	.LVL31:
+  43:IO_drivers/time_protocol.c ****     uint8_t CRC8 = 0; //переменная для хранения CRC
+ 404              		.loc 1 43 13 view .LVU110
+ 405 004e E0E7     		b	.L20
+ 406              	.LVL32:
+ 407              	.L29:
+  60:IO_drivers/time_protocol.c **** 					{ UART_msg.machine_state = __SYNC_WORD2;  }
+ 408              		.loc 1 60 11 is_stmt 1 view .LVU111
+  60:IO_drivers/time_protocol.c **** 					{ UART_msg.machine_state = __SYNC_WORD2;  }
+ 409              		.loc 1 60 34 is_stmt 0 view .LVU112
+ 410 0050 754B     		ldr	r3, .L57+4
+ 411 0052 1B68     		ldr	r3, [r3]
+ 412 0054 5B78     		ldrb	r3, [r3, #1]	@ zero_extendqisi2
+  60:IO_drivers/time_protocol.c **** 					{ UART_msg.machine_state = __SYNC_WORD2;  }
+ 413              		.loc 1 60 14 view .LVU113
+ARM GAS  /tmp/ccBCuFAW.s 			page 13
+
+
+ 414 0056 8342     		cmp	r3, r0
+ 415 0058 04D0     		beq	.L49
+  63:IO_drivers/time_protocol.c **** 				break;
+ 416              		.loc 1 63 13 is_stmt 1 view .LVU114
+  63:IO_drivers/time_protocol.c **** 				break;
+ 417              		.loc 1 63 36 is_stmt 0 view .LVU115
+ 418 005a 724B     		ldr	r3, .L57
+ 419 005c 0122     		movs	r2, #1
+ 420 005e 1A70     		strb	r2, [r3]
+  43:IO_drivers/time_protocol.c ****     uint8_t CRC8 = 0; //переменная для хранения CRC
+ 421              		.loc 1 43 13 view .LVU116
+ 422 0060 0020     		movs	r0, #0
+ 423              	.LVL33:
+  43:IO_drivers/time_protocol.c ****     uint8_t CRC8 = 0; //переменная для хранения CRC
+ 424              		.loc 1 43 13 view .LVU117
+ 425 0062 D6E7     		b	.L20
+ 426              	.LVL34:
+ 427              	.L49:
+  61:IO_drivers/time_protocol.c ****           else
+ 428              		.loc 1 61 8 is_stmt 1 view .LVU118
+  61:IO_drivers/time_protocol.c ****           else
+ 429              		.loc 1 61 31 is_stmt 0 view .LVU119
+ 430 0064 6F4B     		ldr	r3, .L57
+ 431 0066 0322     		movs	r2, #3
+ 432 0068 1A70     		strb	r2, [r3]
+  43:IO_drivers/time_protocol.c ****     uint8_t CRC8 = 0; //переменная для хранения CRC
+ 433              		.loc 1 43 13 view .LVU120
+ 434 006a 0020     		movs	r0, #0
+ 435              	.LVL35:
+  43:IO_drivers/time_protocol.c ****     uint8_t CRC8 = 0; //переменная для хранения CRC
+ 436              		.loc 1 43 13 view .LVU121
+ 437 006c D1E7     		b	.L20
+ 438              	.LVL36:
+ 439              	.L28:
+  67:IO_drivers/time_protocol.c **** 					{ UART_msg.machine_state = __SYNC_WORD3;  }
+ 440              		.loc 1 67 11 is_stmt 1 view .LVU122
+  67:IO_drivers/time_protocol.c **** 					{ UART_msg.machine_state = __SYNC_WORD3;  }
+ 441              		.loc 1 67 34 is_stmt 0 view .LVU123
+ 442 006e 6E4B     		ldr	r3, .L57+4
+ 443 0070 1B68     		ldr	r3, [r3]
+ 444 0072 9B78     		ldrb	r3, [r3, #2]	@ zero_extendqisi2
+  67:IO_drivers/time_protocol.c **** 					{ UART_msg.machine_state = __SYNC_WORD3;  }
+ 445              		.loc 1 67 14 view .LVU124
+ 446 0074 8342     		cmp	r3, r0
+ 447 0076 04D0     		beq	.L50
+  70:IO_drivers/time_protocol.c **** 				break;
+ 448              		.loc 1 70 13 is_stmt 1 view .LVU125
+  70:IO_drivers/time_protocol.c **** 				break;
+ 449              		.loc 1 70 36 is_stmt 0 view .LVU126
+ 450 0078 6A4B     		ldr	r3, .L57
+ 451 007a 0122     		movs	r2, #1
+ 452 007c 1A70     		strb	r2, [r3]
+  43:IO_drivers/time_protocol.c ****     uint8_t CRC8 = 0; //переменная для хранения CRC
+ 453              		.loc 1 43 13 view .LVU127
+ 454 007e 0020     		movs	r0, #0
+ 455              	.LVL37:
+  43:IO_drivers/time_protocol.c ****     uint8_t CRC8 = 0; //переменная для хранения CRC
+ARM GAS  /tmp/ccBCuFAW.s 			page 14
+
+
+ 456              		.loc 1 43 13 view .LVU128
+ 457 0080 C7E7     		b	.L20
+ 458              	.LVL38:
+ 459              	.L50:
+  68:IO_drivers/time_protocol.c ****           else
+ 460              		.loc 1 68 8 is_stmt 1 view .LVU129
+  68:IO_drivers/time_protocol.c ****           else
+ 461              		.loc 1 68 31 is_stmt 0 view .LVU130
+ 462 0082 684B     		ldr	r3, .L57
+ 463 0084 0422     		movs	r2, #4
+ 464 0086 1A70     		strb	r2, [r3]
+  43:IO_drivers/time_protocol.c ****     uint8_t CRC8 = 0; //переменная для хранения CRC
+ 465              		.loc 1 43 13 view .LVU131
+ 466 0088 0020     		movs	r0, #0
+ 467              	.LVL39:
+  43:IO_drivers/time_protocol.c ****     uint8_t CRC8 = 0; //переменная для хранения CRC
+ 468              		.loc 1 43 13 view .LVU132
+ 469 008a C2E7     		b	.L20
+ 470              	.LVL40:
+ 471              	.L27:
+  74:IO_drivers/time_protocol.c **** 					{ UART_msg.machine_state = __SYNC_COMMA1;  }
+ 472              		.loc 1 74 11 is_stmt 1 view .LVU133
+  74:IO_drivers/time_protocol.c **** 					{ UART_msg.machine_state = __SYNC_COMMA1;  }
+ 473              		.loc 1 74 34 is_stmt 0 view .LVU134
+ 474 008c 664B     		ldr	r3, .L57+4
+ 475 008e 1B68     		ldr	r3, [r3]
+ 476 0090 DB78     		ldrb	r3, [r3, #3]	@ zero_extendqisi2
+  74:IO_drivers/time_protocol.c **** 					{ UART_msg.machine_state = __SYNC_COMMA1;  }
+ 477              		.loc 1 74 14 view .LVU135
+ 478 0092 8342     		cmp	r3, r0
+ 479 0094 04D0     		beq	.L51
+  77:IO_drivers/time_protocol.c **** 				break;
+ 480              		.loc 1 77 13 is_stmt 1 view .LVU136
+  77:IO_drivers/time_protocol.c **** 				break;
+ 481              		.loc 1 77 36 is_stmt 0 view .LVU137
+ 482 0096 634B     		ldr	r3, .L57
+ 483 0098 0122     		movs	r2, #1
+ 484 009a 1A70     		strb	r2, [r3]
+  43:IO_drivers/time_protocol.c ****     uint8_t CRC8 = 0; //переменная для хранения CRC
+ 485              		.loc 1 43 13 view .LVU138
+ 486 009c 0020     		movs	r0, #0
+ 487              	.LVL41:
+  43:IO_drivers/time_protocol.c ****     uint8_t CRC8 = 0; //переменная для хранения CRC
+ 488              		.loc 1 43 13 view .LVU139
+ 489 009e B8E7     		b	.L20
+ 490              	.LVL42:
+ 491              	.L51:
+  75:IO_drivers/time_protocol.c ****           else
+ 492              		.loc 1 75 8 is_stmt 1 view .LVU140
+  75:IO_drivers/time_protocol.c ****           else
+ 493              		.loc 1 75 31 is_stmt 0 view .LVU141
+ 494 00a0 604B     		ldr	r3, .L57
+ 495 00a2 0522     		movs	r2, #5
+ 496 00a4 1A70     		strb	r2, [r3]
+  43:IO_drivers/time_protocol.c ****     uint8_t CRC8 = 0; //переменная для хранения CRC
+ 497              		.loc 1 43 13 view .LVU142
+ 498 00a6 0020     		movs	r0, #0
+ARM GAS  /tmp/ccBCuFAW.s 			page 15
+
+
+ 499              	.LVL43:
+  43:IO_drivers/time_protocol.c ****     uint8_t CRC8 = 0; //переменная для хранения CRC
+ 500              		.loc 1 43 13 view .LVU143
+ 501 00a8 B3E7     		b	.L20
+ 502              	.LVL44:
+ 503              	.L26:
+  81:IO_drivers/time_protocol.c **** 					{ UART_msg.machine_state = __ID_MSG;  }
+ 504              		.loc 1 81 11 is_stmt 1 view .LVU144
+  81:IO_drivers/time_protocol.c **** 					{ UART_msg.machine_state = __ID_MSG;  }
+ 505              		.loc 1 81 34 is_stmt 0 view .LVU145
+ 506 00aa 5F4B     		ldr	r3, .L57+4
+ 507 00ac 1B68     		ldr	r3, [r3]
+ 508 00ae 1B79     		ldrb	r3, [r3, #4]	@ zero_extendqisi2
+  81:IO_drivers/time_protocol.c **** 					{ UART_msg.machine_state = __ID_MSG;  }
+ 509              		.loc 1 81 14 view .LVU146
+ 510 00b0 8342     		cmp	r3, r0
+ 511 00b2 04D0     		beq	.L52
+  84:IO_drivers/time_protocol.c **** 				break;
+ 512              		.loc 1 84 13 is_stmt 1 view .LVU147
+  84:IO_drivers/time_protocol.c **** 				break;
+ 513              		.loc 1 84 36 is_stmt 0 view .LVU148
+ 514 00b4 5B4B     		ldr	r3, .L57
+ 515 00b6 0122     		movs	r2, #1
+ 516 00b8 1A70     		strb	r2, [r3]
+  43:IO_drivers/time_protocol.c ****     uint8_t CRC8 = 0; //переменная для хранения CRC
+ 517              		.loc 1 43 13 view .LVU149
+ 518 00ba 0020     		movs	r0, #0
+ 519              	.LVL45:
+  43:IO_drivers/time_protocol.c ****     uint8_t CRC8 = 0; //переменная для хранения CRC
+ 520              		.loc 1 43 13 view .LVU150
+ 521 00bc A9E7     		b	.L20
+ 522              	.LVL46:
+ 523              	.L52:
+  82:IO_drivers/time_protocol.c ****           else
+ 524              		.loc 1 82 8 is_stmt 1 view .LVU151
+  82:IO_drivers/time_protocol.c ****           else
+ 525              		.loc 1 82 31 is_stmt 0 view .LVU152
+ 526 00be 594B     		ldr	r3, .L57
+ 527 00c0 0622     		movs	r2, #6
+ 528 00c2 1A70     		strb	r2, [r3]
+  43:IO_drivers/time_protocol.c ****     uint8_t CRC8 = 0; //переменная для хранения CRC
+ 529              		.loc 1 43 13 view .LVU153
+ 530 00c4 0020     		movs	r0, #0
+ 531              	.LVL47:
+  43:IO_drivers/time_protocol.c ****     uint8_t CRC8 = 0; //переменная для хранения CRC
+ 532              		.loc 1 43 13 view .LVU154
+ 533 00c6 A4E7     		b	.L20
+ 534              	.LVL48:
+ 535              	.L25:
+  88:IO_drivers/time_protocol.c **** 					{ UART_msg.machine_state = __SYNC_COMMA2;  }
+ 536              		.loc 1 88 11 is_stmt 1 view .LVU155
+  88:IO_drivers/time_protocol.c **** 					{ UART_msg.machine_state = __SYNC_COMMA2;  }
+ 537              		.loc 1 88 34 is_stmt 0 view .LVU156
+ 538 00c8 574B     		ldr	r3, .L57+4
+ 539 00ca 1B68     		ldr	r3, [r3]
+ 540 00cc 5B79     		ldrb	r3, [r3, #5]	@ zero_extendqisi2
+  88:IO_drivers/time_protocol.c **** 					{ UART_msg.machine_state = __SYNC_COMMA2;  }
+ARM GAS  /tmp/ccBCuFAW.s 			page 16
+
+
+ 541              		.loc 1 88 14 view .LVU157
+ 542 00ce 8342     		cmp	r3, r0
+ 543 00d0 04D0     		beq	.L53
+  91:IO_drivers/time_protocol.c **** 				break;
+ 544              		.loc 1 91 13 is_stmt 1 view .LVU158
+  91:IO_drivers/time_protocol.c **** 				break;
+ 545              		.loc 1 91 36 is_stmt 0 view .LVU159
+ 546 00d2 544B     		ldr	r3, .L57
+ 547 00d4 0122     		movs	r2, #1
+ 548 00d6 1A70     		strb	r2, [r3]
+  43:IO_drivers/time_protocol.c ****     uint8_t CRC8 = 0; //переменная для хранения CRC
+ 549              		.loc 1 43 13 view .LVU160
+ 550 00d8 0020     		movs	r0, #0
+ 551              	.LVL49:
+  43:IO_drivers/time_protocol.c ****     uint8_t CRC8 = 0; //переменная для хранения CRC
+ 552              		.loc 1 43 13 view .LVU161
+ 553 00da 9AE7     		b	.L20
+ 554              	.LVL50:
+ 555              	.L53:
+  89:IO_drivers/time_protocol.c ****           else
+ 556              		.loc 1 89 8 is_stmt 1 view .LVU162
+  89:IO_drivers/time_protocol.c ****           else
+ 557              		.loc 1 89 31 is_stmt 0 view .LVU163
+ 558 00dc 514B     		ldr	r3, .L57
+ 559 00de 0722     		movs	r2, #7
+ 560 00e0 1A70     		strb	r2, [r3]
+  43:IO_drivers/time_protocol.c ****     uint8_t CRC8 = 0; //переменная для хранения CRC
+ 561              		.loc 1 43 13 view .LVU164
+ 562 00e2 0020     		movs	r0, #0
+ 563              	.LVL51:
+  43:IO_drivers/time_protocol.c ****     uint8_t CRC8 = 0; //переменная для хранения CRC
+ 564              		.loc 1 43 13 view .LVU165
+ 565 00e4 95E7     		b	.L20
+ 566              	.LVL52:
+ 567              	.L24:
+  95:IO_drivers/time_protocol.c **** 					{ UART_msg.machine_state = __USEFUL_PART_MSG;  }
+ 568              		.loc 1 95 11 is_stmt 1 view .LVU166
+  95:IO_drivers/time_protocol.c **** 					{ UART_msg.machine_state = __USEFUL_PART_MSG;  }
+ 569              		.loc 1 95 34 is_stmt 0 view .LVU167
+ 570 00e6 504B     		ldr	r3, .L57+4
+ 571 00e8 1B68     		ldr	r3, [r3]
+ 572 00ea 9B79     		ldrb	r3, [r3, #6]	@ zero_extendqisi2
+  95:IO_drivers/time_protocol.c **** 					{ UART_msg.machine_state = __USEFUL_PART_MSG;  }
+ 573              		.loc 1 95 14 view .LVU168
+ 574 00ec 8342     		cmp	r3, r0
+ 575 00ee 04D0     		beq	.L54
+  98:IO_drivers/time_protocol.c **** 				break;
+ 576              		.loc 1 98 13 is_stmt 1 view .LVU169
+  98:IO_drivers/time_protocol.c **** 				break;
+ 577              		.loc 1 98 36 is_stmt 0 view .LVU170
+ 578 00f0 4C4B     		ldr	r3, .L57
+ 579 00f2 0122     		movs	r2, #1
+ 580 00f4 1A70     		strb	r2, [r3]
+  43:IO_drivers/time_protocol.c ****     uint8_t CRC8 = 0; //переменная для хранения CRC
+ 581              		.loc 1 43 13 view .LVU171
+ 582 00f6 0020     		movs	r0, #0
+ 583              	.LVL53:
+ARM GAS  /tmp/ccBCuFAW.s 			page 17
+
+
+  43:IO_drivers/time_protocol.c ****     uint8_t CRC8 = 0; //переменная для хранения CRC
+ 584              		.loc 1 43 13 view .LVU172
+ 585 00f8 8BE7     		b	.L20
+ 586              	.LVL54:
+ 587              	.L54:
+  96:IO_drivers/time_protocol.c ****           else
+ 588              		.loc 1 96 8 is_stmt 1 view .LVU173
+  96:IO_drivers/time_protocol.c ****           else
+ 589              		.loc 1 96 31 is_stmt 0 view .LVU174
+ 590 00fa 4A4B     		ldr	r3, .L57
+ 591 00fc 0822     		movs	r2, #8
+ 592 00fe 1A70     		strb	r2, [r3]
+  43:IO_drivers/time_protocol.c ****     uint8_t CRC8 = 0; //переменная для хранения CRC
+ 593              		.loc 1 43 13 view .LVU175
+ 594 0100 0020     		movs	r0, #0
+ 595              	.LVL55:
+  43:IO_drivers/time_protocol.c ****     uint8_t CRC8 = 0; //переменная для хранения CRC
+ 596              		.loc 1 43 13 view .LVU176
+ 597 0102 86E7     		b	.L20
+ 598              	.LVL56:
+ 599              	.L23:
+ 102:IO_drivers/time_protocol.c **** 				  {
+ 600              		.loc 1 102 11 is_stmt 1 view .LVU177
+ 102:IO_drivers/time_protocol.c **** 				  {
+ 601              		.loc 1 102 22 is_stmt 0 view .LVU178
+ 602 0104 494B     		ldr	r3, .L57+8
+ 603 0106 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 102:IO_drivers/time_protocol.c **** 				  {
+ 604              		.loc 1 102 14 view .LVU179
+ 605 0108 072B     		cmp	r3, #7
+ 606 010a 08D8     		bhi	.L37
+ 104:IO_drivers/time_protocol.c **** 					  count++;
+ 607              		.loc 1 104 8 is_stmt 1 view .LVU180
+ 104:IO_drivers/time_protocol.c **** 					  count++;
+ 608              		.loc 1 104 18 is_stmt 0 view .LVU181
+ 609 010c DA1D     		adds	r2, r3, #7
+ 610 010e 4649     		ldr	r1, .L57+4
+ 611 0110 0968     		ldr	r1, [r1]
+ 104:IO_drivers/time_protocol.c **** 					  count++;
+ 612              		.loc 1 104 28 view .LVU182
+ 613 0112 8854     		strb	r0, [r1, r2]
+ 105:IO_drivers/time_protocol.c **** 				  } 
+ 614              		.loc 1 105 8 is_stmt 1 view .LVU183
+ 105:IO_drivers/time_protocol.c **** 				  } 
+ 615              		.loc 1 105 13 is_stmt 0 view .LVU184
+ 616 0114 0133     		adds	r3, r3, #1
+ 617 0116 454A     		ldr	r2, .L57+8
+ 618 0118 1370     		strb	r3, [r2]
+  43:IO_drivers/time_protocol.c ****     uint8_t CRC8 = 0; //переменная для хранения CRC
+ 619              		.loc 1 43 13 view .LVU185
+ 620 011a 0020     		movs	r0, #0
+ 621              	.LVL57:
+  43:IO_drivers/time_protocol.c ****     uint8_t CRC8 = 0; //переменная для хранения CRC
+ 622              		.loc 1 43 13 view .LVU186
+ 623 011c 79E7     		b	.L20
+ 624              	.LVL58:
+ 625              	.L37:
+ARM GAS  /tmp/ccBCuFAW.s 			page 18
+
+
+ 109:IO_drivers/time_protocol.c **** 
+ 626              		.loc 1 109 8 is_stmt 1 view .LVU187
+ 109:IO_drivers/time_protocol.c **** 
+ 627              		.loc 1 109 14 is_stmt 0 view .LVU188
+ 628 011e 434B     		ldr	r3, .L57+8
+ 629 0120 0022     		movs	r2, #0
+ 630 0122 1A70     		strb	r2, [r3]
+ 111:IO_drivers/time_protocol.c **** 					  { 
+ 631              		.loc 1 111 13 is_stmt 1 view .LVU189
+ 111:IO_drivers/time_protocol.c **** 					  { 
+ 632              		.loc 1 111 37 is_stmt 0 view .LVU190
+ 633 0124 404B     		ldr	r3, .L57+4
+ 634 0126 1B68     		ldr	r3, [r3]
+ 635 0128 DB7B     		ldrb	r3, [r3, #15]	@ zero_extendqisi2
+ 111:IO_drivers/time_protocol.c **** 					  { 
+ 636              		.loc 1 111 16 view .LVU191
+ 637 012a 8342     		cmp	r3, r0
+ 638 012c 01D0     		beq	.L55
+  43:IO_drivers/time_protocol.c ****     uint8_t CRC8 = 0; //переменная для хранения CRC
+ 639              		.loc 1 43 13 view .LVU192
+ 640 012e 0020     		movs	r0, #0
+ 641              	.LVL59:
+  43:IO_drivers/time_protocol.c ****     uint8_t CRC8 = 0; //переменная для хранения CRC
+ 642              		.loc 1 43 13 view .LVU193
+ 643 0130 6FE7     		b	.L20
+ 644              	.LVL60:
+ 645              	.L55:
+ 113:IO_drivers/time_protocol.c ****               UART_msg.msg_CRC = 0;
+ 646              		.loc 1 113 15 is_stmt 1 view .LVU194
+ 113:IO_drivers/time_protocol.c ****               UART_msg.msg_CRC = 0;
+ 647              		.loc 1 113 38 is_stmt 0 view .LVU195
+ 648 0132 3C4B     		ldr	r3, .L57
+ 649 0134 0922     		movs	r2, #9
+ 650 0136 1A70     		strb	r2, [r3]
+ 114:IO_drivers/time_protocol.c ****               divider = 0x10;
+ 651              		.loc 1 114 15 is_stmt 1 view .LVU196
+ 114:IO_drivers/time_protocol.c ****               divider = 0x10;
+ 652              		.loc 1 114 32 is_stmt 0 view .LVU197
+ 653 0138 0020     		movs	r0, #0
+ 654              	.LVL61:
+ 114:IO_drivers/time_protocol.c ****               divider = 0x10;
+ 655              		.loc 1 114 32 view .LVU198
+ 656 013a 1875     		strb	r0, [r3, #20]
+ 115:IO_drivers/time_protocol.c ****             } 	
+ 657              		.loc 1 115 15 is_stmt 1 view .LVU199
+ 115:IO_drivers/time_protocol.c ****             } 	
+ 658              		.loc 1 115 23 is_stmt 0 view .LVU200
+ 659 013c 3C4B     		ldr	r3, .L57+12
+ 660 013e 1022     		movs	r2, #16
+ 661 0140 1A70     		strb	r2, [r3]
+ 662 0142 66E7     		b	.L20
+ 663              	.LVL62:
+ 664              	.L21:
+ 121:IO_drivers/time_protocol.c ****           {
+ 665              		.loc 1 121 11 is_stmt 1 view .LVU201
+ 121:IO_drivers/time_protocol.c ****           {
+ 666              		.loc 1 121 21 is_stmt 0 view .LVU202
+ARM GAS  /tmp/ccBCuFAW.s 			page 19
+
+
+ 667 0144 394B     		ldr	r3, .L57+8
+ 668 0146 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 121:IO_drivers/time_protocol.c ****           {
+ 669              		.loc 1 121 14 view .LVU203
+ 670 0148 012B     		cmp	r3, #1
+ 671 014a 29D8     		bhi	.L38
+ 123:IO_drivers/time_protocol.c ****             if ((byte >= '0') && (byte <= '9')) //проверка диапазона принят�
+ 672              		.loc 1 123 13 is_stmt 1 view .LVU204
+ 123:IO_drivers/time_protocol.c ****             if ((byte >= '0') && (byte <= '9')) //проверка диапазона принят�
+ 673              		.loc 1 123 27 is_stmt 0 view .LVU205
+ 674 014c 03F11002 		add	r2, r3, #16
+ 123:IO_drivers/time_protocol.c ****             if ((byte >= '0') && (byte <= '9')) //проверка диапазона принят�
+ 675              		.loc 1 123 23 view .LVU206
+ 676 0150 3549     		ldr	r1, .L57+4
+ 677 0152 0968     		ldr	r1, [r1]
+ 123:IO_drivers/time_protocol.c ****             if ((byte >= '0') && (byte <= '9')) //проверка диапазона принят�
+ 678              		.loc 1 123 36 view .LVU207
+ 679 0154 8854     		strb	r0, [r1, r2]
+ 124:IO_drivers/time_protocol.c ****             { UART_msg.msg_CRC |= (byte-0x30)*divider; }
+ 680              		.loc 1 124 13 is_stmt 1 view .LVU208
+ 124:IO_drivers/time_protocol.c ****             { UART_msg.msg_CRC |= (byte-0x30)*divider; }
+ 681              		.loc 1 124 31 is_stmt 0 view .LVU209
+ 682 0156 A0F13002 		sub	r2, r0, #48
+ 683 015a D2B2     		uxtb	r2, r2
+ 124:IO_drivers/time_protocol.c ****             { UART_msg.msg_CRC |= (byte-0x30)*divider; }
+ 684              		.loc 1 124 16 view .LVU210
+ 685 015c 092A     		cmp	r2, #9
+ 686 015e 10D8     		bhi	.L39
+ 125:IO_drivers/time_protocol.c ****             else
+ 687              		.loc 1 125 15 is_stmt 1 view .LVU211
+ 125:IO_drivers/time_protocol.c ****             else
+ 688              		.loc 1 125 32 is_stmt 0 view .LVU212
+ 689 0160 3049     		ldr	r1, .L57
+ 690 0162 3348     		ldr	r0, .L57+12
+ 691              	.LVL63:
+ 125:IO_drivers/time_protocol.c ****             else
+ 692              		.loc 1 125 32 view .LVU213
+ 693 0164 0078     		ldrb	r0, [r0]	@ zero_extendqisi2
+ 694 0166 00FB02F2 		mul	r2, r0, r2
+ 695 016a 087D     		ldrb	r0, [r1, #20]	@ zero_extendqisi2
+ 696 016c 0243     		orrs	r2, r2, r0
+ 697 016e 0A75     		strb	r2, [r1, #20]
+ 698              	.L40:
+ 131:IO_drivers/time_protocol.c ****             divider = (divider >> 4); //деление на 0x10
+ 699              		.loc 1 131 13 is_stmt 1 view .LVU214
+ 131:IO_drivers/time_protocol.c ****             divider = (divider >> 4); //деление на 0x10
+ 700              		.loc 1 131 18 is_stmt 0 view .LVU215
+ 701 0170 0133     		adds	r3, r3, #1
+ 702 0172 2E4A     		ldr	r2, .L57+8
+ 703 0174 1370     		strb	r3, [r2]
+ 132:IO_drivers/time_protocol.c ****           }
+ 704              		.loc 1 132 13 is_stmt 1 view .LVU216
+ 132:IO_drivers/time_protocol.c ****           }
+ 705              		.loc 1 132 21 is_stmt 0 view .LVU217
+ 706 0176 2E4A     		ldr	r2, .L57+12
+ 707 0178 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 708 017a 1B09     		lsrs	r3, r3, #4
+ARM GAS  /tmp/ccBCuFAW.s 			page 20
+
+
+ 709 017c 1370     		strb	r3, [r2]
+  43:IO_drivers/time_protocol.c ****     uint8_t CRC8 = 0; //переменная для хранения CRC
+ 710              		.loc 1 43 13 view .LVU218
+ 711 017e 0020     		movs	r0, #0
+ 712 0180 47E7     		b	.L20
+ 713              	.LVL64:
+ 714              	.L39:
+ 128:IO_drivers/time_protocol.c ****               { UART_msg.msg_CRC |= (byte-0x37)*divider; }
+ 715              		.loc 1 128 15 is_stmt 1 view .LVU219
+ 128:IO_drivers/time_protocol.c ****               { UART_msg.msg_CRC |= (byte-0x37)*divider; }
+ 716              		.loc 1 128 33 is_stmt 0 view .LVU220
+ 717 0182 A0F14102 		sub	r2, r0, #65
+ 718 0186 D2B2     		uxtb	r2, r2
+ 128:IO_drivers/time_protocol.c ****               { UART_msg.msg_CRC |= (byte-0x37)*divider; }
+ 719              		.loc 1 128 18 view .LVU221
+ 720 0188 052A     		cmp	r2, #5
+ 721 018a F1D8     		bhi	.L40
+ 129:IO_drivers/time_protocol.c ****             }
+ 722              		.loc 1 129 17 is_stmt 1 view .LVU222
+ 129:IO_drivers/time_protocol.c ****             }
+ 723              		.loc 1 129 34 is_stmt 0 view .LVU223
+ 724 018c 2549     		ldr	r1, .L57
+ 725 018e 3738     		subs	r0, r0, #55
+ 726              	.LVL65:
+ 129:IO_drivers/time_protocol.c ****             }
+ 727              		.loc 1 129 34 view .LVU224
+ 728 0190 274A     		ldr	r2, .L57+12
+ 729 0192 1278     		ldrb	r2, [r2]	@ zero_extendqisi2
+ 730 0194 02FB00F0 		mul	r0, r2, r0
+ 731 0198 0A7D     		ldrb	r2, [r1, #20]	@ zero_extendqisi2
+ 732 019a 0243     		orrs	r2, r2, r0
+ 733 019c 0A75     		strb	r2, [r1, #20]
+ 734 019e E7E7     		b	.L40
+ 735              	.LVL66:
+ 736              	.L38:
+ 136:IO_drivers/time_protocol.c ****             {
+ 737              		.loc 1 136 13 is_stmt 1 view .LVU225
+ 136:IO_drivers/time_protocol.c ****             {
+ 738              		.loc 1 136 25 is_stmt 0 view .LVU226
+ 739 01a0 214B     		ldr	r3, .L57+4
+ 740 01a2 1D68     		ldr	r5, [r3]
+ 741 01a4 681C     		adds	r0, r5, #1
+ 742              	.LVL67:
+ 136:IO_drivers/time_protocol.c ****             {
+ 743              		.loc 1 136 25 view .LVU227
+ 744 01a6 FFF7FEFF 		bl	calc_CRC8
+ 745              	.LVL68:
+ 136:IO_drivers/time_protocol.c ****             {
+ 746              		.loc 1 136 65 view .LVU228
+ 747 01aa 1E4B     		ldr	r3, .L57
+ 748 01ac 1B7D     		ldrb	r3, [r3, #20]	@ zero_extendqisi2
+ 136:IO_drivers/time_protocol.c ****             {
+ 749              		.loc 1 136 16 view .LVU229
+ 750 01ae 8342     		cmp	r3, r0
+ 751 01b0 2FD0     		beq	.L56
+ 752              	.LVL69:
+ 753              	.L41:
+ARM GAS  /tmp/ccBCuFAW.s 			page 21
+
+
+ 140:IO_drivers/time_protocol.c ****             UART_msg.machine_state = __START_BYTE;
+ 754              		.loc 1 140 13 is_stmt 1 view .LVU230
+ 140:IO_drivers/time_protocol.c ****             UART_msg.machine_state = __START_BYTE;
+ 755              		.loc 1 140 19 is_stmt 0 view .LVU231
+ 756 01b2 1E4B     		ldr	r3, .L57+8
+ 757 01b4 0022     		movs	r2, #0
+ 758 01b6 1A70     		strb	r2, [r3]
+ 141:IO_drivers/time_protocol.c ****             buffer_status =  GET_MSG;
+ 759              		.loc 1 141 13 is_stmt 1 view .LVU232
+ 141:IO_drivers/time_protocol.c ****             buffer_status =  GET_MSG;
+ 760              		.loc 1 141 36 is_stmt 0 view .LVU233
+ 761 01b8 1A4A     		ldr	r2, .L57
+ 762 01ba 0124     		movs	r4, #1
+ 763 01bc 1470     		strb	r4, [r2]
+ 142:IO_drivers/time_protocol.c ****             
+ 764              		.loc 1 142 13 is_stmt 1 view .LVU234
+ 765              	.LVL70:
+ 145:IO_drivers/time_protocol.c ****               ptr_PDTmsg[9], ptr_PDTmsg[10],ptr_PDTmsg[11], ptr_PDTmsg[12],ptr_PDTmsg[13], 
+ 766              		.loc 1 145 13 view .LVU235
+ 145:IO_drivers/time_protocol.c ****               ptr_PDTmsg[9], ptr_PDTmsg[10],ptr_PDTmsg[11], ptr_PDTmsg[12],ptr_PDTmsg[13], 
+ 767              		.loc 1 145 107 is_stmt 0 view .LVU236
+ 768 01be EB79     		ldrb	r3, [r5, #7]	@ zero_extendqisi2
+ 145:IO_drivers/time_protocol.c ****               ptr_PDTmsg[9], ptr_PDTmsg[10],ptr_PDTmsg[11], ptr_PDTmsg[12],ptr_PDTmsg[13], 
+ 769              		.loc 1 145 122 view .LVU237
+ 770 01c0 297A     		ldrb	r1, [r5, #8]	@ zero_extendqisi2
+ 146:IO_drivers/time_protocol.c ****               ptr_PDTmsg[14], ptr_PDTmsg[16], ptr_PDTmsg[17], UART_msg.ntp_UNIXtime);	          
+ 771              		.loc 1 146 25 view .LVU238
+ 772 01c2 687A     		ldrb	r0, [r5, #9]	@ zero_extendqisi2
+ 146:IO_drivers/time_protocol.c ****               ptr_PDTmsg[14], ptr_PDTmsg[16], ptr_PDTmsg[17], UART_msg.ntp_UNIXtime);	          
+ 773              		.loc 1 146 40 view .LVU239
+ 774 01c4 AE7A     		ldrb	r6, [r5, #10]	@ zero_extendqisi2
+ 146:IO_drivers/time_protocol.c ****               ptr_PDTmsg[14], ptr_PDTmsg[16], ptr_PDTmsg[17], UART_msg.ntp_UNIXtime);	          
+ 775              		.loc 1 146 55 view .LVU240
+ 776 01c6 EF7A     		ldrb	r7, [r5, #11]	@ zero_extendqisi2
+ 146:IO_drivers/time_protocol.c ****               ptr_PDTmsg[14], ptr_PDTmsg[16], ptr_PDTmsg[17], UART_msg.ntp_UNIXtime);	          
+ 777              		.loc 1 146 71 view .LVU241
+ 778 01c8 95F80CC0 		ldrb	ip, [r5, #12]	@ zero_extendqisi2
+ 146:IO_drivers/time_protocol.c ****               ptr_PDTmsg[14], ptr_PDTmsg[16], ptr_PDTmsg[17], UART_msg.ntp_UNIXtime);	          
+ 779              		.loc 1 146 86 view .LVU242
+ 780 01cc 95F80DE0 		ldrb	lr, [r5, #13]	@ zero_extendqisi2
+ 147:IO_drivers/time_protocol.c ****               DBG_PutString(DBG_buffer);
+ 781              		.loc 1 147 25 view .LVU243
+ 782 01d0 95F80E80 		ldrb	r8, [r5, #14]	@ zero_extendqisi2
+ 147:IO_drivers/time_protocol.c ****               DBG_PutString(DBG_buffer);
+ 783              		.loc 1 147 41 view .LVU244
+ 784 01d4 95F81090 		ldrb	r9, [r5, #16]	@ zero_extendqisi2
+ 147:IO_drivers/time_protocol.c ****               DBG_PutString(DBG_buffer);
+ 785              		.loc 1 147 57 view .LVU245
+ 786 01d8 95F811A0 		ldrb	r10, [r5, #17]	@ zero_extendqisi2
+ 145:IO_drivers/time_protocol.c ****               ptr_PDTmsg[9], ptr_PDTmsg[10],ptr_PDTmsg[11], ptr_PDTmsg[12],ptr_PDTmsg[13], 
+ 787              		.loc 1 145 13 view .LVU246
+ 788 01dc 154D     		ldr	r5, .L57+16
+ 789 01de 9269     		ldr	r2, [r2, #24]
+ 790 01e0 0992     		str	r2, [sp, #36]
+ 791 01e2 CDF820A0 		str	r10, [sp, #32]
+ 792 01e6 CDF81C90 		str	r9, [sp, #28]
+ 793 01ea CDF81880 		str	r8, [sp, #24]
+ARM GAS  /tmp/ccBCuFAW.s 			page 22
+
+
+ 794 01ee CDF814E0 		str	lr, [sp, #20]
+ 795 01f2 CDF810C0 		str	ip, [sp, #16]
+ 796 01f6 0397     		str	r7, [sp, #12]
+ 797 01f8 0296     		str	r6, [sp, #8]
+ 798 01fa 0190     		str	r0, [sp, #4]
+ 799 01fc 0091     		str	r1, [sp]
+ 800 01fe 0E4A     		ldr	r2, .L57+20
+ 801 0200 3221     		movs	r1, #50
+ 802 0202 2846     		mov	r0, r5
+ 803 0204 FFF7FEFF 		bl	snprintf
+ 804              	.LVL71:
+ 148:IO_drivers/time_protocol.c **** 	          #endif
+ 805              		.loc 1 148 15 is_stmt 1 view .LVU247
+ 806 0208 2846     		mov	r0, r5
+ 807 020a FFF7FEFF 		bl	DBG_PutString
+ 808              	.LVL72:
+ 142:IO_drivers/time_protocol.c ****             
+ 809              		.loc 1 142 27 is_stmt 0 view .LVU248
+ 810 020e 2046     		mov	r0, r4
+ 811 0210 FFE6     		b	.L20
+ 812              	.LVL73:
+ 813              	.L56:
+ 138:IO_drivers/time_protocol.c ****             }
+ 814              		.loc 1 138 15 is_stmt 1 view .LVU249
+ 138:IO_drivers/time_protocol.c ****             }
+ 815              		.loc 1 138 40 is_stmt 0 view .LVU250
+ 816 0212 E81D     		adds	r0, r5, #7
+ 817              	.LVL74:
+ 138:IO_drivers/time_protocol.c ****             }
+ 818              		.loc 1 138 40 view .LVU251
+ 819 0214 FFF7FEFF 		bl	calcUNIXtime_from_PDTmsg
+ 820              	.LVL75:
+ 138:IO_drivers/time_protocol.c ****             }
+ 821              		.loc 1 138 37 view .LVU252
+ 822 0218 024B     		ldr	r3, .L57
+ 823 021a 9861     		str	r0, [r3, #24]
+ 824 021c C9E7     		b	.L41
+ 825              	.LVL76:
+ 826              	.L43:
+  52:IO_drivers/time_protocol.c **** 		  { 
+ 827              		.loc 1 52 7 view .LVU253
+ 828 021e 0020     		movs	r0, #0
+ 829              	.LVL77:
+  52:IO_drivers/time_protocol.c **** 		  { 
+ 830              		.loc 1 52 7 view .LVU254
+ 831 0220 F7E6     		b	.L20
+ 832              	.L58:
+ 833 0222 00BF     		.align	2
+ 834              	.L57:
+ 835 0224 00000000 		.word	.LANCHOR1
+ 836 0228 00000000 		.word	.LANCHOR2
+ 837 022c 00000000 		.word	.LANCHOR3
+ 838 0230 00000000 		.word	.LANCHOR4
+ 839 0234 00000000 		.word	DBG_buffer
+ 840 0238 00000000 		.word	.LC0
+ 841              		.cfi_endproc
+ 842              	.LFE819:
+ARM GAS  /tmp/ccBCuFAW.s 			page 23
+
+
+ 844              		.section	.text.return_UNIXtimeNTP,"ax",%progbits
+ 845              		.align	1
+ 846              		.global	return_UNIXtimeNTP
+ 847              		.syntax unified
+ 848              		.thumb
+ 849              		.thumb_func
+ 851              	return_UNIXtimeNTP:
+ 852              	.LFB822:
+ 193:IO_drivers/time_protocol.c **** 
+ 194:IO_drivers/time_protocol.c **** //--------------------------возвращает время формата UNIX от ntp серве
+ 195:IO_drivers/time_protocol.c **** uint32_t return_UNIXtimeNTP (void)
+ 196:IO_drivers/time_protocol.c **** {
+ 853              		.loc 1 196 1 is_stmt 1 view -0
+ 854              		.cfi_startproc
+ 855              		@ args = 0, pretend = 0, frame = 0
+ 856              		@ frame_needed = 0, uses_anonymous_args = 0
+ 857              		@ link register save eliminated.
+ 197:IO_drivers/time_protocol.c ****   return UART_msg.ntp_UNIXtime;
+ 858              		.loc 1 197 3 view .LVU256
+ 198:IO_drivers/time_protocol.c **** }
+ 859              		.loc 1 198 1 is_stmt 0 view .LVU257
+ 860 0000 014B     		ldr	r3, .L60
+ 861 0002 9869     		ldr	r0, [r3, #24]
+ 862 0004 7047     		bx	lr
+ 863              	.L61:
+ 864 0006 00BF     		.align	2
+ 865              	.L60:
+ 866 0008 00000000 		.word	.LANCHOR1
+ 867              		.cfi_endproc
+ 868              	.LFE822:
+ 870              		.global	RING_buffer
+ 871              		.global	TimeUART
+ 872              		.global	ptr_PDTmsg
+ 873              		.global	UART_msg
+ 874              		.section	.bss.RING_buffer,"aw",%nobits
+ 875              		.align	2
+ 876              		.set	.LANCHOR0,. + 0
+ 879              	RING_buffer:
+ 880 0000 00000000 		.space	12
+ 880      00000000 
+ 880      00000000 
+ 881              		.section	.bss.TimeUART,"aw",%nobits
+ 882              		.align	2
+ 885              	TimeUART:
+ 886 0000 00000000 		.space	4
+ 887              		.section	.bss.UART_msg,"aw",%nobits
+ 888              		.align	2
+ 889              		.set	.LANCHOR1,. + 0
+ 892              	UART_msg:
+ 893 0000 00000000 		.space	32
+ 893      00000000 
+ 893      00000000 
+ 893      00000000 
+ 893      00000000 
+ 894              		.section	.bss.count.1,"aw",%nobits
+ 895              		.set	.LANCHOR3,. + 0
+ 898              	count.1:
+ARM GAS  /tmp/ccBCuFAW.s 			page 24
+
+
+ 899 0000 00       		.space	1
+ 900              		.section	.data.divider.0,"aw"
+ 901              		.set	.LANCHOR4,. + 0
+ 904              	divider.0:
+ 905 0000 10       		.byte	16
+ 906              		.section	.data.ptr_PDTmsg,"aw"
+ 907              		.align	2
+ 908              		.set	.LANCHOR2,. + 0
+ 911              	ptr_PDTmsg:
+ 912 0000 02000000 		.word	UART_msg+2
+ 913              		.text
+ 914              	.Letext0:
+ 915              		.file 2 "/home/arashamf/soft/ARM_toolchains/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/m
+ 916              		.file 3 "/home/arashamf/soft/ARM_toolchains/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/s
+ 917              		.file 4 "Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h"
+ 918              		.file 5 "Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_tim.h"
+ 919              		.file 6 "IO_drivers/ring_buffer.h"
+ 920              		.file 7 "Core/Inc/typedef.h"
+ 921              		.file 8 "Core/Inc/usart.h"
+ 922              		.file 9 "/home/arashamf/soft/ARM_toolchains/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/s
+ARM GAS  /tmp/ccBCuFAW.s 			page 25
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 time_protocol.c
+     /tmp/ccBCuFAW.s:18     .text.calc_CRC8:0000000000000000 $t
+     /tmp/ccBCuFAW.s:23     .text.calc_CRC8:0000000000000000 calc_CRC8
+     /tmp/ccBCuFAW.s:61     .text.calcUNIXtime_from_PDTmsg:0000000000000000 $t
+     /tmp/ccBCuFAW.s:66     .text.calcUNIXtime_from_PDTmsg:0000000000000000 calcUNIXtime_from_PDTmsg
+     /tmp/ccBCuFAW.s:169    .text.PutChar_toRingBuf:0000000000000000 $t
+     /tmp/ccBCuFAW.s:175    .text.PutChar_toRingBuf:0000000000000000 PutChar_toRingBuf
+     /tmp/ccBCuFAW.s:200    .text.PutChar_toRingBuf:000000000000000c $d
+     /tmp/ccBCuFAW.s:205    .text.UARTbuf_init:0000000000000000 $t
+     /tmp/ccBCuFAW.s:211    .text.UARTbuf_init:0000000000000000 UARTbuf_init
+     /tmp/ccBCuFAW.s:288    .text.UARTbuf_init:0000000000000048 $d
+     /tmp/ccBCuFAW.s:295    .rodata.check_ring_buffer.str1.4:0000000000000000 $d
+     /tmp/ccBCuFAW.s:299    .text.check_ring_buffer:0000000000000000 $t
+     /tmp/ccBCuFAW.s:305    .text.check_ring_buffer:0000000000000000 check_ring_buffer
+     /tmp/ccBCuFAW.s:370    .text.check_ring_buffer:000000000000002e $d
+     /tmp/ccBCuFAW.s:835    .text.check_ring_buffer:0000000000000224 $d
+     /tmp/ccBCuFAW.s:845    .text.return_UNIXtimeNTP:0000000000000000 $t
+     /tmp/ccBCuFAW.s:851    .text.return_UNIXtimeNTP:0000000000000000 return_UNIXtimeNTP
+     /tmp/ccBCuFAW.s:866    .text.return_UNIXtimeNTP:0000000000000008 $d
+     /tmp/ccBCuFAW.s:879    .bss.RING_buffer:0000000000000000 RING_buffer
+     /tmp/ccBCuFAW.s:885    .bss.TimeUART:0000000000000000 TimeUART
+     /tmp/ccBCuFAW.s:911    .data.ptr_PDTmsg:0000000000000000 ptr_PDTmsg
+     /tmp/ccBCuFAW.s:892    .bss.UART_msg:0000000000000000 UART_msg
+     /tmp/ccBCuFAW.s:875    .bss.RING_buffer:0000000000000000 $d
+     /tmp/ccBCuFAW.s:882    .bss.TimeUART:0000000000000000 $d
+     /tmp/ccBCuFAW.s:888    .bss.UART_msg:0000000000000000 $d
+     /tmp/ccBCuFAW.s:898    .bss.count.1:0000000000000000 count.1
+     /tmp/ccBCuFAW.s:899    .bss.count.1:0000000000000000 $d
+     /tmp/ccBCuFAW.s:904    .data.divider.0:0000000000000000 divider.0
+     /tmp/ccBCuFAW.s:907    .data.ptr_PDTmsg:0000000000000000 $d
+     /tmp/ccBCuFAW.s:379    .text.check_ring_buffer:0000000000000037 $d
+     /tmp/ccBCuFAW.s:379    .text.check_ring_buffer:0000000000000038 $t
+
+UNDEFINED SYMBOLS
+RING_Put
+returnPtrUARTbuf
+RING_Init
+RING_GetCount
+RING_Pop
+snprintf
+DBG_PutString
+DBG_buffer

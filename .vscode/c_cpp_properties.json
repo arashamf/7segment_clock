@@ -9,7 +9,11 @@
                 "${workspaceRoot}/Core/Inc/**",
                 "${workspaceRoot}/Drivers/STM32L1xx_HAL_Driver/Inc/**",
                 "${workspaceRoot}/Drivers/CMSIS/Include/**",
-                "${workspaceRoot}/Drivers/CMSIS/Device/ST/STM32L1xx/Include/**"
+                "${workspaceRoot}/Drivers/CMSIS/Device/ST/STM32L1xx/Include/**",
+                "${workspaceRoot}/Middlewares/Third_Party/FreeRTOS/Source/include/**",
+                "${workspaceRoot}/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/**",
+                "${workspaceRoot}/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/**",
+                "${workspaceRoot}/timer64/**"
             ],
             "defines": 
             [

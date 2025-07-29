@@ -39,6 +39,13 @@ extern "C" {
 void MX_I2C1_Init(void);
 
 /* USER CODE BEGIN Prototypes */
+typedef enum 
+{
+    I2C_OK          = 0,
+    I2C_ERROR          ,
+    I2C_TIMEOUT        ,
+} I2C_status_t;
+
 uint8_t I2C_WriteBuffer (uint16_t ,uint8_t *, uint16_t );
 uint8_t I2C_WriteByte (uint8_t , uint16_t );
 uint8_t I2C_ReadBuffer (uint16_t , uint8_t *, uint16_t );

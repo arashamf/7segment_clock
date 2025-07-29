@@ -16,7 +16,6 @@
             "configFiles": 
             [
                 "interface/cmsis-dap.cfg",
-                //"interface/stlink.cfg",
                 "target/stm32l1.cfg"
             ],
             "runToEntryPoint": "main",

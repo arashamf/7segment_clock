@@ -18,6 +18,7 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "cmsis_os.h"
 #include "i2c.h"
 #include "tim.h"
 #include "usart.h"
@@ -27,7 +28,7 @@
 /* USER CODE BEGIN Includes */
 #include "LED_display.h"
 #include "rtc.h"
-#include "typedef.h"
+#include "time_protocol.h"
 #include <stdio.h>
 /* USER CODE END Includes */
 
@@ -49,12 +50,12 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-uint32_t TimeUART=0;
-rtc_data data = {0};
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
+void MX_FREERTOS_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -78,15 +79,7 @@ int main(void)
   /* MCU Configuration--------------------------------------------------------*/
 
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
-  LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_COMP);
-  LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_SYSCFG);
-  LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_PWR);
-
-  /* System interrupt init*/
-  NVIC_SetPriorityGrouping(NVIC_PRIORITYGROUP_4);
-
-  /* SysTick_IRQn interrupt configuration */
-  NVIC_SetPriority(SysTick_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(),15, 0));
+  HAL_Init();
 
   /* USER CODE BEGIN Init */
 
@@ -105,55 +98,22 @@ int main(void)
   MX_TIM7_Init();
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
-  timers_ini ();
-
-  GetTime (RTC_ADDRESS, FIRST_REGISTR_TIME, TIME_NUMBER, data.DS3231_getdata);  //получение данных времени  ч/м/с
-	convert_time (data.time, data.DS3231_getdata, TIME_NUMBER);	
-  UART_msg_ini ();
+  UARTbuf_init ();
   /* USER CODE END 2 */
+
+  /* Call init function for freertos objects (in cmsis_os2.c) */
+  MX_FREERTOS_Init();
+
+  /* Start scheduler */
+  osKernelStart();
+
+  /* We should never get here as control is now taken by the scheduler */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    for (uint8_t j = 0; j < 6; j++)
-    {
-      select_number (j);
-      if (data.time[j] >= 0x30)
-      {  data.digital = (data.time[j] - 0x30); }
-      else
-      {  data.digital = 0;  }
-      select_digit (data.digital);
 
-      if (j <4)
-      {  delay_us(1000); }
-      else
-      {  delay_us(750); }
-
-      reset_all_digit ();
-      if (check_ring_buffer () == GET_MSG)
-      {
-        GetTime (RTC_ADDRESS, FIRST_REGISTR_TIME, TIME_NUMBER, data.DS3231_getdata); //получение данных времени сек/мин/чч
-        GetTime (RTC_ADDRESS, FIRST_REGISTR_DATE, TIME_NUMBER, data.DS3231_getdata+3); //получение данных времени день/мес/год      
-        CalcUNIXtime_from_DS3231 (&data.DS3231_UNIXtime, data.DS3231_getdata);
-        TimeUART = return_UNIXtimeNTP ();
-        if (data.DS3231_UNIXtime != TimeUART)
-        {
-          #ifdef __USE_DBG
-	          snprintf (DBG_buffer,  BUFFER_SIZE, "DS3231=%lu, NTP=%lu\r\n", data.DS3231_UNIXtime, TimeUART);		          
-            DBG_PutString(DBG_buffer);
-	        #endif
-          CalcTimeStamp_from_UART (TimeUART);
-          copy_TMdata( data.DS3231_putdata);
-          SetTime (RTC_ADDRESS, FIRST_REGISTR_TIME, TIME_NUMBER, data.DS3231_putdata);
-          SetTime (RTC_ADDRESS, FIRST_REGISTR_DATE, TIME_NUMBER, data.DS3231_putdata+3);
-        }
-      }
-      else
-      {
-        delay_us(500);
-      }
-    }
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -203,19 +163,39 @@ void SystemClock_Config(void)
   {
 
   }
-
-  LL_Init1msTick(32000000);
-
   LL_SetSystemCoreClock(32000000);
+
+   /* Update the time base */
+  if (HAL_InitTick (TICK_INT_PRIORITY) != HAL_OK)
+  {
+    Error_Handler();
+  }
 }
 
 /* USER CODE BEGIN 4 */
-void SysTimerCallback (void)
-{
-	GetTime (RTC_ADDRESS, FIRST_REGISTR_TIME, TIME_NUMBER, data.DS3231_getdata); //получение данных времени  ч/м/с
-  {	convert_time (data.time, data.DS3231_getdata, TIME_NUMBER);	}
-}
+
 /* USER CODE END 4 */
+
+/**
+  * @brief  Period elapsed callback in non blocking mode
+  * @note   This function is called  when TIM6 interrupt took place, inside
+  * HAL_TIM_IRQHandler(). It makes a direct call to HAL_IncTick() to increment
+  * a global variable "uwTick" used as application time base.
+  * @param  htim : TIM handle
+  * @retval None
+  */
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+  /* USER CODE BEGIN Callback 0 */
+
+  /* USER CODE END Callback 0 */
+  if (htim->Instance == TIM6) {
+    HAL_IncTick();
+  }
+  /* USER CODE BEGIN Callback 1 */
+
+  /* USER CODE END Callback 1 */
+}
 
 /**
   * @brief  This function is executed in case of error occurrence.

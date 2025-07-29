@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccjSP2i1.s 			page 1
+ARM GAS  /tmp/ccclupDC.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -26,21 +26,46 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
   24              	reset_number:
   25              	.LVL0:
   26              	.LFB814:
-  27              		.file 1 "Core/Src/LED_display.c"
-   1:Core/Src/LED_display.c **** //Includes ------------------------------------------------------------------//
-   2:Core/Src/LED_display.c **** #include "LED_display.h"
-   3:Core/Src/LED_display.c **** #include "gpio.h"
-   4:Core/Src/LED_display.c **** 
-   5:Core/Src/LED_display.c **** //---------------------------------------------------------------------------//
-   6:Core/Src/LED_display.c **** void reset_number (uint8_t number)
-   7:Core/Src/LED_display.c **** {
-  28              		.loc 1 7 1 view -0
+  27              		.file 1 "IO_drivers/LED_display.c"
+   1:IO_drivers/LED_display.c **** //Includes ------------------------------------------------------------------//
+   2:IO_drivers/LED_display.c **** #include "LED_display.h"
+   3:IO_drivers/LED_display.c **** #include "gpio.h"
+   4:IO_drivers/LED_display.c **** #include "tim.h"
+   5:IO_drivers/LED_display.c **** #include "typedef.h"
+   6:IO_drivers/LED_display.c **** 
+   7:IO_drivers/LED_display.c **** //Variables------------------------------------------------------------------//
+   8:IO_drivers/LED_display.c **** 
+   9:IO_drivers/LED_display.c **** 
+  10:IO_drivers/LED_display.c **** //Prototypes-----------------------------------------------------------------//
+  11:IO_drivers/LED_display.c **** void reset_number (uint8_t );
+  12:IO_drivers/LED_display.c **** void reset_all_number (void);
+  13:IO_drivers/LED_display.c **** void select_number (uint8_t );
+  14:IO_drivers/LED_display.c **** void reset_all_digit (void);
+  15:IO_drivers/LED_display.c **** void digit_0 (void);
+  16:IO_drivers/LED_display.c **** void digit_1 (void);
+  17:IO_drivers/LED_display.c **** void digit_2 (void);
+  18:IO_drivers/LED_display.c **** void digit_3 (void);
+  19:IO_drivers/LED_display.c **** void digit_4 (void);
+  20:IO_drivers/LED_display.c **** void digit_5 (void);
+  21:IO_drivers/LED_display.c **** void digit_6 (void);
+  22:IO_drivers/LED_display.c **** void digit_7 (void);
+  23:IO_drivers/LED_display.c **** void digit_8 (void);
+  24:IO_drivers/LED_display.c **** void digit_9 (void);
+  25:IO_drivers/LED_display.c **** void select_digit (uint8_t );
+  26:IO_drivers/LED_display.c **** 
+  27:IO_drivers/LED_display.c **** //---------------------------------------------------------------------------//
+  28:IO_drivers/LED_display.c **** void reset_number (uint8_t number)
+  29:IO_drivers/LED_display.c **** {
+  28              		.loc 1 29 1 view -0
   29              		.cfi_startproc
+ARM GAS  /tmp/ccclupDC.s 			page 2
+
+
   30              		@ args = 0, pretend = 0, frame = 0
   31              		@ frame_needed = 0, uses_anonymous_args = 0
   32              		@ link register save eliminated.
-   8:Core/Src/LED_display.c ****  switch (number)
-  33              		.loc 1 8 2 view .LVU1
+  30:IO_drivers/LED_display.c ****  switch (number)
+  33              		.loc 1 30 2 view .LVU1
   34 0000 0528     		cmp	r0, #5
   35 0002 21D8     		bhi	.L1
   36 0004 DFE800F0 		tbb	[pc, r0]
@@ -53,14 +78,11 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
   43 000d 1C       		.byte	(.L3-.L4)/2
   44              		.p2align 1
   45              	.L9:
-   9:Core/Src/LED_display.c ****     {
-  10:Core/Src/LED_display.c ****         case 0:
-  11:Core/Src/LED_display.c ****             NUMBER_0 (OFF);
-  46              		.loc 1 11 13 view .LVU2
+  31:IO_drivers/LED_display.c ****     {
+  32:IO_drivers/LED_display.c ****         case 0:
+  33:IO_drivers/LED_display.c ****             NUMBER_0 (OFF);
+  46              		.loc 1 33 13 view .LVU2
   47              	.LVL1:
-ARM GAS  /tmp/ccjSP2i1.s 			page 2
-
-
   48              	.LBB152:
   49              	.LBI152:
   50              		.file 2 "Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h"
@@ -96,6 +118,9 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
   30:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** /** @addtogroup STM32L1xx_LL_Driver
   31:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   * @{
   32:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   */
+ARM GAS  /tmp/ccclupDC.s 			page 3
+
+
   33:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** 
   34:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** #if defined (GPIOA) || defined (GPIOB) || defined (GPIOC) || defined (GPIOD) || defined (GPIOE) || 
   35:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** 
@@ -118,9 +143,6 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
   52:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** #endif /*USE_FULL_LL_DRIVER*/
   53:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** 
   54:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** /* Exported types ------------------------------------------------------------*/
-ARM GAS  /tmp/ccjSP2i1.s 			page 3
-
-
   55:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** #if defined(USE_FULL_LL_DRIVER)
   56:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** /** @defgroup GPIO_LL_ES_INIT GPIO Exported Init structures
   57:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   * @{
@@ -156,6 +178,9 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
   87:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** 
   88:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   uint32_t Alternate;    /*!< Specifies the Peripheral to be connected to the selected pins.
   89:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****                               This parameter can be a value of @ref GPIO_LL_EC_AF.
+ARM GAS  /tmp/ccclupDC.s 			page 4
+
+
   90:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** 
   91:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****                               GPIO HW configuration can be modified afterwards using unitary functi
   92:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** } LL_GPIO_InitTypeDef;
@@ -178,9 +203,6 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  109:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** #define LL_GPIO_PIN_2                      GPIO_BSRR_BS_2 /*!< Select pin 2 */
  110:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** #define LL_GPIO_PIN_3                      GPIO_BSRR_BS_3 /*!< Select pin 3 */
  111:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** #define LL_GPIO_PIN_4                      GPIO_BSRR_BS_4 /*!< Select pin 4 */
-ARM GAS  /tmp/ccjSP2i1.s 			page 4
-
-
  112:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** #define LL_GPIO_PIN_5                      GPIO_BSRR_BS_5 /*!< Select pin 5 */
  113:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** #define LL_GPIO_PIN_6                      GPIO_BSRR_BS_6 /*!< Select pin 6 */
  114:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** #define LL_GPIO_PIN_7                      GPIO_BSRR_BS_7 /*!< Select pin 7 */
@@ -216,6 +238,9 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  144:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** /** @defgroup GPIO_LL_EC_OUTPUT Output Type
  145:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   * @{
  146:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   */
+ARM GAS  /tmp/ccclupDC.s 			page 5
+
+
  147:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** #define LL_GPIO_OUTPUT_PUSHPULL            (0x00000000U) /*!< Select push-pull as output type */
  148:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** #define LL_GPIO_OUTPUT_OPENDRAIN           GPIO_OTYPER_OT_0 /*!< Select open-drain as output type *
  149:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** /**
@@ -238,9 +263,6 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  166:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   */
  167:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** #define LL_GPIO_PULL_NO                    (0x00000000U) /*!< Select I/O no pull */
  168:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** #define LL_GPIO_PULL_UP                    GPIO_PUPDR_PUPDR0_0 /*!< Select I/O pull up */
-ARM GAS  /tmp/ccjSP2i1.s 			page 5
-
-
  169:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** #define LL_GPIO_PULL_DOWN                  GPIO_PUPDR_PUPDR0_1 /*!< Select I/O pull down */
  170:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** /**
  171:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   * @}
@@ -276,6 +298,9 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  201:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** /* Exported macro ------------------------------------------------------------*/
  202:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** /** @defgroup GPIO_LL_Exported_Macros GPIO Exported Macros
  203:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   * @{
+ARM GAS  /tmp/ccclupDC.s 			page 6
+
+
  204:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   */
  205:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** 
  206:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** /** @defgroup GPIO_LL_EM_WRITE_READ Common Write and read registers Macros
@@ -298,9 +323,6 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  223:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   * @retval Register value
  224:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   */
  225:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** #define LL_GPIO_ReadReg(__INSTANCE__, __REG__) READ_REG(__INSTANCE__->__REG__)
-ARM GAS  /tmp/ccjSP2i1.s 			page 6
-
-
  226:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** /**
  227:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   * @}
  228:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   */
@@ -336,6 +358,9 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  258:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_8
  259:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_9
  260:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_10
+ARM GAS  /tmp/ccclupDC.s 			page 7
+
+
  261:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_11
  262:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_12
  263:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_13
@@ -358,9 +383,6 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  280:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   * @note   I/O mode can be Input mode, General purpose output, Alternate function mode or Analog.
  281:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   * @note   Warning: only one pin can be passed as parameter.
  282:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   * @rmtoll MODER        MODEy         LL_GPIO_GetPinMode
-ARM GAS  /tmp/ccjSP2i1.s 			page 7
-
-
  283:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   * @param  GPIOx GPIO Port
  284:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   * @param  Pin This parameter can be one of the following values:
  285:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_0
@@ -396,6 +418,9 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  315:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   * @note   Output type as to be set when gpio pin is in output or
  316:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         alternate modes. Possible type are Push-pull or Open-drain.
  317:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   * @rmtoll OTYPER       OTy           LL_GPIO_SetPinOutputType
+ARM GAS  /tmp/ccclupDC.s 			page 8
+
+
  318:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   * @param  GPIOx GPIO Port
  319:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   * @param  PinMask This parameter can be a combination of the following values:
  320:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_0
@@ -418,9 +443,6 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  337:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   * @param  OutputType This parameter can be one of the following values:
  338:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_OUTPUT_PUSHPULL
  339:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_OUTPUT_OPENDRAIN
-ARM GAS  /tmp/ccjSP2i1.s 			page 8
-
-
  340:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   * @retval None
  341:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   */
  342:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** __STATIC_INLINE void LL_GPIO_SetPinOutputType(GPIO_TypeDef *GPIOx, uint32_t PinMask, uint32_t Outpu
@@ -456,6 +478,9 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  372:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   * @retval Returned value can be one of the following values:
  373:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_OUTPUT_PUSHPULL
  374:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_OUTPUT_OPENDRAIN
+ARM GAS  /tmp/ccclupDC.s 			page 9
+
+
  375:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   */
  376:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** __STATIC_INLINE uint32_t LL_GPIO_GetPinOutputType(GPIO_TypeDef *GPIOx, uint32_t Pin)
  377:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** {
@@ -478,9 +503,6 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  394:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_4
  395:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_5
  396:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_6
-ARM GAS  /tmp/ccjSP2i1.s 			page 9
-
-
  397:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_7
  398:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_8
  399:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_9
@@ -516,6 +538,9 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  429:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_1
  430:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_2
  431:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_3
+ARM GAS  /tmp/ccclupDC.s 			page 10
+
+
  432:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_4
  433:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_5
  434:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_6
@@ -538,9 +563,6 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  451:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** {
  452:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   return (uint32_t)(READ_BIT(GPIOx->OSPEEDR,
  453:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****                              (GPIO_OSPEEDER_OSPEEDR0 << (POSITION_VAL(Pin) * 2U))) >> (POSITION_VAL
-ARM GAS  /tmp/ccjSP2i1.s 			page 10
-
-
  454:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** }
  455:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** 
  456:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** /**
@@ -576,6 +598,9 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  486:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   MODIFY_REG(GPIOx->PUPDR, (GPIO_PUPDR_PUPDR0 << (POSITION_VAL(Pin) * 2U)), (Pull << (POSITION_VAL(
  487:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** }
  488:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** 
+ARM GAS  /tmp/ccclupDC.s 			page 11
+
+
  489:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** /**
  490:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   * @brief  Return gpio pull-up or pull-down for a dedicated pin on a dedicated port
  491:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   * @note   Warning: only one pin can be passed as parameter.
@@ -598,9 +623,6 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  508:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_13
  509:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_14
  510:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_15
-ARM GAS  /tmp/ccjSP2i1.s 			page 11
-
-
  511:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   * @retval Returned value can be one of the following values:
  512:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PULL_NO
  513:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PULL_UP
@@ -636,6 +658,9 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  543:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_5
  544:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_6
  545:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_7
+ARM GAS  /tmp/ccclupDC.s 			page 12
+
+
  546:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_8
  547:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_9
  548:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_10
@@ -658,9 +683,6 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  565:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   * @param  GPIOx GPIO Port
  566:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   * @param  Pin This parameter can be one of the following values:
  567:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_0
-ARM GAS  /tmp/ccjSP2i1.s 			page 12
-
-
  568:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_1
  569:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_2
  570:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_3
@@ -696,6 +718,9 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  600:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   * @brief  Configure gpio alternate function of a dedicated pin from 8 to 15 for a dedicated port.
  601:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   * @note   Possible values are from AF0 to AF15 depending on target.
  602:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   * @note   Warning: only one pin can be passed as parameter.
+ARM GAS  /tmp/ccclupDC.s 			page 13
+
+
  603:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   * @rmtoll AFRH         AFSELy        LL_GPIO_SetAFPin_8_15
  604:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   * @param  GPIOx GPIO Port
  605:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   * @param  Pin This parameter can be one of the following values:
@@ -718,9 +743,6 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  622:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_7
  623:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_8
  624:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_9
-ARM GAS  /tmp/ccjSP2i1.s 			page 13
-
-
  625:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_10
  626:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_11
  627:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_12
@@ -756,6 +778,9 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  657:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_3
  658:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_4
  659:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_5
+ARM GAS  /tmp/ccclupDC.s 			page 14
+
+
  660:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_6
  661:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_7
  662:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_8
@@ -778,9 +803,6 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  679:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   * @brief  Lock configuration of several pins for a dedicated port.
  680:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   * @note   When the lock sequence has been applied on a port bit, the
  681:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         value of this port bit can no longer be modified until the
-ARM GAS  /tmp/ccjSP2i1.s 			page 14
-
-
  682:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         next reset.
  683:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   * @note   Each lock bit freezes a specific configuration register
  684:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         (control and alternate function registers).
@@ -816,6 +838,9 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  714:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   temp = READ_REG(GPIOx->LCKR);
  715:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   (void) temp;
  716:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** }
+ARM GAS  /tmp/ccclupDC.s 			page 15
+
+
  717:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** 
  718:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** /**
  719:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   * @brief  Return 1 if all pins passed as parameter, of a dedicated port, are locked. else Return 
@@ -838,9 +863,6 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  736:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_13
  737:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_14
  738:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_15
-ARM GAS  /tmp/ccjSP2i1.s 			page 15
-
-
  739:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_ALL
  740:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   * @retval State of bit (1 or 0).
  741:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   */
@@ -876,6 +898,9 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  771:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   */
  772:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** __STATIC_INLINE uint32_t LL_GPIO_ReadInputPort(GPIO_TypeDef *GPIOx)
  773:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** {
+ARM GAS  /tmp/ccclupDC.s 			page 16
+
+
  774:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   return (uint32_t)(READ_REG(GPIOx->IDR));
  775:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** }
  776:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** 
@@ -898,9 +923,6 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  793:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_11
  794:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_12
  795:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_13
-ARM GAS  /tmp/ccjSP2i1.s 			page 16
-
-
  796:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_14
  797:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_15
  798:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_ALL
@@ -936,6 +958,9 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  828:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** 
  829:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** /**
  830:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   * @brief  Return if input data level for several pins of dedicated port is high or low.
+ARM GAS  /tmp/ccclupDC.s 			page 17
+
+
  831:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   * @rmtoll ODR          ODy           LL_GPIO_IsOutputPinSet
  832:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   * @param  GPIOx GPIO Port
  833:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   * @param  PinMask This parameter can be a combination of the following values:
@@ -958,9 +983,6 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  850:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_ALL
  851:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   * @retval State of bit (1 or 0).
  852:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   */
-ARM GAS  /tmp/ccjSP2i1.s 			page 17
-
-
  853:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** __STATIC_INLINE uint32_t LL_GPIO_IsOutputPinSet(GPIO_TypeDef *GPIOx, uint32_t PinMask)
  854:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** {
  855:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   return (READ_BIT(GPIOx->ODR, PinMask) == (PinMask));
@@ -996,6 +1018,9 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  885:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** }
  886:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** 
  887:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** /**
+ARM GAS  /tmp/ccclupDC.s 			page 18
+
+
  888:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   * @brief  Set several pins to low level on dedicated gpio port.
  889:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   * @rmtoll BRR          BRy           LL_GPIO_ResetOutputPin\n
  890:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   * @rmtoll BSRR         BRy           LL_GPIO_ResetOutputPin
@@ -1018,9 +1043,6 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  907:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_14
  908:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_15
  909:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_ALL
-ARM GAS  /tmp/ccjSP2i1.s 			page 18
-
-
  910:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   * @retval None
  911:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h ****   */
  912:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** __STATIC_INLINE void LL_GPIO_ResetOutputPin(GPIO_TypeDef *GPIOx, uint32_t PinMask)
@@ -1044,11 +1066,11 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
   61              		.loc 2 919 1 view .LVU6
   62              	.LBE153:
   63              	.LBE152:
-  12:Core/Src/LED_display.c ****             break;
-  13:Core/Src/LED_display.c **** 
-  14:Core/Src/LED_display.c ****         case 1:
-  15:Core/Src/LED_display.c ****             NUMBER_1 (OFF);
-  64              		.loc 1 15 13 is_stmt 1 view .LVU7
+  34:IO_drivers/LED_display.c ****             break;
+  35:IO_drivers/LED_display.c **** 
+  36:IO_drivers/LED_display.c ****         case 1:
+  37:IO_drivers/LED_display.c ****             NUMBER_1 (OFF);
+  64              		.loc 1 37 13 is_stmt 1 view .LVU7
   65              	.LBB154:
   66              	.LBI154:
  912:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** {
@@ -1056,6 +1078,9 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
   68              	.LBB155:
  917:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** #endif /* GPIO_BRR_BR_0 */
   69              		.loc 2 917 3 view .LVU9
+ARM GAS  /tmp/ccclupDC.s 			page 19
+
+
   70 0018 0C4B     		ldr	r3, .L10
   71 001a 4FF40032 		mov	r2, #131072
   72 001e 9A61     		str	r2, [r3, #24]
@@ -1066,11 +1091,11 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
   77              		.loc 2 919 1 view .LVU11
   78              	.LBE155:
   79              	.LBE154:
-  16:Core/Src/LED_display.c ****             break;
-  17:Core/Src/LED_display.c **** 
-  18:Core/Src/LED_display.c ****         case 2:
-  19:Core/Src/LED_display.c ****             NUMBER_2 (OFF);
-  80              		.loc 1 19 13 is_stmt 1 view .LVU12
+  38:IO_drivers/LED_display.c ****             break;
+  39:IO_drivers/LED_display.c **** 
+  40:IO_drivers/LED_display.c ****         case 2:
+  41:IO_drivers/LED_display.c ****             NUMBER_2 (OFF);
+  80              		.loc 1 41 13 is_stmt 1 view .LVU12
   81              	.LBB156:
   82              	.LBI156:
  912:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** {
@@ -1078,9 +1103,6 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
   84              	.LBB157:
  917:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** #endif /* GPIO_BRR_BR_0 */
   85              		.loc 2 917 3 view .LVU14
-ARM GAS  /tmp/ccjSP2i1.s 			page 19
-
-
   86 0022 0A4B     		ldr	r3, .L10
   87 0024 4FF48022 		mov	r2, #262144
   88 0028 9A61     		str	r2, [r3, #24]
@@ -1091,11 +1113,11 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
   93              		.loc 2 919 1 view .LVU16
   94              	.LBE157:
   95              	.LBE156:
-  20:Core/Src/LED_display.c ****             break;
-  21:Core/Src/LED_display.c ****       
-  22:Core/Src/LED_display.c ****         case 3:
-  23:Core/Src/LED_display.c ****             NUMBER_3 (OFF);
-  96              		.loc 1 23 13 is_stmt 1 view .LVU17
+  42:IO_drivers/LED_display.c ****             break;
+  43:IO_drivers/LED_display.c ****       
+  44:IO_drivers/LED_display.c ****         case 3:
+  45:IO_drivers/LED_display.c ****             NUMBER_3 (OFF);
+  96              		.loc 1 45 13 is_stmt 1 view .LVU17
   97              	.LBB158:
   98              	.LBI158:
  912:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** {
@@ -1113,11 +1135,14 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  109              		.loc 2 919 1 view .LVU21
  110              	.LBE159:
  111              	.LBE158:
-  24:Core/Src/LED_display.c ****             break;
-  25:Core/Src/LED_display.c **** 
-  26:Core/Src/LED_display.c ****         case 4:
-  27:Core/Src/LED_display.c ****             NUMBER_4 (OFF);
- 112              		.loc 1 27 13 is_stmt 1 view .LVU22
+  46:IO_drivers/LED_display.c ****             break;
+  47:IO_drivers/LED_display.c **** 
+  48:IO_drivers/LED_display.c ****         case 4:
+ARM GAS  /tmp/ccclupDC.s 			page 20
+
+
+  49:IO_drivers/LED_display.c ****             NUMBER_4 (OFF);
+ 112              		.loc 1 49 13 is_stmt 1 view .LVU22
  113              	.LBB160:
  114              	.LBI160:
  912:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** {
@@ -1135,14 +1160,11 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  125              		.loc 2 919 1 view .LVU26
  126              	.LBE161:
  127              	.LBE160:
-  28:Core/Src/LED_display.c ****             break;
-  29:Core/Src/LED_display.c ****       
-  30:Core/Src/LED_display.c ****         case 5:
-ARM GAS  /tmp/ccjSP2i1.s 			page 20
-
-
-  31:Core/Src/LED_display.c ****             NUMBER_5 (OFF);
- 128              		.loc 1 31 13 is_stmt 1 view .LVU27
+  50:IO_drivers/LED_display.c ****             break;
+  51:IO_drivers/LED_display.c ****       
+  52:IO_drivers/LED_display.c ****         case 5:
+  53:IO_drivers/LED_display.c ****             NUMBER_5 (OFF);
+ 128              		.loc 1 53 13 is_stmt 1 view .LVU27
  129              	.LBB162:
  130              	.LBI162:
  912:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** {
@@ -1159,13 +1181,13 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  139              		.loc 2 917 3 is_stmt 0 view .LVU30
  140              	.LBE163:
  141              	.LBE162:
-  32:Core/Src/LED_display.c ****             break;
-  33:Core/Src/LED_display.c ****       
-  34:Core/Src/LED_display.c ****         default:
-  35:Core/Src/LED_display.c ****             break;     
-  36:Core/Src/LED_display.c ****     }
-  37:Core/Src/LED_display.c **** }
- 142              		.loc 1 37 1 view .LVU31
+  54:IO_drivers/LED_display.c ****             break;
+  55:IO_drivers/LED_display.c ****       
+  56:IO_drivers/LED_display.c ****         default:
+  57:IO_drivers/LED_display.c ****             break;     
+  58:IO_drivers/LED_display.c ****     }
+  59:IO_drivers/LED_display.c **** }
+ 142              		.loc 1 59 1 view .LVU31
  143 0048 7047     		bx	lr
  144              	.L11:
  145 004a 00BF     		.align	2
@@ -1176,31 +1198,31 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  151              		.section	.text.reset_all_number,"ax",%progbits
  152              		.align	1
  153              		.global	reset_all_number
+ARM GAS  /tmp/ccclupDC.s 			page 21
+
+
  154              		.syntax unified
  155              		.thumb
  156              		.thumb_func
  158              	reset_all_number:
  159              	.LFB815:
-  38:Core/Src/LED_display.c **** 
-  39:Core/Src/LED_display.c **** //---------------------------------------------------------------------------//
-  40:Core/Src/LED_display.c **** void reset_all_number (void)
-  41:Core/Src/LED_display.c **** {
- 160              		.loc 1 41 1 is_stmt 1 view -0
+  60:IO_drivers/LED_display.c **** 
+  61:IO_drivers/LED_display.c **** //---------------------------------------------------------------------------//
+  62:IO_drivers/LED_display.c **** void reset_all_number (void)
+  63:IO_drivers/LED_display.c **** {
+ 160              		.loc 1 63 1 is_stmt 1 view -0
  161              		.cfi_startproc
  162              		@ args = 0, pretend = 0, frame = 0
  163              		@ frame_needed = 0, uses_anonymous_args = 0
  164              		@ link register save eliminated.
-  42:Core/Src/LED_display.c ****     NUMBER_0 (OFF);
- 165              		.loc 1 42 5 view .LVU33
+  64:IO_drivers/LED_display.c ****     NUMBER_0 (OFF);
+ 165              		.loc 1 64 5 view .LVU33
  166              	.LVL8:
  167              	.LBB164:
  168              	.LBI164:
  912:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** {
  169              		.loc 2 912 22 view .LVU34
  170              	.LBB165:
-ARM GAS  /tmp/ccjSP2i1.s 			page 21
-
-
  917:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** #endif /* GPIO_BRR_BR_0 */
  171              		.loc 2 917 3 view .LVU35
  172 0000 094B     		ldr	r3, .L13
@@ -1211,8 +1233,8 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  176              		.loc 2 917 3 is_stmt 0 view .LVU36
  177              	.LBE165:
  178              	.LBE164:
-  43:Core/Src/LED_display.c ****     NUMBER_1 (OFF);
- 179              		.loc 1 43 5 is_stmt 1 view .LVU37
+  65:IO_drivers/LED_display.c ****     NUMBER_1 (OFF);
+ 179              		.loc 1 65 5 is_stmt 1 view .LVU37
  180              	.LBB166:
  181              	.LBI166:
  912:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** {
@@ -1227,8 +1249,8 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  188              		.loc 2 917 3 is_stmt 0 view .LVU40
  189              	.LBE167:
  190              	.LBE166:
-  44:Core/Src/LED_display.c ****     NUMBER_2 (OFF);
- 191              		.loc 1 44 5 is_stmt 1 view .LVU41
+  66:IO_drivers/LED_display.c ****     NUMBER_2 (OFF);
+ 191              		.loc 1 66 5 is_stmt 1 view .LVU41
  192              	.LBB168:
  193              	.LBI168:
  912:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** {
@@ -1236,6 +1258,9 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  195              	.LBB169:
  917:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** #endif /* GPIO_BRR_BR_0 */
  196              		.loc 2 917 3 view .LVU43
+ARM GAS  /tmp/ccclupDC.s 			page 22
+
+
  197 000e 4FF48022 		mov	r2, #262144
  198 0012 9A61     		str	r2, [r3, #24]
  199              	.LVL11:
@@ -1243,8 +1268,8 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  200              		.loc 2 917 3 is_stmt 0 view .LVU44
  201              	.LBE169:
  202              	.LBE168:
-  45:Core/Src/LED_display.c ****     NUMBER_3 (OFF);
- 203              		.loc 1 45 5 is_stmt 1 view .LVU45
+  67:IO_drivers/LED_display.c ****     NUMBER_3 (OFF);
+ 203              		.loc 1 67 5 is_stmt 1 view .LVU45
  204              	.LBB170:
  205              	.LBI170:
  912:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** {
@@ -1258,12 +1283,9 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  917:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** #endif /* GPIO_BRR_BR_0 */
  212              		.loc 2 917 3 is_stmt 0 view .LVU48
  213              	.LBE171:
-ARM GAS  /tmp/ccjSP2i1.s 			page 22
-
-
  214              	.LBE170:
-  46:Core/Src/LED_display.c ****     NUMBER_4 (OFF);
- 215              		.loc 1 46 5 is_stmt 1 view .LVU49
+  68:IO_drivers/LED_display.c ****     NUMBER_4 (OFF);
+ 215              		.loc 1 68 5 is_stmt 1 view .LVU49
  216              	.LBB172:
  217              	.LBI172:
  912:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** {
@@ -1278,8 +1300,8 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  224              		.loc 2 917 3 is_stmt 0 view .LVU52
  225              	.LBE173:
  226              	.LBE172:
-  47:Core/Src/LED_display.c ****     NUMBER_5 (OFF);
- 227              		.loc 1 47 5 is_stmt 1 view .LVU53
+  69:IO_drivers/LED_display.c ****     NUMBER_5 (OFF);
+ 227              		.loc 1 69 5 is_stmt 1 view .LVU53
  228              	.LBB174:
  229              	.LBI174:
  912:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** {
@@ -1294,8 +1316,11 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  236              		.loc 2 917 3 is_stmt 0 view .LVU56
  237              	.LBE175:
  238              	.LBE174:
-  48:Core/Src/LED_display.c **** }
- 239              		.loc 1 48 1 view .LVU57
+  70:IO_drivers/LED_display.c **** }
+ 239              		.loc 1 70 1 view .LVU57
+ARM GAS  /tmp/ccclupDC.s 			page 23
+
+
  240 0026 7047     		bx	lr
  241              	.L14:
  242              		.align	2
@@ -1312,30 +1337,27 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  255              	select_number:
  256              	.LVL15:
  257              	.LFB816:
-  49:Core/Src/LED_display.c **** 
-  50:Core/Src/LED_display.c **** //---------------------------------------------------------------------------//
-  51:Core/Src/LED_display.c **** void select_number (uint8_t numb)
-  52:Core/Src/LED_display.c **** {
- 258              		.loc 1 52 1 is_stmt 1 view -0
+  71:IO_drivers/LED_display.c **** 
+  72:IO_drivers/LED_display.c **** //---------------------------------------------------------------------------//
+  73:IO_drivers/LED_display.c **** void select_number (uint8_t numb)
+  74:IO_drivers/LED_display.c **** {
+ 258              		.loc 1 74 1 is_stmt 1 view -0
  259              		.cfi_startproc
-ARM GAS  /tmp/ccjSP2i1.s 			page 23
-
-
  260              		@ args = 0, pretend = 0, frame = 0
  261              		@ frame_needed = 0, uses_anonymous_args = 0
- 262              		.loc 1 52 1 is_stmt 0 view .LVU59
+ 262              		.loc 1 74 1 is_stmt 0 view .LVU59
  263 0000 10B5     		push	{r4, lr}
  264              	.LCFI0:
  265              		.cfi_def_cfa_offset 8
  266              		.cfi_offset 4, -8
  267              		.cfi_offset 14, -4
  268 0002 0446     		mov	r4, r0
-  53:Core/Src/LED_display.c ****     reset_all_number();
- 269              		.loc 1 53 5 is_stmt 1 view .LVU60
+  75:IO_drivers/LED_display.c ****     reset_all_number();
+ 269              		.loc 1 75 5 is_stmt 1 view .LVU60
  270 0004 FFF7FEFF 		bl	reset_all_number
  271              	.LVL16:
-  54:Core/Src/LED_display.c ****     switch (numb)
- 272              		.loc 1 54 5 view .LVU61
+  76:IO_drivers/LED_display.c ****     switch (numb)
+ 272              		.loc 1 76 5 view .LVU61
  273 0008 052C     		cmp	r4, #5
  274 000a 07D8     		bhi	.L15
  275 000c DFE804F0 		tbb	[pc, r4]
@@ -1348,14 +1370,17 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  282 0015 17       		.byte	(.L17-.L18)/2
  283              		.p2align 1
  284              	.L23:
-  55:Core/Src/LED_display.c ****     {
-  56:Core/Src/LED_display.c ****         case 0:
-  57:Core/Src/LED_display.c ****             NUMBER_0 (ON);
- 285              		.loc 1 57 13 view .LVU62
+  77:IO_drivers/LED_display.c ****     {
+  78:IO_drivers/LED_display.c ****         case 0:
+  79:IO_drivers/LED_display.c ****             NUMBER_0 (ON);
+ 285              		.loc 1 79 13 view .LVU62
  286              	.LVL17:
  287              	.LBB176:
  288              	.LBI176:
  882:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** {
+ARM GAS  /tmp/ccclupDC.s 			page 24
+
+
  289              		.loc 2 882 22 view .LVU63
  290              	.LBB177:
  884:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** }
@@ -1369,40 +1394,37 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  297              		.loc 2 884 3 is_stmt 0 view .LVU65
  298              	.LBE177:
  299              	.LBE176:
-  58:Core/Src/LED_display.c ****             break;
-  59:Core/Src/LED_display.c **** 
-  60:Core/Src/LED_display.c ****         case 1:
-  61:Core/Src/LED_display.c ****             NUMBER_1 (ON);
-  62:Core/Src/LED_display.c ****             break;
-  63:Core/Src/LED_display.c **** 
-  64:Core/Src/LED_display.c ****         case 2:
-  65:Core/Src/LED_display.c ****             NUMBER_2 (ON);
-  66:Core/Src/LED_display.c ****             break;
-ARM GAS  /tmp/ccjSP2i1.s 			page 24
-
-
-  67:Core/Src/LED_display.c ****       
-  68:Core/Src/LED_display.c ****         case 3:
-  69:Core/Src/LED_display.c ****             NUMBER_3 (ON);
-  70:Core/Src/LED_display.c ****             break;
-  71:Core/Src/LED_display.c **** 
-  72:Core/Src/LED_display.c ****         case 4:
-  73:Core/Src/LED_display.c ****             NUMBER_4 (ON);
-  74:Core/Src/LED_display.c ****             break;
-  75:Core/Src/LED_display.c ****       
-  76:Core/Src/LED_display.c ****         case 5:
-  77:Core/Src/LED_display.c ****             NUMBER_5 (ON);
-  78:Core/Src/LED_display.c ****             break;
-  79:Core/Src/LED_display.c ****       
-  80:Core/Src/LED_display.c ****         default:
-  81:Core/Src/LED_display.c ****             break;     
-  82:Core/Src/LED_display.c ****     }
-  83:Core/Src/LED_display.c **** }
- 300              		.loc 1 83 1 view .LVU66
+  80:IO_drivers/LED_display.c ****             break;
+  81:IO_drivers/LED_display.c **** 
+  82:IO_drivers/LED_display.c ****         case 1:
+  83:IO_drivers/LED_display.c ****             NUMBER_1 (ON);
+  84:IO_drivers/LED_display.c ****             break;
+  85:IO_drivers/LED_display.c **** 
+  86:IO_drivers/LED_display.c ****         case 2:
+  87:IO_drivers/LED_display.c ****             NUMBER_2 (ON);
+  88:IO_drivers/LED_display.c ****             break;
+  89:IO_drivers/LED_display.c ****       
+  90:IO_drivers/LED_display.c ****         case 3:
+  91:IO_drivers/LED_display.c ****             NUMBER_3 (ON);
+  92:IO_drivers/LED_display.c ****             break;
+  93:IO_drivers/LED_display.c **** 
+  94:IO_drivers/LED_display.c ****         case 4:
+  95:IO_drivers/LED_display.c ****             NUMBER_4 (ON);
+  96:IO_drivers/LED_display.c ****             break;
+  97:IO_drivers/LED_display.c ****       
+  98:IO_drivers/LED_display.c ****         case 5:
+  99:IO_drivers/LED_display.c ****             NUMBER_5 (ON);
+ 100:IO_drivers/LED_display.c ****             break;
+ 101:IO_drivers/LED_display.c ****       
+ 102:IO_drivers/LED_display.c ****         default:
+ 103:IO_drivers/LED_display.c ****             break;     
+ 104:IO_drivers/LED_display.c ****     }
+ 105:IO_drivers/LED_display.c **** }
+ 300              		.loc 1 105 1 view .LVU66
  301 001c 10BD     		pop	{r4, pc}
  302              	.L22:
-  61:Core/Src/LED_display.c ****             break;
- 303              		.loc 1 61 13 is_stmt 1 view .LVU67
+  83:IO_drivers/LED_display.c ****             break;
+ 303              		.loc 1 83 13 is_stmt 1 view .LVU67
  304              	.LVL19:
  305              	.LBB178:
  306              	.LBI178:
@@ -1416,6 +1438,9 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  312 0022 9A61     		str	r2, [r3, #24]
  885:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** 
  313              		.loc 2 885 1 is_stmt 0 view .LVU70
+ARM GAS  /tmp/ccclupDC.s 			page 25
+
+
  314 0024 FAE7     		b	.L15
  315              	.LVL20:
  316              	.L21:
@@ -1423,8 +1448,8 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  317              		.loc 2 885 1 view .LVU71
  318              	.LBE179:
  319              	.LBE178:
-  65:Core/Src/LED_display.c ****             break;
- 320              		.loc 1 65 13 is_stmt 1 view .LVU72
+  87:IO_drivers/LED_display.c ****             break;
+ 320              		.loc 1 87 13 is_stmt 1 view .LVU72
  321              	.LBB180:
  322              	.LBI180:
  882:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** {
@@ -1438,17 +1463,14 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  885:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** 
  329              		.loc 2 885 1 is_stmt 0 view .LVU75
  330 002c F6E7     		b	.L15
-ARM GAS  /tmp/ccjSP2i1.s 			page 25
-
-
  331              	.LVL21:
  332              	.L20:
  885:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** 
  333              		.loc 2 885 1 view .LVU76
  334              	.LBE181:
  335              	.LBE180:
-  69:Core/Src/LED_display.c ****             break;
- 336              		.loc 1 69 13 is_stmt 1 view .LVU77
+  91:IO_drivers/LED_display.c ****             break;
+ 336              		.loc 1 91 13 is_stmt 1 view .LVU77
  337              	.LBB182:
  338              	.LBI182:
  882:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** {
@@ -1468,14 +1490,17 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  349              		.loc 2 885 1 view .LVU81
  350              	.LBE183:
  351              	.LBE182:
-  73:Core/Src/LED_display.c ****             break;
- 352              		.loc 1 73 13 is_stmt 1 view .LVU82
+  95:IO_drivers/LED_display.c ****             break;
+ 352              		.loc 1 95 13 is_stmt 1 view .LVU82
  353              	.LBB184:
  354              	.LBI184:
  882:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** {
  355              		.loc 2 882 22 view .LVU83
  356              	.LBB185:
  884:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** }
+ARM GAS  /tmp/ccclupDC.s 			page 26
+
+
  357              		.loc 2 884 3 view .LVU84
  358 0036 044B     		ldr	r3, .L25
  359 0038 1022     		movs	r2, #16
@@ -1489,8 +1514,8 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  365              		.loc 2 885 1 view .LVU86
  366              	.LBE185:
  367              	.LBE184:
-  77:Core/Src/LED_display.c ****             break;
- 368              		.loc 1 77 13 is_stmt 1 view .LVU87
+  99:IO_drivers/LED_display.c ****             break;
+ 368              		.loc 1 99 13 is_stmt 1 view .LVU87
  369              	.LBB186:
  370              	.LBI186:
  882:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** {
@@ -1498,9 +1523,6 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  372              	.LBB187:
  884:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** }
  373              		.loc 2 884 3 view .LVU89
-ARM GAS  /tmp/ccjSP2i1.s 			page 26
-
-
  374 003e 024B     		ldr	r3, .L25
  375 0040 2022     		movs	r2, #32
  376 0042 9A61     		str	r2, [r3, #24]
@@ -1509,7 +1531,7 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  378              		.loc 2 884 3 is_stmt 0 view .LVU90
  379              	.LBE187:
  380              	.LBE186:
- 381              		.loc 1 83 1 view .LVU91
+ 381              		.loc 1 105 1 view .LVU91
  382 0044 EAE7     		b	.L15
  383              	.L26:
  384 0046 00BF     		.align	2
@@ -1525,17 +1547,20 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  395              		.thumb_func
  397              	reset_all_digit:
  398              	.LFB817:
-  84:Core/Src/LED_display.c **** 
-  85:Core/Src/LED_display.c **** //---------------------------------------------------------------------------//
-  86:Core/Src/LED_display.c **** void reset_all_digit (void)
-  87:Core/Src/LED_display.c **** {
- 399              		.loc 1 87 1 is_stmt 1 view -0
+ 106:IO_drivers/LED_display.c **** 
+ 107:IO_drivers/LED_display.c **** //---------------------------------------------------------------------------//
+ 108:IO_drivers/LED_display.c **** void reset_all_digit (void)
+ 109:IO_drivers/LED_display.c **** {
+ 399              		.loc 1 109 1 is_stmt 1 view -0
  400              		.cfi_startproc
  401              		@ args = 0, pretend = 0, frame = 0
  402              		@ frame_needed = 0, uses_anonymous_args = 0
  403              		@ link register save eliminated.
-  88:Core/Src/LED_display.c ****     Segment_A(OFF);
- 404              		.loc 1 88 5 view .LVU93
+ 110:IO_drivers/LED_display.c ****     Segment_A(OFF);
+ 404              		.loc 1 110 5 view .LVU93
+ARM GAS  /tmp/ccclupDC.s 			page 27
+
+
  405              	.LVL25:
  406              	.LBB188:
  407              	.LBI188:
@@ -1552,15 +1577,12 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  415              		.loc 2 917 3 is_stmt 0 view .LVU96
  416              	.LBE189:
  417              	.LBE188:
-  89:Core/Src/LED_display.c ****     Segment_B(OFF);
- 418              		.loc 1 89 5 is_stmt 1 view .LVU97
+ 111:IO_drivers/LED_display.c ****     Segment_B(OFF);
+ 418              		.loc 1 111 5 is_stmt 1 view .LVU97
  419              	.LBB190:
  420              	.LBI190:
  912:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** {
  421              		.loc 2 912 22 view .LVU98
-ARM GAS  /tmp/ccjSP2i1.s 			page 27
-
-
  422              	.LBB191:
  917:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** #endif /* GPIO_BRR_BR_0 */
  423              		.loc 2 917 3 view .LVU99
@@ -1571,8 +1593,8 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  427              		.loc 2 917 3 is_stmt 0 view .LVU100
  428              	.LBE191:
  429              	.LBE190:
-  90:Core/Src/LED_display.c ****     Segment_C(OFF);
- 430              		.loc 1 90 5 is_stmt 1 view .LVU101
+ 112:IO_drivers/LED_display.c ****     Segment_C(OFF);
+ 430              		.loc 1 112 5 is_stmt 1 view .LVU101
  431              	.LBB192:
  432              	.LBI192:
  912:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** {
@@ -1587,8 +1609,8 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  439              		.loc 2 917 3 is_stmt 0 view .LVU104
  440              	.LBE193:
  441              	.LBE192:
-  91:Core/Src/LED_display.c ****     Segment_D(OFF);
- 442              		.loc 1 91 5 is_stmt 1 view .LVU105
+ 113:IO_drivers/LED_display.c ****     Segment_D(OFF);
+ 442              		.loc 1 113 5 is_stmt 1 view .LVU105
  443              	.LBB194:
  444              	.LBI194:
  912:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** {
@@ -1596,6 +1618,9 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  446              	.LBB195:
  917:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** #endif /* GPIO_BRR_BR_0 */
  447              		.loc 2 917 3 view .LVU107
+ARM GAS  /tmp/ccclupDC.s 			page 28
+
+
  448 0014 4FF48012 		mov	r2, #1048576
  449 0018 9A61     		str	r2, [r3, #24]
  450              	.LVL29:
@@ -1603,8 +1628,8 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  451              		.loc 2 917 3 is_stmt 0 view .LVU108
  452              	.LBE195:
  453              	.LBE194:
-  92:Core/Src/LED_display.c ****     Segment_E(OFF);
- 454              		.loc 1 92 5 is_stmt 1 view .LVU109
+ 114:IO_drivers/LED_display.c ****     Segment_E(OFF);
+ 454              		.loc 1 114 5 is_stmt 1 view .LVU109
  455              	.LBB196:
  456              	.LBI196:
  912:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** {
@@ -1618,12 +1643,9 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  917:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** #endif /* GPIO_BRR_BR_0 */
  463              		.loc 2 917 3 is_stmt 0 view .LVU112
  464              	.LBE197:
-ARM GAS  /tmp/ccjSP2i1.s 			page 28
-
-
  465              	.LBE196:
-  93:Core/Src/LED_display.c ****     Segment_F(OFF);
- 466              		.loc 1 93 5 is_stmt 1 view .LVU113
+ 115:IO_drivers/LED_display.c ****     Segment_F(OFF);
+ 466              		.loc 1 115 5 is_stmt 1 view .LVU113
  467              	.LBB198:
  468              	.LBI198:
  912:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** {
@@ -1638,8 +1660,8 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  475              		.loc 2 917 3 is_stmt 0 view .LVU116
  476              	.LBE199:
  477              	.LBE198:
-  94:Core/Src/LED_display.c ****     Segment_G(OFF);
- 478              		.loc 1 94 5 is_stmt 1 view .LVU117
+ 116:IO_drivers/LED_display.c ****     Segment_G(OFF);
+ 478              		.loc 1 116 5 is_stmt 1 view .LVU117
  479              	.LBB200:
  480              	.LBI200:
  912:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** {
@@ -1654,8 +1676,11 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  487              		.loc 2 917 3 is_stmt 0 view .LVU120
  488              	.LBE201:
  489              	.LBE200:
-  95:Core/Src/LED_display.c ****     Segment_DP(OFF);
- 490              		.loc 1 95 5 is_stmt 1 view .LVU121
+ 117:IO_drivers/LED_display.c ****     Segment_DP(OFF);
+ 490              		.loc 1 117 5 is_stmt 1 view .LVU121
+ARM GAS  /tmp/ccclupDC.s 			page 29
+
+
  491              	.LBB202:
  492              	.LBI202:
  912:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** {
@@ -1670,17 +1695,14 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  499              		.loc 2 917 3 is_stmt 0 view .LVU124
  500              	.LBE203:
  501              	.LBE202:
-  96:Core/Src/LED_display.c **** }
- 502              		.loc 1 96 1 view .LVU125
+ 118:IO_drivers/LED_display.c **** }
+ 502              		.loc 1 118 1 view .LVU125
  503 0032 7047     		bx	lr
  504              	.L29:
  505              		.align	2
  506              	.L28:
  507 0034 00040240 		.word	1073873920
  508              		.cfi_endproc
-ARM GAS  /tmp/ccjSP2i1.s 			page 29
-
-
  509              	.LFE817:
  511              		.section	.text.digit_0,"ax",%progbits
  512              		.align	1
@@ -1690,17 +1712,17 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  516              		.thumb_func
  518              	digit_0:
  519              	.LFB818:
-  97:Core/Src/LED_display.c **** 
-  98:Core/Src/LED_display.c **** //---------------------------------------------------------------------------//
-  99:Core/Src/LED_display.c **** void digit_0 (void)
- 100:Core/Src/LED_display.c **** {
- 520              		.loc 1 100 1 is_stmt 1 view -0
+ 119:IO_drivers/LED_display.c **** 
+ 120:IO_drivers/LED_display.c **** //---------------------------------------------------------------------------//
+ 121:IO_drivers/LED_display.c **** void digit_0 (void)
+ 122:IO_drivers/LED_display.c **** {
+ 520              		.loc 1 122 1 is_stmt 1 view -0
  521              		.cfi_startproc
  522              		@ args = 0, pretend = 0, frame = 0
  523              		@ frame_needed = 0, uses_anonymous_args = 0
  524              		@ link register save eliminated.
- 101:Core/Src/LED_display.c ****   Segment_A(ON);
- 525              		.loc 1 101 3 view .LVU127
+ 123:IO_drivers/LED_display.c ****   Segment_A(ON);
+ 525              		.loc 1 123 3 view .LVU127
  526              	.LVL34:
  527              	.LBB204:
  528              	.LBI204:
@@ -1716,9 +1738,12 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  884:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** }
  536              		.loc 2 884 3 is_stmt 0 view .LVU130
  537              	.LBE205:
+ARM GAS  /tmp/ccclupDC.s 			page 30
+
+
  538              	.LBE204:
- 102:Core/Src/LED_display.c ****   Segment_B(ON);
- 539              		.loc 1 102 3 is_stmt 1 view .LVU131
+ 124:IO_drivers/LED_display.c ****   Segment_B(ON);
+ 539              		.loc 1 124 3 is_stmt 1 view .LVU131
  540              	.LBB206:
  541              	.LBI206:
  882:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** {
@@ -1733,14 +1758,11 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  548              		.loc 2 884 3 is_stmt 0 view .LVU134
  549              	.LBE207:
  550              	.LBE206:
- 103:Core/Src/LED_display.c ****   Segment_C(ON);
- 551              		.loc 1 103 3 is_stmt 1 view .LVU135
+ 125:IO_drivers/LED_display.c ****   Segment_C(ON);
+ 551              		.loc 1 125 3 is_stmt 1 view .LVU135
  552              	.LBB208:
  553              	.LBI208:
  882:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** {
-ARM GAS  /tmp/ccjSP2i1.s 			page 30
-
-
  554              		.loc 2 882 22 view .LVU136
  555              	.LBB209:
  884:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** }
@@ -1752,8 +1774,8 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  560              		.loc 2 884 3 is_stmt 0 view .LVU138
  561              	.LBE209:
  562              	.LBE208:
- 104:Core/Src/LED_display.c ****   Segment_D(ON);
- 563              		.loc 1 104 3 is_stmt 1 view .LVU139
+ 126:IO_drivers/LED_display.c ****   Segment_D(ON);
+ 563              		.loc 1 126 3 is_stmt 1 view .LVU139
  564              	.LBB210:
  565              	.LBI210:
  882:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** {
@@ -1768,14 +1790,17 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  572              		.loc 2 884 3 is_stmt 0 view .LVU142
  573              	.LBE211:
  574              	.LBE210:
- 105:Core/Src/LED_display.c ****   Segment_E(ON);
- 575              		.loc 1 105 3 is_stmt 1 view .LVU143
+ 127:IO_drivers/LED_display.c ****   Segment_E(ON);
+ 575              		.loc 1 127 3 is_stmt 1 view .LVU143
  576              	.LBB212:
  577              	.LBI212:
  882:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** {
  578              		.loc 2 882 22 view .LVU144
  579              	.LBB213:
  884:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** }
+ARM GAS  /tmp/ccclupDC.s 			page 31
+
+
  580              		.loc 2 884 3 view .LVU145
  581 0012 2022     		movs	r2, #32
  582 0014 9A61     		str	r2, [r3, #24]
@@ -1784,8 +1809,8 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  584              		.loc 2 884 3 is_stmt 0 view .LVU146
  585              	.LBE213:
  586              	.LBE212:
- 106:Core/Src/LED_display.c ****   Segment_F(ON);
- 587              		.loc 1 106 3 is_stmt 1 view .LVU147
+ 128:IO_drivers/LED_display.c ****   Segment_F(ON);
+ 587              		.loc 1 128 3 is_stmt 1 view .LVU147
  588              	.LBB214:
  589              	.LBI214:
  882:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** {
@@ -1798,13 +1823,10 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  595              	.LVL40:
  884:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** }
  596              		.loc 2 884 3 is_stmt 0 view .LVU150
-ARM GAS  /tmp/ccjSP2i1.s 			page 31
-
-
  597              	.LBE215:
  598              	.LBE214:
- 107:Core/Src/LED_display.c **** }
- 599              		.loc 1 107 1 view .LVU151
+ 129:IO_drivers/LED_display.c **** }
+ 599              		.loc 1 129 1 view .LVU151
  600 001c 7047     		bx	lr
  601              	.L32:
  602 001e 00BF     		.align	2
@@ -1820,22 +1842,25 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  613              		.thumb_func
  615              	digit_1:
  616              	.LFB819:
- 108:Core/Src/LED_display.c **** 
- 109:Core/Src/LED_display.c **** //---------------------------------------------------------------------------//
- 110:Core/Src/LED_display.c **** void digit_1 (void)
- 111:Core/Src/LED_display.c **** {
- 617              		.loc 1 111 1 is_stmt 1 view -0
+ 130:IO_drivers/LED_display.c **** 
+ 131:IO_drivers/LED_display.c **** //---------------------------------------------------------------------------//
+ 132:IO_drivers/LED_display.c **** void digit_1 (void)
+ 133:IO_drivers/LED_display.c **** {
+ 617              		.loc 1 133 1 is_stmt 1 view -0
  618              		.cfi_startproc
  619              		@ args = 0, pretend = 0, frame = 0
  620              		@ frame_needed = 0, uses_anonymous_args = 0
  621              		@ link register save eliminated.
- 112:Core/Src/LED_display.c ****   Segment_B(ON);
- 622              		.loc 1 112 3 view .LVU153
+ 134:IO_drivers/LED_display.c ****   Segment_B(ON);
+ 622              		.loc 1 134 3 view .LVU153
  623              	.LVL41:
  624              	.LBB216:
  625              	.LBI216:
  882:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** {
  626              		.loc 2 882 22 view .LVU154
+ARM GAS  /tmp/ccclupDC.s 			page 32
+
+
  627              	.LBB217:
  884:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** }
  628              		.loc 2 884 3 view .LVU155
@@ -1847,8 +1872,8 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  633              		.loc 2 884 3 is_stmt 0 view .LVU156
  634              	.LBE217:
  635              	.LBE216:
- 113:Core/Src/LED_display.c ****   Segment_C(ON);
- 636              		.loc 1 113 3 is_stmt 1 view .LVU157
+ 135:IO_drivers/LED_display.c ****   Segment_C(ON);
+ 636              		.loc 1 135 3 is_stmt 1 view .LVU157
  637              	.LBB218:
  638              	.LBI218:
  882:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** {
@@ -1858,16 +1883,13 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  641              		.loc 2 884 3 view .LVU159
  642 0006 0822     		movs	r2, #8
  643 0008 9A61     		str	r2, [r3, #24]
-ARM GAS  /tmp/ccjSP2i1.s 			page 32
-
-
  644              	.LVL43:
  884:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** }
  645              		.loc 2 884 3 is_stmt 0 view .LVU160
  646              	.LBE219:
  647              	.LBE218:
- 114:Core/Src/LED_display.c **** }
- 648              		.loc 1 114 1 view .LVU161
+ 136:IO_drivers/LED_display.c **** }
+ 648              		.loc 1 136 1 view .LVU161
  649 000a 7047     		bx	lr
  650              	.L35:
  651              		.align	2
@@ -1883,19 +1905,22 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  662              		.thumb_func
  664              	digit_2:
  665              	.LFB820:
- 115:Core/Src/LED_display.c **** 
- 116:Core/Src/LED_display.c **** //---------------------------------------------------------------------------//
- 117:Core/Src/LED_display.c **** void digit_2 (void)
- 118:Core/Src/LED_display.c **** {
- 666              		.loc 1 118 1 is_stmt 1 view -0
+ 137:IO_drivers/LED_display.c **** 
+ 138:IO_drivers/LED_display.c **** //---------------------------------------------------------------------------//
+ 139:IO_drivers/LED_display.c **** void digit_2 (void)
+ 140:IO_drivers/LED_display.c **** {
+ 666              		.loc 1 140 1 is_stmt 1 view -0
  667              		.cfi_startproc
  668              		@ args = 0, pretend = 0, frame = 0
  669              		@ frame_needed = 0, uses_anonymous_args = 0
  670              		@ link register save eliminated.
- 119:Core/Src/LED_display.c ****   Segment_A(ON);
- 671              		.loc 1 119 3 view .LVU163
+ 141:IO_drivers/LED_display.c ****   Segment_A(ON);
+ 671              		.loc 1 141 3 view .LVU163
  672              	.LVL44:
  673              	.LBB220:
+ARM GAS  /tmp/ccclupDC.s 			page 33
+
+
  674              	.LBI220:
  882:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** {
  675              		.loc 2 882 22 view .LVU164
@@ -1910,17 +1935,14 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  682              		.loc 2 884 3 is_stmt 0 view .LVU166
  683              	.LBE221:
  684              	.LBE220:
- 120:Core/Src/LED_display.c ****   Segment_B(ON);
- 685              		.loc 1 120 3 is_stmt 1 view .LVU167
+ 142:IO_drivers/LED_display.c ****   Segment_B(ON);
+ 685              		.loc 1 142 3 is_stmt 1 view .LVU167
  686              	.LBB222:
  687              	.LBI222:
  882:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** {
  688              		.loc 2 882 22 view .LVU168
  689              	.LBB223:
  884:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** }
-ARM GAS  /tmp/ccjSP2i1.s 			page 33
-
-
  690              		.loc 2 884 3 view .LVU169
  691 0006 0122     		movs	r2, #1
  692 0008 9A61     		str	r2, [r3, #24]
@@ -1929,8 +1951,8 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  694              		.loc 2 884 3 is_stmt 0 view .LVU170
  695              	.LBE223:
  696              	.LBE222:
- 121:Core/Src/LED_display.c ****   Segment_G(ON);
- 697              		.loc 1 121 3 is_stmt 1 view .LVU171
+ 143:IO_drivers/LED_display.c ****   Segment_G(ON);
+ 697              		.loc 1 143 3 is_stmt 1 view .LVU171
  698              	.LBB224:
  699              	.LBI224:
  882:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** {
@@ -1945,8 +1967,8 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  706              		.loc 2 884 3 is_stmt 0 view .LVU174
  707              	.LBE225:
  708              	.LBE224:
- 122:Core/Src/LED_display.c ****   Segment_E(ON);
- 709              		.loc 1 122 3 is_stmt 1 view .LVU175
+ 144:IO_drivers/LED_display.c ****   Segment_E(ON);
+ 709              		.loc 1 144 3 is_stmt 1 view .LVU175
  710              	.LBB226:
  711              	.LBI226:
  882:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** {
@@ -1956,13 +1978,16 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  714              		.loc 2 884 3 view .LVU177
  715 0010 2022     		movs	r2, #32
  716 0012 9A61     		str	r2, [r3, #24]
+ARM GAS  /tmp/ccclupDC.s 			page 34
+
+
  717              	.LVL48:
  884:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** }
  718              		.loc 2 884 3 is_stmt 0 view .LVU178
  719              	.LBE227:
  720              	.LBE226:
- 123:Core/Src/LED_display.c ****   Segment_D(ON);
- 721              		.loc 1 123 3 is_stmt 1 view .LVU179
+ 145:IO_drivers/LED_display.c ****   Segment_D(ON);
+ 721              		.loc 1 145 3 is_stmt 1 view .LVU179
  722              	.LBB228:
  723              	.LBI228:
  882:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** {
@@ -1977,11 +2002,8 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  730              		.loc 2 884 3 is_stmt 0 view .LVU182
  731              	.LBE229:
  732              	.LBE228:
- 124:Core/Src/LED_display.c **** }
-ARM GAS  /tmp/ccjSP2i1.s 			page 34
-
-
- 733              		.loc 1 124 1 view .LVU183
+ 146:IO_drivers/LED_display.c **** }
+ 733              		.loc 1 146 1 view .LVU183
  734 0018 7047     		bx	lr
  735              	.L38:
  736 001a 00BF     		.align	2
@@ -1997,17 +2019,17 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  747              		.thumb_func
  749              	digit_3:
  750              	.LFB821:
- 125:Core/Src/LED_display.c **** 
- 126:Core/Src/LED_display.c **** //---------------------------------------------------------------------------//
- 127:Core/Src/LED_display.c **** void digit_3 (void)
- 128:Core/Src/LED_display.c **** {
- 751              		.loc 1 128 1 is_stmt 1 view -0
+ 147:IO_drivers/LED_display.c **** 
+ 148:IO_drivers/LED_display.c **** //---------------------------------------------------------------------------//
+ 149:IO_drivers/LED_display.c **** void digit_3 (void)
+ 150:IO_drivers/LED_display.c **** {
+ 751              		.loc 1 150 1 is_stmt 1 view -0
  752              		.cfi_startproc
  753              		@ args = 0, pretend = 0, frame = 0
  754              		@ frame_needed = 0, uses_anonymous_args = 0
  755              		@ link register save eliminated.
- 129:Core/Src/LED_display.c ****   Segment_A(ON);
- 756              		.loc 1 129 3 view .LVU185
+ 151:IO_drivers/LED_display.c ****   Segment_A(ON);
+ 756              		.loc 1 151 3 view .LVU185
  757              	.LVL50:
  758              	.LBB230:
  759              	.LBI230:
@@ -2016,6 +2038,9 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  761              	.LBB231:
  884:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** }
  762              		.loc 2 884 3 view .LVU187
+ARM GAS  /tmp/ccclupDC.s 			page 35
+
+
  763 0000 064B     		ldr	r3, .L40
  764 0002 0222     		movs	r2, #2
  765 0004 9A61     		str	r2, [r3, #24]
@@ -2024,8 +2049,8 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  767              		.loc 2 884 3 is_stmt 0 view .LVU188
  768              	.LBE231:
  769              	.LBE230:
- 130:Core/Src/LED_display.c ****   Segment_B(ON);
- 770              		.loc 1 130 3 is_stmt 1 view .LVU189
+ 152:IO_drivers/LED_display.c ****   Segment_B(ON);
+ 770              		.loc 1 152 3 is_stmt 1 view .LVU189
  771              	.LBB232:
  772              	.LBI232:
  882:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** {
@@ -2038,13 +2063,10 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  778              	.LVL52:
  884:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** }
  779              		.loc 2 884 3 is_stmt 0 view .LVU192
-ARM GAS  /tmp/ccjSP2i1.s 			page 35
-
-
  780              	.LBE233:
  781              	.LBE232:
- 131:Core/Src/LED_display.c ****   Segment_G(ON);
- 782              		.loc 1 131 3 is_stmt 1 view .LVU193
+ 153:IO_drivers/LED_display.c ****   Segment_G(ON);
+ 782              		.loc 1 153 3 is_stmt 1 view .LVU193
  783              	.LBB234:
  784              	.LBI234:
  882:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** {
@@ -2059,8 +2081,8 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  791              		.loc 2 884 3 is_stmt 0 view .LVU196
  792              	.LBE235:
  793              	.LBE234:
- 132:Core/Src/LED_display.c ****   Segment_C(ON);
- 794              		.loc 1 132 3 is_stmt 1 view .LVU197
+ 154:IO_drivers/LED_display.c ****   Segment_C(ON);
+ 794              		.loc 1 154 3 is_stmt 1 view .LVU197
  795              	.LBB236:
  796              	.LBI236:
  882:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** {
@@ -2075,8 +2097,11 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  803              		.loc 2 884 3 is_stmt 0 view .LVU200
  804              	.LBE237:
  805              	.LBE236:
- 133:Core/Src/LED_display.c ****   Segment_D(ON);
- 806              		.loc 1 133 3 is_stmt 1 view .LVU201
+ 155:IO_drivers/LED_display.c ****   Segment_D(ON);
+ARM GAS  /tmp/ccclupDC.s 			page 36
+
+
+ 806              		.loc 1 155 3 is_stmt 1 view .LVU201
  807              	.LBB238:
  808              	.LBI238:
  882:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** {
@@ -2091,16 +2116,13 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  815              		.loc 2 884 3 is_stmt 0 view .LVU204
  816              	.LBE239:
  817              	.LBE238:
- 134:Core/Src/LED_display.c **** }
- 818              		.loc 1 134 1 view .LVU205
+ 156:IO_drivers/LED_display.c **** }
+ 818              		.loc 1 156 1 view .LVU205
  819 0018 7047     		bx	lr
  820              	.L41:
  821 001a 00BF     		.align	2
  822              	.L40:
  823 001c 00040240 		.word	1073873920
-ARM GAS  /tmp/ccjSP2i1.s 			page 36
-
-
  824              		.cfi_endproc
  825              	.LFE821:
  827              		.section	.text.digit_4,"ax",%progbits
@@ -2111,17 +2133,17 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  832              		.thumb_func
  834              	digit_4:
  835              	.LFB822:
- 135:Core/Src/LED_display.c **** 
- 136:Core/Src/LED_display.c **** //---------------------------------------------------------------------------//
- 137:Core/Src/LED_display.c **** void digit_4 (void)
- 138:Core/Src/LED_display.c **** {
- 836              		.loc 1 138 1 is_stmt 1 view -0
+ 157:IO_drivers/LED_display.c **** 
+ 158:IO_drivers/LED_display.c **** //---------------------------------------------------------------------------//
+ 159:IO_drivers/LED_display.c **** void digit_4 (void)
+ 160:IO_drivers/LED_display.c **** {
+ 836              		.loc 1 160 1 is_stmt 1 view -0
  837              		.cfi_startproc
  838              		@ args = 0, pretend = 0, frame = 0
  839              		@ frame_needed = 0, uses_anonymous_args = 0
  840              		@ link register save eliminated.
- 139:Core/Src/LED_display.c ****   Segment_B(ON);
- 841              		.loc 1 139 3 view .LVU207
+ 161:IO_drivers/LED_display.c ****   Segment_B(ON);
+ 841              		.loc 1 161 3 view .LVU207
  842              	.LVL56:
  843              	.LBB240:
  844              	.LBI240:
@@ -2136,10 +2158,13 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  851              	.LVL57:
  884:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** }
  852              		.loc 2 884 3 is_stmt 0 view .LVU210
+ARM GAS  /tmp/ccclupDC.s 			page 37
+
+
  853              	.LBE241:
  854              	.LBE240:
- 140:Core/Src/LED_display.c ****   Segment_C(ON);
- 855              		.loc 1 140 3 is_stmt 1 view .LVU211
+ 162:IO_drivers/LED_display.c ****   Segment_C(ON);
+ 855              		.loc 1 162 3 is_stmt 1 view .LVU211
  856              	.LBB242:
  857              	.LBI242:
  882:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** {
@@ -2154,13 +2179,10 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  864              		.loc 2 884 3 is_stmt 0 view .LVU214
  865              	.LBE243:
  866              	.LBE242:
- 141:Core/Src/LED_display.c ****   Segment_F(ON);
- 867              		.loc 1 141 3 is_stmt 1 view .LVU215
+ 163:IO_drivers/LED_display.c ****   Segment_F(ON);
+ 867              		.loc 1 163 3 is_stmt 1 view .LVU215
  868              	.LBB244:
  869              	.LBI244:
-ARM GAS  /tmp/ccjSP2i1.s 			page 37
-
-
  882:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** {
  870              		.loc 2 882 22 view .LVU216
  871              	.LBB245:
@@ -2173,8 +2195,8 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  876              		.loc 2 884 3 is_stmt 0 view .LVU218
  877              	.LBE245:
  878              	.LBE244:
- 142:Core/Src/LED_display.c ****   Segment_G(ON);
- 879              		.loc 1 142 3 is_stmt 1 view .LVU219
+ 164:IO_drivers/LED_display.c ****   Segment_G(ON);
+ 879              		.loc 1 164 3 is_stmt 1 view .LVU219
  880              	.LBB246:
  881              	.LBI246:
  882:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** {
@@ -2189,13 +2211,16 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  888              		.loc 2 884 3 is_stmt 0 view .LVU222
  889              	.LBE247:
  890              	.LBE246:
- 143:Core/Src/LED_display.c **** }
- 891              		.loc 1 143 1 view .LVU223
+ 165:IO_drivers/LED_display.c **** }
+ 891              		.loc 1 165 1 view .LVU223
  892 0016 7047     		bx	lr
  893              	.L44:
  894              		.align	2
  895              	.L43:
  896 0018 00040240 		.word	1073873920
+ARM GAS  /tmp/ccclupDC.s 			page 38
+
+
  897              		.cfi_endproc
  898              	.LFE822:
  900              		.section	.text.digit_5,"ax",%progbits
@@ -2206,21 +2231,18 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  905              		.thumb_func
  907              	digit_5:
  908              	.LFB823:
- 144:Core/Src/LED_display.c **** 
- 145:Core/Src/LED_display.c **** //---------------------------------------------------------------------------//
- 146:Core/Src/LED_display.c **** void digit_5 (void)
- 147:Core/Src/LED_display.c **** {
- 909              		.loc 1 147 1 is_stmt 1 view -0
+ 166:IO_drivers/LED_display.c **** 
+ 167:IO_drivers/LED_display.c **** //---------------------------------------------------------------------------//
+ 168:IO_drivers/LED_display.c **** void digit_5 (void)
+ 169:IO_drivers/LED_display.c **** {
+ 909              		.loc 1 169 1 is_stmt 1 view -0
  910              		.cfi_startproc
  911              		@ args = 0, pretend = 0, frame = 0
  912              		@ frame_needed = 0, uses_anonymous_args = 0
  913              		@ link register save eliminated.
- 148:Core/Src/LED_display.c ****   Segment_A(ON);
- 914              		.loc 1 148 3 view .LVU225
+ 170:IO_drivers/LED_display.c ****   Segment_A(ON);
+ 914              		.loc 1 170 3 view .LVU225
  915              	.LVL61:
-ARM GAS  /tmp/ccjSP2i1.s 			page 38
-
-
  916              	.LBB248:
  917              	.LBI248:
  882:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** {
@@ -2236,8 +2258,8 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  925              		.loc 2 884 3 is_stmt 0 view .LVU228
  926              	.LBE249:
  927              	.LBE248:
- 149:Core/Src/LED_display.c ****   Segment_F(ON);
- 928              		.loc 1 149 3 is_stmt 1 view .LVU229
+ 171:IO_drivers/LED_display.c ****   Segment_F(ON);
+ 928              		.loc 1 171 3 is_stmt 1 view .LVU229
  929              	.LBB250:
  930              	.LBI250:
  882:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** {
@@ -2252,10 +2274,13 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  937              		.loc 2 884 3 is_stmt 0 view .LVU232
  938              	.LBE251:
  939              	.LBE250:
- 150:Core/Src/LED_display.c ****   Segment_G(ON);
- 940              		.loc 1 150 3 is_stmt 1 view .LVU233
+ 172:IO_drivers/LED_display.c ****   Segment_G(ON);
+ 940              		.loc 1 172 3 is_stmt 1 view .LVU233
  941              	.LBB252:
  942              	.LBI252:
+ARM GAS  /tmp/ccclupDC.s 			page 39
+
+
  882:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** {
  943              		.loc 2 882 22 view .LVU234
  944              	.LBB253:
@@ -2268,8 +2293,8 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  949              		.loc 2 884 3 is_stmt 0 view .LVU236
  950              	.LBE253:
  951              	.LBE252:
- 151:Core/Src/LED_display.c ****   Segment_C(ON);
- 952              		.loc 1 151 3 is_stmt 1 view .LVU237
+ 173:IO_drivers/LED_display.c ****   Segment_C(ON);
+ 952              		.loc 1 173 3 is_stmt 1 view .LVU237
  953              	.LBB254:
  954              	.LBI254:
  882:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** {
@@ -2278,17 +2303,14 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  884:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** }
  957              		.loc 2 884 3 view .LVU239
  958 0012 0822     		movs	r2, #8
-ARM GAS  /tmp/ccjSP2i1.s 			page 39
-
-
  959 0014 9A61     		str	r2, [r3, #24]
  960              	.LVL65:
  884:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** }
  961              		.loc 2 884 3 is_stmt 0 view .LVU240
  962              	.LBE255:
  963              	.LBE254:
- 152:Core/Src/LED_display.c ****   Segment_D(ON);
- 964              		.loc 1 152 3 is_stmt 1 view .LVU241
+ 174:IO_drivers/LED_display.c ****   Segment_D(ON);
+ 964              		.loc 1 174 3 is_stmt 1 view .LVU241
  965              	.LBB256:
  966              	.LBI256:
  882:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** {
@@ -2303,8 +2325,8 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  973              		.loc 2 884 3 is_stmt 0 view .LVU244
  974              	.LBE257:
  975              	.LBE256:
- 153:Core/Src/LED_display.c **** }
- 976              		.loc 1 153 1 view .LVU245
+ 175:IO_drivers/LED_display.c **** }
+ 976              		.loc 1 175 1 view .LVU245
  977 001a 7047     		bx	lr
  978              	.L47:
  979              		.align	2
@@ -2316,21 +2338,24 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  986              		.align	1
  987              		.global	digit_6
  988              		.syntax unified
+ARM GAS  /tmp/ccclupDC.s 			page 40
+
+
  989              		.thumb
  990              		.thumb_func
  992              	digit_6:
  993              	.LFB824:
- 154:Core/Src/LED_display.c **** 
- 155:Core/Src/LED_display.c **** //---------------------------------------------------------------------------//
- 156:Core/Src/LED_display.c **** void digit_6(void)
- 157:Core/Src/LED_display.c **** {
- 994              		.loc 1 157 1 is_stmt 1 view -0
+ 176:IO_drivers/LED_display.c **** 
+ 177:IO_drivers/LED_display.c **** //---------------------------------------------------------------------------//
+ 178:IO_drivers/LED_display.c **** void digit_6(void)
+ 179:IO_drivers/LED_display.c **** {
+ 994              		.loc 1 179 1 is_stmt 1 view -0
  995              		.cfi_startproc
  996              		@ args = 0, pretend = 0, frame = 0
  997              		@ frame_needed = 0, uses_anonymous_args = 0
  998              		@ link register save eliminated.
- 158:Core/Src/LED_display.c ****   Segment_A(ON);
- 999              		.loc 1 158 3 view .LVU247
+ 180:IO_drivers/LED_display.c ****   Segment_A(ON);
+ 999              		.loc 1 180 3 view .LVU247
  1000              	.LVL67:
  1001              	.LBB258:
  1002              	.LBI258:
@@ -2338,9 +2363,6 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  1003              		.loc 2 882 22 view .LVU248
  1004              	.LBB259:
  884:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** }
-ARM GAS  /tmp/ccjSP2i1.s 			page 40
-
-
  1005              		.loc 2 884 3 view .LVU249
  1006 0000 074B     		ldr	r3, .L49
  1007 0002 0222     		movs	r2, #2
@@ -2350,8 +2372,8 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  1010              		.loc 2 884 3 is_stmt 0 view .LVU250
  1011              	.LBE259:
  1012              	.LBE258:
- 159:Core/Src/LED_display.c ****   Segment_C(ON);
- 1013              		.loc 1 159 3 is_stmt 1 view .LVU251
+ 181:IO_drivers/LED_display.c ****   Segment_C(ON);
+ 1013              		.loc 1 181 3 is_stmt 1 view .LVU251
  1014              	.LBB260:
  1015              	.LBI260:
  882:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** {
@@ -2366,8 +2388,8 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  1022              		.loc 2 884 3 is_stmt 0 view .LVU254
  1023              	.LBE261:
  1024              	.LBE260:
- 160:Core/Src/LED_display.c ****   Segment_D(ON);
- 1025              		.loc 1 160 3 is_stmt 1 view .LVU255
+ 182:IO_drivers/LED_display.c ****   Segment_D(ON);
+ 1025              		.loc 1 182 3 is_stmt 1 view .LVU255
  1026              	.LBB262:
  1027              	.LBI262:
  882:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** {
@@ -2376,14 +2398,17 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  884:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** }
  1030              		.loc 2 884 3 view .LVU257
  1031 000a 1022     		movs	r2, #16
+ARM GAS  /tmp/ccclupDC.s 			page 41
+
+
  1032 000c 9A61     		str	r2, [r3, #24]
  1033              	.LVL70:
  884:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** }
  1034              		.loc 2 884 3 is_stmt 0 view .LVU258
  1035              	.LBE263:
  1036              	.LBE262:
- 161:Core/Src/LED_display.c ****   Segment_E(ON);
- 1037              		.loc 1 161 3 is_stmt 1 view .LVU259
+ 183:IO_drivers/LED_display.c ****   Segment_E(ON);
+ 1037              		.loc 1 183 3 is_stmt 1 view .LVU259
  1038              	.LBB264:
  1039              	.LBI264:
  882:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** {
@@ -2398,11 +2423,8 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  1046              		.loc 2 884 3 is_stmt 0 view .LVU262
  1047              	.LBE265:
  1048              	.LBE264:
-ARM GAS  /tmp/ccjSP2i1.s 			page 41
-
-
- 162:Core/Src/LED_display.c ****   Segment_F(ON);
- 1049              		.loc 1 162 3 is_stmt 1 view .LVU263
+ 184:IO_drivers/LED_display.c ****   Segment_F(ON);
+ 1049              		.loc 1 184 3 is_stmt 1 view .LVU263
  1050              	.LBB266:
  1051              	.LBI266:
  882:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** {
@@ -2417,8 +2439,8 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  1058              		.loc 2 884 3 is_stmt 0 view .LVU266
  1059              	.LBE267:
  1060              	.LBE266:
- 163:Core/Src/LED_display.c ****   Segment_G(ON);
- 1061              		.loc 1 163 3 is_stmt 1 view .LVU267
+ 185:IO_drivers/LED_display.c ****   Segment_G(ON);
+ 1061              		.loc 1 185 3 is_stmt 1 view .LVU267
  1062              	.LBB268:
  1063              	.LBI268:
  882:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** {
@@ -2433,9 +2455,12 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  1070              		.loc 2 884 3 is_stmt 0 view .LVU270
  1071              	.LBE269:
  1072              	.LBE268:
- 164:Core/Src/LED_display.c **** }
- 1073              		.loc 1 164 1 view .LVU271
+ 186:IO_drivers/LED_display.c **** }
+ 1073              		.loc 1 186 1 view .LVU271
  1074 001e 7047     		bx	lr
+ARM GAS  /tmp/ccclupDC.s 			page 42
+
+
  1075              	.L50:
  1076              		.align	2
  1077              	.L49:
@@ -2450,20 +2475,17 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  1087              		.thumb_func
  1089              	digit_7:
  1090              	.LFB825:
- 165:Core/Src/LED_display.c **** 
- 166:Core/Src/LED_display.c **** //---------------------------------------------------------------------------//
- 167:Core/Src/LED_display.c **** void digit_7 (void)
- 168:Core/Src/LED_display.c **** {
- 1091              		.loc 1 168 1 is_stmt 1 view -0
+ 187:IO_drivers/LED_display.c **** 
+ 188:IO_drivers/LED_display.c **** //---------------------------------------------------------------------------//
+ 189:IO_drivers/LED_display.c **** void digit_7 (void)
+ 190:IO_drivers/LED_display.c **** {
+ 1091              		.loc 1 190 1 is_stmt 1 view -0
  1092              		.cfi_startproc
  1093              		@ args = 0, pretend = 0, frame = 0
  1094              		@ frame_needed = 0, uses_anonymous_args = 0
-ARM GAS  /tmp/ccjSP2i1.s 			page 42
-
-
  1095              		@ link register save eliminated.
- 169:Core/Src/LED_display.c ****   Segment_A(ON);
- 1096              		.loc 1 169 3 view .LVU273
+ 191:IO_drivers/LED_display.c ****   Segment_A(ON);
+ 1096              		.loc 1 191 3 view .LVU273
  1097              	.LVL74:
  1098              	.LBB270:
  1099              	.LBI270:
@@ -2480,8 +2502,8 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  1107              		.loc 2 884 3 is_stmt 0 view .LVU276
  1108              	.LBE271:
  1109              	.LBE270:
- 170:Core/Src/LED_display.c ****   Segment_B(ON);
- 1110              		.loc 1 170 3 is_stmt 1 view .LVU277
+ 192:IO_drivers/LED_display.c ****   Segment_B(ON);
+ 1110              		.loc 1 192 3 is_stmt 1 view .LVU277
  1111              	.LBB272:
  1112              	.LBI272:
  882:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** {
@@ -2496,8 +2518,11 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  1119              		.loc 2 884 3 is_stmt 0 view .LVU280
  1120              	.LBE273:
  1121              	.LBE272:
- 171:Core/Src/LED_display.c ****   Segment_C(ON);
- 1122              		.loc 1 171 3 is_stmt 1 view .LVU281
+ARM GAS  /tmp/ccclupDC.s 			page 43
+
+
+ 193:IO_drivers/LED_display.c ****   Segment_C(ON);
+ 1122              		.loc 1 193 3 is_stmt 1 view .LVU281
  1123              	.LBB274:
  1124              	.LBI274:
  882:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** {
@@ -2512,15 +2537,12 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  1131              		.loc 2 884 3 is_stmt 0 view .LVU284
  1132              	.LBE275:
  1133              	.LBE274:
- 172:Core/Src/LED_display.c **** }
- 1134              		.loc 1 172 1 view .LVU285
+ 194:IO_drivers/LED_display.c **** }
+ 1134              		.loc 1 194 1 view .LVU285
  1135 000e 7047     		bx	lr
  1136              	.L53:
  1137              		.align	2
  1138              	.L52:
-ARM GAS  /tmp/ccjSP2i1.s 			page 43
-
-
  1139 0010 00040240 		.word	1073873920
  1140              		.cfi_endproc
  1141              	.LFE825:
@@ -2532,17 +2554,17 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  1148              		.thumb_func
  1150              	digit_8:
  1151              	.LFB826:
- 173:Core/Src/LED_display.c **** 
- 174:Core/Src/LED_display.c **** //---------------------------------------------------------------------------//
- 175:Core/Src/LED_display.c **** void digit_8 (void)
- 176:Core/Src/LED_display.c **** {
- 1152              		.loc 1 176 1 is_stmt 1 view -0
+ 195:IO_drivers/LED_display.c **** 
+ 196:IO_drivers/LED_display.c **** //---------------------------------------------------------------------------//
+ 197:IO_drivers/LED_display.c **** void digit_8 (void)
+ 198:IO_drivers/LED_display.c **** {
+ 1152              		.loc 1 198 1 is_stmt 1 view -0
  1153              		.cfi_startproc
  1154              		@ args = 0, pretend = 0, frame = 0
  1155              		@ frame_needed = 0, uses_anonymous_args = 0
  1156              		@ link register save eliminated.
- 177:Core/Src/LED_display.c ****   Segment_A(ON);
- 1157              		.loc 1 177 3 view .LVU287
+ 199:IO_drivers/LED_display.c ****   Segment_A(ON);
+ 1157              		.loc 1 199 3 view .LVU287
  1158              	.LVL78:
  1159              	.LBB276:
  1160              	.LBI276:
@@ -2556,11 +2578,14 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  1166 0004 9A61     		str	r2, [r3, #24]
  1167              	.LVL79:
  884:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** }
+ARM GAS  /tmp/ccclupDC.s 			page 44
+
+
  1168              		.loc 2 884 3 is_stmt 0 view .LVU290
  1169              	.LBE277:
  1170              	.LBE276:
- 178:Core/Src/LED_display.c ****   Segment_B(ON);
- 1171              		.loc 1 178 3 is_stmt 1 view .LVU291
+ 200:IO_drivers/LED_display.c ****   Segment_B(ON);
+ 1171              		.loc 1 200 3 is_stmt 1 view .LVU291
  1172              	.LBB278:
  1173              	.LBI278:
  882:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** {
@@ -2575,12 +2600,9 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  1180              		.loc 2 884 3 is_stmt 0 view .LVU294
  1181              	.LBE279:
  1182              	.LBE278:
- 179:Core/Src/LED_display.c ****   Segment_C(ON);
- 1183              		.loc 1 179 3 is_stmt 1 view .LVU295
+ 201:IO_drivers/LED_display.c ****   Segment_C(ON);
+ 1183              		.loc 1 201 3 is_stmt 1 view .LVU295
  1184              	.LBB280:
-ARM GAS  /tmp/ccjSP2i1.s 			page 44
-
-
  1185              	.LBI280:
  882:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** {
  1186              		.loc 2 882 22 view .LVU296
@@ -2594,8 +2616,8 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  1192              		.loc 2 884 3 is_stmt 0 view .LVU298
  1193              	.LBE281:
  1194              	.LBE280:
- 180:Core/Src/LED_display.c ****   Segment_D(ON);
- 1195              		.loc 1 180 3 is_stmt 1 view .LVU299
+ 202:IO_drivers/LED_display.c ****   Segment_D(ON);
+ 1195              		.loc 1 202 3 is_stmt 1 view .LVU299
  1196              	.LBB282:
  1197              	.LBI282:
  882:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** {
@@ -2610,12 +2632,15 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  1204              		.loc 2 884 3 is_stmt 0 view .LVU302
  1205              	.LBE283:
  1206              	.LBE282:
- 181:Core/Src/LED_display.c ****   Segment_E(ON);
- 1207              		.loc 1 181 3 is_stmt 1 view .LVU303
+ 203:IO_drivers/LED_display.c ****   Segment_E(ON);
+ 1207              		.loc 1 203 3 is_stmt 1 view .LVU303
  1208              	.LBB284:
  1209              	.LBI284:
  882:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** {
  1210              		.loc 2 882 22 view .LVU304
+ARM GAS  /tmp/ccclupDC.s 			page 45
+
+
  1211              	.LBB285:
  884:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** }
  1212              		.loc 2 884 3 view .LVU305
@@ -2626,8 +2651,8 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  1216              		.loc 2 884 3 is_stmt 0 view .LVU306
  1217              	.LBE285:
  1218              	.LBE284:
- 182:Core/Src/LED_display.c ****   Segment_F(ON);
- 1219              		.loc 1 182 3 is_stmt 1 view .LVU307
+ 204:IO_drivers/LED_display.c ****   Segment_F(ON);
+ 1219              		.loc 1 204 3 is_stmt 1 view .LVU307
  1220              	.LBB286:
  1221              	.LBI286:
  882:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** {
@@ -2638,15 +2663,12 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  1225 0016 4FF48072 		mov	r2, #256
  1226 001a 9A61     		str	r2, [r3, #24]
  1227              	.LVL84:
-ARM GAS  /tmp/ccjSP2i1.s 			page 45
-
-
  884:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** }
  1228              		.loc 2 884 3 is_stmt 0 view .LVU310
  1229              	.LBE287:
  1230              	.LBE286:
- 183:Core/Src/LED_display.c ****   Segment_G(ON);
- 1231              		.loc 1 183 3 is_stmt 1 view .LVU311
+ 205:IO_drivers/LED_display.c ****   Segment_G(ON);
+ 1231              		.loc 1 205 3 is_stmt 1 view .LVU311
  1232              	.LBB288:
  1233              	.LBI288:
  882:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** {
@@ -2661,8 +2683,8 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  1240              		.loc 2 884 3 is_stmt 0 view .LVU314
  1241              	.LBE289:
  1242              	.LBE288:
- 184:Core/Src/LED_display.c **** }
- 1243              		.loc 1 184 1 view .LVU315
+ 206:IO_drivers/LED_display.c **** }
+ 1243              		.loc 1 206 1 view .LVU315
  1244 0022 7047     		bx	lr
  1245              	.L56:
  1246              		.align	2
@@ -2676,19 +2698,22 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  1255              		.syntax unified
  1256              		.thumb
  1257              		.thumb_func
+ARM GAS  /tmp/ccclupDC.s 			page 46
+
+
  1259              	digit_9:
  1260              	.LFB827:
- 185:Core/Src/LED_display.c **** 
- 186:Core/Src/LED_display.c **** //---------------------------------------------------------------------------//
- 187:Core/Src/LED_display.c **** void digit_9 (void)
- 188:Core/Src/LED_display.c **** {
- 1261              		.loc 1 188 1 is_stmt 1 view -0
+ 207:IO_drivers/LED_display.c **** 
+ 208:IO_drivers/LED_display.c **** //---------------------------------------------------------------------------//
+ 209:IO_drivers/LED_display.c **** void digit_9 (void)
+ 210:IO_drivers/LED_display.c **** {
+ 1261              		.loc 1 210 1 is_stmt 1 view -0
  1262              		.cfi_startproc
  1263              		@ args = 0, pretend = 0, frame = 0
  1264              		@ frame_needed = 0, uses_anonymous_args = 0
  1265              		@ link register save eliminated.
- 189:Core/Src/LED_display.c ****   Segment_A(ON);
- 1266              		.loc 1 189 3 view .LVU317
+ 211:IO_drivers/LED_display.c ****   Segment_A(ON);
+ 1266              		.loc 1 211 3 view .LVU317
  1267              	.LVL86:
  1268              	.LBB290:
  1269              	.LBI290:
@@ -2698,9 +2723,6 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  884:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** }
  1272              		.loc 2 884 3 view .LVU319
  1273 0000 074B     		ldr	r3, .L58
-ARM GAS  /tmp/ccjSP2i1.s 			page 46
-
-
  1274 0002 0222     		movs	r2, #2
  1275 0004 9A61     		str	r2, [r3, #24]
  1276              	.LVL87:
@@ -2708,8 +2730,8 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  1277              		.loc 2 884 3 is_stmt 0 view .LVU320
  1278              	.LBE291:
  1279              	.LBE290:
- 190:Core/Src/LED_display.c ****   Segment_B(ON);
- 1280              		.loc 1 190 3 is_stmt 1 view .LVU321
+ 212:IO_drivers/LED_display.c ****   Segment_B(ON);
+ 1280              		.loc 1 212 3 is_stmt 1 view .LVU321
  1281              	.LBB292:
  1282              	.LBI292:
  882:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** {
@@ -2724,8 +2746,8 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  1289              		.loc 2 884 3 is_stmt 0 view .LVU324
  1290              	.LBE293:
  1291              	.LBE292:
- 191:Core/Src/LED_display.c ****   Segment_C(ON);
- 1292              		.loc 1 191 3 is_stmt 1 view .LVU325
+ 213:IO_drivers/LED_display.c ****   Segment_C(ON);
+ 1292              		.loc 1 213 3 is_stmt 1 view .LVU325
  1293              	.LBB294:
  1294              	.LBI294:
  882:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** {
@@ -2736,12 +2758,15 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  1298 000a 0822     		movs	r2, #8
  1299 000c 9A61     		str	r2, [r3, #24]
  1300              	.LVL89:
+ARM GAS  /tmp/ccclupDC.s 			page 47
+
+
  884:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** }
  1301              		.loc 2 884 3 is_stmt 0 view .LVU328
  1302              	.LBE295:
  1303              	.LBE294:
- 192:Core/Src/LED_display.c ****   Segment_D(ON);
- 1304              		.loc 1 192 3 is_stmt 1 view .LVU329
+ 214:IO_drivers/LED_display.c ****   Segment_D(ON);
+ 1304              		.loc 1 214 3 is_stmt 1 view .LVU329
  1305              	.LBB296:
  1306              	.LBI296:
  882:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** {
@@ -2756,11 +2781,8 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  1313              		.loc 2 884 3 is_stmt 0 view .LVU332
  1314              	.LBE297:
  1315              	.LBE296:
- 193:Core/Src/LED_display.c ****   Segment_F(ON);
- 1316              		.loc 1 193 3 is_stmt 1 view .LVU333
-ARM GAS  /tmp/ccjSP2i1.s 			page 47
-
-
+ 215:IO_drivers/LED_display.c ****   Segment_F(ON);
+ 1316              		.loc 1 215 3 is_stmt 1 view .LVU333
  1317              	.LBB298:
  1318              	.LBI298:
  882:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** {
@@ -2775,8 +2797,8 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  1325              		.loc 2 884 3 is_stmt 0 view .LVU336
  1326              	.LBE299:
  1327              	.LBE298:
- 194:Core/Src/LED_display.c ****   Segment_G(ON);
- 1328              		.loc 1 194 3 is_stmt 1 view .LVU337
+ 216:IO_drivers/LED_display.c ****   Segment_G(ON);
+ 1328              		.loc 1 216 3 is_stmt 1 view .LVU337
  1329              	.LBB300:
  1330              	.LBI300:
  882:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h **** {
@@ -2791,11 +2813,14 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  1337              		.loc 2 884 3 is_stmt 0 view .LVU340
  1338              	.LBE301:
  1339              	.LBE300:
- 195:Core/Src/LED_display.c **** }
- 1340              		.loc 1 195 1 view .LVU341
+ 217:IO_drivers/LED_display.c **** }
+ 1340              		.loc 1 217 1 view .LVU341
  1341 001e 7047     		bx	lr
  1342              	.L59:
  1343              		.align	2
+ARM GAS  /tmp/ccclupDC.s 			page 48
+
+
  1344              	.L58:
  1345 0020 00040240 		.word	1073873920
  1346              		.cfi_endproc
@@ -2809,30 +2834,27 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  1356              	select_digit:
  1357              	.LVL93:
  1358              	.LFB828:
- 196:Core/Src/LED_display.c **** 
- 197:Core/Src/LED_display.c **** //---------------------------------------------------------------------------//
- 198:Core/Src/LED_display.c **** void select_digit (uint8_t digit)
- 199:Core/Src/LED_display.c **** {
- 1359              		.loc 1 199 1 is_stmt 1 view -0
+ 218:IO_drivers/LED_display.c **** 
+ 219:IO_drivers/LED_display.c **** //---------------------------------------------------------------------------//
+ 220:IO_drivers/LED_display.c **** void select_digit (uint8_t digit)
+ 221:IO_drivers/LED_display.c **** {
+ 1359              		.loc 1 221 1 is_stmt 1 view -0
  1360              		.cfi_startproc
  1361              		@ args = 0, pretend = 0, frame = 0
  1362              		@ frame_needed = 0, uses_anonymous_args = 0
- 1363              		.loc 1 199 1 is_stmt 0 view .LVU343
-ARM GAS  /tmp/ccjSP2i1.s 			page 48
-
-
+ 1363              		.loc 1 221 1 is_stmt 0 view .LVU343
  1364 0000 10B5     		push	{r4, lr}
  1365              	.LCFI1:
  1366              		.cfi_def_cfa_offset 8
  1367              		.cfi_offset 4, -8
  1368              		.cfi_offset 14, -4
  1369 0002 0446     		mov	r4, r0
- 200:Core/Src/LED_display.c ****     reset_all_digit();
- 1370              		.loc 1 200 5 is_stmt 1 view .LVU344
+ 222:IO_drivers/LED_display.c ****     reset_all_digit();
+ 1370              		.loc 1 222 5 is_stmt 1 view .LVU344
  1371 0004 FFF7FEFF 		bl	reset_all_digit
  1372              	.LVL94:
- 201:Core/Src/LED_display.c ****     switch (digit)
- 1373              		.loc 1 201 5 view .LVU345
+ 223:IO_drivers/LED_display.c ****     switch (digit)
+ 1373              		.loc 1 223 5 view .LVU345
  1374 0008 092C     		cmp	r4, #9
  1375 000a 08D8     		bhi	.L60
  1376 000c DFE804F0 		tbb	[pc, r4]
@@ -2849,200 +2871,333 @@ ARM GAS  /tmp/ccjSP2i1.s 			page 1
  1387 0019 20       		.byte	(.L62-.L63)/2
  1388              		.p2align 1
  1389              	.L72:
- 202:Core/Src/LED_display.c ****     {
- 203:Core/Src/LED_display.c ****         case 0:
- 204:Core/Src/LED_display.c ****             digit_0 ();
- 1390              		.loc 1 204 13 view .LVU346
+ 224:IO_drivers/LED_display.c ****     {
+ 225:IO_drivers/LED_display.c ****         case 0:
+ 226:IO_drivers/LED_display.c ****             digit_0 ();
+ 1390              		.loc 1 226 13 view .LVU346
  1391 001a FFF7FEFF 		bl	digit_0
  1392              	.LVL95:
- 205:Core/Src/LED_display.c ****             break;
- 1393              		.loc 1 205 13 view .LVU347
+ 227:IO_drivers/LED_display.c ****             break;
+ARM GAS  /tmp/ccclupDC.s 			page 49
+
+
+ 1393              		.loc 1 227 13 view .LVU347
  1394              	.L60:
- 206:Core/Src/LED_display.c **** 
- 207:Core/Src/LED_display.c ****         case 1:
- 208:Core/Src/LED_display.c ****             digit_1 ();
- 209:Core/Src/LED_display.c ****             break;
- 210:Core/Src/LED_display.c **** 
- 211:Core/Src/LED_display.c ****         case 2:
- 212:Core/Src/LED_display.c ****             digit_2 ();
- 213:Core/Src/LED_display.c ****             break;
- 214:Core/Src/LED_display.c ****       
- 215:Core/Src/LED_display.c ****         case 3:
- 216:Core/Src/LED_display.c ****             digit_3 ();
- 217:Core/Src/LED_display.c ****             break;  
- 218:Core/Src/LED_display.c **** 
- 219:Core/Src/LED_display.c ****         case 4:
- 220:Core/Src/LED_display.c ****             digit_4 ();
- 221:Core/Src/LED_display.c ****             break;
- 222:Core/Src/LED_display.c ****       
- 223:Core/Src/LED_display.c ****         case 5:
- 224:Core/Src/LED_display.c ****             digit_5 ();
- 225:Core/Src/LED_display.c ****             break; 
-ARM GAS  /tmp/ccjSP2i1.s 			page 49
-
-
- 226:Core/Src/LED_display.c **** 
- 227:Core/Src/LED_display.c ****         case 6:
- 228:Core/Src/LED_display.c ****             digit_6 ();
- 229:Core/Src/LED_display.c ****             break;
- 230:Core/Src/LED_display.c **** 
- 231:Core/Src/LED_display.c ****         case 7:
- 232:Core/Src/LED_display.c ****             digit_7 ();
- 233:Core/Src/LED_display.c ****             break;
- 234:Core/Src/LED_display.c ****       
- 235:Core/Src/LED_display.c ****         case 8:
- 236:Core/Src/LED_display.c ****             digit_8 ();
- 237:Core/Src/LED_display.c ****             break;  
- 238:Core/Src/LED_display.c **** 
- 239:Core/Src/LED_display.c ****         case 9:
- 240:Core/Src/LED_display.c ****             digit_9 ();
- 241:Core/Src/LED_display.c ****             break;
- 242:Core/Src/LED_display.c ****       
- 243:Core/Src/LED_display.c ****         default:
- 244:Core/Src/LED_display.c ****             break;     
- 245:Core/Src/LED_display.c ****     }
- 246:Core/Src/LED_display.c **** }
- 1395              		.loc 1 246 1 is_stmt 0 view .LVU348
+ 228:IO_drivers/LED_display.c **** 
+ 229:IO_drivers/LED_display.c ****         case 1:
+ 230:IO_drivers/LED_display.c ****             digit_1 ();
+ 231:IO_drivers/LED_display.c ****             break;
+ 232:IO_drivers/LED_display.c **** 
+ 233:IO_drivers/LED_display.c ****         case 2:
+ 234:IO_drivers/LED_display.c ****             digit_2 ();
+ 235:IO_drivers/LED_display.c ****             break;
+ 236:IO_drivers/LED_display.c ****       
+ 237:IO_drivers/LED_display.c ****         case 3:
+ 238:IO_drivers/LED_display.c ****             digit_3 ();
+ 239:IO_drivers/LED_display.c ****             break;  
+ 240:IO_drivers/LED_display.c **** 
+ 241:IO_drivers/LED_display.c ****         case 4:
+ 242:IO_drivers/LED_display.c ****             digit_4 ();
+ 243:IO_drivers/LED_display.c ****             break;
+ 244:IO_drivers/LED_display.c ****       
+ 245:IO_drivers/LED_display.c ****         case 5:
+ 246:IO_drivers/LED_display.c ****             digit_5 ();
+ 247:IO_drivers/LED_display.c ****             break; 
+ 248:IO_drivers/LED_display.c **** 
+ 249:IO_drivers/LED_display.c ****         case 6:
+ 250:IO_drivers/LED_display.c ****             digit_6 ();
+ 251:IO_drivers/LED_display.c ****             break;
+ 252:IO_drivers/LED_display.c **** 
+ 253:IO_drivers/LED_display.c ****         case 7:
+ 254:IO_drivers/LED_display.c ****             digit_7 ();
+ 255:IO_drivers/LED_display.c ****             break;
+ 256:IO_drivers/LED_display.c ****       
+ 257:IO_drivers/LED_display.c ****         case 8:
+ 258:IO_drivers/LED_display.c ****             digit_8 ();
+ 259:IO_drivers/LED_display.c ****             break;  
+ 260:IO_drivers/LED_display.c **** 
+ 261:IO_drivers/LED_display.c ****         case 9:
+ 262:IO_drivers/LED_display.c ****             digit_9 ();
+ 263:IO_drivers/LED_display.c ****             break;
+ 264:IO_drivers/LED_display.c ****       
+ 265:IO_drivers/LED_display.c ****         default:
+ 266:IO_drivers/LED_display.c ****             break;     
+ 267:IO_drivers/LED_display.c ****     }
+ 268:IO_drivers/LED_display.c **** }
+ 1395              		.loc 1 268 1 is_stmt 0 view .LVU348
  1396 001e 10BD     		pop	{r4, pc}
  1397              	.L71:
- 208:Core/Src/LED_display.c ****             break;
- 1398              		.loc 1 208 13 is_stmt 1 view .LVU349
+ 230:IO_drivers/LED_display.c ****             break;
+ 1398              		.loc 1 230 13 is_stmt 1 view .LVU349
  1399 0020 FFF7FEFF 		bl	digit_1
  1400              	.LVL96:
- 209:Core/Src/LED_display.c **** 
- 1401              		.loc 1 209 13 view .LVU350
+ 231:IO_drivers/LED_display.c **** 
+ 1401              		.loc 1 231 13 view .LVU350
  1402 0024 FBE7     		b	.L60
  1403              	.L70:
- 212:Core/Src/LED_display.c ****             break;
- 1404              		.loc 1 212 13 view .LVU351
+ 234:IO_drivers/LED_display.c ****             break;
+ 1404              		.loc 1 234 13 view .LVU351
  1405 0026 FFF7FEFF 		bl	digit_2
+ARM GAS  /tmp/ccclupDC.s 			page 50
+
+
  1406              	.LVL97:
- 213:Core/Src/LED_display.c ****       
- 1407              		.loc 1 213 13 view .LVU352
+ 235:IO_drivers/LED_display.c ****       
+ 1407              		.loc 1 235 13 view .LVU352
  1408 002a F8E7     		b	.L60
  1409              	.L69:
- 216:Core/Src/LED_display.c ****             break;  
- 1410              		.loc 1 216 13 view .LVU353
+ 238:IO_drivers/LED_display.c ****             break;  
+ 1410              		.loc 1 238 13 view .LVU353
  1411 002c FFF7FEFF 		bl	digit_3
  1412              	.LVL98:
- 217:Core/Src/LED_display.c **** 
- 1413              		.loc 1 217 13 view .LVU354
+ 239:IO_drivers/LED_display.c **** 
+ 1413              		.loc 1 239 13 view .LVU354
  1414 0030 F5E7     		b	.L60
  1415              	.L68:
- 220:Core/Src/LED_display.c ****             break;
- 1416              		.loc 1 220 13 view .LVU355
+ 242:IO_drivers/LED_display.c ****             break;
+ 1416              		.loc 1 242 13 view .LVU355
  1417 0032 FFF7FEFF 		bl	digit_4
  1418              	.LVL99:
- 221:Core/Src/LED_display.c ****       
- 1419              		.loc 1 221 13 view .LVU356
+ 243:IO_drivers/LED_display.c ****       
+ 1419              		.loc 1 243 13 view .LVU356
  1420 0036 F2E7     		b	.L60
  1421              	.L67:
- 224:Core/Src/LED_display.c ****             break; 
-ARM GAS  /tmp/ccjSP2i1.s 			page 50
-
-
- 1422              		.loc 1 224 13 view .LVU357
+ 246:IO_drivers/LED_display.c ****             break; 
+ 1422              		.loc 1 246 13 view .LVU357
  1423 0038 FFF7FEFF 		bl	digit_5
  1424              	.LVL100:
- 225:Core/Src/LED_display.c **** 
- 1425              		.loc 1 225 13 view .LVU358
+ 247:IO_drivers/LED_display.c **** 
+ 1425              		.loc 1 247 13 view .LVU358
  1426 003c EFE7     		b	.L60
  1427              	.L66:
- 228:Core/Src/LED_display.c ****             break;
- 1428              		.loc 1 228 13 view .LVU359
+ 250:IO_drivers/LED_display.c ****             break;
+ 1428              		.loc 1 250 13 view .LVU359
  1429 003e FFF7FEFF 		bl	digit_6
  1430              	.LVL101:
- 229:Core/Src/LED_display.c **** 
- 1431              		.loc 1 229 13 view .LVU360
+ 251:IO_drivers/LED_display.c **** 
+ 1431              		.loc 1 251 13 view .LVU360
  1432 0042 ECE7     		b	.L60
  1433              	.L65:
- 232:Core/Src/LED_display.c ****             break;
- 1434              		.loc 1 232 13 view .LVU361
+ 254:IO_drivers/LED_display.c ****             break;
+ 1434              		.loc 1 254 13 view .LVU361
  1435 0044 FFF7FEFF 		bl	digit_7
  1436              	.LVL102:
- 233:Core/Src/LED_display.c ****       
- 1437              		.loc 1 233 13 view .LVU362
+ 255:IO_drivers/LED_display.c ****       
+ 1437              		.loc 1 255 13 view .LVU362
  1438 0048 E9E7     		b	.L60
  1439              	.L64:
- 236:Core/Src/LED_display.c ****             break;  
- 1440              		.loc 1 236 13 view .LVU363
+ 258:IO_drivers/LED_display.c ****             break;  
+ 1440              		.loc 1 258 13 view .LVU363
  1441 004a FFF7FEFF 		bl	digit_8
  1442              	.LVL103:
- 237:Core/Src/LED_display.c **** 
- 1443              		.loc 1 237 13 view .LVU364
+ 259:IO_drivers/LED_display.c **** 
+ 1443              		.loc 1 259 13 view .LVU364
  1444 004e E6E7     		b	.L60
  1445              	.L62:
- 240:Core/Src/LED_display.c ****             break;
- 1446              		.loc 1 240 13 view .LVU365
+ 262:IO_drivers/LED_display.c ****             break;
+ 1446              		.loc 1 262 13 view .LVU365
  1447 0050 FFF7FEFF 		bl	digit_9
  1448              	.LVL104:
- 241:Core/Src/LED_display.c ****       
- 1449              		.loc 1 241 13 view .LVU366
- 1450              		.loc 1 246 1 is_stmt 0 view .LVU367
+ARM GAS  /tmp/ccclupDC.s 			page 51
+
+
+ 263:IO_drivers/LED_display.c ****       
+ 1449              		.loc 1 263 13 view .LVU366
+ 1450              		.loc 1 268 1 is_stmt 0 view .LVU367
  1451 0054 E3E7     		b	.L60
  1452              		.cfi_endproc
  1453              	.LFE828:
- 1455              		.text
- 1456              	.Letext0:
- 1457              		.file 3 "/home/arashamf/soft/ARM_toolchains/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/m
- 1458              		.file 4 "/home/arashamf/soft/ARM_toolchains/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/s
- 1459              		.file 5 "Drivers/CMSIS/Device/ST/STM32L1xx/Include/stm32l151xb.h"
- 1460              		.file 6 "Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h"
- 1461              		.file 7 "Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_tim.h"
-ARM GAS  /tmp/ccjSP2i1.s 			page 51
+ 1455              		.section	.text.LED_data_output,"ax",%progbits
+ 1456              		.align	1
+ 1457              		.global	LED_data_output
+ 1458              		.syntax unified
+ 1459              		.thumb
+ 1460              		.thumb_func
+ 1462              	LED_data_output:
+ 1463              	.LVL105:
+ 1464              	.LFB829:
+ 269:IO_drivers/LED_display.c **** 
+ 270:IO_drivers/LED_display.c **** //---------------------------------------------------------------------------//
+ 271:IO_drivers/LED_display.c **** void LED_data_output (char * time, uint8_t LEDnumb)
+ 272:IO_drivers/LED_display.c **** {
+ 1465              		.loc 1 272 1 is_stmt 1 view -0
+ 1466              		.cfi_startproc
+ 1467              		@ args = 0, pretend = 0, frame = 0
+ 1468              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1469              		.loc 1 272 1 is_stmt 0 view .LVU369
+ 1470 0000 70B5     		push	{r4, r5, r6, lr}
+ 1471              	.LCFI2:
+ 1472              		.cfi_def_cfa_offset 16
+ 1473              		.cfi_offset 4, -16
+ 1474              		.cfi_offset 5, -12
+ 1475              		.cfi_offset 6, -8
+ 1476              		.cfi_offset 14, -4
+ 1477 0002 0646     		mov	r6, r0
+ 1478 0004 0D46     		mov	r5, r1
+ 273:IO_drivers/LED_display.c ****     uint8_t digital;
+ 1479              		.loc 1 273 5 is_stmt 1 view .LVU370
+ 274:IO_drivers/LED_display.c ****     for (uint8_t j = 0; j < LEDnumb; j++)
+ 1480              		.loc 1 274 5 view .LVU371
+ 1481              	.LBB302:
+ 1482              		.loc 1 274 10 view .LVU372
+ 1483              	.LVL106:
+ 1484              		.loc 1 274 18 is_stmt 0 view .LVU373
+ 1485 0006 0024     		movs	r4, #0
+ 1486              		.loc 1 274 5 view .LVU374
+ 1487 0008 09E0     		b	.L75
+ 1488              	.LVL107:
+ 1489              	.L78:
+ 275:IO_drivers/LED_display.c ****     {
+ 276:IO_drivers/LED_display.c ****         select_number (j);
+ 277:IO_drivers/LED_display.c ****         if (*(time+j) >= 0x30)
+ 278:IO_drivers/LED_display.c ****         {  digital = (*(time+j) - 0x30); }
+ 279:IO_drivers/LED_display.c ****         else
+ 280:IO_drivers/LED_display.c ****         {  digital = 0;  }
+ 1490              		.loc 1 280 20 view .LVU375
+ 1491 000a 0020     		movs	r0, #0
+ 1492              	.L76:
+ 1493              	.LVL108:
+ 281:IO_drivers/LED_display.c ****         select_digit (digital);
+ARM GAS  /tmp/ccclupDC.s 			page 52
+
+
+ 1494              		.loc 1 281 9 is_stmt 1 discriminator 2 view .LVU376
+ 1495 000c FFF7FEFF 		bl	select_digit
+ 1496              	.LVL109:
+ 282:IO_drivers/LED_display.c ****         delay_LED_digital (j);
+ 1497              		.loc 1 282 9 discriminator 2 view .LVU377
+ 1498 0010 2046     		mov	r0, r4
+ 1499 0012 FFF7FEFF 		bl	delay_LED_digital
+ 1500              	.LVL110:
+ 283:IO_drivers/LED_display.c ****         reset_all_digit ();
+ 1501              		.loc 1 283 9 discriminator 2 view .LVU378
+ 1502 0016 FFF7FEFF 		bl	reset_all_digit
+ 1503              	.LVL111:
+ 274:IO_drivers/LED_display.c ****     {
+ 1504              		.loc 1 274 38 discriminator 2 view .LVU379
+ 274:IO_drivers/LED_display.c ****     {
+ 1505              		.loc 1 274 39 is_stmt 0 discriminator 2 view .LVU380
+ 1506 001a 0134     		adds	r4, r4, #1
+ 1507              	.LVL112:
+ 274:IO_drivers/LED_display.c ****     {
+ 1508              		.loc 1 274 39 discriminator 2 view .LVU381
+ 1509 001c E4B2     		uxtb	r4, r4
+ 1510              	.LVL113:
+ 1511              	.L75:
+ 274:IO_drivers/LED_display.c ****     {
+ 1512              		.loc 1 274 25 is_stmt 1 discriminator 1 view .LVU382
+ 274:IO_drivers/LED_display.c ****     {
+ 1513              		.loc 1 274 5 is_stmt 0 discriminator 1 view .LVU383
+ 1514 001e AC42     		cmp	r4, r5
+ 1515 0020 08D2     		bcs	.L80
+ 276:IO_drivers/LED_display.c ****         if (*(time+j) >= 0x30)
+ 1516              		.loc 1 276 9 is_stmt 1 view .LVU384
+ 1517 0022 2046     		mov	r0, r4
+ 1518 0024 FFF7FEFF 		bl	select_number
+ 1519              	.LVL114:
+ 277:IO_drivers/LED_display.c ****         {  digital = (*(time+j) - 0x30); }
+ 1520              		.loc 1 277 9 view .LVU385
+ 277:IO_drivers/LED_display.c ****         {  digital = (*(time+j) - 0x30); }
+ 1521              		.loc 1 277 13 is_stmt 0 view .LVU386
+ 1522 0028 335D     		ldrb	r3, [r6, r4]	@ zero_extendqisi2
+ 277:IO_drivers/LED_display.c ****         {  digital = (*(time+j) - 0x30); }
+ 1523              		.loc 1 277 12 view .LVU387
+ 1524 002a 2F2B     		cmp	r3, #47
+ 1525 002c EDD9     		bls	.L78
+ 278:IO_drivers/LED_display.c ****         else
+ 1526              		.loc 1 278 12 is_stmt 1 view .LVU388
+ 278:IO_drivers/LED_display.c ****         else
+ 1527              		.loc 1 278 20 is_stmt 0 view .LVU389
+ 1528 002e 303B     		subs	r3, r3, #48
+ 1529 0030 D8B2     		uxtb	r0, r3
+ 1530              	.LVL115:
+ 278:IO_drivers/LED_display.c ****         else
+ 1531              		.loc 1 278 20 view .LVU390
+ 1532 0032 EBE7     		b	.L76
+ 1533              	.LVL116:
+ 1534              	.L80:
+ 278:IO_drivers/LED_display.c ****         else
+ 1535              		.loc 1 278 20 view .LVU391
+ARM GAS  /tmp/ccclupDC.s 			page 53
+
+
+ 1536              	.LBE302:
+ 284:IO_drivers/LED_display.c ****         //delay_us(500);
+ 285:IO_drivers/LED_display.c ****     }
+ 286:IO_drivers/LED_display.c **** }...
+ 1537              		.loc 1 286 1 view .LVU392
+ 1538 0034 70BD     		pop	{r4, r5, r6, pc}
+ 1539              		.loc 1 286 1 view .LVU393
+ 1540              		.cfi_endproc
+ 1541              	.LFE829:
+ 1543              		.text
+ 1544              	.Letext0:
+ 1545              		.file 3 "/home/arashamf/soft/ARM_toolchains/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/m
+ 1546              		.file 4 "/home/arashamf/soft/ARM_toolchains/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/s
+ 1547              		.file 5 "Drivers/CMSIS/Device/ST/STM32L1xx/Include/stm32l151xb.h"
+ 1548              		.file 6 "Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h"
+ 1549              		.file 7 "Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_tim.h"
+ 1550              		.file 8 "Core/Inc/tim.h"
+ARM GAS  /tmp/ccclupDC.s 			page 54
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 LED_display.c
-     /tmp/ccjSP2i1.s:18     .text.reset_number:0000000000000000 $t
-     /tmp/ccjSP2i1.s:24     .text.reset_number:0000000000000000 reset_number
-     /tmp/ccjSP2i1.s:38     .text.reset_number:0000000000000008 $d
-     /tmp/ccjSP2i1.s:44     .text.reset_number:000000000000000e $t
-     /tmp/ccjSP2i1.s:147    .text.reset_number:000000000000004c $d
-     /tmp/ccjSP2i1.s:152    .text.reset_all_number:0000000000000000 $t
-     /tmp/ccjSP2i1.s:158    .text.reset_all_number:0000000000000000 reset_all_number
-     /tmp/ccjSP2i1.s:244    .text.reset_all_number:0000000000000028 $d
-     /tmp/ccjSP2i1.s:249    .text.select_number:0000000000000000 $t
-     /tmp/ccjSP2i1.s:255    .text.select_number:0000000000000000 select_number
-     /tmp/ccjSP2i1.s:277    .text.select_number:0000000000000010 $d
-     /tmp/ccjSP2i1.s:283    .text.select_number:0000000000000016 $t
-     /tmp/ccjSP2i1.s:386    .text.select_number:0000000000000048 $d
-     /tmp/ccjSP2i1.s:391    .text.reset_all_digit:0000000000000000 $t
-     /tmp/ccjSP2i1.s:397    .text.reset_all_digit:0000000000000000 reset_all_digit
-     /tmp/ccjSP2i1.s:507    .text.reset_all_digit:0000000000000034 $d
-     /tmp/ccjSP2i1.s:512    .text.digit_0:0000000000000000 $t
-     /tmp/ccjSP2i1.s:518    .text.digit_0:0000000000000000 digit_0
-     /tmp/ccjSP2i1.s:604    .text.digit_0:0000000000000020 $d
-     /tmp/ccjSP2i1.s:609    .text.digit_1:0000000000000000 $t
-     /tmp/ccjSP2i1.s:615    .text.digit_1:0000000000000000 digit_1
-     /tmp/ccjSP2i1.s:653    .text.digit_1:000000000000000c $d
-     /tmp/ccjSP2i1.s:658    .text.digit_2:0000000000000000 $t
-     /tmp/ccjSP2i1.s:664    .text.digit_2:0000000000000000 digit_2
-     /tmp/ccjSP2i1.s:738    .text.digit_2:000000000000001c $d
-     /tmp/ccjSP2i1.s:743    .text.digit_3:0000000000000000 $t
-     /tmp/ccjSP2i1.s:749    .text.digit_3:0000000000000000 digit_3
-     /tmp/ccjSP2i1.s:823    .text.digit_3:000000000000001c $d
-     /tmp/ccjSP2i1.s:828    .text.digit_4:0000000000000000 $t
-     /tmp/ccjSP2i1.s:834    .text.digit_4:0000000000000000 digit_4
-     /tmp/ccjSP2i1.s:896    .text.digit_4:0000000000000018 $d
-     /tmp/ccjSP2i1.s:901    .text.digit_5:0000000000000000 $t
-     /tmp/ccjSP2i1.s:907    .text.digit_5:0000000000000000 digit_5
-     /tmp/ccjSP2i1.s:981    .text.digit_5:000000000000001c $d
-     /tmp/ccjSP2i1.s:986    .text.digit_6:0000000000000000 $t
-     /tmp/ccjSP2i1.s:992    .text.digit_6:0000000000000000 digit_6
-     /tmp/ccjSP2i1.s:1078   .text.digit_6:0000000000000020 $d
-     /tmp/ccjSP2i1.s:1083   .text.digit_7:0000000000000000 $t
-     /tmp/ccjSP2i1.s:1089   .text.digit_7:0000000000000000 digit_7
-     /tmp/ccjSP2i1.s:1139   .text.digit_7:0000000000000010 $d
-     /tmp/ccjSP2i1.s:1144   .text.digit_8:0000000000000000 $t
-     /tmp/ccjSP2i1.s:1150   .text.digit_8:0000000000000000 digit_8
-     /tmp/ccjSP2i1.s:1248   .text.digit_8:0000000000000024 $d
-     /tmp/ccjSP2i1.s:1253   .text.digit_9:0000000000000000 $t
-     /tmp/ccjSP2i1.s:1259   .text.digit_9:0000000000000000 digit_9
-     /tmp/ccjSP2i1.s:1345   .text.digit_9:0000000000000020 $d
-     /tmp/ccjSP2i1.s:1350   .text.select_digit:0000000000000000 $t
-     /tmp/ccjSP2i1.s:1356   .text.select_digit:0000000000000000 select_digit
-     /tmp/ccjSP2i1.s:1378   .text.select_digit:0000000000000010 $d
-     /tmp/ccjSP2i1.s:1388   .text.select_digit:000000000000001a $t
+     /tmp/ccclupDC.s:18     .text.reset_number:0000000000000000 $t
+     /tmp/ccclupDC.s:24     .text.reset_number:0000000000000000 reset_number
+     /tmp/ccclupDC.s:38     .text.reset_number:0000000000000008 $d
+     /tmp/ccclupDC.s:44     .text.reset_number:000000000000000e $t
+     /tmp/ccclupDC.s:147    .text.reset_number:000000000000004c $d
+     /tmp/ccclupDC.s:152    .text.reset_all_number:0000000000000000 $t
+     /tmp/ccclupDC.s:158    .text.reset_all_number:0000000000000000 reset_all_number
+     /tmp/ccclupDC.s:244    .text.reset_all_number:0000000000000028 $d
+     /tmp/ccclupDC.s:249    .text.select_number:0000000000000000 $t
+     /tmp/ccclupDC.s:255    .text.select_number:0000000000000000 select_number
+     /tmp/ccclupDC.s:277    .text.select_number:0000000000000010 $d
+     /tmp/ccclupDC.s:283    .text.select_number:0000000000000016 $t
+     /tmp/ccclupDC.s:386    .text.select_number:0000000000000048 $d
+     /tmp/ccclupDC.s:391    .text.reset_all_digit:0000000000000000 $t
+     /tmp/ccclupDC.s:397    .text.reset_all_digit:0000000000000000 reset_all_digit
+     /tmp/ccclupDC.s:507    .text.reset_all_digit:0000000000000034 $d
+     /tmp/ccclupDC.s:512    .text.digit_0:0000000000000000 $t
+     /tmp/ccclupDC.s:518    .text.digit_0:0000000000000000 digit_0
+     /tmp/ccclupDC.s:604    .text.digit_0:0000000000000020 $d
+     /tmp/ccclupDC.s:609    .text.digit_1:0000000000000000 $t
+     /tmp/ccclupDC.s:615    .text.digit_1:0000000000000000 digit_1
+     /tmp/ccclupDC.s:653    .text.digit_1:000000000000000c $d
+     /tmp/ccclupDC.s:658    .text.digit_2:0000000000000000 $t
+     /tmp/ccclupDC.s:664    .text.digit_2:0000000000000000 digit_2
+     /tmp/ccclupDC.s:738    .text.digit_2:000000000000001c $d
+     /tmp/ccclupDC.s:743    .text.digit_3:0000000000000000 $t
+     /tmp/ccclupDC.s:749    .text.digit_3:0000000000000000 digit_3
+     /tmp/ccclupDC.s:823    .text.digit_3:000000000000001c $d
+     /tmp/ccclupDC.s:828    .text.digit_4:0000000000000000 $t
+     /tmp/ccclupDC.s:834    .text.digit_4:0000000000000000 digit_4
+     /tmp/ccclupDC.s:896    .text.digit_4:0000000000000018 $d
+     /tmp/ccclupDC.s:901    .text.digit_5:0000000000000000 $t
+     /tmp/ccclupDC.s:907    .text.digit_5:0000000000000000 digit_5
+     /tmp/ccclupDC.s:981    .text.digit_5:000000000000001c $d
+     /tmp/ccclupDC.s:986    .text.digit_6:0000000000000000 $t
+     /tmp/ccclupDC.s:992    .text.digit_6:0000000000000000 digit_6
+     /tmp/ccclupDC.s:1078   .text.digit_6:0000000000000020 $d
+     /tmp/ccclupDC.s:1083   .text.digit_7:0000000000000000 $t
+     /tmp/ccclupDC.s:1089   .text.digit_7:0000000000000000 digit_7
+     /tmp/ccclupDC.s:1139   .text.digit_7:0000000000000010 $d
+     /tmp/ccclupDC.s:1144   .text.digit_8:0000000000000000 $t
+     /tmp/ccclupDC.s:1150   .text.digit_8:0000000000000000 digit_8
+     /tmp/ccclupDC.s:1248   .text.digit_8:0000000000000024 $d
+     /tmp/ccclupDC.s:1253   .text.digit_9:0000000000000000 $t
+     /tmp/ccclupDC.s:1259   .text.digit_9:0000000000000000 digit_9
+     /tmp/ccclupDC.s:1345   .text.digit_9:0000000000000020 $d
+     /tmp/ccclupDC.s:1350   .text.select_digit:0000000000000000 $t
+     /tmp/ccclupDC.s:1356   .text.select_digit:0000000000000000 select_digit
+     /tmp/ccclupDC.s:1378   .text.select_digit:0000000000000010 $d
+     /tmp/ccclupDC.s:1388   .text.select_digit:000000000000001a $t
+     /tmp/ccclupDC.s:1456   .text.LED_data_output:0000000000000000 $t
+     /tmp/ccclupDC.s:1462   .text.LED_data_output:0000000000000000 LED_data_output
 
-NO UNDEFINED SYMBOLS
+UNDEFINED SYMBOLS
+delay_LED_digital
+ARM GAS  /tmp/ccclupDC.s 			page 55
+
+

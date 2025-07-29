@@ -26,11 +26,15 @@
 #include "usart.h"
 #include <stdio.h>
 
-// DEFINES---------------------------------------------------------------------------//
+//defines---------------------------------------------------------------------------//
 #define   I2C_DELAY               100
 #define   RTC_I2C                 I2C1
 #define 	I2C_REQUEST_WRITE       0x00
 #define 	I2C_REQUEST_READ        0x01
+
+//variables--------------------------------------------------------------------------------//
+I2C_status_t I2Cstatus = I2C_OK;
+
 /* USER CODE END 0 */
 
 /* I2C1 init function */
@@ -96,28 +100,28 @@ void MX_I2C1_Init(void)
 //------------------------------------------------------------------------------//
 static uint8_t I2C_WriteAdress (uint16_t reg_addr, uint32_t delay)
 {
-  uint8_t I2C_status = I2C_OK;
-  static uint64_t timeout_delay = 0;
-	if ((I2C_status = LL_I2C_IsActiveFlag_BUSY(RTC_I2C)) != I2C_OK) 
-  { return I2C_status; }
+  I2Cstatus = I2C_OK;
+  //static uint64_t timeout_delay = 0;
+	if ((I2Cstatus = LL_I2C_IsActiveFlag_BUSY(RTC_I2C)) != I2C_OK) 
+  { return I2Cstatus; }
 
   LL_I2C_DisableBitPOS(RTC_I2C); //Disable Pos
   LL_I2C_AcknowledgeNextData(RTC_I2C, LL_I2C_ACK); //Prepare the generation of a ACKnowledge condition after the address receive match code or next received byte
   LL_I2C_GenerateStartCondition(RTC_I2C); //Generate a START condition
   
-  timeout_delay = delay + Get_SysTick(); //инициализация переменной таймаута
-	while(!LL_I2C_IsActiveFlag_SB(RTC_I2C))  //Indicate the status of Start Bit (master mode)
+  //timeout_delay = delay + Get_SysTick(); //инициализация переменной таймаута
+	while(!LL_I2C_IsActiveFlag_SB(RTC_I2C))  //Indicate the I2Cstatus of Start Bit (master mode)
   {
-    if (systick_delay (timeout_delay) == 1) //выход из ожидания в случае окончания таймаута
-    {  return (I2C_status = I2C_TIMEOUT);  }
+    if (return_flag_timeout() == ON) //выход из ожидания в случае окончания таймаута
+    {  return (I2Cstatus = I2C_TIMEOUT);  }
   }
   (void) RTC_I2C->SR1;   //считывание регистра SR1 для сброса флагов
 		
   LL_I2C_TransmitData8(RTC_I2C, RTC_ADDRESS | I2C_REQUEST_WRITE); //передача адреса микросхемы и бита write 
   while(!LL_I2C_IsActiveFlag_ADDR(RTC_I2C))
   {
-    if (systick_delay (timeout_delay) == 1) //выход из ожидания в случае окнчаеия таймаута
-    {  return (I2C_status = I2C_TIMEOUT);  }
+    if (return_flag_timeout() == ON) //выход из ожидания в случае окончания таймаута
+    {  return (I2Cstatus = I2C_TIMEOUT);  }
   }
   LL_I2C_ClearFlag_ADDR(RTC_I2C);
   (void) RTC_I2C->SR2;   //считывание регистра SR2 для сброса флагов
@@ -125,77 +129,77 @@ static uint8_t I2C_WriteAdress (uint16_t reg_addr, uint32_t delay)
   LL_I2C_TransmitData8(RTC_I2C, (uint8_t) reg_addr); //адреса регистра 
 	while(!LL_I2C_IsActiveFlag_TXE(RTC_I2C))
   {
-    if (systick_delay (timeout_delay) == 1) //выход из ожидания в случае окнчаеия таймаута
-    {  return (I2C_status = I2C_TIMEOUT);  }
+    if (return_flag_timeout() == ON) //выход из ожидания в случае окнчаеия таймаута
+    {  return (I2Cstatus = I2C_TIMEOUT);  }
   }
-	return I2C_OK;
+	return I2Cstatus=I2C_OK;
 }
 
 //------------------------------------------------------------------------------//
 uint8_t I2C_WriteBuffer (uint16_t reg_addr, uint8_t *buf, uint16_t bytes_count)
 {
-  uint8_t I2C_status = I2C_OK;
-  static uint64_t timeout_delay = 0;
-	if ((I2C_status = I2C_WriteAdress (reg_addr, I2C_DELAY)) != I2C_OK)
-	{	return I2C_status;	}
+  I2Cstatus = I2C_OK;
+  //static uint64_t timeout_delay = 0;
+	if ((I2Cstatus = I2C_WriteAdress (reg_addr, I2C_DELAY)) != I2C_OK)
+	{	return I2Cstatus;	}
 
-  timeout_delay = I2C_DELAY + Get_SysTick(); //инициализация переменной таймаута
+ // timeout_delay = I2C_DELAY + Get_SysTick(); //инициализация переменной таймаута
   for(uint16_t i=0; i<bytes_count; i++)
   {
     LL_I2C_TransmitData8(RTC_I2C, buf[i]);
     while(!LL_I2C_IsActiveFlag_TXE(RTC_I2C))
     {
-      if (systick_delay (timeout_delay) == 1) //выход из ожидания в случае окончания таймаута
-      {  return (I2C_status = I2C_TIMEOUT);  }
+      if (return_flag_timeout() == ON) //выход из ожидания в случае окончания таймаута
+      {  return (I2Cstatus = I2C_TIMEOUT);  }
     }
   }
   LL_I2C_GenerateStopCondition(RTC_I2C);
 
-	return I2C_status;
+	return I2Cstatus;
 }
 
 //------------------------------------------------------------------------------//
 uint8_t I2C_WriteByte (uint8_t byte, uint16_t reg_addr)
 {
-  uint8_t I2C_status = I2C_OK;
-  static uint64_t timeout_delay = 0;
-  if ((I2C_status = I2C_WriteAdress (reg_addr, I2C_DELAY)) != I2C_OK)
-	{	return I2C_status;	}
+  I2Cstatus = I2C_OK;
+ // static uint64_t timeout_delay = 0;
+  if ((I2Cstatus = I2C_WriteAdress (reg_addr, I2C_DELAY)) != I2C_OK)
+	{	return I2Cstatus;	}
 
-  timeout_delay = I2C_DELAY + Get_SysTick(); //инициализация переменной таймаута
+  //timeout_delay = I2C_DELAY + Get_SysTick(); //инициализация переменной таймаута
   LL_I2C_TransmitData8(RTC_I2C, byte);
   while(!LL_I2C_IsActiveFlag_TXE(RTC_I2C))
   {
-    if (systick_delay (timeout_delay) == 1) //выход из ожидания в случае окончания таймаута
-    {  return (I2C_status = I2C_TIMEOUT);  }
+    if (return_flag_timeout() == ON) //выход из ожидания в случае окончания таймаута
+    {  return (I2Cstatus = I2C_TIMEOUT);  }
   };
   LL_I2C_GenerateStopCondition(RTC_I2C);
 		
-	return I2C_status;
+	return I2Cstatus;
 }
 
 //------------------------------------------------------------------------------//
 uint8_t I2C_ReadBuffer (uint16_t reg_addr, uint8_t *buf, uint16_t bytes_count)
 {
-  uint8_t I2C_status = I2C_OK;
-  static uint64_t timeout_delay = 0;
-  if ((I2C_status = I2C_WriteAdress (reg_addr, I2C_DELAY)) != I2C_OK)
-	{	return I2C_status;	}
+  uint8_t I2Cstatus = I2C_OK;
+  //static uint64_t timeout_delay = 0;
+  if ((I2Cstatus = I2C_WriteAdress (reg_addr, I2C_DELAY)) != I2C_OK)
+	{	return I2Cstatus;	}
 	
   LL_I2C_GenerateStartCondition(RTC_I2C); //условие Start
-  timeout_delay = I2C_DELAY + Get_SysTick(); //инициализация переменной таймаута
+ // timeout_delay = I2C_DELAY + Get_SysTick(); //инициализация переменной таймаута
   while(!LL_I2C_IsActiveFlag_SB(RTC_I2C))
   {
-    if (systick_delay (timeout_delay) == 1) //выход из ожидания в случае окончания таймаута
-    {  return (I2C_status = I2C_TIMEOUT);  }
+    if (return_flag_timeout() == ON) //выход из ожидания в случае окончания таймаута
+    {  return I2Cstatus = I2C_TIMEOUT;  }
   }
   (void) RTC_I2C->SR1;
 
   LL_I2C_TransmitData8(RTC_I2C, RTC_ADDRESS | I2C_REQUEST_READ); //передача адреса микросхемы и бита read 
   while (!LL_I2C_IsActiveFlag_ADDR(RTC_I2C))
   {
-    if (systick_delay (timeout_delay) == 1) //выход из ожидания в случае окончания таймаута
-    {  return (I2C_status = I2C_TIMEOUT);  }
+    if (return_flag_timeout() == ON) //выход из ожидания в случае окончания таймаута
+    {  return I2Cstatus = I2C_TIMEOUT;  }
   }
   LL_I2C_ClearFlag_ADDR(RTC_I2C);
 		
@@ -205,8 +209,8 @@ uint8_t I2C_ReadBuffer (uint16_t reg_addr, uint8_t *buf, uint16_t bytes_count)
     {
       while(!LL_I2C_IsActiveFlag_RXNE(RTC_I2C))
       {
-        if (systick_delay (timeout_delay) == 1) //выход из ожидания в случае окончания таймаута
-        { return (I2C_status = I2C_TIMEOUT);  }
+        if (return_flag_timeout() == ON) //выход из ожидания в случае окончания таймаута
+        { return I2Cstatus = I2C_TIMEOUT;  }
       }
       buf[i] = LL_I2C_ReceiveData8(RTC_I2C);
     }
@@ -216,35 +220,36 @@ uint8_t I2C_ReadBuffer (uint16_t reg_addr, uint8_t *buf, uint16_t bytes_count)
       LL_I2C_GenerateStopCondition(RTC_I2C); //условие Stop после получения текущего байта
       while(!LL_I2C_IsActiveFlag_RXNE(RTC_I2C))
       {
-        if (systick_delay (timeout_delay) == 1) //выход из ожидания в случае окончания таймаута
-        { return (I2C_status = I2C_TIMEOUT);  }
+        if (return_flag_timeout() == ON) //выход из ожидания в случае окончания таймаута
+        { return I2Cstatus = I2C_TIMEOUT;  }
       };
       buf[i] = LL_I2C_ReceiveData8(RTC_I2C);
     }
   }	
-	return I2C_status;
+	return I2Cstatus;
 }
 
 //------------------------------------------------------------------------------//
 uint8_t I2C_ReadByte (uint16_t reg_addr, uint8_t * byte)
 {
-	uint8_t I2C_status = I2C_OK;
-  static uint64_t timeout_delay = 0;
-  if ((I2C_status = I2C_WriteAdress (reg_addr, I2C_DELAY)) != I2C_OK)
-	{	return I2C_status;	}
+	I2Cstatus = I2C_OK;
+  //static uint64_t timeout_delay = 0;
+  if ((I2Cstatus = I2C_WriteAdress (reg_addr, I2C_DELAY)) != I2C_OK)
+	{	return I2Cstatus;	}
 	
   LL_I2C_GenerateStartCondition(RTC_I2C); //условие Start
+   // timeout_delay = I2C_DELAY + Get_SysTick(); //инициализация переменной таймаута
   while(!LL_I2C_IsActiveFlag_SB(RTC_I2C))
   {
-    if (systick_delay (timeout_delay) == 1) //выход из ожидания в случае окончания таймаута
-    { return (I2C_status = I2C_TIMEOUT);  }
+    if (return_flag_timeout() == ON) //выход из ожидания в случае окончания таймаута
+    { return I2Cstatus = I2C_TIMEOUT;  }
   }
   (void) RTC_I2C->SR1;
   LL_I2C_TransmitData8(RTC_I2C, RTC_ADDRESS | I2C_REQUEST_READ); //передача адреса микросхемы и бита read 
   while (!LL_I2C_IsActiveFlag_ADDR(RTC_I2C))
   {
-    if (systick_delay (timeout_delay) == 1) //выход из ожидания в случае окончания таймаута
-    { return (I2C_status = I2C_TIMEOUT);  }
+    if (return_flag_timeout() == ON) //выход из ожидания в случае окончания таймаута
+    { return I2Cstatus = I2C_TIMEOUT;  }
   }
 	LL_I2C_ClearFlag_ADDR(RTC_I2C);
 		
@@ -252,11 +257,11 @@ uint8_t I2C_ReadByte (uint16_t reg_addr, uint8_t * byte)
 	LL_I2C_GenerateStopCondition(RTC_I2C); //условие Stop после получения текущего байта
 	while(!LL_I2C_IsActiveFlag_RXNE(RTC_I2C))
   {
-    if (systick_delay (timeout_delay) == 1) //выход из ожидания в случае окончания таймаута
-    { return (I2C_status = I2C_TIMEOUT);  }
+    if (return_flag_timeout() == ON) //выход из ожидания в случае окончания таймаута
+    { return I2Cstatus = I2C_TIMEOUT;  }
   }
 	*byte = LL_I2C_ReceiveData8(RTC_I2C);	
 		
-	return I2C_status;
+	return I2Cstatus;
 }
 /* USER CODE END 1 */

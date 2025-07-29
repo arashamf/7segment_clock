@@ -29,7 +29,7 @@ extern "C" {
 #include "main.h"
 
 /* USER CODE BEGIN Includes */
-#include "ring_buffer.h"
+
 /* USER CODE END Includes */
 
 /* USER CODE BEGIN Private defines */
@@ -47,9 +47,9 @@ extern char DBG_buffer[];
 
 void UART_PutString (const char *);
 void UART_CharReception_Callback (void);
-void UART_msg_ini (void);
-uint8_t check_ring_buffer (void);
-uint32_t return_UNIXtimeNTP (void);
+uint8_t * returnPtrUARTbuf (void);
+
+//variables --------------------------------------------------------------------------//
 
 /* USER CODE END Prototypes */
 

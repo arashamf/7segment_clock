@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccW1jini.s 			page 1
+ARM GAS  /tmp/cciwsK0L.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccW1jini.s 			page 1
   29:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_ll_dma.c **** /** @addtogroup STM32L1xx_LL_Driver
   30:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_ll_dma.c ****   * @{
   31:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_ll_dma.c ****   */
-ARM GAS  /tmp/ccW1jini.s 			page 2
+ARM GAS  /tmp/cciwsK0L.s 			page 2
 
 
   32:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_ll_dma.c **** 
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccW1jini.s 			page 1
   86:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_ll_dma.c ****                                                          (((CHANNEL) == LL_DMA_CHANNEL_1) || \
   87:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_ll_dma.c ****                                                           ((CHANNEL) == LL_DMA_CHANNEL_2) || \
   88:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_ll_dma.c ****                                                           ((CHANNEL) == LL_DMA_CHANNEL_3) || \
-ARM GAS  /tmp/ccW1jini.s 			page 3
+ARM GAS  /tmp/cciwsK0L.s 			page 3
 
 
   89:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_ll_dma.c ****                                                           ((CHANNEL) == LL_DMA_CHANNEL_4) || \
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccW1jini.s 			page 1
  143:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_ll_dma.c ****   *         @arg @ref LL_DMA_CHANNEL_6
  144:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_ll_dma.c ****   *         @arg @ref LL_DMA_CHANNEL_7
  145:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_ll_dma.c ****   *         @arg @ref LL_DMA_CHANNEL_ALL
-ARM GAS  /tmp/ccW1jini.s 			page 4
+ARM GAS  /tmp/cciwsK0L.s 			page 4
 
 
  146:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_ll_dma.c ****   * @retval An ErrorStatus enumeration value:
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccW1jini.s 			page 1
   42 0006 404B     		ldr	r3, .L40
   43 0008 9842     		cmp	r0, r3
   44 000a 39D0     		beq	.L26
-ARM GAS  /tmp/ccW1jini.s 			page 5
+ARM GAS  /tmp/cciwsK0L.s 			page 5
 
 
   45              	.L4:
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccW1jini.s 			page 1
  200:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_ll_dma.c ****     LL_DMA_WriteReg(tmp, CMAR, 0U);
   85              		.loc 1 200 5 discriminator 36 view .LVU18
   86 003c DA60     		str	r2, [r3, #12]
-ARM GAS  /tmp/ccW1jini.s 			page 6
+ARM GAS  /tmp/cciwsK0L.s 			page 6
 
 
  201:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_ll_dma.c **** 
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccW1jini.s 			page 1
  231:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_ll_dma.c ****       /* Reset interrupt pending bits for DMAx Channel6 */
  232:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_ll_dma.c ****       LL_DMA_ClearFlag_GI6(DMAx);
  233:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_ll_dma.c ****     }
-ARM GAS  /tmp/ccW1jini.s 			page 7
+ARM GAS  /tmp/cciwsK0L.s 			page 7
 
 
  234:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_ll_dma.c ****     else if (Channel == LL_DMA_CHANNEL_7)
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccW1jini.s 			page 1
    9:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h ****   ==============================================================================
   10:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h ****     [..]
   11:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h ****       A delay between an RCC peripheral clock enable and the effective peripheral
-ARM GAS  /tmp/ccW1jini.s 			page 8
+ARM GAS  /tmp/cciwsK0L.s 			page 8
 
 
   12:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h ****       enabling should be taken into account in order to manage the peripheral read/write
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccW1jini.s 			page 1
   66:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h ****   * @{
   67:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h ****   */
   68:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h **** 
-ARM GAS  /tmp/ccW1jini.s 			page 9
+ARM GAS  /tmp/cciwsK0L.s 			page 9
 
 
   69:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h **** /** @defgroup BUS_LL_EC_AHB1_GRP1_PERIPH  AHB1 GRP1 PERIPH
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccW1jini.s 			page 1
  123:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h **** #endif /*SPI3*/
  124:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h **** #define LL_APB1_GRP1_PERIPH_USART2         RCC_APB1ENR_USART2EN
  125:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h **** #define LL_APB1_GRP1_PERIPH_USART3         RCC_APB1ENR_USART3EN
-ARM GAS  /tmp/ccW1jini.s 			page 10
+ARM GAS  /tmp/cciwsK0L.s 			page 10
 
 
  126:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h **** #if defined(UART4)
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccW1jini.s 			page 1
  180:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h ****   * @brief  Enable AHB1 peripherals clock.
  181:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h ****   * @rmtoll AHBENR       GPIOAEN       LL_AHB1_GRP1_EnableClock\n
  182:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h ****   *         AHBENR       GPIOBEN       LL_AHB1_GRP1_EnableClock\n
-ARM GAS  /tmp/ccW1jini.s 			page 11
+ARM GAS  /tmp/cciwsK0L.s 			page 11
 
 
  183:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h ****   *         AHBENR       GPIOCEN       LL_AHB1_GRP1_EnableClock\n
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccW1jini.s 			page 1
  237:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h ****   *         AHBENR       AESEN         LL_AHB1_GRP1_IsEnabledClock\n
  238:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h ****   *         AHBENR       FSMCEN        LL_AHB1_GRP1_IsEnabledClock
  239:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h ****   * @param  Periphs This parameter can be a combination of the following values:
-ARM GAS  /tmp/ccW1jini.s 			page 12
+ARM GAS  /tmp/cciwsK0L.s 			page 12
 
 
  240:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h ****   *         @arg @ref LL_AHB1_GRP1_PERIPH_GPIOA
@@ -718,7 +718,7 @@ ARM GAS  /tmp/ccW1jini.s 			page 1
  294:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h ****   *
  295:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h ****   *         (*) value not defined in all devices.
  296:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h ****   * @retval None
-ARM GAS  /tmp/ccW1jini.s 			page 13
+ARM GAS  /tmp/cciwsK0L.s 			page 13
 
 
  297:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h **** */
@@ -778,7 +778,7 @@ ARM GAS  /tmp/ccW1jini.s 			page 1
  148              	.LBE29:
  149              	.LBE28:
  166:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_ll_dma.c ****     }
-ARM GAS  /tmp/ccW1jini.s 			page 14
+ARM GAS  /tmp/cciwsK0L.s 			page 14
 
 
  150              		.loc 1 166 7 is_stmt 1 view .LVU44
@@ -838,7 +838,7 @@ ARM GAS  /tmp/ccW1jini.s 			page 1
  162 007c 0020     		movs	r0, #0
  163              	.LVL7:
  164              	.LBB33:
-ARM GAS  /tmp/ccW1jini.s 			page 15
+ARM GAS  /tmp/cciwsK0L.s 			page 15
 
 
  165              	.LBB32:
@@ -898,7 +898,7 @@ ARM GAS  /tmp/ccW1jini.s 			page 1
  185:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_ll_dma.c **** 
  208              		.loc 1 185 35 discriminator 21 view .LVU60
  209 00a8 0629     		cmp	r1, #6
-ARM GAS  /tmp/ccW1jini.s 			page 16
+ARM GAS  /tmp/cciwsK0L.s 			page 16
 
 
  210 00aa 01D0     		beq	.L23
@@ -958,7 +958,7 @@ ARM GAS  /tmp/ccW1jini.s 			page 1
   40:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h **** /* Private types -------------------------------------------------------------*/
   41:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h **** /* Private variables ---------------------------------------------------------*/
   42:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h **** /** @defgroup DMA_LL_Private_Variables DMA Private Variables
-ARM GAS  /tmp/ccW1jini.s 			page 17
+ARM GAS  /tmp/cciwsK0L.s 			page 17
 
 
   43:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h ****   * @{
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/ccW1jini.s 			page 1
   97:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h ****                                         @note: The circular buffer mode cannot be used if the memor
   98:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h ****                                                data transfer direction is configured on the selecte
   99:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h **** 
-ARM GAS  /tmp/ccW1jini.s 			page 18
+ARM GAS  /tmp/cciwsK0L.s 			page 18
 
 
  100:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h ****                                         This feature can be modified afterwards using unitary funct
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/ccW1jini.s 			page 1
  154:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h **** #define LL_DMA_IFCR_CHTIF1                DMA_IFCR_CHTIF1       /*!< Channel 1 half transfer flag  
  155:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h **** #define LL_DMA_IFCR_CTEIF1                DMA_IFCR_CTEIF1       /*!< Channel 1 transfer error flag 
  156:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h **** #define LL_DMA_IFCR_CGIF2                 DMA_IFCR_CGIF2        /*!< Channel 2 global flag         
-ARM GAS  /tmp/ccW1jini.s 			page 19
+ARM GAS  /tmp/cciwsK0L.s 			page 19
 
 
  157:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h **** #define LL_DMA_IFCR_CTCIF2                DMA_IFCR_CTCIF2       /*!< Channel 2 transfer complete fl
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/ccW1jini.s 			page 1
  211:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h **** #define LL_DMA_ISR_TEIF6                  DMA_ISR_TEIF6         /*!< Channel 6 transfer error flag 
  212:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h **** #define LL_DMA_ISR_GIF7                   DMA_ISR_GIF7          /*!< Channel 7 global flag         
  213:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h **** #define LL_DMA_ISR_TCIF7                  DMA_ISR_TCIF7         /*!< Channel 7 transfer complete fl
-ARM GAS  /tmp/ccW1jini.s 			page 20
+ARM GAS  /tmp/cciwsK0L.s 			page 20
 
 
  214:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h **** #define LL_DMA_ISR_HTIF7                  DMA_ISR_HTIF7         /*!< Channel 7 half transfer flag  
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/ccW1jini.s 			page 1
  268:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h ****   * @{
  269:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h ****   */
  270:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h **** #define LL_DMA_PERIPH_INCREMENT           DMA_CCR_PINC            /*!< Peripheral increment mode En
-ARM GAS  /tmp/ccW1jini.s 			page 21
+ARM GAS  /tmp/cciwsK0L.s 			page 21
 
 
  271:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h **** #define LL_DMA_PERIPH_NOINCREMENT         0x00000000U             /*!< Peripheral increment mode Di
@@ -1258,7 +1258,7 @@ ARM GAS  /tmp/ccW1jini.s 			page 1
  325:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h **** 
  326:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h **** /** @defgroup DMA_LL_EM_WRITE_READ Common Write and read registers macros
  327:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h ****   * @{
-ARM GAS  /tmp/ccW1jini.s 			page 22
+ARM GAS  /tmp/cciwsK0L.s 			page 22
 
 
  328:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h ****   */
@@ -1318,7 +1318,7 @@ ARM GAS  /tmp/ccW1jini.s 			page 1
  382:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h ****  ((uint32_t)(__CHANNEL_INSTANCE__) == ((uint32_t)DMA1_Channel6)) ? LL_DMA_CHANNEL_6 : \
  383:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h ****  ((uint32_t)(__CHANNEL_INSTANCE__) == ((uint32_t)DMA2_Channel6)) ? LL_DMA_CHANNEL_6 : \
  384:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h ****  LL_DMA_CHANNEL_7)
-ARM GAS  /tmp/ccW1jini.s 			page 23
+ARM GAS  /tmp/cciwsK0L.s 			page 23
 
 
  385:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h **** #else
@@ -1378,7 +1378,7 @@ ARM GAS  /tmp/ccW1jini.s 			page 1
  439:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h ****  (((uint32_t)(__DMA_INSTANCE__) == ((uint32_t)DMA2)) && ((uint32_t)(__CHANNEL__) == ((uint32_t)LL_D
  440:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h ****  (((uint32_t)(__DMA_INSTANCE__) == ((uint32_t)DMA1)) && ((uint32_t)(__CHANNEL__) == ((uint32_t)LL_D
  441:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h ****  (((uint32_t)(__DMA_INSTANCE__) == ((uint32_t)DMA2)) && ((uint32_t)(__CHANNEL__) == ((uint32_t)LL_D
-ARM GAS  /tmp/ccW1jini.s 			page 24
+ARM GAS  /tmp/cciwsK0L.s 			page 24
 
 
  442:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h ****  (((uint32_t)(__DMA_INSTANCE__) == ((uint32_t)DMA1)) && ((uint32_t)(__CHANNEL__) == ((uint32_t)LL_D
@@ -1438,7 +1438,7 @@ ARM GAS  /tmp/ccW1jini.s 			page 1
  496:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h ****   * @brief  Disable DMA channel.
  497:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h ****   * @rmtoll CCR          EN            LL_DMA_DisableChannel
  498:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h ****   * @param  DMAx DMAx Instance
-ARM GAS  /tmp/ccW1jini.s 			page 25
+ARM GAS  /tmp/cciwsK0L.s 			page 25
 
 
  499:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h ****   * @param  Channel This parameter can be one of the following values:
@@ -1498,7 +1498,7 @@ ARM GAS  /tmp/ccW1jini.s 			page 1
  553:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h ****   * @param  Configuration This parameter must be a combination of all the following values:
  554:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h ****   *         @arg @ref LL_DMA_DIRECTION_PERIPH_TO_MEMORY or @ref LL_DMA_DIRECTION_MEMORY_TO_PERIPH o
  555:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h ****   *         @arg @ref LL_DMA_MODE_NORMAL or @ref LL_DMA_MODE_CIRCULAR
-ARM GAS  /tmp/ccW1jini.s 			page 26
+ARM GAS  /tmp/cciwsK0L.s 			page 26
 
 
  556:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h ****   *         @arg @ref LL_DMA_PERIPH_INCREMENT or @ref LL_DMA_PERIPH_NOINCREMENT
@@ -1558,7 +1558,7 @@ ARM GAS  /tmp/ccW1jini.s 			page 1
  610:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h ****   *         @arg @ref LL_DMA_DIRECTION_MEMORY_TO_PERIPH
  611:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h ****   *         @arg @ref LL_DMA_DIRECTION_MEMORY_TO_MEMORY
  612:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h ****   */
-ARM GAS  /tmp/ccW1jini.s 			page 27
+ARM GAS  /tmp/cciwsK0L.s 			page 27
 
 
  613:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h **** __STATIC_INLINE uint32_t LL_DMA_GetDataTransferDirection(DMA_TypeDef *DMAx, uint32_t Channel)
@@ -1618,7 +1618,7 @@ ARM GAS  /tmp/ccW1jini.s 			page 1
  667:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h ****   * @brief  Set Peripheral increment mode.
  668:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h ****   * @rmtoll CCR          PINC          LL_DMA_SetPeriphIncMode
  669:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h ****   * @param  DMAx DMAx Instance
-ARM GAS  /tmp/ccW1jini.s 			page 28
+ARM GAS  /tmp/cciwsK0L.s 			page 28
 
 
  670:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h ****   * @param  Channel This parameter can be one of the following values:
@@ -1678,7 +1678,7 @@ ARM GAS  /tmp/ccW1jini.s 			page 1
  724:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h ****   *         @arg @ref LL_DMA_MEMORY_INCREMENT
  725:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h ****   *         @arg @ref LL_DMA_MEMORY_NOINCREMENT
  726:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h ****   * @retval None
-ARM GAS  /tmp/ccW1jini.s 			page 29
+ARM GAS  /tmp/cciwsK0L.s 			page 29
 
 
  727:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h ****   */
@@ -1738,7 +1738,7 @@ ARM GAS  /tmp/ccW1jini.s 			page 1
  781:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h ****   * @brief  Get Peripheral size.
  782:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h ****   * @rmtoll CCR          PSIZE         LL_DMA_GetPeriphSize
  783:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h ****   * @param  DMAx DMAx Instance
-ARM GAS  /tmp/ccW1jini.s 			page 30
+ARM GAS  /tmp/cciwsK0L.s 			page 30
 
 
  784:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h ****   * @param  Channel This parameter can be one of the following values:
@@ -1798,7 +1798,7 @@ ARM GAS  /tmp/ccW1jini.s 			page 1
  838:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h ****   *         @arg @ref LL_DMA_CHANNEL_7
  839:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h ****   * @retval Returned value can be one of the following values:
  840:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h ****   *         @arg @ref LL_DMA_MDATAALIGN_BYTE
-ARM GAS  /tmp/ccW1jini.s 			page 31
+ARM GAS  /tmp/cciwsK0L.s 			page 31
 
 
  841:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h ****   *         @arg @ref LL_DMA_MDATAALIGN_HALFWORD
@@ -1858,7 +1858,7 @@ ARM GAS  /tmp/ccW1jini.s 			page 1
  895:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h ****   return (READ_BIT(((DMA_Channel_TypeDef *)((uint32_t)((uint32_t)DMAx + CHANNEL_OFFSET_TAB[Channel 
  896:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h ****                    DMA_CCR_PL));
  897:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h **** }
-ARM GAS  /tmp/ccW1jini.s 			page 32
+ARM GAS  /tmp/cciwsK0L.s 			page 32
 
 
  898:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h **** 
@@ -1918,7 +1918,7 @@ ARM GAS  /tmp/ccW1jini.s 			page 1
  952:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h ****   *         @arg @ref LL_DMA_CHANNEL_1
  953:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h ****   *         @arg @ref LL_DMA_CHANNEL_2
  954:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h ****   *         @arg @ref LL_DMA_CHANNEL_3
-ARM GAS  /tmp/ccW1jini.s 			page 33
+ARM GAS  /tmp/cciwsK0L.s 			page 33
 
 
  955:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h ****   *         @arg @ref LL_DMA_CHANNEL_4
@@ -1978,7 +1978,7 @@ ARM GAS  /tmp/ccW1jini.s 			page 1
 1009:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h ****   * @note   This API must not be called when the DMA channel is enabled.
 1010:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h ****   * @rmtoll CPAR         PA            LL_DMA_SetPeriphAddress
 1011:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h ****   * @param  DMAx DMAx Instance
-ARM GAS  /tmp/ccW1jini.s 			page 34
+ARM GAS  /tmp/cciwsK0L.s 			page 34
 
 
 1012:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h ****   * @param  Channel This parameter can be one of the following values:
@@ -2038,7 +2038,7 @@ ARM GAS  /tmp/ccW1jini.s 			page 1
 1066:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h **** }
 1067:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h **** 
 1068:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h **** /**
-ARM GAS  /tmp/ccW1jini.s 			page 35
+ARM GAS  /tmp/cciwsK0L.s 			page 35
 
 
 1069:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h ****   * @brief  Set the Memory to Memory Source address.
@@ -2098,7 +2098,7 @@ ARM GAS  /tmp/ccW1jini.s 			page 1
 1123:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h ****   *         @arg @ref LL_DMA_CHANNEL_6
 1124:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h ****   *         @arg @ref LL_DMA_CHANNEL_7
 1125:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h ****   * @retval Between Min_Data = 0 and Max_Data = 0xFFFFFFFF
-ARM GAS  /tmp/ccW1jini.s 			page 36
+ARM GAS  /tmp/cciwsK0L.s 			page 36
 
 
 1126:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h ****   */
@@ -2158,7 +2158,7 @@ ARM GAS  /tmp/ccW1jini.s 			page 1
 1180:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h ****   return (READ_BIT(DMAx->ISR, DMA_ISR_GIF2) == (DMA_ISR_GIF2));
 1181:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h **** }
 1182:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h **** 
-ARM GAS  /tmp/ccW1jini.s 			page 37
+ARM GAS  /tmp/cciwsK0L.s 			page 37
 
 
 1183:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h **** /**
@@ -2218,7 +2218,7 @@ ARM GAS  /tmp/ccW1jini.s 			page 1
 1237:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h **** 
 1238:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h **** /**
 1239:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h ****   * @brief  Get Channel 1 transfer complete flag.
-ARM GAS  /tmp/ccW1jini.s 			page 38
+ARM GAS  /tmp/cciwsK0L.s 			page 38
 
 
 1240:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h ****   * @rmtoll ISR          TCIF1         LL_DMA_IsActiveFlag_TC1
@@ -2278,7 +2278,7 @@ ARM GAS  /tmp/ccW1jini.s 			page 1
 1294:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h ****   * @brief  Get Channel 6 transfer complete flag.
 1295:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h ****   * @rmtoll ISR          TCIF6         LL_DMA_IsActiveFlag_TC6
 1296:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h ****   * @param  DMAx DMAx Instance
-ARM GAS  /tmp/ccW1jini.s 			page 39
+ARM GAS  /tmp/cciwsK0L.s 			page 39
 
 
 1297:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h ****   * @retval State of bit (1 or 0).
@@ -2338,7 +2338,7 @@ ARM GAS  /tmp/ccW1jini.s 			page 1
 1351:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h ****   * @param  DMAx DMAx Instance
 1352:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h ****   * @retval State of bit (1 or 0).
 1353:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h ****   */
-ARM GAS  /tmp/ccW1jini.s 			page 40
+ARM GAS  /tmp/cciwsK0L.s 			page 40
 
 
 1354:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h **** __STATIC_INLINE uint32_t LL_DMA_IsActiveFlag_HT4(DMA_TypeDef *DMAx)
@@ -2398,7 +2398,7 @@ ARM GAS  /tmp/ccW1jini.s 			page 1
 1408:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h ****   */
 1409:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h **** __STATIC_INLINE uint32_t LL_DMA_IsActiveFlag_TE2(DMA_TypeDef *DMAx)
 1410:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h **** {
-ARM GAS  /tmp/ccW1jini.s 			page 41
+ARM GAS  /tmp/cciwsK0L.s 			page 41
 
 
 1411:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h ****   return (READ_BIT(DMAx->ISR, DMA_ISR_TEIF2) == (DMA_ISR_TEIF2));
@@ -2458,7 +2458,7 @@ ARM GAS  /tmp/ccW1jini.s 			page 1
 1465:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h **** {
 1466:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h ****   return (READ_BIT(DMAx->ISR, DMA_ISR_TEIF7) == (DMA_ISR_TEIF7));
 1467:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h **** }
-ARM GAS  /tmp/ccW1jini.s 			page 42
+ARM GAS  /tmp/cciwsK0L.s 			page 42
 
 
 1468:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h **** 
@@ -2518,7 +2518,7 @@ ARM GAS  /tmp/ccW1jini.s 			page 1
  254 00c2 43F01003 		orr	r3, r3, #16
  255 00c6 4360     		str	r3, [r0, #4]
  256              	.LBE39:
-ARM GAS  /tmp/ccW1jini.s 			page 43
+ARM GAS  /tmp/cciwsK0L.s 			page 43
 
 
  257              	.LBE38:
@@ -2578,7 +2578,7 @@ ARM GAS  /tmp/ccW1jini.s 			page 1
  295              		.loc 1 221 7 is_stmt 1 view .LVU83
  296              	.LBB46:
  297              	.LBI46:
-ARM GAS  /tmp/ccW1jini.s 			page 44
+ARM GAS  /tmp/cciwsK0L.s 			page 44
 
 
 1501:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h **** 
@@ -2638,7 +2638,7 @@ ARM GAS  /tmp/ccW1jini.s 			page 1
  329 00e6 43F48033 		orr	r3, r3, #65536
  330 00ea 4360     		str	r3, [r0, #4]
  331              	.LBE51:
-ARM GAS  /tmp/ccW1jini.s 			page 45
+ARM GAS  /tmp/cciwsK0L.s 			page 45
 
 
  332              	.LBE50:
@@ -2698,7 +2698,7 @@ ARM GAS  /tmp/ccW1jini.s 			page 1
  370              		.loc 1 237 7 is_stmt 1 view .LVU104
  371              	.LBB58:
  372              	.LBI58:
-ARM GAS  /tmp/ccW1jini.s 			page 46
+ARM GAS  /tmp/cciwsK0L.s 			page 46
 
 
 1534:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h **** 
@@ -2758,7 +2758,7 @@ ARM GAS  /tmp/ccW1jini.s 			page 1
  248:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_ll_dma.c **** /**
  249:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_ll_dma.c ****   * @brief  Initialize the DMA registers according to the specified parameters in DMA_InitStruct.
  250:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_ll_dma.c ****   * @note   To convert DMAx_Channely Instance to DMAx Instance and Channely, use helper macros :
-ARM GAS  /tmp/ccW1jini.s 			page 47
+ARM GAS  /tmp/cciwsK0L.s 			page 47
 
 
  251:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_ll_dma.c ****   *         @arg @ref __LL_DMA_GET_INSTANCE
@@ -2818,7 +2818,7 @@ ARM GAS  /tmp/ccW1jini.s 			page 1
  286:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_ll_dma.c ****    * - Direction:      DMA_CCR_DIR and DMA_CCR_MEM2MEM bits
  287:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_ll_dma.c ****    * - Mode:           DMA_CCR_CIRC bit
  288:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_ll_dma.c ****    * - PeriphOrM2MSrcIncMode:  DMA_CCR_PINC bit
-ARM GAS  /tmp/ccW1jini.s 			page 48
+ARM GAS  /tmp/cciwsK0L.s 			page 48
 
 
  289:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_ll_dma.c ****    * - MemoryOrM2MDstIncMode:  DMA_CCR_MINC bit
@@ -2878,7 +2878,7 @@ ARM GAS  /tmp/ccW1jini.s 			page 1
  469              	.LVL32:
  565:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h ****              DMA_CCR_DIR | DMA_CCR_MEM2MEM | DMA_CCR_CIRC | DMA_CCR_PINC | DMA_CCR_MINC | DMA_CCR_P
  470              		.loc 3 565 3 is_stmt 0 view .LVU137
-ARM GAS  /tmp/ccW1jini.s 			page 49
+ARM GAS  /tmp/cciwsK0L.s 			page 49
 
 
  471 001e 0F4C     		ldr	r4, .L44
@@ -2938,7 +2938,7 @@ ARM GAS  /tmp/ccW1jini.s 			page 1
  506              	.LBB67:
 1025:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h **** }
  507              		.loc 3 1025 3 view .LVU147
-ARM GAS  /tmp/ccW1jini.s 			page 50
+ARM GAS  /tmp/cciwsK0L.s 			page 50
 
 
  508 0042 CCF80830 		str	r3, [ip, #8]
@@ -2998,7 +2998,7 @@ ARM GAS  /tmp/ccW1jini.s 			page 1
  550              	LL_DMA_StructInit:
  551              	.LVL43:
  552              	.LFB189:
-ARM GAS  /tmp/ccW1jini.s 			page 51
+ARM GAS  /tmp/cciwsK0L.s 			page 51
 
 
  323:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_ll_dma.c **** 
@@ -3058,7 +3058,7 @@ ARM GAS  /tmp/ccW1jini.s 			page 1
  588 0014 4362     		str	r3, [r0, #36]
  342:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_ll_dma.c **** }
  589              		.loc 1 342 1 view .LVU177
-ARM GAS  /tmp/ccW1jini.s 			page 52
+ARM GAS  /tmp/cciwsK0L.s 			page 52
 
 
  590 0016 7047     		bx	lr
@@ -3076,20 +3076,20 @@ ARM GAS  /tmp/ccW1jini.s 			page 1
  604              		.file 5 "/home/arashamf/soft/ARM_toolchains/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/s
  605              		.file 6 "Drivers/CMSIS/Device/ST/STM32L1xx/Include/stm32l151xb.h"
  606              		.file 7 "Drivers/CMSIS/Device/ST/STM32L1xx/Include/stm32l1xx.h"
-ARM GAS  /tmp/ccW1jini.s 			page 53
+ARM GAS  /tmp/cciwsK0L.s 			page 53
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 stm32l1xx_ll_dma.c
-     /tmp/ccW1jini.s:18     .text.LL_DMA_DeInit:0000000000000000 $t
-     /tmp/ccW1jini.s:24     .text.LL_DMA_DeInit:0000000000000000 LL_DMA_DeInit
-     /tmp/ccW1jini.s:393    .text.LL_DMA_DeInit:0000000000000108 $d
-     /tmp/ccW1jini.s:407    .text.LL_DMA_Init:0000000000000000 $t
-     /tmp/ccW1jini.s:413    .text.LL_DMA_Init:0000000000000000 LL_DMA_Init
-     /tmp/ccW1jini.s:539    .text.LL_DMA_Init:000000000000005c $d
-     /tmp/ccW1jini.s:544    .text.LL_DMA_StructInit:0000000000000000 $t
-     /tmp/ccW1jini.s:550    .text.LL_DMA_StructInit:0000000000000000 LL_DMA_StructInit
-     /tmp/ccW1jini.s:595    .rodata.CHANNEL_OFFSET_TAB:0000000000000000 $d
-     /tmp/ccW1jini.s:599    .rodata.CHANNEL_OFFSET_TAB:0000000000000000 CHANNEL_OFFSET_TAB
+     /tmp/cciwsK0L.s:18     .text.LL_DMA_DeInit:0000000000000000 $t
+     /tmp/cciwsK0L.s:24     .text.LL_DMA_DeInit:0000000000000000 LL_DMA_DeInit
+     /tmp/cciwsK0L.s:393    .text.LL_DMA_DeInit:0000000000000108 $d
+     /tmp/cciwsK0L.s:407    .text.LL_DMA_Init:0000000000000000 $t
+     /tmp/cciwsK0L.s:413    .text.LL_DMA_Init:0000000000000000 LL_DMA_Init
+     /tmp/cciwsK0L.s:539    .text.LL_DMA_Init:000000000000005c $d
+     /tmp/cciwsK0L.s:544    .text.LL_DMA_StructInit:0000000000000000 $t
+     /tmp/cciwsK0L.s:550    .text.LL_DMA_StructInit:0000000000000000 LL_DMA_StructInit
+     /tmp/cciwsK0L.s:595    .rodata.CHANNEL_OFFSET_TAB:0000000000000000 $d
+     /tmp/cciwsK0L.s:599    .rodata.CHANNEL_OFFSET_TAB:0000000000000000 CHANNEL_OFFSET_TAB
 
 NO UNDEFINED SYMBOLS
