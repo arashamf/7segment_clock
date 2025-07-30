@@ -9,7 +9,7 @@ extern "C" {
 #include "main.h"	
 
 //prototypes-----------------------------------------------------------------------//
-void PutChar_toRingBuf(char );
+void PutCharRingBuf(char smb);
 void UARTbuf_init (void);
 void RingBuffer_ini (void);
 uint8_t check_ring_buffer (void);

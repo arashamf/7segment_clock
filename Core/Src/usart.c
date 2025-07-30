@@ -23,6 +23,7 @@
 /* USER CODE BEGIN 0 */
 #include <stdio.h>
 #include "typedef.h"
+#include "time_protocol.h"
 
 // defines--------------------------------------------------------------------------//
 #define 	DBG_UART 			USART1
@@ -136,7 +137,7 @@ void UART_CharReception_Callback (void)
 {
   auto uint8_t smb;
 	smb = LL_USART_ReceiveData8(NTP_UART);
-  UART_PutByte(smb);
+  PutCharRingBuf(smb);
 }
 
 //----------------------------возврат указателя на UART буффер--------------------------------//

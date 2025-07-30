@@ -35,7 +35,7 @@ build/usart.o: Core/Src/usart.c Core/Inc/usart.h Core/Inc/main.h \
  Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_tim.h \
  Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h \
  Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h Core/Inc/typedef.h \
- IO_drivers/ring_buffer.h Core/Inc/main.h
+ IO_drivers/ring_buffer.h Core/Inc/main.h IO_drivers/time_protocol.h
 Core/Inc/usart.h:
 Core/Inc/main.h:
 Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal.h:
@@ -79,3 +79,4 @@ Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h:
 Core/Inc/typedef.h:
 IO_drivers/ring_buffer.h:
 Core/Inc/main.h:
+IO_drivers/time_protocol.h:

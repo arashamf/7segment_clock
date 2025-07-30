@@ -62,6 +62,7 @@
         "tim.h": "c",
         "typedef.h": "c",
         "usart.h": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "time_protocol.h": "c"
     }
 }

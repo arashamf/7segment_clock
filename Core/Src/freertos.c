@@ -54,6 +54,8 @@ osThreadId MessagingDS3231TaskHandle;
 osThreadId SetupTimeonBoardTaskHandle;
 osThreadId ParseUARTmsgTaskHandle;
 
+osMutexId I2CmutexHandle; //мьютекс блокировки передачи команд ячейкам
+
 uint8_t timeout_flag = OFF;
 __IO uint32_t UNIXtimeDS3231 = 0;
 /* USER CODE END Variables */
@@ -115,7 +117,8 @@ void MX_FREERTOS_Init(void) {
   /* USER CODE END Init */
 
   /* USER CODE BEGIN RTOS_MUTEX */
-  /* add mutexes, ... */
+  osMutexDef (I2CmutexHandle); 
+	I2CmutexHandle = osMutexCreate(osMutex (I2CmutexHandle));
   /* USER CODE END RTOS_MUTEX */
 
   /* USER CODE BEGIN RTOS_SEMAPHORES */
@@ -177,10 +180,14 @@ void LaunchMessagingDS3231 (void const * argument)
 
   for(;;)
   {
-    timeout_flag = OFF;
-    osTimerStart (osProgTimerI2C_timeout, I2C_DELAY);
-    UNIXtimeDS3231 = GetUnixTime_from_DS3231();
-    osDelayUntil (&tickcount, 1000);
+    if (osMutexWait (I2CmutexHandle, 20) == osOK)
+		{	
+        timeout_flag = OFF;
+        osTimerStart (osProgTimerI2C_timeout, I2C_DELAY);
+        UNIXtimeDS3231 = GetUnixTime_from_DS3231();
+        osMutexRelease (I2CmutexHandle);
+        osDelayUntil (&tickcount, 1000);
+    }
   }
 }
 
@@ -201,20 +208,35 @@ void SetupTimeonBoard (void const * argument)
 void ParseUARTmsg (void const * argument)
 {
   __IO uint32_t TimeUART = 0;
+  static uint8_t flagGetMsg = NO_MSG;
 
   for(;;)
   {
-    if (check_ring_buffer () == GET_MSG)
+    if (flagGetMsg == NO_MSG)
     {
-      if ((TimeUART = return_UNIXtimeNTP()) > 0); //возвращает UNIX-время, полученное от ntp сервера
+      if (check_ring_buffer () == GET_MSG)
       {
-        if (UNIXtimeDS3231 != TimeUART)
+        if ((TimeUART = return_UNIXtimeNTP()) > 0) //возвращает UNIX-время, полученное от ntp сервера
         {
-          PrepareSendTimedata_to_DS3231(TimeUART);
+          if (UNIXtimeDS3231 != TimeUART)
+          {
+            timeout_flag = OFF;
+            flagGetMsg = GET_MSG;      
+          }
         }
       }
+      osDelay (3);
     }
-    osDelay (3);
+    else
+    {
+      if (osMutexWait (I2CmutexHandle, 20) == osOK)
+		  {	
+        flagGetMsg = NO_MSG;
+        PrepareSendTimedata_to_DS3231(TimeUART); 
+        osMutexRelease (I2CmutexHandle);
+        osDelay (1000);
+      }
+    }
   }
 }
 

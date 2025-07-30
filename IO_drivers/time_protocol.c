@@ -16,7 +16,7 @@ static uint8_t calc_CRC8 (uint8_t * );
 static uint32_t  calcUNIXtime_from_PDTmsg (uint8_t * );
 
 //---------------------------------------------------------------------------------//
-void PutChar_toRingBuf(char smb)
+void PutCharRingBuf(char smb)
 {
   RING_Put(&RING_buffer, smb); //отправка байта в кольцевой буффер
 }
@@ -142,10 +142,10 @@ uint8_t check_ring_buffer (void)
             buffer_status =  GET_MSG;
             
             #ifdef __USE_DBG
-		          snprintf (DBG_buffer,  BUFFER_SIZE, "msg=$PDT,1,%c%c%c%c%c%c%c%c*%c%c, UT=%lu\r\n", ptr_PDTmsg[7], ptr_PDTmsg[8],
-              ptr_PDTmsg[9], ptr_PDTmsg[10],ptr_PDTmsg[11], ptr_PDTmsg[12],ptr_PDTmsg[13], 
-              ptr_PDTmsg[14], ptr_PDTmsg[16], ptr_PDTmsg[17], UART_msg.ntp_UNIXtime);	          
-              DBG_PutString(DBG_buffer);
+		        //  snprintf (DBG_buffer,  BUFFER_SIZE, "msg=$PDT,1,%c%c%c%c%c%c%c%c*%c%c, UT=%lu\r\n", ptr_PDTmsg[7], ptr_PDTmsg[8],
+            //  ptr_PDTmsg[9], ptr_PDTmsg[10],ptr_PDTmsg[11], ptr_PDTmsg[12],ptr_PDTmsg[13], 
+            //  ptr_PDTmsg[14], ptr_PDTmsg[16], ptr_PDTmsg[17], UART_msg.ntp_UNIXtime);	          
+           //   DBG_PutString(DBG_buffer);
 	          #endif
           }
           
