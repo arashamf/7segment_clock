@@ -122,12 +122,18 @@ static void convert_time (char * mod_time_data, uint8_t * time_data, uint8_t tim
 //---------------------------------------------------------------------------------------------//
 static void CalcUNIXtime_from_DS3231 (uint32_t * UNIX_time, uint8_t * time_data)
 {
-	TimeStamp.tm_sec = *time_data;
-	TimeStamp.tm_min = *(time_data+1);
-	TimeStamp.tm_hour = *(time_data+2);
-	TimeStamp.tm_mday = *(time_data+3)-1;
-	TimeStamp.tm_mon = *(time_data+4);			
-	TimeStamp.tm_year = *(time_data+5) + (2000 - 1900);
+	#ifdef __USE_DBG
+	 	snprintf (DBG_buffer,  BUFFER_SIZE, "s=%u,min=%u,h=%u,d=%u,month=%u,year=%u\r\n", *time_data, 
+		*(time_data+1), *(time_data+2), *(time_data+3), *(time_data+4), *(time_data+5));	          
+      	DBG_PutString(DBG_buffer);
+	#endif
+
+	TimeStamp.tm_sec = *(time_data+0); //second
+	TimeStamp.tm_min = *(time_data+1); //minute
+	TimeStamp.tm_hour = *(time_data+2); //hour
+	TimeStamp.tm_mday = *(time_data+3)+1; //day
+	TimeStamp.tm_mon = *(time_data+4)-1; //month(1..12)	
+	TimeStamp.tm_year = *(time_data+5) + (2000 - 1900); //year (2025->125)
 	*UNIX_time =  (uint32_t	) mktime64(&TimeStamp); //перевод полученной даты в формат UNIX (01.01.1970)
 }
 
@@ -173,6 +179,7 @@ uint8_t PrepareSendTimedata_to_DS3231 (uint32_t UART_UnixTime)
 	status = I2C_OK;
 	CalcTimeStamp_from_UART (UART_UnixTime);
 	copy_TMdata(data.DS3231_putdata);
+
     status = SetTimeDS3231 (RTC_ADDRESS, FIRST_REGISTR_TIME, TIME_NUMBER, data.DS3231_putdata);
     status = SetTimeDS3231 (RTC_ADDRESS, FIRST_REGISTR_DATE, TIME_NUMBER, data.DS3231_putdata+3);
 	return status;

@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cc290wYV.s 			page 1
+ARM GAS  /tmp/cc6rMAp7.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,7 +58,7 @@ ARM GAS  /tmp/cc290wYV.s 			page 1
   30:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c ****        necessary). Please refer to the Reference manual for connection between peripherals
   31:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c ****        and DMA requests.
   32:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c **** 
-ARM GAS  /tmp/cc290wYV.s 			page 2
+ARM GAS  /tmp/cc6rMAp7.s 			page 2
 
 
   33:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c ****    (#) For a given Channel, program the required configuration through the following parameters:
@@ -118,7 +118,7 @@ ARM GAS  /tmp/cc290wYV.s 			page 1
   87:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c **** /** @addtogroup STM32L1xx_HAL_Driver
   88:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c ****   * @{
   89:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c ****   */
-ARM GAS  /tmp/cc290wYV.s 			page 3
+ARM GAS  /tmp/cc6rMAp7.s 			page 3
 
 
   90:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c **** 
@@ -178,7 +178,7 @@ ARM GAS  /tmp/cc290wYV.s 			page 1
  144:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c **** HAL_StatusTypeDef HAL_DMA_Init(DMA_HandleTypeDef *hdma)
  145:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c **** {
  146:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c ****   uint32_t tmp;
-ARM GAS  /tmp/cc290wYV.s 			page 4
+ARM GAS  /tmp/cc6rMAp7.s 			page 4
 
 
  147:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c **** 
@@ -238,7 +238,7 @@ ARM GAS  /tmp/cc290wYV.s 			page 1
  201:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c **** 
  202:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c ****   /* Write to DMA Channel CR register */
  203:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c ****   hdma->Instance->CCR = tmp;
-ARM GAS  /tmp/cc290wYV.s 			page 5
+ARM GAS  /tmp/cc6rMAp7.s 			page 5
 
 
  204:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c **** 
@@ -298,7 +298,7 @@ ARM GAS  /tmp/cc290wYV.s 			page 1
  258:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c **** 
  259:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c ****   /* Reset DMA Channel CR register */
  260:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c ****   hdma->Instance->CCR = 0U;
-ARM GAS  /tmp/cc290wYV.s 			page 6
+ARM GAS  /tmp/cc6rMAp7.s 			page 6
 
 
  261:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c **** 
@@ -358,7 +358,7 @@ ARM GAS  /tmp/cc290wYV.s 			page 1
  315:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c **** HAL_StatusTypeDef HAL_DMA_Start(DMA_HandleTypeDef *hdma, uint32_t SrcAddress, uint32_t DstAddress, 
  316:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c **** {
  317:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c ****   HAL_StatusTypeDef status = HAL_OK;
-ARM GAS  /tmp/cc290wYV.s 			page 7
+ARM GAS  /tmp/cc6rMAp7.s 			page 7
 
 
  318:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c **** 
@@ -418,7 +418,7 @@ ARM GAS  /tmp/cc290wYV.s 			page 1
  372:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c ****     hdma->ErrorCode = HAL_DMA_ERROR_NONE;
  373:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c **** 
  374:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c ****     /* Disable the peripheral */
-ARM GAS  /tmp/cc290wYV.s 			page 8
+ARM GAS  /tmp/cc6rMAp7.s 			page 8
 
 
  375:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c ****     __HAL_DMA_DISABLE(hdma);
@@ -478,7 +478,7 @@ ARM GAS  /tmp/cc290wYV.s 			page 1
  429:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c ****     /* Disable DMA IT */
  430:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c ****     __HAL_DMA_DISABLE_IT(hdma, (DMA_IT_TC | DMA_IT_HT | DMA_IT_TE));
  431:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c **** 
-ARM GAS  /tmp/cc290wYV.s 			page 9
+ARM GAS  /tmp/cc6rMAp7.s 			page 9
 
 
  432:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c ****     /* Disable the channel */
@@ -538,7 +538,7 @@ ARM GAS  /tmp/cc290wYV.s 			page 1
  486:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c ****     }
  487:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c ****   }
  488:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c ****   return status;
-ARM GAS  /tmp/cc290wYV.s 			page 10
+ARM GAS  /tmp/cc6rMAp7.s 			page 10
 
 
  489:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c **** }
@@ -598,7 +598,7 @@ ARM GAS  /tmp/cc290wYV.s 			page 1
  543:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c ****       /* Update error code */
  544:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c ****       hdma->ErrorCode = HAL_DMA_ERROR_TE;
  545:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c **** 
-ARM GAS  /tmp/cc290wYV.s 			page 11
+ARM GAS  /tmp/cc6rMAp7.s 			page 11
 
 
  546:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c ****       /* Change the DMA state */
@@ -658,7 +658,7 @@ ARM GAS  /tmp/cc290wYV.s 			page 1
  600:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c **** void HAL_DMA_IRQHandler(DMA_HandleTypeDef *hdma)
  601:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c **** {
  602:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c ****   uint32_t flag_it = hdma->DmaBaseAddress->ISR;
-ARM GAS  /tmp/cc290wYV.s 			page 12
+ARM GAS  /tmp/cc6rMAp7.s 			page 12
 
 
  603:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c ****   uint32_t source_it = hdma->Instance->CCR;
@@ -718,7 +718,7 @@ ARM GAS  /tmp/cc290wYV.s 			page 1
  657:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c ****     /* When a DMA transfer error occurs */
  658:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c ****     /* A hardware clear of its EN bits is performed */
  659:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c ****     /* Disable ALL DMA IT */
-ARM GAS  /tmp/cc290wYV.s 			page 13
+ARM GAS  /tmp/cc6rMAp7.s 			page 13
 
 
  660:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c ****     __HAL_DMA_DISABLE_IT(hdma, (DMA_IT_TC | DMA_IT_HT | DMA_IT_TE));
@@ -778,7 +778,7 @@ ARM GAS  /tmp/cc290wYV.s 			page 1
  714:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c ****            break;
  715:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c **** 
  716:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c ****      case  HAL_DMA_XFER_ERROR_CB_ID:
-ARM GAS  /tmp/cc290wYV.s 			page 14
+ARM GAS  /tmp/cc6rMAp7.s 			page 14
 
 
  717:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c ****            hdma->XferErrorCallback = pCallback;
@@ -838,7 +838,7 @@ ARM GAS  /tmp/cc290wYV.s 			page 1
  771:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c ****      case  HAL_DMA_XFER_ABORT_CB_ID:
  772:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c ****            hdma->XferAbortCallback = NULL;
  773:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c ****            break;
-ARM GAS  /tmp/cc290wYV.s 			page 15
+ARM GAS  /tmp/cc6rMAp7.s 			page 15
 
 
  774:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c **** 
@@ -898,7 +898,7 @@ ARM GAS  /tmp/cc290wYV.s 			page 1
  828:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c ****   /* Return DMA handle state */
  829:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c ****   return hdma->State;
  830:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c **** }
-ARM GAS  /tmp/cc290wYV.s 			page 16
+ARM GAS  /tmp/cc6rMAp7.s 			page 16
 
 
  831:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c **** 
@@ -958,7 +958,7 @@ ARM GAS  /tmp/cc290wYV.s 			page 1
   44 000a 04FA0CF4 		lsl	r4, r4, ip
   45              		.loc 1 867 30 view .LVU6
   46 000e D0F83CC0 		ldr	ip, [r0, #60]
-ARM GAS  /tmp/cc290wYV.s 			page 17
+ARM GAS  /tmp/cc6rMAp7.s 			page 17
 
 
   47 0012 CCF80440 		str	r4, [ip, #4]
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/cc290wYV.s 			page 1
   78 002a 7047     		bx	lr
   79              	.LVL3:
   80              	.L5:
-ARM GAS  /tmp/cc290wYV.s 			page 18
+ARM GAS  /tmp/cc6rMAp7.s 			page 18
 
 
   81              	.LCFI2:
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/cc290wYV.s 			page 1
  124              		.loc 1 156 3 view .LVU32
  157:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c ****   assert_param(IS_DMA_MEMORY_INC_STATE(hdma->Init.MemInc));
  125              		.loc 1 157 3 view .LVU33
-ARM GAS  /tmp/cc290wYV.s 			page 19
+ARM GAS  /tmp/cc6rMAp7.s 			page 19
 
 
  158:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c ****   assert_param(IS_DMA_PERIPHERAL_DATA_SIZE(hdma->Init.PeriphDataAlignment));
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/cc290wYV.s 			page 1
  160              		.loc 1 192 7 is_stmt 0 view .LVU53
  161 0024 20F4FF40 		bic	r0, r0, #32640
  162              	.LVL8:
-ARM GAS  /tmp/cc290wYV.s 			page 20
+ARM GAS  /tmp/cc6rMAp7.s 			page 20
 
 
  192:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c ****                       DMA_CCR_MINC  | DMA_CCR_PINC    | DMA_CCR_CIRC   |
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/cc290wYV.s 			page 1
  209:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c **** 
  201              		.loc 1 209 15 view .LVU70
  202 0050 82F82130 		strb	r3, [r2, #33]
-ARM GAS  /tmp/cc290wYV.s 			page 21
+ARM GAS  /tmp/cc6rMAp7.s 			page 21
 
 
  212:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c **** 
@@ -1258,7 +1258,7 @@ ARM GAS  /tmp/cc290wYV.s 			page 1
  236:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c **** 
  249              		.loc 1 236 3 view .LVU81
  250 0004 0168     		ldr	r1, [r0]
-ARM GAS  /tmp/cc290wYV.s 			page 22
+ARM GAS  /tmp/cc6rMAp7.s 			page 22
 
 
  251 0006 0A68     		ldr	r2, [r1]
@@ -1318,7 +1318,7 @@ ARM GAS  /tmp/cc290wYV.s 			page 1
  266:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c ****   hdma->XferHalfCpltCallback = NULL;
  289              		.loc 1 266 3 is_stmt 1 view .LVU98
  266:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c ****   hdma->XferHalfCpltCallback = NULL;
-ARM GAS  /tmp/cc290wYV.s 			page 23
+ARM GAS  /tmp/cc6rMAp7.s 			page 23
 
 
  290              		.loc 1 266 26 is_stmt 0 view .LVU99
@@ -1378,7 +1378,7 @@ ARM GAS  /tmp/cc290wYV.s 			page 1
  327              		.cfi_endproc
  328              	.LFE73:
  330              		.section	.text.HAL_DMA_Start,"ax",%progbits
-ARM GAS  /tmp/cc290wYV.s 			page 24
+ARM GAS  /tmp/cc6rMAp7.s 			page 24
 
 
  331              		.align	1
@@ -1438,7 +1438,7 @@ ARM GAS  /tmp/cc290wYV.s 			page 1
  343:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c ****     status = HAL_BUSY;
  374              		.loc 1 343 5 is_stmt 1 view .LVU129
  343:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c ****     status = HAL_BUSY;
-ARM GAS  /tmp/cc290wYV.s 			page 25
+ARM GAS  /tmp/cc6rMAp7.s 			page 25
 
 
  375              		.loc 1 343 5 view .LVU130
@@ -1498,7 +1498,7 @@ ARM GAS  /tmp/cc290wYV.s 			page 1
  416              	.LVL26:
  417              	.L23:
  323:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c **** 
-ARM GAS  /tmp/cc290wYV.s 			page 26
+ARM GAS  /tmp/cc6rMAp7.s 			page 26
 
 
  418              		.loc 1 323 3 view .LVU144
@@ -1558,7 +1558,7 @@ ARM GAS  /tmp/cc290wYV.s 			page 1
  463 0012 94F82100 		ldrb	r0, [r4, #33]	@ zero_extendqisi2
  464 0016 C0B2     		uxtb	r0, r0
  368:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c ****   {
-ARM GAS  /tmp/cc290wYV.s 			page 27
+ARM GAS  /tmp/cc6rMAp7.s 			page 27
 
 
  465              		.loc 1 368 5 discriminator 2 view .LVU156
@@ -1618,7 +1618,7 @@ ARM GAS  /tmp/cc290wYV.s 			page 1
  504 0040 E36A     		ldr	r3, [r4, #44]
  382:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c ****     {
  505              		.loc 1 382 7 view .LVU172
-ARM GAS  /tmp/cc290wYV.s 			page 28
+ARM GAS  /tmp/cc6rMAp7.s 			page 28
 
 
  506 0042 5BB1     		cbz	r3, .L29
@@ -1678,7 +1678,7 @@ ARM GAS  /tmp/cc290wYV.s 			page 1
  555              		@ link register save eliminated.
  415:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c **** 
  556              		.loc 1 415 3 view .LVU180
-ARM GAS  /tmp/cc290wYV.s 			page 29
+ARM GAS  /tmp/cc6rMAp7.s 			page 29
 
 
  418:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c ****   {
@@ -1738,7 +1738,7 @@ ARM GAS  /tmp/cc290wYV.s 			page 1
  595 002e 03F01C03 		and	r3, r3, #28
  436:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c **** 
  596              		.loc 1 436 9 view .LVU197
-ARM GAS  /tmp/cc290wYV.s 			page 30
+ARM GAS  /tmp/cc6rMAp7.s 			page 30
 
 
  597 0032 C16B     		ldr	r1, [r0, #60]
@@ -1798,7 +1798,7 @@ ARM GAS  /tmp/cc290wYV.s 			page 1
  640              		.loc 1 456 3 is_stmt 1 view .LVU210
  641              	.LVL41:
  458:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c ****   {
-ARM GAS  /tmp/cc290wYV.s 			page 31
+ARM GAS  /tmp/cc6rMAp7.s 			page 31
 
 
  642              		.loc 1 458 3 view .LVU211
@@ -1858,7 +1858,7 @@ ARM GAS  /tmp/cc290wYV.s 			page 1
  681              		.loc 1 474 48 view .LVU226
  682 0030 0122     		movs	r2, #1
  683 0032 02FA03F3 		lsl	r3, r2, r3
-ARM GAS  /tmp/cc290wYV.s 			page 32
+ARM GAS  /tmp/cc6rMAp7.s 			page 32
 
 
  474:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c **** 
@@ -1918,7 +1918,7 @@ ARM GAS  /tmp/cc290wYV.s 			page 1
  726              		.cfi_startproc
  727              		@ args = 0, pretend = 0, frame = 0
  728              		@ frame_needed = 0, uses_anonymous_args = 0
-ARM GAS  /tmp/cc290wYV.s 			page 33
+ARM GAS  /tmp/cc6rMAp7.s 			page 33
 
 
  500:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c ****   uint32_t temp;
@@ -1978,7 +1978,7 @@ ARM GAS  /tmp/cc290wYV.s 			page 1
  768 0020 0F46     		mov	r7, r1
  769 0022 1546     		mov	r5, r2
  513:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c ****   {
-ARM GAS  /tmp/cc290wYV.s 			page 34
+ARM GAS  /tmp/cc6rMAp7.s 			page 34
 
 
  770              		.loc 1 513 3 is_stmt 1 view .LVU256
@@ -2038,7 +2038,7 @@ ARM GAS  /tmp/cc290wYV.s 			page 1
  807 0048 35D1     		bne	.L57
  536:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c ****     {
  808              		.loc 1 536 5 is_stmt 1 view .LVU274
-ARM GAS  /tmp/cc290wYV.s 			page 35
+ARM GAS  /tmp/cc6rMAp7.s 			page 35
 
 
  536:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c ****     {
@@ -2098,7 +2098,7 @@ ARM GAS  /tmp/cc290wYV.s 			page 1
  846              		.loc 1 566 9 is_stmt 1 view .LVU291
  566:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c **** 
  847              		.loc 1 566 9 view .LVU292
-ARM GAS  /tmp/cc290wYV.s 			page 36
+ARM GAS  /tmp/cc6rMAp7.s 			page 36
 
 
  848 0080 0023     		movs	r3, #0
@@ -2158,7 +2158,7 @@ ARM GAS  /tmp/cc290wYV.s 			page 1
  886 00a6 5360     		str	r3, [r2, #4]
  544:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c **** 
  887              		.loc 1 544 7 is_stmt 1 view .LVU309
-ARM GAS  /tmp/cc290wYV.s 			page 37
+ARM GAS  /tmp/cc6rMAp7.s 			page 37
 
 
  544:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c **** 
@@ -2218,7 +2218,7 @@ ARM GAS  /tmp/cc290wYV.s 			page 1
  923 00cc 84F82000 		strb	r0, [r4, #32]
  589:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c **** 
  924              		.loc 1 589 3 view .LVU329
-ARM GAS  /tmp/cc290wYV.s 			page 38
+ARM GAS  /tmp/cc6rMAp7.s 			page 38
 
 
  591:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c **** }
@@ -2278,7 +2278,7 @@ ARM GAS  /tmp/cc290wYV.s 			page 1
  969 0004 1968     		ldr	r1, [r3]
  970              	.LVL61:
  603:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c **** 
-ARM GAS  /tmp/cc290wYV.s 			page 39
+ARM GAS  /tmp/cc6rMAp7.s 			page 39
 
 
  971              		.loc 1 603 3 is_stmt 1 view .LVU342
@@ -2338,7 +2338,7 @@ ARM GAS  /tmp/cc290wYV.s 			page 1
  1009              	.LVL63:
  615:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c **** 
  1010              		.loc 1 615 48 view .LVU359
-ARM GAS  /tmp/cc290wYV.s 			page 40
+ARM GAS  /tmp/cc6rMAp7.s 			page 40
 
 
  1011 0036 0423     		movs	r3, #4
@@ -2398,7 +2398,7 @@ ARM GAS  /tmp/cc290wYV.s 			page 1
  1049              		.loc 1 639 19 is_stmt 0 view .LVU375
  1050 0062 0123     		movs	r3, #1
  1051 0064 80F82130 		strb	r3, [r0, #33]
-ARM GAS  /tmp/cc290wYV.s 			page 41
+ARM GAS  /tmp/cc6rMAp7.s 			page 41
 
 
  1052              	.L64:
@@ -2458,7 +2458,7 @@ ARM GAS  /tmp/cc290wYV.s 			page 1
  1089 008c 0B42     		tst	r3, r1
  1090 008e D8D0     		beq	.L59
  655:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c ****   {
-ARM GAS  /tmp/cc290wYV.s 			page 42
+ARM GAS  /tmp/cc6rMAp7.s 			page 42
 
 
  1091              		.loc 1 655 79 discriminator 1 view .LVU393
@@ -2518,7 +2518,7 @@ ARM GAS  /tmp/cc290wYV.s 			page 1
  677:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c ****     }
  1128              		.loc 1 677 7 is_stmt 1 view .LVU411
  1129 00c0 9847     		blx	r3
-ARM GAS  /tmp/cc290wYV.s 			page 43
+ARM GAS  /tmp/cc6rMAp7.s 			page 43
 
 
  1130              	.LVL70:
@@ -2578,7 +2578,7 @@ ARM GAS  /tmp/cc290wYV.s 			page 1
  1173 0018 04D0     		beq	.L76
  731:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c ****   }
  1174              		.loc 1 731 12 view .LVU425
-ARM GAS  /tmp/cc290wYV.s 			page 44
+ARM GAS  /tmp/cc6rMAp7.s 			page 44
 
 
  1175 001a 0120     		movs	r0, #1
@@ -2638,7 +2638,7 @@ ARM GAS  /tmp/cc290wYV.s 			page 1
  699:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c **** 
  1214              		.loc 1 699 21 is_stmt 0 view .LVU441
  1215 0038 0020     		movs	r0, #0
-ARM GAS  /tmp/cc290wYV.s 			page 45
+ARM GAS  /tmp/cc6rMAp7.s 			page 45
 
 
  714:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c **** 
@@ -2698,7 +2698,7 @@ ARM GAS  /tmp/cc290wYV.s 			page 1
  1258              		@ link register save eliminated.
  749:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c ****   HAL_StatusTypeDef status = HAL_OK;
  1259              		.loc 1 749 1 is_stmt 0 view .LVU456
-ARM GAS  /tmp/cc290wYV.s 			page 46
+ARM GAS  /tmp/cc6rMAp7.s 			page 46
 
 
  1260 0000 0346     		mov	r3, r0
@@ -2758,7 +2758,7 @@ ARM GAS  /tmp/cc290wYV.s 			page 1
  1298 0028 DFE801F0 		tbb	[pc, r1]
  1299              	.L81:
  1300 002c 03       		.byte	(.L85-.L81)/2
-ARM GAS  /tmp/cc290wYV.s 			page 47
+ARM GAS  /tmp/cc6rMAp7.s 			page 47
 
 
  1301 002d 07       		.byte	(.L84-.L81)/2
@@ -2818,7 +2818,7 @@ ARM GAS  /tmp/cc290wYV.s 			page 1
  1339              		.loc 1 776 35 is_stmt 0 view .LVU488
  1340 004c 0020     		movs	r0, #0
  1341 004e 9862     		str	r0, [r3, #40]
-ARM GAS  /tmp/cc290wYV.s 			page 48
+ARM GAS  /tmp/cc6rMAp7.s 			page 48
 
 
  777:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c ****            hdma->XferErrorCallback = NULL;
@@ -2878,7 +2878,7 @@ ARM GAS  /tmp/cc290wYV.s 			page 1
  1385              	.LFE82:
  1387              		.section	.text.HAL_DMA_GetError,"ax",%progbits
  1388              		.align	1
-ARM GAS  /tmp/cc290wYV.s 			page 49
+ARM GAS  /tmp/cc6rMAp7.s 			page 49
 
 
  1389              		.global	HAL_DMA_GetError
@@ -2913,44 +2913,44 @@ ARM GAS  /tmp/cc290wYV.s 			page 1
  1416              		.file 5 "Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_def.h"
  1417              		.file 6 "Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_dma.h"
  1418              		.file 7 "Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal.h"
-ARM GAS  /tmp/cc290wYV.s 			page 50
+ARM GAS  /tmp/cc6rMAp7.s 			page 50
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 stm32l1xx_hal_dma.c
-     /tmp/cc290wYV.s:18     .text.DMA_SetConfig:0000000000000000 $t
-     /tmp/cc290wYV.s:23     .text.DMA_SetConfig:0000000000000000 DMA_SetConfig
-     /tmp/cc290wYV.s:99     .text.HAL_DMA_Init:0000000000000000 $t
-     /tmp/cc290wYV.s:105    .text.HAL_DMA_Init:0000000000000000 HAL_DMA_Init
-     /tmp/cc290wYV.s:223    .text.HAL_DMA_Init:0000000000000060 $d
-     /tmp/cc290wYV.s:230    .text.HAL_DMA_DeInit:0000000000000000 $t
-     /tmp/cc290wYV.s:236    .text.HAL_DMA_DeInit:0000000000000000 HAL_DMA_DeInit
-     /tmp/cc290wYV.s:324    .text.HAL_DMA_DeInit:0000000000000050 $d
-     /tmp/cc290wYV.s:331    .text.HAL_DMA_Start:0000000000000000 $t
-     /tmp/cc290wYV.s:337    .text.HAL_DMA_Start:0000000000000000 HAL_DMA_Start
-     /tmp/cc290wYV.s:425    .text.HAL_DMA_Start_IT:0000000000000000 $t
-     /tmp/cc290wYV.s:431    .text.HAL_DMA_Start_IT:0000000000000000 HAL_DMA_Start_IT
-     /tmp/cc290wYV.s:542    .text.HAL_DMA_Abort:0000000000000000 $t
-     /tmp/cc290wYV.s:548    .text.HAL_DMA_Abort:0000000000000000 HAL_DMA_Abort
-     /tmp/cc290wYV.s:621    .text.HAL_DMA_Abort_IT:0000000000000000 $t
-     /tmp/cc290wYV.s:627    .text.HAL_DMA_Abort_IT:0000000000000000 HAL_DMA_Abort_IT
-     /tmp/cc290wYV.s:716    .text.HAL_DMA_PollForTransfer:0000000000000000 $t
-     /tmp/cc290wYV.s:722    .text.HAL_DMA_PollForTransfer:0000000000000000 HAL_DMA_PollForTransfer
-     /tmp/cc290wYV.s:944    .text.HAL_DMA_IRQHandler:0000000000000000 $t
-     /tmp/cc290wYV.s:950    .text.HAL_DMA_IRQHandler:0000000000000000 HAL_DMA_IRQHandler
-     /tmp/cc290wYV.s:1138   .text.HAL_DMA_RegisterCallback:0000000000000000 $t
-     /tmp/cc290wYV.s:1144   .text.HAL_DMA_RegisterCallback:0000000000000000 HAL_DMA_RegisterCallback
-     /tmp/cc290wYV.s:1195   .text.HAL_DMA_RegisterCallback:000000000000002c $d
-     /tmp/cc290wYV.s:1199   .text.HAL_DMA_RegisterCallback:0000000000000030 $t
-     /tmp/cc290wYV.s:1245   .text.HAL_DMA_UnRegisterCallback:0000000000000000 $t
-     /tmp/cc290wYV.s:1251   .text.HAL_DMA_UnRegisterCallback:0000000000000000 HAL_DMA_UnRegisterCallback
-     /tmp/cc290wYV.s:1300   .text.HAL_DMA_UnRegisterCallback:000000000000002c $d
-     /tmp/cc290wYV.s:1364   .text.HAL_DMA_GetState:0000000000000000 $t
-     /tmp/cc290wYV.s:1370   .text.HAL_DMA_GetState:0000000000000000 HAL_DMA_GetState
-     /tmp/cc290wYV.s:1388   .text.HAL_DMA_GetError:0000000000000000 $t
-     /tmp/cc290wYV.s:1394   .text.HAL_DMA_GetError:0000000000000000 HAL_DMA_GetError
-     /tmp/cc290wYV.s:1305   .text.HAL_DMA_UnRegisterCallback:0000000000000031 $d
-     /tmp/cc290wYV.s:1305   .text.HAL_DMA_UnRegisterCallback:0000000000000032 $t
+     /tmp/cc6rMAp7.s:18     .text.DMA_SetConfig:0000000000000000 $t
+     /tmp/cc6rMAp7.s:23     .text.DMA_SetConfig:0000000000000000 DMA_SetConfig
+     /tmp/cc6rMAp7.s:99     .text.HAL_DMA_Init:0000000000000000 $t
+     /tmp/cc6rMAp7.s:105    .text.HAL_DMA_Init:0000000000000000 HAL_DMA_Init
+     /tmp/cc6rMAp7.s:223    .text.HAL_DMA_Init:0000000000000060 $d
+     /tmp/cc6rMAp7.s:230    .text.HAL_DMA_DeInit:0000000000000000 $t
+     /tmp/cc6rMAp7.s:236    .text.HAL_DMA_DeInit:0000000000000000 HAL_DMA_DeInit
+     /tmp/cc6rMAp7.s:324    .text.HAL_DMA_DeInit:0000000000000050 $d
+     /tmp/cc6rMAp7.s:331    .text.HAL_DMA_Start:0000000000000000 $t
+     /tmp/cc6rMAp7.s:337    .text.HAL_DMA_Start:0000000000000000 HAL_DMA_Start
+     /tmp/cc6rMAp7.s:425    .text.HAL_DMA_Start_IT:0000000000000000 $t
+     /tmp/cc6rMAp7.s:431    .text.HAL_DMA_Start_IT:0000000000000000 HAL_DMA_Start_IT
+     /tmp/cc6rMAp7.s:542    .text.HAL_DMA_Abort:0000000000000000 $t
+     /tmp/cc6rMAp7.s:548    .text.HAL_DMA_Abort:0000000000000000 HAL_DMA_Abort
+     /tmp/cc6rMAp7.s:621    .text.HAL_DMA_Abort_IT:0000000000000000 $t
+     /tmp/cc6rMAp7.s:627    .text.HAL_DMA_Abort_IT:0000000000000000 HAL_DMA_Abort_IT
+     /tmp/cc6rMAp7.s:716    .text.HAL_DMA_PollForTransfer:0000000000000000 $t
+     /tmp/cc6rMAp7.s:722    .text.HAL_DMA_PollForTransfer:0000000000000000 HAL_DMA_PollForTransfer
+     /tmp/cc6rMAp7.s:944    .text.HAL_DMA_IRQHandler:0000000000000000 $t
+     /tmp/cc6rMAp7.s:950    .text.HAL_DMA_IRQHandler:0000000000000000 HAL_DMA_IRQHandler
+     /tmp/cc6rMAp7.s:1138   .text.HAL_DMA_RegisterCallback:0000000000000000 $t
+     /tmp/cc6rMAp7.s:1144   .text.HAL_DMA_RegisterCallback:0000000000000000 HAL_DMA_RegisterCallback
+     /tmp/cc6rMAp7.s:1195   .text.HAL_DMA_RegisterCallback:000000000000002c $d
+     /tmp/cc6rMAp7.s:1199   .text.HAL_DMA_RegisterCallback:0000000000000030 $t
+     /tmp/cc6rMAp7.s:1245   .text.HAL_DMA_UnRegisterCallback:0000000000000000 $t
+     /tmp/cc6rMAp7.s:1251   .text.HAL_DMA_UnRegisterCallback:0000000000000000 HAL_DMA_UnRegisterCallback
+     /tmp/cc6rMAp7.s:1300   .text.HAL_DMA_UnRegisterCallback:000000000000002c $d
+     /tmp/cc6rMAp7.s:1364   .text.HAL_DMA_GetState:0000000000000000 $t
+     /tmp/cc6rMAp7.s:1370   .text.HAL_DMA_GetState:0000000000000000 HAL_DMA_GetState
+     /tmp/cc6rMAp7.s:1388   .text.HAL_DMA_GetError:0000000000000000 $t
+     /tmp/cc6rMAp7.s:1394   .text.HAL_DMA_GetError:0000000000000000 HAL_DMA_GetError
+     /tmp/cc6rMAp7.s:1305   .text.HAL_DMA_UnRegisterCallback:0000000000000031 $d
+     /tmp/cc6rMAp7.s:1305   .text.HAL_DMA_UnRegisterCallback:0000000000000032 $t
 
 UNDEFINED SYMBOLS
 HAL_GetTick

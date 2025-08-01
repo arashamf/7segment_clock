@@ -27,8 +27,10 @@
 /* USER CODE BEGIN Includes */
 #include "rtc.h"
 #include "typedef.h"
+#include "usart.h"
 #include "LED_display.h"
 #include "time_protocol.h"
+#include <stdio.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -200,7 +202,7 @@ void SetupTimeonBoard (void const * argument)
     { 
       LED_data_output ((char *)return_HandleTimeBuff(), NUMB_DIGITS_BOARD);
     }  
-    osDelay (2);
+    osDelay (3);
   }  
 }
 
@@ -214,14 +216,19 @@ void ParseUARTmsg (void const * argument)
   {
     if (flagGetMsg == NO_MSG)
     {
-      if (check_ring_buffer () == GET_MSG)
+      if (check_ring_buffer () == GET_MSG) //проверка кольцевого буффера
       {
         if ((TimeUART = return_UNIXtimeNTP()) > 0) //возвращает UNIX-время, полученное от ntp сервера
         {
-          if (UNIXtimeDS3231 != TimeUART)
+          //если UNIX-время от ntp-сервера не равно времени от DS3231 и отличается больше, чем на единицу
+          if ((UNIXtimeDS3231 != TimeUART) && ((TimeUART-UNIXtimeDS3231)>1)) 
           {
-            timeout_flag = OFF;
-            flagGetMsg = GET_MSG;      
+
+            #ifdef __USE_DBG
+	 	        //  snprintf (DBG_buffer,  BUFFER_SIZE, "DS3231=%ld,NTP=%ld\r\n", UNIXtimeDS3231, TimeUART);	          
+      	    //  DBG_PutString(DBG_buffer);
+	          #endif
+            flagGetMsg = GET_MSG; //установка флага получения сообщения с данными времени от ntp-сервера     
           }
         }
       }
@@ -232,8 +239,10 @@ void ParseUARTmsg (void const * argument)
       if (osMutexWait (I2CmutexHandle, 20) == osOK)
 		  {	
         flagGetMsg = NO_MSG;
-        PrepareSendTimedata_to_DS3231(TimeUART); 
-        osMutexRelease (I2CmutexHandle);
+        timeout_flag = OFF; //сброс флага таймаута I2C
+        osTimerStart (osProgTimerI2C_timeout, I2C_DELAY); //запуск таймера таймаута I2C
+        PrepareSendTimedata_to_DS3231(TimeUART); //подготовка и передача данных времени в DS3231
+        osMutexRelease (I2CmutexHandle); //освобождение мьютекса
         osDelay (1000);
       }
     }

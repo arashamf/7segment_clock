@@ -13,6 +13,7 @@
 #define     I2C_DELAY             100
 #define     BUFFER_SIZE           50 //размер буффера UART
 #define     PDT_SIZE_MSG          8
+#define     SEGMENT_NUMBER        8
 #define     SIZE_DS3231_BUF       6
 #define     NUMB_DIGITS_BOARD     6
 #define     SIZE_CRC              2
@@ -23,6 +24,12 @@
 #define     OFF                   0
 
 //typedef--------------------------------------------------------------------------//
+typedef struct 
+{
+	GPIO_TypeDef * PORTx;
+	uint32_t PORT_Pin;		
+
+}TPortPin;
 
 //---------------------------------------------------------------------------------//
 typedef struct

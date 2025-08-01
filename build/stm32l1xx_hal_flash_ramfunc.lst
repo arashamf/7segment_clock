@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccTtVc7p.s 			page 1
+ARM GAS  /tmp/cc446pRI.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccTtVc7p.s 			page 1
   31:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_flash_ramfunc.c ****   * @attention
   32:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_flash_ramfunc.c ****   *
   33:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_flash_ramfunc.c ****   * Copyright (c) 2017 STMicroelectronics.
-ARM GAS  /tmp/ccTtVc7p.s 			page 2
+ARM GAS  /tmp/cc446pRI.s 			page 2
 
 
   34:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_flash_ramfunc.c ****   * All rights reserved.
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccTtVc7p.s 			page 1
   88:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_flash_ramfunc.c **** /* Private functions ---------------------------------------------------------*/
   89:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_flash_ramfunc.c ****  
   90:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_flash_ramfunc.c **** /** @defgroup FLASH_RAMFUNC_Exported_Functions FLASH RAM Exported Functions
-ARM GAS  /tmp/ccTtVc7p.s 			page 3
+ARM GAS  /tmp/cc446pRI.s 			page 3
 
 
   91:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_flash_ramfunc.c ****  *
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccTtVc7p.s 			page 1
  145:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_flash_ramfunc.c **** #if defined(FLASH_PECR_PARALLBANK)
  146:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_flash_ramfunc.c **** /**
  147:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_flash_ramfunc.c ****   * @brief  Erases a specified 2 pages in program memory in parallel.
-ARM GAS  /tmp/ccTtVc7p.s 			page 4
+ARM GAS  /tmp/cc446pRI.s 			page 4
 
 
  148:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_flash_ramfunc.c ****   * @note   This function can be used only for STM32L151xD, STM32L152xD), STM32L162xD and Cat5  dev
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccTtVc7p.s 			page 1
  202:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_flash_ramfunc.c ****   *        (BANK2). This parameter should be between FLASH_BANK2_BASE and (FLASH_BANK2_END - FLASH_
  203:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_flash_ramfunc.c ****   * @param  pBuffer2: pointer to the buffer containing the data to be  written 
  204:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_flash_ramfunc.c ****   *         to the second half page in the second bank.
-ARM GAS  /tmp/ccTtVc7p.s 			page 5
+ARM GAS  /tmp/cc446pRI.s 			page 5
 
 
  205:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_flash_ramfunc.c ****   * @note   To correctly run this function, the @ref HAL_FLASH_Unlock() function
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccTtVc7p.s 			page 1
  259:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_flash_ramfunc.c ****     }
  260:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_flash_ramfunc.c ****     
  261:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_flash_ramfunc.c ****     /* Wait for last operation to be completed */
-ARM GAS  /tmp/ccTtVc7p.s 			page 6
+ARM GAS  /tmp/cc446pRI.s 			page 6
 
 
  262:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_flash_ramfunc.c ****     status = FLASHRAM_WaitForLastOperation(FLASH_TIMEOUT_VALUE);
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccTtVc7p.s 			page 1
  316:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_flash_ramfunc.c **** 
  317:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_flash_ramfunc.c ****     /* Proceed to program the new half page */
  318:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_flash_ramfunc.c ****     SET_BIT(FLASH->PECR, FLASH_PECR_FPRG);
-ARM GAS  /tmp/ccTtVc7p.s 			page 7
+ARM GAS  /tmp/cc446pRI.s 			page 7
 
 
  319:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_flash_ramfunc.c ****     SET_BIT(FLASH->PECR, FLASH_PECR_PROG);
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccTtVc7p.s 			page 1
  373:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_flash_ramfunc.c ****   *            @arg @ref HAL_FLASH_ERROR_RD      FLASH Read Protection error flag (PCROP)
  374:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_flash_ramfunc.c **** @elif STM32L100xC
  375:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_flash_ramfunc.c ****   *            @arg @ref HAL_FLASH_ERROR_RD      FLASH Read Protection error flag (PCROP)
-ARM GAS  /tmp/ccTtVc7p.s 			page 8
+ARM GAS  /tmp/cc446pRI.s 			page 8
 
 
  376:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_flash_ramfunc.c ****   *            @arg @ref HAL_FLASH_ERROR_OPTVUSR FLASH Option User validity error
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccTtVc7p.s 			page 1
  430:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_flash_ramfunc.c ****   
  431:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_flash_ramfunc.c ****   /* Wait for last operation to be completed */
  432:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_flash_ramfunc.c ****   status = FLASHRAM_WaitForLastOperation(FLASH_TIMEOUT_VALUE);
-ARM GAS  /tmp/ccTtVc7p.s 			page 9
+ARM GAS  /tmp/cc446pRI.s 			page 9
 
 
  433:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_flash_ramfunc.c ****   
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccTtVc7p.s 			page 1
  487:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_flash_ramfunc.c **** {
  488:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_flash_ramfunc.c ****   uint32_t primask_bit;
  489:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_flash_ramfunc.c ****   HAL_StatusTypeDef status = HAL_OK;
-ARM GAS  /tmp/ccTtVc7p.s 			page 10
+ARM GAS  /tmp/cc446pRI.s 			page 10
 
 
  490:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_flash_ramfunc.c **** 
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccTtVc7p.s 			page 1
   28              		@ args = 0, pretend = 0, frame = 0
   29              		@ frame_needed = 0, uses_anonymous_args = 0
   30              		@ link register save eliminated.
-ARM GAS  /tmp/ccTtVc7p.s 			page 11
+ARM GAS  /tmp/cc446pRI.s 			page 11
 
 
  542:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_flash_ramfunc.c ****   uint32_t flags = 0U;
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccTtVc7p.s 			page 1
   72 0030 074A     		ldr	r2, .L5
   73 0032 9269     		ldr	r2, [r2, #24]
   74              		.loc 1 554 5 view .LVU18
-ARM GAS  /tmp/ccTtVc7p.s 			page 12
+ARM GAS  /tmp/cc446pRI.s 			page 12
 
 
   75 0034 12F4006F 		tst	r2, #2048
@@ -718,7 +718,7 @@ ARM GAS  /tmp/ccTtVc7p.s 			page 1
  105              		.thumb
  106              		.thumb_func
  108              	FLASHRAM_WaitForLastOperation:
-ARM GAS  /tmp/ccTtVc7p.s 			page 13
+ARM GAS  /tmp/cc446pRI.s 			page 13
 
 
  109              	.LVL5:
@@ -778,7 +778,7 @@ ARM GAS  /tmp/ccTtVc7p.s 			page 1
  141              		.loc 1 597 5 is_stmt 1 view .LVU36
  142              		.loc 1 597 7 is_stmt 0 view .LVU37
  143 006c E0B1     		cbz	r0, .L14
-ARM GAS  /tmp/ccTtVc7p.s 			page 14
+ARM GAS  /tmp/cc446pRI.s 			page 14
 
 
  598:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_flash_ramfunc.c ****     {
@@ -838,7 +838,7 @@ ARM GAS  /tmp/ccTtVc7p.s 			page 1
  619:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_flash_ramfunc.c ****     /*Save the error code*/
  620:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_flash_ramfunc.c ****     FLASHRAM_SetErrorCode();
  621:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_flash_ramfunc.c ****     return HAL_ERROR;
-ARM GAS  /tmp/ccTtVc7p.s 			page 15
+ARM GAS  /tmp/cc446pRI.s 			page 15
 
 
  622:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_flash_ramfunc.c ****   }
@@ -898,7 +898,7 @@ ARM GAS  /tmp/ccTtVc7p.s 			page 1
  116:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_flash_ramfunc.c **** 
  219              		.loc 1 116 3 view .LVU59
  220 00b0 054B     		ldr	r3, .L20
-ARM GAS  /tmp/ccTtVc7p.s 			page 16
+ARM GAS  /tmp/cc446pRI.s 			page 16
 
 
  221 00b2 064A     		ldr	r2, .L20+4
@@ -958,7 +958,7 @@ ARM GAS  /tmp/ccTtVc7p.s 			page 1
  267 00e0 22F01002 		bic	r2, r2, #16
  268 00e4 1A60     		str	r2, [r3]
  129:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_flash_ramfunc.c **** 
-ARM GAS  /tmp/ccTtVc7p.s 			page 17
+ARM GAS  /tmp/cc446pRI.s 			page 17
 
 
  269              		.loc 1 129 3 view .LVU70
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/ccTtVc7p.s 			page 1
  315 0102 FFF7A9FF 		bl	FLASHRAM_WaitForLastOperation
  316              	.LVL15:
  311:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_flash_ramfunc.c ****   {
-ARM GAS  /tmp/ccTtVc7p.s 			page 18
+ARM GAS  /tmp/cc446pRI.s 			page 18
 
 
  317              		.loc 1 311 3 is_stmt 1 view .LVU81
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/ccTtVc7p.s 			page 1
   46:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __STATIC_INLINE
   47:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __STATIC_INLINE                        static inline
   48:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
-ARM GAS  /tmp/ccTtVc7p.s 			page 19
+ARM GAS  /tmp/cc446pRI.s 			page 19
 
 
   49:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __STATIC_FORCEINLINE                 
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/ccTtVc7p.s 			page 1
  103:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic push
  104:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wpacked"
  105:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wattributes"
-ARM GAS  /tmp/ccTtVc7p.s 			page 20
+ARM GAS  /tmp/cc446pRI.s 			page 20
 
 
  106:Drivers/CMSIS/Include/cmsis_gcc.h ****   __PACKED_STRUCT T_UINT32_READ { uint32_t v; };
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/ccTtVc7p.s 			page 1
  160:Drivers/CMSIS/Include/cmsis_gcc.h **** #if (defined (__ARM_FEATURE_CMSE ) && (__ARM_FEATURE_CMSE == 3))
  161:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
  162:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Get Control Register (non-secure)
-ARM GAS  /tmp/ccTtVc7p.s 			page 21
+ARM GAS  /tmp/cc446pRI.s 			page 21
 
 
  163:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Returns the content of the non-secure Control Register when in secure mode.
@@ -1258,7 +1258,7 @@ ARM GAS  /tmp/ccTtVc7p.s 			page 1
  217:Drivers/CMSIS/Include/cmsis_gcc.h ****   \return               APSR Register value
  218:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
  219:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __get_APSR(void)
-ARM GAS  /tmp/ccTtVc7p.s 			page 22
+ARM GAS  /tmp/cc446pRI.s 			page 22
 
 
  220:Drivers/CMSIS/Include/cmsis_gcc.h **** {
@@ -1318,7 +1318,7 @@ ARM GAS  /tmp/ccTtVc7p.s 			page 1
  274:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Assigns the given value to the Process Stack Pointer (PSP).
  275:Drivers/CMSIS/Include/cmsis_gcc.h ****   \param [in]    topOfProcStack  Process Stack Pointer value to set
  276:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
-ARM GAS  /tmp/ccTtVc7p.s 			page 23
+ARM GAS  /tmp/cc446pRI.s 			page 23
 
 
  277:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __set_PSP(uint32_t topOfProcStack)
@@ -1378,7 +1378,7 @@ ARM GAS  /tmp/ccTtVc7p.s 			page 1
  331:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __set_MSP(uint32_t topOfMainStack)
  332:Drivers/CMSIS/Include/cmsis_gcc.h **** {
  333:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MSR msp, %0" : : "r" (topOfMainStack) : );
-ARM GAS  /tmp/ccTtVc7p.s 			page 24
+ARM GAS  /tmp/cc446pRI.s 			page 24
 
 
  334:Drivers/CMSIS/Include/cmsis_gcc.h **** }
@@ -1438,7 +1438,7 @@ ARM GAS  /tmp/ccTtVc7p.s 			page 1
  385:Drivers/CMSIS/Include/cmsis_gcc.h **** 
  386:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MRS %0, primask" : "=r" (result) :: "memory");
  327              		.loc 2 386 3 view .LVU86
-ARM GAS  /tmp/ccTtVc7p.s 			page 25
+ARM GAS  /tmp/cc446pRI.s 			page 25
 
 
  328              		.syntax unified
@@ -1498,7 +1498,7 @@ ARM GAS  /tmp/ccTtVc7p.s 			page 1
  371 0124 54F8042B 		ldr	r2, [r4], #4
  372              	.LVL18:
  324:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_flash_ramfunc.c ****       pBuffer++;
-ARM GAS  /tmp/ccTtVc7p.s 			page 26
+ARM GAS  /tmp/cc446pRI.s 			page 26
 
 
  373              		.loc 1 324 61 view .LVU99
@@ -1558,7 +1558,7 @@ ARM GAS  /tmp/ccTtVc7p.s 			page 1
  403:Drivers/CMSIS/Include/cmsis_gcc.h **** }
  404:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
  405:Drivers/CMSIS/Include/cmsis_gcc.h **** 
-ARM GAS  /tmp/ccTtVc7p.s 			page 27
+ARM GAS  /tmp/cc446pRI.s 			page 27
 
 
  406:Drivers/CMSIS/Include/cmsis_gcc.h **** 
@@ -1618,7 +1618,7 @@ ARM GAS  /tmp/ccTtVc7p.s 			page 1
  444              		.loc 1 396 18 is_stmt 0 view .LVU117
  445 0158 024B     		ldr	r3, .L33
  446 015a 5B69     		ldr	r3, [r3, #20]
-ARM GAS  /tmp/ccTtVc7p.s 			page 28
+ARM GAS  /tmp/cc446pRI.s 			page 28
 
 
  396:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_flash_ramfunc.c ****   return HAL_OK;  
@@ -1678,7 +1678,7 @@ ARM GAS  /tmp/ccTtVc7p.s 			page 1
  492 0170 FFF772FF 		bl	FLASHRAM_WaitForLastOperation
  493              	.LVL30:
  434:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_flash_ramfunc.c ****   {
-ARM GAS  /tmp/ccTtVc7p.s 			page 29
+ARM GAS  /tmp/cc446pRI.s 			page 29
 
 
  494              		.loc 1 434 3 is_stmt 1 view .LVU129
@@ -1738,7 +1738,7 @@ ARM GAS  /tmp/ccTtVc7p.s 			page 1
  442:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_flash_ramfunc.c **** 
  536              		.loc 1 442 5 view .LVU142
  537 017e 0D4D     		ldr	r5, .L39
-ARM GAS  /tmp/ccTtVc7p.s 			page 30
+ARM GAS  /tmp/cc446pRI.s 			page 30
 
 
  538 0180 6B68     		ldr	r3, [r5, #4]
@@ -1798,7 +1798,7 @@ ARM GAS  /tmp/ccTtVc7p.s 			page 1
  579              		.thumb
  580              		.syntax unified
  581 01b2 E0E7     		b	.L36
-ARM GAS  /tmp/ccTtVc7p.s 			page 31
+ARM GAS  /tmp/cc446pRI.s 			page 31
 
 
  582              	.L40:
@@ -1858,7 +1858,7 @@ ARM GAS  /tmp/ccTtVc7p.s 			page 1
  629 01ca 08B1     		cbz	r0, .L44
  630              	.LVL41:
  631              	.L42:
-ARM GAS  /tmp/ccTtVc7p.s 			page 32
+ARM GAS  /tmp/cc446pRI.s 			page 32
 
 
  521:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_flash_ramfunc.c **** }
@@ -1918,7 +1918,7 @@ ARM GAS  /tmp/ccTtVc7p.s 			page 1
  502:Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_flash_ramfunc.c ****     
  674              		.loc 1 502 5 view .LVU178
  675 01e0 7368     		ldr	r3, [r6, #4]
-ARM GAS  /tmp/ccTtVc7p.s 			page 33
+ARM GAS  /tmp/cc446pRI.s 			page 33
 
 
  676 01e2 43F01003 		orr	r3, r3, #16
@@ -1978,7 +1978,7 @@ ARM GAS  /tmp/ccTtVc7p.s 			page 1
  718              	.LBE37:
  719              	.LBE36:
  720              		.cfi_endproc
-ARM GAS  /tmp/ccTtVc7p.s 			page 34
+ARM GAS  /tmp/cc446pRI.s 			page 34
 
 
  721              	.LFE77:
@@ -1989,35 +1989,35 @@ ARM GAS  /tmp/ccTtVc7p.s 			page 1
  727              		.file 5 "Drivers/CMSIS/Device/ST/STM32L1xx/Include/stm32l151xb.h"
  728              		.file 6 "Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_def.h"
  729              		.file 7 "Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_flash.h"
-ARM GAS  /tmp/ccTtVc7p.s 			page 35
+ARM GAS  /tmp/cc446pRI.s 			page 35
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 stm32l1xx_hal_flash_ramfunc.c
-     /tmp/ccTtVc7p.s:18     .RamFunc:0000000000000000 $t
-     /tmp/ccTtVc7p.s:23     .RamFunc:0000000000000000 FLASHRAM_SetErrorCode
-     /tmp/ccTtVc7p.s:98     .RamFunc:0000000000000050 $d
-     /tmp/ccTtVc7p.s:103    .RamFunc:0000000000000058 $t
-     /tmp/ccTtVc7p.s:108    .RamFunc:0000000000000058 FLASHRAM_WaitForLastOperation
-     /tmp/ccTtVc7p.s:201    .RamFunc:00000000000000ac $d
-     /tmp/ccTtVc7p.s:205    .RamFunc:00000000000000b0 $t
-     /tmp/ccTtVc7p.s:211    .RamFunc:00000000000000b0 HAL_FLASHEx_EnableRunPowerDown
-     /tmp/ccTtVc7p.s:238    .RamFunc:00000000000000c8 $d
-     /tmp/ccTtVc7p.s:244    .RamFunc:00000000000000d4 $t
-     /tmp/ccTtVc7p.s:250    .RamFunc:00000000000000d4 HAL_FLASHEx_DisableRunPowerDown
-     /tmp/ccTtVc7p.s:277    .RamFunc:00000000000000ec $d
-     /tmp/ccTtVc7p.s:283    .RamFunc:00000000000000f8 $t
-     /tmp/ccTtVc7p.s:289    .RamFunc:00000000000000f8 HAL_FLASHEx_HalfPageProgram
-     /tmp/ccTtVc7p.s:425    .RamFunc:0000000000000154 $d
-     /tmp/ccTtVc7p.s:429    .RamFunc:0000000000000158 $t
-     /tmp/ccTtVc7p.s:435    .RamFunc:0000000000000158 HAL_FLASHEx_GetError
-     /tmp/ccTtVc7p.s:458    .RamFunc:0000000000000164 $d
-     /tmp/ccTtVc7p.s:462    .RamFunc:0000000000000168 $t
-     /tmp/ccTtVc7p.s:468    .RamFunc:0000000000000168 HAL_FLASHEx_DATAEEPROM_EraseDoubleWord
-     /tmp/ccTtVc7p.s:585    .RamFunc:00000000000001b4 $d
-     /tmp/ccTtVc7p.s:591    .RamFunc:00000000000001b8 $t
-     /tmp/ccTtVc7p.s:597    .RamFunc:00000000000001b8 HAL_FLASHEx_DATAEEPROM_ProgramDoubleWord
-     /tmp/ccTtVc7p.s:717    .RamFunc:000000000000020c $d
+     /tmp/cc446pRI.s:18     .RamFunc:0000000000000000 $t
+     /tmp/cc446pRI.s:23     .RamFunc:0000000000000000 FLASHRAM_SetErrorCode
+     /tmp/cc446pRI.s:98     .RamFunc:0000000000000050 $d
+     /tmp/cc446pRI.s:103    .RamFunc:0000000000000058 $t
+     /tmp/cc446pRI.s:108    .RamFunc:0000000000000058 FLASHRAM_WaitForLastOperation
+     /tmp/cc446pRI.s:201    .RamFunc:00000000000000ac $d
+     /tmp/cc446pRI.s:205    .RamFunc:00000000000000b0 $t
+     /tmp/cc446pRI.s:211    .RamFunc:00000000000000b0 HAL_FLASHEx_EnableRunPowerDown
+     /tmp/cc446pRI.s:238    .RamFunc:00000000000000c8 $d
+     /tmp/cc446pRI.s:244    .RamFunc:00000000000000d4 $t
+     /tmp/cc446pRI.s:250    .RamFunc:00000000000000d4 HAL_FLASHEx_DisableRunPowerDown
+     /tmp/cc446pRI.s:277    .RamFunc:00000000000000ec $d
+     /tmp/cc446pRI.s:283    .RamFunc:00000000000000f8 $t
+     /tmp/cc446pRI.s:289    .RamFunc:00000000000000f8 HAL_FLASHEx_HalfPageProgram
+     /tmp/cc446pRI.s:425    .RamFunc:0000000000000154 $d
+     /tmp/cc446pRI.s:429    .RamFunc:0000000000000158 $t
+     /tmp/cc446pRI.s:435    .RamFunc:0000000000000158 HAL_FLASHEx_GetError
+     /tmp/cc446pRI.s:458    .RamFunc:0000000000000164 $d
+     /tmp/cc446pRI.s:462    .RamFunc:0000000000000168 $t
+     /tmp/cc446pRI.s:468    .RamFunc:0000000000000168 HAL_FLASHEx_DATAEEPROM_EraseDoubleWord
+     /tmp/cc446pRI.s:585    .RamFunc:00000000000001b4 $d
+     /tmp/cc446pRI.s:591    .RamFunc:00000000000001b8 $t
+     /tmp/cc446pRI.s:597    .RamFunc:00000000000001b8 HAL_FLASHEx_DATAEEPROM_ProgramDoubleWord
+     /tmp/cc446pRI.s:717    .RamFunc:000000000000020c $d
 
 UNDEFINED SYMBOLS
 pFlash

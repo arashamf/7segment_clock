@@ -4,28 +4,40 @@
 #include "tim.h"
 #include "typedef.h"
 
-//Variables------------------------------------------------------------------//
+//Defines------------------------------------------------------------------------------------//
+#define DIGIT_CODE_SIZE 0x0B
 
+//Variables------------------------------------------------------------------//
+const TPortPin LEDpins[ DIGIT_CODE_SIZE] = 
+{
+    { SA_GPIO_Port, SA_Pin},
+    { SB_GPIO_Port, SB_Pin},
+	{ SC_GPIO_Port, SC_Pin },
+    { SD_GPIO_Port, SD_Pin},
+	{ SE_GPIO_Port, SE_Pin},
+	{ SF_GPIO_Port, SF_Pin },
+    { SG_GPIO_Port, SG_Pin},
+    { SDP_GPIO_Port, SDP_Pin }
+};
+
+ //коды чисел от 0 до 9, последний элемент (0x00) - код гашения всех сегментов
+const uint8_t digit_code[] = 
+{
+    0x3F, 0x06, 0x5B, 0x4F, 0x66, 0x6D, 0x7D, 0x07, 0x7F, 0x6F, 0x00
+};
+
+//segment_numb - количество сегментов каждого разряда табло
+uint8_t segment_numb = sizeof (LEDpins)/ sizeof (LEDpins[0]);
 
 //Prototypes-----------------------------------------------------------------//
-void reset_number (uint8_t );
-void reset_all_number (void);
-void select_number (uint8_t );
-void reset_all_digit (void);
-void digit_0 (void);
-void digit_1 (void);
-void digit_2 (void);
-void digit_3 (void);
-void digit_4 (void);
-void digit_5 (void);
-void digit_6 (void);
-void digit_7 (void);
-void digit_8 (void);
-void digit_9 (void);
-void select_digit (uint8_t );
+static void reset_number (uint8_t );
+static void reset_all_number (void);
+static void select_number (uint8_t );
+static void reset_all_digit (void);
+static void digit_activating (uint8_t digit);
 
 //---------------------------------------------------------------------------//
-void reset_number (uint8_t number)
+static void reset_number (uint8_t number)
 {
  switch (number)
     {
@@ -59,7 +71,7 @@ void reset_number (uint8_t number)
 }
 
 //---------------------------------------------------------------------------//
-void reset_all_number (void)
+static void reset_all_number (void)
 {
     NUMBER_0 (OFF);
     NUMBER_1 (OFF);
@@ -70,7 +82,7 @@ void reset_all_number (void)
 }
 
 //---------------------------------------------------------------------------//
-void select_number (uint8_t numb)
+static void select_number (uint8_t numb)
 {
     reset_all_number();
     switch (numb)
@@ -105,165 +117,30 @@ void select_number (uint8_t numb)
 }
 
 //---------------------------------------------------------------------------//
-void reset_all_digit (void)
+static void reset_all_digit (void)
 {
-    Segment_A(OFF);
-    Segment_B(OFF);
-    Segment_C(OFF);
-    Segment_D(OFF);
-    Segment_E(OFF);
-    Segment_F(OFF);
-    Segment_G(OFF);
-    Segment_DP(OFF);
+    digit_activating (DIGIT_CODE_SIZE-1);
 }
 
 //---------------------------------------------------------------------------//
-void digit_0 (void)
+static void digit_activating (uint8_t digit)
 {
-  Segment_A(ON);
-  Segment_B(ON);
-  Segment_C(ON);
-  Segment_D(ON);
-  Segment_E(ON);
-  Segment_F(ON);
-}
-
-//---------------------------------------------------------------------------//
-void digit_1 (void)
-{
-  Segment_B(ON);
-  Segment_C(ON);
-}
-
-//---------------------------------------------------------------------------//
-void digit_2 (void)
-{
-  Segment_A(ON);
-  Segment_B(ON);
-  Segment_G(ON);
-  Segment_E(ON);
-  Segment_D(ON);
-}
-
-//---------------------------------------------------------------------------//
-void digit_3 (void)
-{
-  Segment_A(ON);
-  Segment_B(ON);
-  Segment_G(ON);
-  Segment_C(ON);
-  Segment_D(ON);
-}
-
-//---------------------------------------------------------------------------//
-void digit_4 (void)
-{
-  Segment_B(ON);
-  Segment_C(ON);
-  Segment_F(ON);
-  Segment_G(ON);
-}
-
-//---------------------------------------------------------------------------//
-void digit_5 (void)
-{
-  Segment_A(ON);
-  Segment_F(ON);
-  Segment_G(ON);
-  Segment_C(ON);
-  Segment_D(ON);
-}
-
-//---------------------------------------------------------------------------//
-void digit_6(void)
-{
-  Segment_A(ON);
-  Segment_C(ON);
-  Segment_D(ON);
-  Segment_E(ON);
-  Segment_F(ON);
-  Segment_G(ON);
-}
-
-//---------------------------------------------------------------------------//
-void digit_7 (void)
-{
-  Segment_A(ON);
-  Segment_B(ON);
-  Segment_C(ON);
-}
-
-//---------------------------------------------------------------------------//
-void digit_8 (void)
-{
-  Segment_A(ON);
-  Segment_B(ON);
-  Segment_C(ON);
-  Segment_D(ON);
-  Segment_E(ON);
-  Segment_F(ON);
-  Segment_G(ON);
-}
-
-//---------------------------------------------------------------------------//
-void digit_9 (void)
-{
-  Segment_A(ON);
-  Segment_B(ON);
-  Segment_C(ON);
-  Segment_D(ON);
-  Segment_F(ON);
-  Segment_G(ON);
-}
-
-//---------------------------------------------------------------------------//
-void select_digit (uint8_t digit)
-{
-    reset_all_digit();
-    switch (digit)
+    uint8_t num = 0;
+    
+    if ((digit >= 0 ) && (digit <= 10))
     {
-        case 0:
-            digit_0 ();
-            break;
+        num = digit_code[digit];
+        for (uint8_t count = 0; count < segment_numb; count++)
+        {
 
-        case 1:
-            digit_1 ();
-            break;
-
-        case 2:
-            digit_2 ();
-            break;
-      
-        case 3:
-            digit_3 ();
-            break;  
-
-        case 4:
-            digit_4 ();
-            break;
-      
-        case 5:
-            digit_5 ();
-            break; 
-
-        case 6:
-            digit_6 ();
-            break;
-
-        case 7:
-            digit_7 ();
-            break;
-      
-        case 8:
-            digit_8 ();
-            break;  
-
-        case 9:
-            digit_9 ();
-            break;
-      
-        default:
-            break;     
+            if ((num&0x01) == ON) {
+                LL_GPIO_SetOutputPin (LEDpins[count].PORTx, LEDpins[count].PORT_Pin);
+            }
+            else {
+                LL_GPIO_ResetOutputPin (LEDpins[count].PORTx, LEDpins[count].PORT_Pin);
+            }
+            num = num >> 1;
+        }
     }
 }
 
@@ -278,7 +155,7 @@ void LED_data_output (char * time, uint8_t LEDnumb)
         {  digital = (*(time+j) - 0x30); }
         else
         {  digital = 0;  }
-        select_digit (digital);
+        digit_activating (digital);
         delay_LED_digital (j);
         reset_all_digit ();
         //delay_us(500);

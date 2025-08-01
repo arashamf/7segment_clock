@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccAFiJUS.s 			page 1
+ARM GAS  /tmp/cczKNpF0.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccAFiJUS.s 			page 1
   30:Core/Src/i2c.c **** #define   I2C_DELAY               100
   31:Core/Src/i2c.c **** #define   RTC_I2C                 I2C1
   32:Core/Src/i2c.c **** #define 	I2C_REQUEST_WRITE       0x00
-ARM GAS  /tmp/ccAFiJUS.s 			page 2
+ARM GAS  /tmp/cczKNpF0.s 			page 2
 
 
   33:Core/Src/i2c.c **** #define 	I2C_REQUEST_READ        0x01
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccAFiJUS.s 			page 1
   87:Core/Src/i2c.c ****   I2C_InitStruct.OwnAddress1 = 0;
   88:Core/Src/i2c.c ****   I2C_InitStruct.TypeAcknowledge = LL_I2C_ACK;
   89:Core/Src/i2c.c ****   I2C_InitStruct.OwnAddrSize = LL_I2C_OWNADDRESS1_7BIT;
-ARM GAS  /tmp/ccAFiJUS.s 			page 3
+ARM GAS  /tmp/cczKNpF0.s 			page 3
 
 
   90:Core/Src/i2c.c ****   LL_I2C_Init(I2C1, &I2C_InitStruct);
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccAFiJUS.s 			page 1
   15:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h ****   *
   16:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h ****   ******************************************************************************
   17:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h ****   */
-ARM GAS  /tmp/ccAFiJUS.s 			page 4
+ARM GAS  /tmp/cczKNpF0.s 			page 4
 
 
   18:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h **** 
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccAFiJUS.s 			page 1
   72:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h ****   uint32_t PeripheralMode;      /*!< Specifies the peripheral mode.
   73:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h ****                                      This parameter can be a value of @ref I2C_LL_EC_PERIPHERAL_MOD
   74:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h **** 
-ARM GAS  /tmp/ccAFiJUS.s 			page 5
+ARM GAS  /tmp/cczKNpF0.s 			page 5
 
 
   75:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h ****                                      This feature can be modified afterwards using unitary function
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccAFiJUS.s 			page 1
  129:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h **** #define LL_I2C_SR1_PECERR                   I2C_ISR_PECERR          /*!< PEC Error in reception (SM
  130:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h **** #define LL_I2C_SR1_TIMEOUT                  I2C_ISR_TIMEOUT         /*!< Timeout detection flag (SM
  131:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h **** #define LL_I2C_SR1_SMALERT                  I2C_ISR_SMALERT         /*!< SMBus alert (SMBus mode)  
-ARM GAS  /tmp/ccAFiJUS.s 			page 6
+ARM GAS  /tmp/cczKNpF0.s 			page 6
 
 
  132:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h **** #define LL_I2C_SR2_MSL                      I2C_SR2_MSL             /*!< Master/Slave flag         
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccAFiJUS.s 			page 1
  186:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h **** #define LL_I2C_MODE_SMBUS_DEVICE            I2C_CR1_SMBUS                                          
  187:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h **** #define LL_I2C_MODE_SMBUS_DEVICE_ARP        (uint32_t)(I2C_CR1_SMBUS | I2C_CR1_ENARP)              
  188:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h **** /**
-ARM GAS  /tmp/ccAFiJUS.s 			page 7
+ARM GAS  /tmp/cczKNpF0.s 			page 7
 
 
  189:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h ****   * @}
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccAFiJUS.s 			page 1
  243:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h **** /** @defgroup I2C_LL_EM_Exported_Macros_Helper Exported Macros Helper
  244:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h ****   * @{
  245:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h ****   */
-ARM GAS  /tmp/ccAFiJUS.s 			page 8
+ARM GAS  /tmp/cczKNpF0.s 			page 8
 
 
  246:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h **** 
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccAFiJUS.s 			page 1
  300:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h ****                                                                             (((((__PCLK__) / ((__SP
  301:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h ****                                                                             (((((__PCLK__) / ((__SP
  302:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h **** 
-ARM GAS  /tmp/ccAFiJUS.s 			page 9
+ARM GAS  /tmp/cczKNpF0.s 			page 9
 
 
  303:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h **** /**
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccAFiJUS.s 			page 1
  357:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h ****   * @retval None
  358:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h ****   */
  359:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h **** __STATIC_INLINE void LL_I2C_Disable(I2C_TypeDef *I2Cx)
-ARM GAS  /tmp/ccAFiJUS.s 			page 10
+ARM GAS  /tmp/cczKNpF0.s 			page 10
 
 
  360:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h **** {
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccAFiJUS.s 			page 1
  414:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h ****   */
  415:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h **** __STATIC_INLINE void LL_I2C_EnableDMAReq_RX(I2C_TypeDef *I2Cx)
  416:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h **** {
-ARM GAS  /tmp/ccAFiJUS.s 			page 11
+ARM GAS  /tmp/cczKNpF0.s 			page 11
 
 
  417:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h ****   SET_BIT(I2Cx->CR2, I2C_CR2_DMAEN);
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccAFiJUS.s 			page 1
  471:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h ****   */
  472:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h **** __STATIC_INLINE void LL_I2C_DisableClockStretching(I2C_TypeDef *I2Cx)
  473:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h **** {
-ARM GAS  /tmp/ccAFiJUS.s 			page 12
+ARM GAS  /tmp/cczKNpF0.s 			page 12
 
 
  474:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h ****   SET_BIT(I2Cx->CR1, I2C_CR1_NOSTRETCH);
@@ -718,7 +718,7 @@ ARM GAS  /tmp/ccAFiJUS.s 			page 1
  528:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h ****   *         OAR1         ADDMODE       LL_I2C_SetOwnAddress1
  529:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h ****   * @param  I2Cx I2C Instance.
  530:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h ****   * @param  OwnAddress1 This parameter must be a value between Min_Data=0 and Max_Data=0x3FF.
-ARM GAS  /tmp/ccAFiJUS.s 			page 13
+ARM GAS  /tmp/cczKNpF0.s 			page 13
 
 
  531:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h ****   * @param  OwnAddrSize This parameter can be one of the following values:
@@ -778,7 +778,7 @@ ARM GAS  /tmp/ccAFiJUS.s 			page 1
  585:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h **** }
  586:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h **** 
  587:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h **** /**
-ARM GAS  /tmp/ccAFiJUS.s 			page 14
+ARM GAS  /tmp/cczKNpF0.s 			page 14
 
 
  588:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h ****   * @brief  Configure the Peripheral clock frequency.
@@ -838,7 +838,7 @@ ARM GAS  /tmp/ccAFiJUS.s 			page 1
  642:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h ****   *         @arg @ref LL_I2C_CLOCK_SPEED_STANDARD_MODE
  643:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h ****   *         @arg @ref LL_I2C_CLOCK_SPEED_FAST_MODE
  644:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h ****   * @retval None
-ARM GAS  /tmp/ccAFiJUS.s 			page 15
+ARM GAS  /tmp/cczKNpF0.s 			page 15
 
 
  645:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h ****   */
@@ -898,7 +898,7 @@ ARM GAS  /tmp/ccAFiJUS.s 			page 1
  699:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h **** }
  700:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h **** 
  701:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h **** /**
-ARM GAS  /tmp/ccAFiJUS.s 			page 16
+ARM GAS  /tmp/cczKNpF0.s 			page 16
 
 
  702:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h ****   * @brief  Get the SCL high and low period.
@@ -958,7 +958,7 @@ ARM GAS  /tmp/ccAFiJUS.s 			page 1
  756:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h ****   }
  757:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h **** 
  758:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h ****   /* Configure I2Cx: Clock control register */
-ARM GAS  /tmp/ccAFiJUS.s 			page 17
+ARM GAS  /tmp/cczKNpF0.s 			page 17
 
 
  759:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h ****   MODIFY_REG(I2Cx->CCR, (I2C_CCR_FS | I2C_CCR_DUTY | I2C_CCR_CCR), clockconfig);
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/ccAFiJUS.s 			page 1
  813:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h ****   */
  814:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h **** __STATIC_INLINE void LL_I2C_EnableSMBusAlert(I2C_TypeDef *I2Cx)
  815:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h **** {
-ARM GAS  /tmp/ccAFiJUS.s 			page 18
+ARM GAS  /tmp/cczKNpF0.s 			page 18
 
 
  816:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h ****   SET_BIT(I2Cx->CR1, I2C_CR1_ALERT);
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/ccAFiJUS.s 			page 1
  870:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h ****   */
  871:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h **** __STATIC_INLINE void LL_I2C_DisableSMBusPEC(I2C_TypeDef *I2Cx)
  872:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h **** {
-ARM GAS  /tmp/ccAFiJUS.s 			page 19
+ARM GAS  /tmp/cczKNpF0.s 			page 19
 
 
  873:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h ****   CLEAR_BIT(I2Cx->CR1, I2C_CR1_ENPEC);
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/ccAFiJUS.s 			page 1
  927:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h ****   */
  928:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h **** __STATIC_INLINE uint32_t LL_I2C_IsEnabledIT_TX(I2C_TypeDef *I2Cx)
  929:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h **** {
-ARM GAS  /tmp/ccAFiJUS.s 			page 20
+ARM GAS  /tmp/cczKNpF0.s 			page 20
 
 
  930:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h ****   return (READ_BIT(I2Cx->CR2, I2C_CR2_ITEVTEN | I2C_CR2_ITBUFEN) == (I2C_CR2_ITEVTEN | I2C_CR2_ITBU
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/ccAFiJUS.s 			page 1
  984:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h ****   */
  985:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h **** __STATIC_INLINE void LL_I2C_EnableIT_EVT(I2C_TypeDef *I2Cx)
  986:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h **** {
-ARM GAS  /tmp/ccAFiJUS.s 			page 21
+ARM GAS  /tmp/cczKNpF0.s 			page 21
 
 
  987:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h ****   SET_BIT(I2Cx->CR2, I2C_CR2_ITEVTEN);
@@ -1258,7 +1258,7 @@ ARM GAS  /tmp/ccAFiJUS.s 			page 1
 1041:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h ****   * @retval None
 1042:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h ****   */
 1043:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h **** __STATIC_INLINE void LL_I2C_DisableIT_BUF(I2C_TypeDef *I2Cx)
-ARM GAS  /tmp/ccAFiJUS.s 			page 22
+ARM GAS  /tmp/cczKNpF0.s 			page 22
 
 
 1044:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h **** {
@@ -1318,7 +1318,7 @@ ARM GAS  /tmp/ccAFiJUS.s 			page 1
 1098:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h ****   CLEAR_BIT(I2Cx->CR2, I2C_CR2_ITERREN);
 1099:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h **** }
 1100:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h **** 
-ARM GAS  /tmp/ccAFiJUS.s 			page 23
+ARM GAS  /tmp/cczKNpF0.s 			page 23
 
 
 1101:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h **** /**
@@ -1378,7 +1378,7 @@ ARM GAS  /tmp/ccAFiJUS.s 			page 1
 1155:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h **** {
 1156:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h ****   return (READ_BIT(I2Cx->SR1, I2C_SR1_RXNE) == (I2C_SR1_RXNE));
 1157:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h **** }
-ARM GAS  /tmp/ccAFiJUS.s 			page 24
+ARM GAS  /tmp/cczKNpF0.s 			page 24
 
 
 1158:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h **** 
@@ -1438,7 +1438,7 @@ ARM GAS  /tmp/ccAFiJUS.s 			page 1
 1212:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h ****   * @brief  Indicate the status of Stop detection flag (slave mode).
 1213:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h ****   * @note   RESET: Clear default value.
 1214:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h ****   *         SET: When a Stop condition is detected.
-ARM GAS  /tmp/ccAFiJUS.s 			page 25
+ARM GAS  /tmp/cczKNpF0.s 			page 25
 
 
 1215:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h ****   * @rmtoll SR1          STOPF         LL_I2C_IsActiveFlag_STOP
@@ -1498,7 +1498,7 @@ ARM GAS  /tmp/ccAFiJUS.s 			page 1
 1269:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h ****   * @retval State of bit (1 or 0).
 1270:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h ****   */
 1271:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h **** __STATIC_INLINE uint32_t LL_I2C_IsActiveSMBusFlag_PECERR(I2C_TypeDef *I2Cx)
-ARM GAS  /tmp/ccAFiJUS.s 			page 26
+ARM GAS  /tmp/cczKNpF0.s 			page 26
 
 
 1272:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h **** {
@@ -1558,7 +1558,7 @@ ARM GAS  /tmp/ccAFiJUS.s 			page 1
   64 0012 1C70     		strb	r4, [r3]
   65              		.loc 1 105 5 view .LVU11
   66 0014 CCB9     		cbnz	r4, .L2
-ARM GAS  /tmp/ccAFiJUS.s 			page 27
+ARM GAS  /tmp/cczKNpF0.s 			page 27
 
 
   67 0016 0546     		mov	r5, r0
@@ -1618,7 +1618,7 @@ ARM GAS  /tmp/ccAFiJUS.s 			page 1
 1359:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h **** 
 1360:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h **** /**
 1361:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h ****   * @brief  Indicate the status of General call address reception (Slave mode).
-ARM GAS  /tmp/ccAFiJUS.s 			page 28
+ARM GAS  /tmp/cczKNpF0.s 			page 28
 
 
 1362:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h ****   * @note   RESET: No General call address
@@ -1678,7 +1678,7 @@ ARM GAS  /tmp/ccAFiJUS.s 			page 1
 1416:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h ****   * @brief  Clear Stop detection flag.
 1417:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h ****   * @note   Clearing this flag is done by a read access to the I2Cx_SR1
 1418:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h ****   *         register followed by a write access to I2Cx_CR1 register.
-ARM GAS  /tmp/ccAFiJUS.s 			page 29
+ARM GAS  /tmp/cczKNpF0.s 			page 29
 
 
 1419:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h ****   * @rmtoll SR1          STOPF         LL_I2C_ClearFlag_STOP\n
@@ -1738,7 +1738,7 @@ ARM GAS  /tmp/ccAFiJUS.s 			page 1
 1473:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h ****   CLEAR_BIT(I2Cx->SR1, I2C_SR1_PECERR);
 1474:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h **** }
 1475:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h **** 
-ARM GAS  /tmp/ccAFiJUS.s 			page 30
+ARM GAS  /tmp/cczKNpF0.s 			page 30
 
 
 1476:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h **** /**
@@ -1798,7 +1798,7 @@ ARM GAS  /tmp/ccAFiJUS.s 			page 1
 1530:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h **** }
 1531:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h **** 
 1532:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h **** /**
-ARM GAS  /tmp/ccAFiJUS.s 			page 31
+ARM GAS  /tmp/cczKNpF0.s 			page 31
 
 
 1533:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h ****   * @brief  Check if the I2C peripheral is under reset state or not.
@@ -1858,7 +1858,7 @@ ARM GAS  /tmp/ccAFiJUS.s 			page 1
 1587:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h ****   * @retval None
 1588:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h ****   */
 1589:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h **** __STATIC_INLINE void LL_I2C_EnableBitPOS(I2C_TypeDef *I2Cx)
-ARM GAS  /tmp/ccAFiJUS.s 			page 32
+ARM GAS  /tmp/cczKNpF0.s 			page 32
 
 
 1590:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h **** {
@@ -1918,7 +1918,7 @@ ARM GAS  /tmp/ccAFiJUS.s 			page 1
  105              	.LVL6:
  106              	.L3:
 1568:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h **** }
-ARM GAS  /tmp/ccAFiJUS.s 			page 33
+ARM GAS  /tmp/cczKNpF0.s 			page 33
 
 
  107              		.loc 2 1568 3 is_stmt 0 view .LVU23
@@ -1978,7 +1978,7 @@ ARM GAS  /tmp/ccAFiJUS.s 			page 1
  129:Core/Src/i2c.c ****   LL_I2C_TransmitData8(RTC_I2C, (uint8_t) reg_addr); //адреса регистра 
  130:Core/Src/i2c.c **** 	while(!LL_I2C_IsActiveFlag_TXE(RTC_I2C))
  131:Core/Src/i2c.c ****   {
-ARM GAS  /tmp/ccAFiJUS.s 			page 34
+ARM GAS  /tmp/cczKNpF0.s 			page 34
 
 
  132:Core/Src/i2c.c ****     if (return_flag_timeout() == ON) //выход из ожидания в случае окнча�
@@ -2038,7 +2038,7 @@ ARM GAS  /tmp/ccAFiJUS.s 			page 1
 1633:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h ****   * @brief  Enable DMA last transfer.
 1634:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h ****   * @note   This action mean that next DMA EOT is the last transfer.
 1635:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h ****   * @rmtoll CR2          LAST          LL_I2C_EnableLastDMA
-ARM GAS  /tmp/ccAFiJUS.s 			page 35
+ARM GAS  /tmp/cczKNpF0.s 			page 35
 
 
 1636:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h ****   * @param  I2Cx I2C Instance.
@@ -2098,7 +2098,7 @@ ARM GAS  /tmp/ccAFiJUS.s 			page 1
 1690:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h **** __STATIC_INLINE void LL_I2C_DisableSMBusPECCompare(I2C_TypeDef *I2Cx)
 1691:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h **** {
 1692:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h ****   CLEAR_BIT(I2Cx->CR1, I2C_CR1_PEC);
-ARM GAS  /tmp/ccAFiJUS.s 			page 36
+ARM GAS  /tmp/cczKNpF0.s 			page 36
 
 
 1693:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h **** }
@@ -2158,7 +2158,7 @@ ARM GAS  /tmp/ccAFiJUS.s 			page 1
  162 005a 43F0D003 		orr	r3, r3, #208
  163 005e 1361     		str	r3, [r2, #16]
  164              	.LVL10:
-ARM GAS  /tmp/ccAFiJUS.s 			page 37
+ARM GAS  /tmp/cczKNpF0.s 			page 37
 
 
  165              	.L5:
@@ -2218,7 +2218,7 @@ ARM GAS  /tmp/ccAFiJUS.s 			page 1
  205              		.loc 2 1397 3 view .LVU54
 1398:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h ****   (void) tmpreg;
  206              		.loc 2 1398 3 view .LVU55
-ARM GAS  /tmp/ccAFiJUS.s 			page 38
+ARM GAS  /tmp/cczKNpF0.s 			page 38
 
 
 1398:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h ****   (void) tmpreg;
@@ -2278,7 +2278,7 @@ ARM GAS  /tmp/ccAFiJUS.s 			page 1
 1128:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h **** {
  249              		.loc 2 1128 26 view .LVU71
  250              	.LBB107:
-ARM GAS  /tmp/ccAFiJUS.s 			page 39
+ARM GAS  /tmp/cczKNpF0.s 			page 39
 
 
 1130:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h **** }
@@ -2338,7 +2338,7 @@ ARM GAS  /tmp/ccAFiJUS.s 			page 1
  295              		.thumb_func
  297              	MX_I2C1_Init:
  298              	.LFB817:
-ARM GAS  /tmp/ccAFiJUS.s 			page 40
+ARM GAS  /tmp/cczKNpF0.s 			page 40
 
 
   42:Core/Src/i2c.c **** 
@@ -2398,7 +2398,7 @@ ARM GAS  /tmp/ccAFiJUS.s 			page 1
    9:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h ****   ==============================================================================
   10:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h ****     [..]
   11:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h ****       A delay between an RCC peripheral clock enable and the effective peripheral
-ARM GAS  /tmp/ccAFiJUS.s 			page 41
+ARM GAS  /tmp/cczKNpF0.s 			page 41
 
 
   12:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h ****       enabling should be taken into account in order to manage the peripheral read/write
@@ -2458,7 +2458,7 @@ ARM GAS  /tmp/ccAFiJUS.s 			page 1
   66:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h ****   * @{
   67:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h ****   */
   68:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h **** 
-ARM GAS  /tmp/ccAFiJUS.s 			page 42
+ARM GAS  /tmp/cczKNpF0.s 			page 42
 
 
   69:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h **** /** @defgroup BUS_LL_EC_AHB1_GRP1_PERIPH  AHB1 GRP1 PERIPH
@@ -2518,7 +2518,7 @@ ARM GAS  /tmp/ccAFiJUS.s 			page 1
  123:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h **** #endif /*SPI3*/
  124:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h **** #define LL_APB1_GRP1_PERIPH_USART2         RCC_APB1ENR_USART2EN
  125:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h **** #define LL_APB1_GRP1_PERIPH_USART3         RCC_APB1ENR_USART3EN
-ARM GAS  /tmp/ccAFiJUS.s 			page 43
+ARM GAS  /tmp/cczKNpF0.s 			page 43
 
 
  126:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h **** #if defined(UART4)
@@ -2578,7 +2578,7 @@ ARM GAS  /tmp/ccAFiJUS.s 			page 1
  180:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h ****   * @brief  Enable AHB1 peripherals clock.
  181:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h ****   * @rmtoll AHBENR       GPIOAEN       LL_AHB1_GRP1_EnableClock\n
  182:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h ****   *         AHBENR       GPIOBEN       LL_AHB1_GRP1_EnableClock\n
-ARM GAS  /tmp/ccAFiJUS.s 			page 44
+ARM GAS  /tmp/cczKNpF0.s 			page 44
 
 
  183:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h ****   *         AHBENR       GPIOCEN       LL_AHB1_GRP1_EnableClock\n
@@ -2638,7 +2638,7 @@ ARM GAS  /tmp/ccAFiJUS.s 			page 1
  355              	.LVL21:
  356              		.loc 3 220 3 is_stmt 0 view .LVU96
  357              	.LBE109:
-ARM GAS  /tmp/ccAFiJUS.s 			page 45
+ARM GAS  /tmp/cczKNpF0.s 			page 45
 
 
  358              	.LBE108:
@@ -2698,7 +2698,7 @@ ARM GAS  /tmp/ccAFiJUS.s 			page 1
  394              		.loc 1 67 25 is_stmt 0 view .LVU114
  395 0066 CDF81090 		str	r9, [sp, #16]
   68:Core/Src/i2c.c ****   GPIO_InitStruct.Pull = LL_GPIO_PULL_NO;
-ARM GAS  /tmp/ccAFiJUS.s 			page 46
+ARM GAS  /tmp/cczKNpF0.s 			page 46
 
 
  396              		.loc 1 68 3 is_stmt 1 view .LVU115
@@ -2758,7 +2758,7 @@ ARM GAS  /tmp/ccAFiJUS.s 			page 1
  251:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h ****   *         @arg @ref LL_AHB1_GRP1_PERIPH_DMA2 (*)
  252:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h ****   *         @arg @ref LL_AHB1_GRP1_PERIPH_CRYP (*)
  253:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h ****   *         @arg @ref LL_AHB1_GRP1_PERIPH_FSMC (*)
-ARM GAS  /tmp/ccAFiJUS.s 			page 47
+ARM GAS  /tmp/cczKNpF0.s 			page 47
 
 
  254:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h ****   *
@@ -2818,7 +2818,7 @@ ARM GAS  /tmp/ccAFiJUS.s 			page 1
  308:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h ****   *         AHBRSTR      GPIODRST      LL_AHB1_GRP1_ForceReset\n
  309:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h ****   *         AHBRSTR      GPIOERST      LL_AHB1_GRP1_ForceReset\n
  310:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h ****   *         AHBRSTR      GPIOHRST      LL_AHB1_GRP1_ForceReset\n
-ARM GAS  /tmp/ccAFiJUS.s 			page 48
+ARM GAS  /tmp/cczKNpF0.s 			page 48
 
 
  311:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h ****   *         AHBRSTR      GPIOFRST      LL_AHB1_GRP1_ForceReset\n
@@ -2878,7 +2878,7 @@ ARM GAS  /tmp/ccAFiJUS.s 			page 1
  365:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h ****   *         @arg @ref LL_AHB1_GRP1_PERIPH_GPIOD
  366:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h ****   *         @arg @ref LL_AHB1_GRP1_PERIPH_GPIOE (*)
  367:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h ****   *         @arg @ref LL_AHB1_GRP1_PERIPH_GPIOH
-ARM GAS  /tmp/ccAFiJUS.s 			page 49
+ARM GAS  /tmp/cczKNpF0.s 			page 49
 
 
  368:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h ****   *         @arg @ref LL_AHB1_GRP1_PERIPH_GPIOF (*)
@@ -2938,7 +2938,7 @@ ARM GAS  /tmp/ccAFiJUS.s 			page 1
  422:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h **** __STATIC_INLINE void LL_AHB1_GRP1_EnableClockSleep(uint32_t Periphs)
  423:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h **** {
  424:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h ****   __IO uint32_t tmpreg;
-ARM GAS  /tmp/ccAFiJUS.s 			page 50
+ARM GAS  /tmp/cczKNpF0.s 			page 50
 
 
  425:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h ****   SET_BIT(RCC->AHBLPENR, Periphs);
@@ -2998,7 +2998,7 @@ ARM GAS  /tmp/ccAFiJUS.s 			page 1
  479:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h ****   */
  480:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h **** 
  481:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h **** /**
-ARM GAS  /tmp/ccAFiJUS.s 			page 51
+ARM GAS  /tmp/cczKNpF0.s 			page 51
 
 
  482:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h ****   * @brief  Enable APB1 peripherals clock.
@@ -3058,7 +3058,7 @@ ARM GAS  /tmp/ccAFiJUS.s 			page 1
  416              		.loc 3 532 3 view .LVU125
  417 007a 6B6A     		ldr	r3, [r5, #36]
  418 007c 43F40013 		orr	r3, r3, #2097152
-ARM GAS  /tmp/ccAFiJUS.s 			page 52
+ARM GAS  /tmp/cczKNpF0.s 			page 52
 
 
  419 0080 6B62     		str	r3, [r5, #36]
@@ -3118,7 +3118,7 @@ ARM GAS  /tmp/ccAFiJUS.s 			page 1
  460              		.loc 1 84 33 is_stmt 0 view .LVU140
  461 00a0 0894     		str	r4, [sp, #32]
   85:Core/Src/i2c.c ****   I2C_InitStruct.DutyCycle = LL_I2C_DUTYCYCLE_2;
-ARM GAS  /tmp/ccAFiJUS.s 			page 53
+ARM GAS  /tmp/cczKNpF0.s 			page 53
 
 
  462              		.loc 1 85 3 is_stmt 1 view .LVU141
@@ -3178,7 +3178,7 @@ ARM GAS  /tmp/ccAFiJUS.s 			page 1
  507:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h **** {
  501              		.loc 2 507 22 view .LVU157
  502              	.LBB119:
-ARM GAS  /tmp/ccAFiJUS.s 			page 54
+ARM GAS  /tmp/cczKNpF0.s 			page 54
 
 
  509:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h **** }
@@ -3238,7 +3238,7 @@ ARM GAS  /tmp/ccAFiJUS.s 			page 1
  551              		.loc 1 141 13 is_stmt 0 view .LVU164
  552 0006 154C     		ldr	r4, .L28
  553 0008 0023     		movs	r3, #0
-ARM GAS  /tmp/ccAFiJUS.s 			page 55
+ARM GAS  /tmp/cczKNpF0.s 			page 55
 
 
  554 000a 2370     		strb	r3, [r4]
@@ -3298,7 +3298,7 @@ ARM GAS  /tmp/ccAFiJUS.s 			page 1
 1128:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h **** {
  598              		.loc 2 1128 26 view .LVU179
  599              	.LBB124:
-ARM GAS  /tmp/ccAFiJUS.s 			page 56
+ARM GAS  /tmp/cczKNpF0.s 			page 56
 
 
 1130:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h **** }
@@ -3358,7 +3358,7 @@ ARM GAS  /tmp/ccAFiJUS.s 			page 1
  147:Core/Src/i2c.c ****   {
  639              		.loc 1 147 37 discriminator 2 view .LVU194
  640 0048 E6E7     		b	.L21
-ARM GAS  /tmp/ccAFiJUS.s 			page 57
+ARM GAS  /tmp/cczKNpF0.s 			page 57
 
 
  641              	.L26:
@@ -3418,7 +3418,7 @@ ARM GAS  /tmp/ccAFiJUS.s 			page 1
  686              		.loc 1 163 1 is_stmt 0 view .LVU203
  687 0000 38B5     		push	{r3, r4, r5, lr}
  688              	.LCFI8:
-ARM GAS  /tmp/ccAFiJUS.s 			page 58
+ARM GAS  /tmp/cczKNpF0.s 			page 58
 
 
  689              		.cfi_def_cfa_offset 16
@@ -3478,7 +3478,7 @@ ARM GAS  /tmp/ccAFiJUS.s 			page 1
  733              		.loc 2 1128 26 view .LVU216
  734              	.LBB131:
 1130:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h **** }
-ARM GAS  /tmp/ccAFiJUS.s 			page 59
+ARM GAS  /tmp/cczKNpF0.s 			page 59
 
 
  735              		.loc 2 1130 3 view .LVU217
@@ -3538,7 +3538,7 @@ ARM GAS  /tmp/ccAFiJUS.s 			page 1
  777              		.loc 1 178 9 is_stmt 0 view .LVU232
  778 0046 014B     		ldr	r3, .L36
  779 0048 1878     		ldrb	r0, [r3]	@ zero_extendqisi2
-ARM GAS  /tmp/ccAFiJUS.s 			page 60
+ARM GAS  /tmp/cczKNpF0.s 			page 60
 
 
  780              	.L31:
@@ -3598,7 +3598,7 @@ ARM GAS  /tmp/ccAFiJUS.s 			page 1
  828              		.loc 1 186 6 view .LVU240
  829 000e 0646     		mov	r6, r0
  830 0010 70B9     		cbnz	r0, .L39
-ARM GAS  /tmp/ccAFiJUS.s 			page 61
+ARM GAS  /tmp/cczKNpF0.s 			page 61
 
 
  187:Core/Src/i2c.c **** 	{	return I2Cstatus;	}
@@ -3658,7 +3658,7 @@ ARM GAS  /tmp/ccAFiJUS.s 			page 1
  870              		.loc 1 194 25 view .LVU254
  871 002e 0226     		movs	r6, #2
  872              	.L39:
-ARM GAS  /tmp/ccAFiJUS.s 			page 62
+ARM GAS  /tmp/cczKNpF0.s 			page 62
 
 
  195:Core/Src/i2c.c ****   }
@@ -3718,7 +3718,7 @@ ARM GAS  /tmp/ccAFiJUS.s 			page 1
  889              	.LVL64:
  890              	.LBB138:
  891              	.LBI138:
-ARM GAS  /tmp/ccAFiJUS.s 			page 63
+ARM GAS  /tmp/cczKNpF0.s 			page 63
 
 
 1739:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h **** {
@@ -3778,7 +3778,7 @@ ARM GAS  /tmp/ccAFiJUS.s 			page 1
  934              	.LBI142:
 1395:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h **** {
  935              		.loc 2 1395 22 view .LVU272
-ARM GAS  /tmp/ccAFiJUS.s 			page 64
+ARM GAS  /tmp/cczKNpF0.s 			page 64
 
 
  936              	.LBB143:
@@ -3838,7 +3838,7 @@ ARM GAS  /tmp/ccAFiJUS.s 			page 1
  972 0072 9F42     		cmp	r7, r3
  973 0074 13DB     		blt	.L45
  219:Core/Src/i2c.c ****       LL_I2C_GenerateStopCondition(RTC_I2C); //условие Stop после получения т
-ARM GAS  /tmp/ccAFiJUS.s 			page 65
+ARM GAS  /tmp/cczKNpF0.s 			page 65
 
 
  974              		.loc 1 219 7 is_stmt 1 view .LVU291
@@ -3898,7 +3898,7 @@ ARM GAS  /tmp/ccAFiJUS.s 			page 1
  221:Core/Src/i2c.c ****       {
  1016              		.loc 1 221 12 view .LVU304
  1017 008c 13F0400F 		tst	r3, #64
-ARM GAS  /tmp/ccAFiJUS.s 			page 66
+ARM GAS  /tmp/cczKNpF0.s 			page 66
 
 
  1018 0090 16D1     		bne	.L60
@@ -3958,7 +3958,7 @@ ARM GAS  /tmp/ccAFiJUS.s 			page 1
  215:Core/Src/i2c.c ****     }
  1058              		.loc 1 215 7 is_stmt 1 view .LVU319
  1059              	.LVL79:
-ARM GAS  /tmp/ccAFiJUS.s 			page 67
+ARM GAS  /tmp/cczKNpF0.s 			page 67
 
 
  1060              	.LBB153:
@@ -4018,7 +4018,7 @@ ARM GAS  /tmp/ccAFiJUS.s 			page 1
  1099              	.LBE155:
  226:Core/Src/i2c.c ****     }
  1100              		.loc 1 226 14 view .LVU335
-ARM GAS  /tmp/ccAFiJUS.s 			page 68
+ARM GAS  /tmp/cczKNpF0.s 			page 68
 
 
  1101 00c4 EB55     		strb	r3, [r5, r7]
@@ -4078,7 +4078,7 @@ ARM GAS  /tmp/ccAFiJUS.s 			page 1
  1150              		.loc 1 237 6 view .LVU344
  1151 0014 80B9     		cbnz	r0, .L65
  238:Core/Src/i2c.c **** 	{	return I2Cstatus;	}
-ARM GAS  /tmp/ccAFiJUS.s 			page 69
+ARM GAS  /tmp/cczKNpF0.s 			page 69
 
 
  239:Core/Src/i2c.c **** 	
@@ -4138,7 +4138,7 @@ ARM GAS  /tmp/ccAFiJUS.s 			page 1
  1192              		.loc 1 245 24 is_stmt 0 view .LVU359
  1193 0032 0220     		movs	r0, #2
  1194 0034 1D4B     		ldr	r3, .L76
-ARM GAS  /tmp/ccAFiJUS.s 			page 70
+ARM GAS  /tmp/cczKNpF0.s 			page 70
 
 
  1195 0036 1870     		strb	r0, [r3]
@@ -4198,7 +4198,7 @@ ARM GAS  /tmp/ccAFiJUS.s 			page 1
  1225              	.LBE162:
  1226              	.LBE161:
  249:Core/Src/i2c.c ****   {
-ARM GAS  /tmp/ccAFiJUS.s 			page 71
+ARM GAS  /tmp/cczKNpF0.s 			page 71
 
 
  1227              		.loc 1 249 9 is_stmt 1 view .LVU366
@@ -4258,7 +4258,7 @@ ARM GAS  /tmp/ccAFiJUS.s 			page 1
  1266 0066 124B     		ldr	r3, .L76+4
  1267 0068 5A69     		ldr	r2, [r3, #20]
 1398:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h ****   (void) tmpreg;
-ARM GAS  /tmp/ccAFiJUS.s 			page 72
+ARM GAS  /tmp/cczKNpF0.s 			page 72
 
 
  1268              		.loc 2 1398 10 view .LVU382
@@ -4318,7 +4318,7 @@ ARM GAS  /tmp/ccAFiJUS.s 			page 1
  1308              	.LBE170:
  1309              	.LBE169:
  258:Core/Src/i2c.c ****   {
-ARM GAS  /tmp/ccAFiJUS.s 			page 73
+ARM GAS  /tmp/cczKNpF0.s 			page 73
 
 
  1310              		.loc 1 258 7 is_stmt 1 view .LVU397
@@ -4378,7 +4378,7 @@ ARM GAS  /tmp/ccAFiJUS.s 			page 1
  1350              	.LVL104:
 1729:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h **** }
  1351              		.loc 2 1729 20 view .LVU412
-ARM GAS  /tmp/ccAFiJUS.s 			page 74
+ARM GAS  /tmp/cczKNpF0.s 			page 74
 
 
  1352              	.LBE174:
@@ -4415,31 +4415,31 @@ ARM GAS  /tmp/ccAFiJUS.s 			page 1
  1383              		.file 9 "Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h"
  1384              		.file 10 "Core/Inc/i2c.h"
  1385              		.file 11 "Core/Inc/main.h"
-ARM GAS  /tmp/ccAFiJUS.s 			page 75
+ARM GAS  /tmp/cczKNpF0.s 			page 75
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 i2c.c
-     /tmp/ccAFiJUS.s:18     .text.I2C_WriteAdress:0000000000000000 $t
-     /tmp/ccAFiJUS.s:23     .text.I2C_WriteAdress:0000000000000000 I2C_WriteAdress
-     /tmp/ccAFiJUS.s:285    .text.I2C_WriteAdress:00000000000000b8 $d
-     /tmp/ccAFiJUS.s:291    .text.MX_I2C1_Init:0000000000000000 $t
-     /tmp/ccAFiJUS.s:297    .text.MX_I2C1_Init:0000000000000000 MX_I2C1_Init
-     /tmp/ccAFiJUS.s:520    .text.MX_I2C1_Init:00000000000000d4 $d
-     /tmp/ccAFiJUS.s:527    .text.I2C_WriteBuffer:0000000000000000 $t
-     /tmp/ccAFiJUS.s:533    .text.I2C_WriteBuffer:0000000000000000 I2C_WriteBuffer
-     /tmp/ccAFiJUS.s:667    .text.I2C_WriteBuffer:000000000000005c $d
-     /tmp/ccAFiJUS.s:673    .text.I2C_WriteByte:0000000000000000 $t
-     /tmp/ccAFiJUS.s:679    .text.I2C_WriteByte:0000000000000000 I2C_WriteByte
-     /tmp/ccAFiJUS.s:786    .text.I2C_WriteByte:000000000000004c $d
-     /tmp/ccAFiJUS.s:792    .text.I2C_ReadBuffer:0000000000000000 $t
-     /tmp/ccAFiJUS.s:798    .text.I2C_ReadBuffer:0000000000000000 I2C_ReadBuffer
-     /tmp/ccAFiJUS.s:1106   .text.I2C_ReadBuffer:00000000000000c8 $d
-     /tmp/ccAFiJUS.s:1112   .text.I2C_ReadByte:0000000000000000 $t
-     /tmp/ccAFiJUS.s:1118   .text.I2C_ReadByte:0000000000000000 I2C_ReadByte
-     /tmp/ccAFiJUS.s:1364   .text.I2C_ReadByte:00000000000000ac $d
-     /tmp/ccAFiJUS.s:1374   .bss.I2Cstatus:0000000000000000 I2Cstatus
-     /tmp/ccAFiJUS.s:1375   .bss.I2Cstatus:0000000000000000 $d
+     /tmp/cczKNpF0.s:18     .text.I2C_WriteAdress:0000000000000000 $t
+     /tmp/cczKNpF0.s:23     .text.I2C_WriteAdress:0000000000000000 I2C_WriteAdress
+     /tmp/cczKNpF0.s:285    .text.I2C_WriteAdress:00000000000000b8 $d
+     /tmp/cczKNpF0.s:291    .text.MX_I2C1_Init:0000000000000000 $t
+     /tmp/cczKNpF0.s:297    .text.MX_I2C1_Init:0000000000000000 MX_I2C1_Init
+     /tmp/cczKNpF0.s:520    .text.MX_I2C1_Init:00000000000000d4 $d
+     /tmp/cczKNpF0.s:527    .text.I2C_WriteBuffer:0000000000000000 $t
+     /tmp/cczKNpF0.s:533    .text.I2C_WriteBuffer:0000000000000000 I2C_WriteBuffer
+     /tmp/cczKNpF0.s:667    .text.I2C_WriteBuffer:000000000000005c $d
+     /tmp/cczKNpF0.s:673    .text.I2C_WriteByte:0000000000000000 $t
+     /tmp/cczKNpF0.s:679    .text.I2C_WriteByte:0000000000000000 I2C_WriteByte
+     /tmp/cczKNpF0.s:786    .text.I2C_WriteByte:000000000000004c $d
+     /tmp/cczKNpF0.s:792    .text.I2C_ReadBuffer:0000000000000000 $t
+     /tmp/cczKNpF0.s:798    .text.I2C_ReadBuffer:0000000000000000 I2C_ReadBuffer
+     /tmp/cczKNpF0.s:1106   .text.I2C_ReadBuffer:00000000000000c8 $d
+     /tmp/cczKNpF0.s:1112   .text.I2C_ReadByte:0000000000000000 $t
+     /tmp/cczKNpF0.s:1118   .text.I2C_ReadByte:0000000000000000 I2C_ReadByte
+     /tmp/cczKNpF0.s:1364   .text.I2C_ReadByte:00000000000000ac $d
+     /tmp/cczKNpF0.s:1374   .bss.I2Cstatus:0000000000000000 I2Cstatus
+     /tmp/cczKNpF0.s:1375   .bss.I2Cstatus:0000000000000000 $d
 
 UNDEFINED SYMBOLS
 return_flag_timeout

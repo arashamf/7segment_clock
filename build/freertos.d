@@ -53,7 +53,7 @@ build/freertos.o: Core/Src/freertos.c \
  Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h \
  Middlewares/Third_Party/FreeRTOS/Source/include/timers.h \
  IO_drivers/rtc.h Core/Inc/typedef.h Core/Inc/main.h \
- IO_drivers/ring_buffer.h IO_drivers/LED_display.h \
+ IO_drivers/ring_buffer.h Core/Inc/usart.h IO_drivers/LED_display.h \
  IO_drivers/time_protocol.h
 Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h:
 Core/Inc/FreeRTOSConfig.h:
@@ -115,5 +115,6 @@ IO_drivers/rtc.h:
 Core/Inc/typedef.h:
 Core/Inc/main.h:
 IO_drivers/ring_buffer.h:
+Core/Inc/usart.h:
 IO_drivers/LED_display.h:
 IO_drivers/time_protocol.h:

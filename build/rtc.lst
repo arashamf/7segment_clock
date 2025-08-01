@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccAGdX81.s 			page 1
+ARM GAS  /tmp/ccBVJHev.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccAGdX81.s 			page 1
   30:IO_drivers/rtc.c **** struct TM TimeStamp;
   31:IO_drivers/rtc.c **** rtc_data data = {0}; //структура с настройками времени
   32:IO_drivers/rtc.c **** I2C_status_t status = I2C_OK;
-ARM GAS  /tmp/ccAGdX81.s 			page 2
+ARM GAS  /tmp/ccBVJHev.s 			page 2
 
 
   33:IO_drivers/rtc.c **** 
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccAGdX81.s 			page 1
   87:IO_drivers/rtc.c **** 
   88:IO_drivers/rtc.c **** //-------------ф-я перевода числа из двоично-десятичного пре�
   89:IO_drivers/rtc.c **** static uint8_t RTC_ConvertToDec(uint8_t digit)
-ARM GAS  /tmp/ccAGdX81.s 			page 3
+ARM GAS  /tmp/ccBVJHev.s 			page 3
 
 
   90:IO_drivers/rtc.c **** {
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccAGdX81.s 			page 1
   74              	.LVL4:
   75              		.loc 1 98 33 view .LVU12
   76 0014 C0B2     		uxtb	r0, r0
-ARM GAS  /tmp/ccAGdX81.s 			page 4
+ARM GAS  /tmp/ccBVJHev.s 			page 4
 
 
   77              		.loc 1 98 10 view .LVU13
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccAGdX81.s 			page 1
  116 000c 1EDB     		blt	.L11
  117              	.LBE2:
  113:IO_drivers/rtc.c **** 		
-ARM GAS  /tmp/ccAGdX81.s 			page 5
+ARM GAS  /tmp/ccBVJHev.s 			page 5
 
 
  118              		.loc 1 113 1 view .LVU24
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccAGdX81.s 			page 1
  164              	.LBE3:
  119:IO_drivers/rtc.c **** 	}
  120:IO_drivers/rtc.c **** }
-ARM GAS  /tmp/ccAGdX81.s 			page 6
+ARM GAS  /tmp/ccBVJHev.s 			page 6
 
 
  165              		.loc 1 120 1 view .LVU39
@@ -329,98 +329,104 @@ ARM GAS  /tmp/ccAGdX81.s 			page 1
  122:IO_drivers/rtc.c **** //---------------------------------------------------------------------------------------------//
  123:IO_drivers/rtc.c **** static void CalcUNIXtime_from_DS3231 (uint32_t * UNIX_time, uint8_t * time_data)
  124:IO_drivers/rtc.c **** {
- 125:IO_drivers/rtc.c **** 	TimeStamp.tm_sec = *time_data;
- 126:IO_drivers/rtc.c **** 	TimeStamp.tm_min = *(time_data+1);
- 127:IO_drivers/rtc.c **** 	TimeStamp.tm_hour = *(time_data+2);
- 128:IO_drivers/rtc.c **** 	TimeStamp.tm_mday = *(time_data+3)-1;
- 129:IO_drivers/rtc.c **** 	TimeStamp.tm_mon = *(time_data+4);			
- 130:IO_drivers/rtc.c **** 	TimeStamp.tm_year = *(time_data+5) + (2000 - 1900);
- 131:IO_drivers/rtc.c **** 	*UNIX_time =  (uint32_t	) mktime64(&TimeStamp); //перевод полученной даты в 
- 132:IO_drivers/rtc.c **** }
- 133:IO_drivers/rtc.c **** 
- 134:IO_drivers/rtc.c **** //------------------получение данных времени из DS3231 и расчёт UNIX
- 135:IO_drivers/rtc.c **** uint32_t GetUnixTime_from_DS3231 (void)
- 136:IO_drivers/rtc.c **** {
- 137:IO_drivers/rtc.c **** 	status = I2C_OK;
- 138:IO_drivers/rtc.c ****     status = GetTime_DS3231 ();
+ 125:IO_drivers/rtc.c **** 	#ifdef __USE_DBG
+ 126:IO_drivers/rtc.c **** 	 	snprintf (DBG_buffer,  BUFFER_SIZE, "s=%u,min=%u,h=%u,d=%u,month=%u,year=%u\r\n", *time_data, 
+ 127:IO_drivers/rtc.c **** 		*(time_data+1), *(time_data+2), *(time_data+3), *(time_data+4), *(time_data+5));	          
+ 128:IO_drivers/rtc.c ****       	DBG_PutString(DBG_buffer);
+ 129:IO_drivers/rtc.c **** 	#endif
+ 130:IO_drivers/rtc.c **** 
+ 131:IO_drivers/rtc.c **** 	TimeStamp.tm_sec = *(time_data+0); //second
+ 132:IO_drivers/rtc.c **** 	TimeStamp.tm_min = *(time_data+1); //minute
+ 133:IO_drivers/rtc.c **** 	TimeStamp.tm_hour = *(time_data+2); //hour
+ 134:IO_drivers/rtc.c **** 	TimeStamp.tm_mday = *(time_data+3)+1; //day
+ 135:IO_drivers/rtc.c **** 	TimeStamp.tm_mon = *(time_data+4)-1; //month(1..12)	
+ 136:IO_drivers/rtc.c **** 	TimeStamp.tm_year = *(time_data+5) + (2000 - 1900); //year (2025->125)
+ 137:IO_drivers/rtc.c **** 	*UNIX_time =  (uint32_t	) mktime64(&TimeStamp); //перевод полученной даты в 
+ 138:IO_drivers/rtc.c **** }
  139:IO_drivers/rtc.c **** 
- 140:IO_drivers/rtc.c **** 	if (status == I2C_OK)
- 141:IO_drivers/rtc.c **** 	{	
- 142:IO_drivers/rtc.c **** 		convert_time (data.time, data.DS3231_getdata, NUMB_DIGITS_BOARD/2); //формирование с
- 143:IO_drivers/rtc.c **** 		CalcUNIXtime_from_DS3231 (&data.DS3231_UNIXtime, data.DS3231_getdata);  //расчёт UNIX вр�
- 144:IO_drivers/rtc.c **** 		return data.DS3231_UNIXtime;
- 145:IO_drivers/rtc.c **** 	}
- 146:IO_drivers/rtc.c **** 	else
- 147:IO_drivers/rtc.c **** 	{ return 0;	}
- 148:IO_drivers/rtc.c **** 
- 149:IO_drivers/rtc.c **** }
- 150:IO_drivers/rtc.c **** 
- 151:IO_drivers/rtc.c **** //---------------------------------------------------------------------------------------------//
- 152:IO_drivers/rtc.c **** static void CalcTimeStamp_from_UART (uint32_t UART_UNIXtime)
- 153:IO_drivers/rtc.c **** {
-ARM GAS  /tmp/ccAGdX81.s 			page 7
+ 140:IO_drivers/rtc.c **** //------------------получение данных времени из DS3231 и расчёт UNIX
+ 141:IO_drivers/rtc.c **** uint32_t GetUnixTime_from_DS3231 (void)
+ 142:IO_drivers/rtc.c **** {
+ 143:IO_drivers/rtc.c **** 	status = I2C_OK;
+ 144:IO_drivers/rtc.c ****     status = GetTime_DS3231 ();
+ 145:IO_drivers/rtc.c **** 
+ 146:IO_drivers/rtc.c **** 	if (status == I2C_OK)
+ 147:IO_drivers/rtc.c **** 	{	
+ 148:IO_drivers/rtc.c **** 		convert_time (data.time, data.DS3231_getdata, NUMB_DIGITS_BOARD/2); //формирование с
+ 149:IO_drivers/rtc.c **** 		CalcUNIXtime_from_DS3231 (&data.DS3231_UNIXtime, data.DS3231_getdata);  //расчёт UNIX вр�
+ 150:IO_drivers/rtc.c **** 		return data.DS3231_UNIXtime;
+ 151:IO_drivers/rtc.c **** 	}
+ 152:IO_drivers/rtc.c **** 	else
+ 153:IO_drivers/rtc.c **** 	{ return 0;	}
+ARM GAS  /tmp/ccBVJHev.s 			page 7
 
 
- 154:IO_drivers/rtc.c **** 	int64_t buf = (uint64_t)UART_UNIXtime;
- 155:IO_drivers/rtc.c **** 	TimeStamp = *gmtime64_r (&buf, &TimeStamp);
+ 154:IO_drivers/rtc.c **** 
+ 155:IO_drivers/rtc.c **** }
  156:IO_drivers/rtc.c **** 
- 157:IO_drivers/rtc.c **** }
- 158:IO_drivers/rtc.c **** 
- 159:IO_drivers/rtc.c **** //---------------------------------------------------------------------------------------------//
- 160:IO_drivers/rtc.c **** static void copy_TMdata(uint8_t *RTC_buffer)
- 161:IO_drivers/rtc.c **** {
- 191              		.loc 1 161 1 is_stmt 1 view -0
+ 157:IO_drivers/rtc.c **** //---------------------------------------------------------------------------------------------//
+ 158:IO_drivers/rtc.c **** static void CalcTimeStamp_from_UART (uint32_t UART_UNIXtime)
+ 159:IO_drivers/rtc.c **** {
+ 160:IO_drivers/rtc.c **** 	int64_t buf = (uint64_t)UART_UNIXtime;
+ 161:IO_drivers/rtc.c **** 	TimeStamp = *gmtime64_r (&buf, &TimeStamp);
+ 162:IO_drivers/rtc.c **** 
+ 163:IO_drivers/rtc.c **** }
+ 164:IO_drivers/rtc.c **** 
+ 165:IO_drivers/rtc.c **** //---------------------------------------------------------------------------------------------//
+ 166:IO_drivers/rtc.c **** static void copy_TMdata(uint8_t *RTC_buffer)
+ 167:IO_drivers/rtc.c **** {
+ 191              		.loc 1 167 1 is_stmt 1 view -0
  192              		.cfi_startproc
  193              		@ args = 0, pretend = 0, frame = 0
  194              		@ frame_needed = 0, uses_anonymous_args = 0
  195              		@ link register save eliminated.
- 162:IO_drivers/rtc.c **** 	*RTC_buffer 		=  TimeStamp.tm_sec;
- 196              		.loc 1 162 2 view .LVU42
- 197              		.loc 1 162 28 is_stmt 0 view .LVU43
+ 168:IO_drivers/rtc.c **** 	*RTC_buffer 		=  TimeStamp.tm_sec;
+ 196              		.loc 1 168 2 view .LVU42
+ 197              		.loc 1 168 28 is_stmt 0 view .LVU43
  198 0000 074B     		ldr	r3, .L15
  199 0002 1A68     		ldr	r2, [r3]
- 200              		.loc 1 162 16 view .LVU44
+ 200              		.loc 1 168 16 view .LVU44
  201 0004 0270     		strb	r2, [r0]
- 163:IO_drivers/rtc.c **** 	*(RTC_buffer+1) 	=  TimeStamp.tm_min;
- 202              		.loc 1 163 2 is_stmt 1 view .LVU45
- 203              		.loc 1 163 31 is_stmt 0 view .LVU46
+ 169:IO_drivers/rtc.c **** 	*(RTC_buffer+1) 	=  TimeStamp.tm_min;
+ 202              		.loc 1 169 2 is_stmt 1 view .LVU45
+ 203              		.loc 1 169 31 is_stmt 0 view .LVU46
  204 0006 5A68     		ldr	r2, [r3, #4]
- 205              		.loc 1 163 19 view .LVU47
+ 205              		.loc 1 169 19 view .LVU47
  206 0008 4270     		strb	r2, [r0, #1]
- 164:IO_drivers/rtc.c **** 	*(RTC_buffer+2) 	=  TimeStamp.tm_hour;
- 207              		.loc 1 164 2 is_stmt 1 view .LVU48
- 208              		.loc 1 164 31 is_stmt 0 view .LVU49
+ 170:IO_drivers/rtc.c **** 	*(RTC_buffer+2) 	=  TimeStamp.tm_hour;
+ 207              		.loc 1 170 2 is_stmt 1 view .LVU48
+ 208              		.loc 1 170 31 is_stmt 0 view .LVU49
  209 000a 9A68     		ldr	r2, [r3, #8]
- 210              		.loc 1 164 19 view .LVU50
+ 210              		.loc 1 170 19 view .LVU50
  211 000c 8270     		strb	r2, [r0, #2]
- 165:IO_drivers/rtc.c **** 	*(RTC_buffer+3) 	=  (TimeStamp.tm_mday);
- 212              		.loc 1 165 2 is_stmt 1 view .LVU51
- 213              		.loc 1 165 32 is_stmt 0 view .LVU52
+ 171:IO_drivers/rtc.c **** 	*(RTC_buffer+3) 	=  (TimeStamp.tm_mday);
+ 212              		.loc 1 171 2 is_stmt 1 view .LVU51
+ 213              		.loc 1 171 32 is_stmt 0 view .LVU52
  214 000e DA68     		ldr	r2, [r3, #12]
- 215              		.loc 1 165 19 view .LVU53
+ 215              		.loc 1 171 19 view .LVU53
  216 0010 C270     		strb	r2, [r0, #3]
- 166:IO_drivers/rtc.c **** 	*(RTC_buffer+4) 	=  (TimeStamp.tm_mon) + 1; //в структуре TimeStamp месяца от 0 
- 217              		.loc 1 166 2 is_stmt 1 view .LVU54
- 218              		.loc 1 166 32 is_stmt 0 view .LVU55
+ 172:IO_drivers/rtc.c **** 	*(RTC_buffer+4) 	=  (TimeStamp.tm_mon) + 1; //в структуре TimeStamp месяца от 0 
+ 217              		.loc 1 172 2 is_stmt 1 view .LVU54
+ 218              		.loc 1 172 32 is_stmt 0 view .LVU55
  219 0012 1A69     		ldr	r2, [r3, #16]
- 220              		.loc 1 166 41 view .LVU56
+ 220              		.loc 1 172 41 view .LVU56
  221 0014 0132     		adds	r2, r2, #1
- 222              		.loc 1 166 19 view .LVU57
+ 222              		.loc 1 172 19 view .LVU57
  223 0016 0271     		strb	r2, [r0, #4]
- 167:IO_drivers/rtc.c **** 	*(RTC_buffer+5) 	=  TimeStamp.tm_year - (2000 - 1900);
- 224              		.loc 1 167 2 is_stmt 1 view .LVU58
- 225              		.loc 1 167 31 is_stmt 0 view .LVU59
+ 173:IO_drivers/rtc.c **** 	*(RTC_buffer+5) 	=  TimeStamp.tm_year - (2000 - 1900);
+ 224              		.loc 1 173 2 is_stmt 1 view .LVU58
+ 225              		.loc 1 173 31 is_stmt 0 view .LVU59
  226 0018 5B69     		ldr	r3, [r3, #20]
- 227              		.loc 1 167 40 view .LVU60
+ 227              		.loc 1 173 40 view .LVU60
+ARM GAS  /tmp/ccBVJHev.s 			page 8
+
+
  228 001a 643B     		subs	r3, r3, #100
- 229              		.loc 1 167 19 view .LVU61
+ 229              		.loc 1 173 19 view .LVU61
  230 001c 4371     		strb	r3, [r0, #5]
- 168:IO_drivers/rtc.c **** }
- 231              		.loc 1 168 1 view .LVU62
+ 174:IO_drivers/rtc.c **** }
+ 231              		.loc 1 174 1 view .LVU62
  232 001e 7047     		bx	lr
-ARM GAS  /tmp/ccAGdX81.s 			page 8
-
-
  233              	.L16:
  234              		.align	2
  235              	.L15:
@@ -472,15 +478,15 @@ ARM GAS  /tmp/ccAGdX81.s 			page 1
   46:IO_drivers/rtc.c **** 	{
  276              		.loc 1 46 16 is_stmt 0 view .LVU70
  277 000e 2946     		mov	r1, r5
+ARM GAS  /tmp/ccBVJHev.s 			page 9
+
+
  278              	.LVL18:
   46:IO_drivers/rtc.c **** 	{
  279              		.loc 1 46 16 view .LVU71
  280 0010 FFF7FEFF 		bl	I2C_ReadBuffer
  281              	.LVL19:
   46:IO_drivers/rtc.c **** 	{
-ARM GAS  /tmp/ccAGdX81.s 			page 9
-
-
  282              		.loc 1 46 16 view .LVU72
  283 0014 0446     		mov	r4, r0
   46:IO_drivers/rtc.c **** 	{
@@ -532,15 +538,15 @@ ARM GAS  /tmp/ccAGdX81.s 			page 1
   48:IO_drivers/rtc.c **** 		{
  318              		.loc 1 48 3 discriminator 1 view .LVU85
  319              	.LBE5:
+ARM GAS  /tmp/ccBVJHev.s 			page 10
+
+
   58:IO_drivers/rtc.c **** }
  320              		.loc 1 58 2 is_stmt 1 view .LVU86
   59:IO_drivers/rtc.c **** 
  321              		.loc 1 59 1 is_stmt 0 view .LVU87
  322 002e 054B     		ldr	r3, .L24
  323 0030 1878     		ldrb	r0, [r3]	@ zero_extendqisi2
-ARM GAS  /tmp/ccAGdX81.s 			page 10
-
-
  324 0032 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
  325              	.LVL25:
  326              	.L22:
@@ -592,15 +598,15 @@ ARM GAS  /tmp/ccAGdX81.s 			page 1
  366              	.LCFI3:
  367              		.cfi_def_cfa_offset 16
  368              		.cfi_offset 3, -16
+ARM GAS  /tmp/ccBVJHev.s 			page 11
+
+
  369              		.cfi_offset 4, -12
  370              		.cfi_offset 5, -8
  371              		.cfi_offset 14, -4
  105:IO_drivers/rtc.c **** 	status = GetDataDS3231(RTC_ADDRESS, FIRST_REGISTR_TIME, TIME_NUMBER, data.DS3231_getdata); //по�
  372              		.loc 1 105 2 view .LVU96
  105:IO_drivers/rtc.c **** 	status = GetDataDS3231(RTC_ADDRESS, FIRST_REGISTR_TIME, TIME_NUMBER, data.DS3231_getdata); //по�
-ARM GAS  /tmp/ccAGdX81.s 			page 11
-
-
  373              		.loc 1 105 9 is_stmt 0 view .LVU97
  374 0002 094C     		ldr	r4, .L28
  375 0004 0021     		movs	r1, #0
@@ -643,706 +649,778 @@ ARM GAS  /tmp/ccAGdX81.s 			page 1
  404 002c 00000000 		.word	.LANCHOR2
  405              		.cfi_endproc
  406              	.LFE822:
- 408              		.section	.text.CalcUNIXtime_from_DS3231,"ax",%progbits
- 409              		.align	1
- 410              		.syntax unified
- 411              		.thumb
- 412              		.thumb_func
- 414              	CalcUNIXtime_from_DS3231:
- 415              	.LVL30:
- 416              	.LFB824:
- 124:IO_drivers/rtc.c **** 	TimeStamp.tm_sec = *time_data;
- 417              		.loc 1 124 1 is_stmt 1 view -0
- 418              		.cfi_startproc
- 419              		@ args = 0, pretend = 0, frame = 0
- 420              		@ frame_needed = 0, uses_anonymous_args = 0
- 124:IO_drivers/rtc.c **** 	TimeStamp.tm_sec = *time_data;
- 421              		.loc 1 124 1 is_stmt 0 view .LVU107
-ARM GAS  /tmp/ccAGdX81.s 			page 12
+ 408              		.section	.rodata.CalcUNIXtime_from_DS3231.str1.4,"aMS",%progbits,1
+ 409              		.align	2
+ 410              	.LC0:
+ 411 0000 733D2575 		.ascii	"s=%u,min=%u,h=%u,d=%u,month=%u,year=%u\015\012\000"
+ 411      2C6D696E 
+ 411      3D25752C 
+ 411      683D2575 
+ 411      2C643D25 
+ 412              		.section	.text.CalcUNIXtime_from_DS3231,"ax",%progbits
+ARM GAS  /tmp/ccBVJHev.s 			page 12
 
 
- 422 0000 10B5     		push	{r4, lr}
- 423              	.LCFI4:
- 424              		.cfi_def_cfa_offset 8
- 425              		.cfi_offset 4, -8
- 426              		.cfi_offset 14, -4
- 427 0002 0446     		mov	r4, r0
- 125:IO_drivers/rtc.c **** 	TimeStamp.tm_min = *(time_data+1);
- 428              		.loc 1 125 2 is_stmt 1 view .LVU108
- 125:IO_drivers/rtc.c **** 	TimeStamp.tm_min = *(time_data+1);
- 429              		.loc 1 125 21 is_stmt 0 view .LVU109
- 430 0004 0B78     		ldrb	r3, [r1]	@ zero_extendqisi2
- 125:IO_drivers/rtc.c **** 	TimeStamp.tm_min = *(time_data+1);
- 431              		.loc 1 125 19 view .LVU110
- 432 0006 0948     		ldr	r0, .L32
- 433              	.LVL31:
- 125:IO_drivers/rtc.c **** 	TimeStamp.tm_min = *(time_data+1);
- 434              		.loc 1 125 19 view .LVU111
- 435 0008 0360     		str	r3, [r0]
- 126:IO_drivers/rtc.c **** 	TimeStamp.tm_hour = *(time_data+2);
- 436              		.loc 1 126 2 is_stmt 1 view .LVU112
- 126:IO_drivers/rtc.c **** 	TimeStamp.tm_hour = *(time_data+2);
- 437              		.loc 1 126 21 is_stmt 0 view .LVU113
- 438 000a 4B78     		ldrb	r3, [r1, #1]	@ zero_extendqisi2
- 126:IO_drivers/rtc.c **** 	TimeStamp.tm_hour = *(time_data+2);
- 439              		.loc 1 126 19 view .LVU114
- 440 000c 4360     		str	r3, [r0, #4]
- 127:IO_drivers/rtc.c **** 	TimeStamp.tm_mday = *(time_data+3)-1;
- 441              		.loc 1 127 2 is_stmt 1 view .LVU115
- 127:IO_drivers/rtc.c **** 	TimeStamp.tm_mday = *(time_data+3)-1;
- 442              		.loc 1 127 22 is_stmt 0 view .LVU116
- 443 000e 8B78     		ldrb	r3, [r1, #2]	@ zero_extendqisi2
- 127:IO_drivers/rtc.c **** 	TimeStamp.tm_mday = *(time_data+3)-1;
- 444              		.loc 1 127 20 view .LVU117
- 445 0010 8360     		str	r3, [r0, #8]
- 128:IO_drivers/rtc.c **** 	TimeStamp.tm_mon = *(time_data+4);			
- 446              		.loc 1 128 2 is_stmt 1 view .LVU118
- 128:IO_drivers/rtc.c **** 	TimeStamp.tm_mon = *(time_data+4);			
- 447              		.loc 1 128 22 is_stmt 0 view .LVU119
- 448 0012 CB78     		ldrb	r3, [r1, #3]	@ zero_extendqisi2
- 128:IO_drivers/rtc.c **** 	TimeStamp.tm_mon = *(time_data+4);			
- 449              		.loc 1 128 36 view .LVU120
- 450 0014 013B     		subs	r3, r3, #1
- 128:IO_drivers/rtc.c **** 	TimeStamp.tm_mon = *(time_data+4);			
- 451              		.loc 1 128 20 view .LVU121
- 452 0016 C360     		str	r3, [r0, #12]
- 129:IO_drivers/rtc.c **** 	TimeStamp.tm_year = *(time_data+5) + (2000 - 1900);
- 453              		.loc 1 129 2 is_stmt 1 view .LVU122
- 129:IO_drivers/rtc.c **** 	TimeStamp.tm_year = *(time_data+5) + (2000 - 1900);
- 454              		.loc 1 129 21 is_stmt 0 view .LVU123
- 455 0018 0B79     		ldrb	r3, [r1, #4]	@ zero_extendqisi2
- 129:IO_drivers/rtc.c **** 	TimeStamp.tm_year = *(time_data+5) + (2000 - 1900);
- 456              		.loc 1 129 19 view .LVU124
- 457 001a 0361     		str	r3, [r0, #16]
- 130:IO_drivers/rtc.c **** 	*UNIX_time =  (uint32_t	) mktime64(&TimeStamp); //перевод полученной даты в 
- 458              		.loc 1 130 2 is_stmt 1 view .LVU125
- 130:IO_drivers/rtc.c **** 	*UNIX_time =  (uint32_t	) mktime64(&TimeStamp); //перевод полученной даты в 
- 459              		.loc 1 130 22 is_stmt 0 view .LVU126
-ARM GAS  /tmp/ccAGdX81.s 			page 13
+ 413              		.align	1
+ 414              		.syntax unified
+ 415              		.thumb
+ 416              		.thumb_func
+ 418              	CalcUNIXtime_from_DS3231:
+ 419              	.LVL30:
+ 420              	.LFB824:
+ 124:IO_drivers/rtc.c **** 	#ifdef __USE_DBG
+ 421              		.loc 1 124 1 is_stmt 1 view -0
+ 422              		.cfi_startproc
+ 423              		@ args = 0, pretend = 0, frame = 0
+ 424              		@ frame_needed = 0, uses_anonymous_args = 0
+ 124:IO_drivers/rtc.c **** 	#ifdef __USE_DBG
+ 425              		.loc 1 124 1 is_stmt 0 view .LVU107
+ 426 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 427              	.LCFI4:
+ 428              		.cfi_def_cfa_offset 20
+ 429              		.cfi_offset 4, -20
+ 430              		.cfi_offset 5, -16
+ 431              		.cfi_offset 6, -12
+ 432              		.cfi_offset 7, -8
+ 433              		.cfi_offset 14, -4
+ 434 0002 87B0     		sub	sp, sp, #28
+ 435              	.LCFI5:
+ 436              		.cfi_def_cfa_offset 48
+ 437 0004 0546     		mov	r5, r0
+ 438 0006 0C46     		mov	r4, r1
+ 126:IO_drivers/rtc.c **** 		*(time_data+1), *(time_data+2), *(time_data+3), *(time_data+4), *(time_data+5));	          
+ 439              		.loc 1 126 4 is_stmt 1 view .LVU108
+ 127:IO_drivers/rtc.c ****       	DBG_PutString(DBG_buffer);
+ 440              		.loc 1 127 3 is_stmt 0 view .LVU109
+ 441 0008 4B78     		ldrb	r3, [r1, #1]	@ zero_extendqisi2
+ 127:IO_drivers/rtc.c ****       	DBG_PutString(DBG_buffer);
+ 442              		.loc 1 127 19 view .LVU110
+ 443 000a 8A78     		ldrb	r2, [r1, #2]	@ zero_extendqisi2
+ 127:IO_drivers/rtc.c ****       	DBG_PutString(DBG_buffer);
+ 444              		.loc 1 127 35 view .LVU111
+ 445 000c C978     		ldrb	r1, [r1, #3]	@ zero_extendqisi2
+ 446              	.LVL31:
+ 127:IO_drivers/rtc.c ****       	DBG_PutString(DBG_buffer);
+ 447              		.loc 1 127 51 view .LVU112
+ 448 000e 2079     		ldrb	r0, [r4, #4]	@ zero_extendqisi2
+ 449              	.LVL32:
+ 127:IO_drivers/rtc.c ****       	DBG_PutString(DBG_buffer);
+ 450              		.loc 1 127 67 view .LVU113
+ 451 0010 6779     		ldrb	r7, [r4, #5]	@ zero_extendqisi2
+ 126:IO_drivers/rtc.c **** 		*(time_data+1), *(time_data+2), *(time_data+3), *(time_data+4), *(time_data+5));	          
+ 452              		.loc 1 126 4 view .LVU114
+ 453 0012 124E     		ldr	r6, .L32
+ 454 0014 0497     		str	r7, [sp, #16]
+ 455 0016 0390     		str	r0, [sp, #12]
+ 456 0018 0291     		str	r1, [sp, #8]
+ 457 001a 0192     		str	r2, [sp, #4]
+ 458 001c 0093     		str	r3, [sp]
+ 459 001e 2378     		ldrb	r3, [r4]	@ zero_extendqisi2
+ 460 0020 0F4A     		ldr	r2, .L32+4
+ 461 0022 3221     		movs	r1, #50
+ARM GAS  /tmp/ccBVJHev.s 			page 13
 
 
- 460 001c 4B79     		ldrb	r3, [r1, #5]	@ zero_extendqisi2
- 130:IO_drivers/rtc.c **** 	*UNIX_time =  (uint32_t	) mktime64(&TimeStamp); //перевод полученной даты в 
- 461              		.loc 1 130 37 view .LVU127
- 462 001e 6433     		adds	r3, r3, #100
- 130:IO_drivers/rtc.c **** 	*UNIX_time =  (uint32_t	) mktime64(&TimeStamp); //перевод полученной даты в 
- 463              		.loc 1 130 20 view .LVU128
- 464 0020 4361     		str	r3, [r0, #20]
- 131:IO_drivers/rtc.c **** }
- 465              		.loc 1 131 2 is_stmt 1 view .LVU129
- 131:IO_drivers/rtc.c **** }
- 466              		.loc 1 131 28 is_stmt 0 view .LVU130
- 467 0022 FFF7FEFF 		bl	mktime64
- 468              	.LVL32:
- 131:IO_drivers/rtc.c **** }
- 469              		.loc 1 131 13 view .LVU131
- 470 0026 2060     		str	r0, [r4]
- 132:IO_drivers/rtc.c **** 
- 471              		.loc 1 132 1 view .LVU132
- 472 0028 10BD     		pop	{r4, pc}
- 473              	.LVL33:
- 474              	.L33:
- 132:IO_drivers/rtc.c **** 
- 475              		.loc 1 132 1 view .LVU133
- 476 002a 00BF     		.align	2
- 477              	.L32:
- 478 002c 00000000 		.word	.LANCHOR0
- 479              		.cfi_endproc
- 480              	.LFE824:
- 482              		.section	.text.CalcTimeStamp_from_UART,"ax",%progbits
- 483              		.align	1
- 484              		.syntax unified
- 485              		.thumb
- 486              		.thumb_func
- 488              	CalcTimeStamp_from_UART:
- 489              	.LVL34:
- 490              	.LFB826:
- 153:IO_drivers/rtc.c **** 	int64_t buf = (uint64_t)UART_UNIXtime;
- 491              		.loc 1 153 1 is_stmt 1 view -0
- 492              		.cfi_startproc
- 493              		@ args = 0, pretend = 0, frame = 8
- 494              		@ frame_needed = 0, uses_anonymous_args = 0
- 153:IO_drivers/rtc.c **** 	int64_t buf = (uint64_t)UART_UNIXtime;
- 495              		.loc 1 153 1 is_stmt 0 view .LVU135
- 496 0000 10B5     		push	{r4, lr}
- 497              	.LCFI5:
- 498              		.cfi_def_cfa_offset 8
- 499              		.cfi_offset 4, -8
- 500              		.cfi_offset 14, -4
- 501 0002 82B0     		sub	sp, sp, #8
- 502              	.LCFI6:
- 503              		.cfi_def_cfa_offset 16
- 154:IO_drivers/rtc.c **** 	TimeStamp = *gmtime64_r (&buf, &TimeStamp);
- 504              		.loc 1 154 2 is_stmt 1 view .LVU136
- 154:IO_drivers/rtc.c **** 	TimeStamp = *gmtime64_r (&buf, &TimeStamp);
- 505              		.loc 1 154 10 is_stmt 0 view .LVU137
- 506 0004 0090     		str	r0, [sp]
- 507 0006 0023     		movs	r3, #0
-ARM GAS  /tmp/ccAGdX81.s 			page 14
+ 462 0024 3046     		mov	r0, r6
+ 463 0026 FFF7FEFF 		bl	snprintf
+ 464              	.LVL33:
+ 128:IO_drivers/rtc.c **** 	#endif
+ 465              		.loc 1 128 8 is_stmt 1 view .LVU115
+ 466 002a 3046     		mov	r0, r6
+ 467 002c FFF7FEFF 		bl	DBG_PutString
+ 468              	.LVL34:
+ 131:IO_drivers/rtc.c **** 	TimeStamp.tm_min = *(time_data+1); //minute
+ 469              		.loc 1 131 2 view .LVU116
+ 131:IO_drivers/rtc.c **** 	TimeStamp.tm_min = *(time_data+1); //minute
+ 470              		.loc 1 131 21 is_stmt 0 view .LVU117
+ 471 0030 2378     		ldrb	r3, [r4]	@ zero_extendqisi2
+ 131:IO_drivers/rtc.c **** 	TimeStamp.tm_min = *(time_data+1); //minute
+ 472              		.loc 1 131 19 view .LVU118
+ 473 0032 0C48     		ldr	r0, .L32+8
+ 474 0034 0360     		str	r3, [r0]
+ 132:IO_drivers/rtc.c **** 	TimeStamp.tm_hour = *(time_data+2); //hour
+ 475              		.loc 1 132 2 is_stmt 1 view .LVU119
+ 132:IO_drivers/rtc.c **** 	TimeStamp.tm_hour = *(time_data+2); //hour
+ 476              		.loc 1 132 21 is_stmt 0 view .LVU120
+ 477 0036 6378     		ldrb	r3, [r4, #1]	@ zero_extendqisi2
+ 132:IO_drivers/rtc.c **** 	TimeStamp.tm_hour = *(time_data+2); //hour
+ 478              		.loc 1 132 19 view .LVU121
+ 479 0038 4360     		str	r3, [r0, #4]
+ 133:IO_drivers/rtc.c **** 	TimeStamp.tm_mday = *(time_data+3)+1; //day
+ 480              		.loc 1 133 2 is_stmt 1 view .LVU122
+ 133:IO_drivers/rtc.c **** 	TimeStamp.tm_mday = *(time_data+3)+1; //day
+ 481              		.loc 1 133 22 is_stmt 0 view .LVU123
+ 482 003a A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 133:IO_drivers/rtc.c **** 	TimeStamp.tm_mday = *(time_data+3)+1; //day
+ 483              		.loc 1 133 20 view .LVU124
+ 484 003c 8360     		str	r3, [r0, #8]
+ 134:IO_drivers/rtc.c **** 	TimeStamp.tm_mon = *(time_data+4)-1; //month(1..12)	
+ 485              		.loc 1 134 2 is_stmt 1 view .LVU125
+ 134:IO_drivers/rtc.c **** 	TimeStamp.tm_mon = *(time_data+4)-1; //month(1..12)	
+ 486              		.loc 1 134 22 is_stmt 0 view .LVU126
+ 487 003e E378     		ldrb	r3, [r4, #3]	@ zero_extendqisi2
+ 134:IO_drivers/rtc.c **** 	TimeStamp.tm_mon = *(time_data+4)-1; //month(1..12)	
+ 488              		.loc 1 134 36 view .LVU127
+ 489 0040 0133     		adds	r3, r3, #1
+ 134:IO_drivers/rtc.c **** 	TimeStamp.tm_mon = *(time_data+4)-1; //month(1..12)	
+ 490              		.loc 1 134 20 view .LVU128
+ 491 0042 C360     		str	r3, [r0, #12]
+ 135:IO_drivers/rtc.c **** 	TimeStamp.tm_year = *(time_data+5) + (2000 - 1900); //year (2025->125)
+ 492              		.loc 1 135 2 is_stmt 1 view .LVU129
+ 135:IO_drivers/rtc.c **** 	TimeStamp.tm_year = *(time_data+5) + (2000 - 1900); //year (2025->125)
+ 493              		.loc 1 135 21 is_stmt 0 view .LVU130
+ 494 0044 2379     		ldrb	r3, [r4, #4]	@ zero_extendqisi2
+ 135:IO_drivers/rtc.c **** 	TimeStamp.tm_year = *(time_data+5) + (2000 - 1900); //year (2025->125)
+ 495              		.loc 1 135 35 view .LVU131
+ 496 0046 013B     		subs	r3, r3, #1
+ 135:IO_drivers/rtc.c **** 	TimeStamp.tm_year = *(time_data+5) + (2000 - 1900); //year (2025->125)
+ 497              		.loc 1 135 19 view .LVU132
+ 498 0048 0361     		str	r3, [r0, #16]
+ 136:IO_drivers/rtc.c **** 	*UNIX_time =  (uint32_t	) mktime64(&TimeStamp); //перевод полученной даты в 
+ 499              		.loc 1 136 2 is_stmt 1 view .LVU133
+ARM GAS  /tmp/ccBVJHev.s 			page 14
 
 
- 508 0008 0193     		str	r3, [sp, #4]
- 155:IO_drivers/rtc.c **** 
- 509              		.loc 1 155 2 is_stmt 1 view .LVU138
- 155:IO_drivers/rtc.c **** 
- 510              		.loc 1 155 15 is_stmt 0 view .LVU139
- 511 000a 094C     		ldr	r4, .L36
- 512 000c 2146     		mov	r1, r4
- 513 000e 6846     		mov	r0, sp
- 514              	.LVL35:
- 155:IO_drivers/rtc.c **** 
- 515              		.loc 1 155 15 view .LVU140
- 516 0010 FFF7FEFF 		bl	gmtime64_r
- 517              	.LVL36:
- 155:IO_drivers/rtc.c **** 
- 518              		.loc 1 155 12 view .LVU141
- 519 0014 A446     		mov	ip, r4
- 520 0016 0446     		mov	r4, r0
- 521 0018 0FCC     		ldmia	r4!, {r0, r1, r2, r3}
- 522 001a ACE80F00 		stmia	ip!, {r0, r1, r2, r3}
- 523 001e 0FCC     		ldmia	r4!, {r0, r1, r2, r3}
- 524 0020 ACE80F00 		stmia	ip!, {r0, r1, r2, r3}
- 525 0024 2368     		ldr	r3, [r4]
- 526 0026 CCF80030 		str	r3, [ip]
- 157:IO_drivers/rtc.c **** 
- 527              		.loc 1 157 1 view .LVU142
- 528 002a 02B0     		add	sp, sp, #8
- 529              	.LCFI7:
- 530              		.cfi_def_cfa_offset 8
- 531              		@ sp needed
- 532 002c 10BD     		pop	{r4, pc}
- 533              	.L37:
- 534 002e 00BF     		.align	2
- 535              	.L36:
- 536 0030 00000000 		.word	.LANCHOR0
- 537              		.cfi_endproc
- 538              	.LFE826:
- 540              		.section	.text.SetTimeDS3231,"ax",%progbits
- 541              		.align	1
- 542              		.syntax unified
- 543              		.thumb
- 544              		.thumb_func
- 546              	SetTimeDS3231:
- 547              	.LVL37:
- 548              	.LFB819:
+ 136:IO_drivers/rtc.c **** 	*UNIX_time =  (uint32_t	) mktime64(&TimeStamp); //перевод полученной даты в 
+ 500              		.loc 1 136 22 is_stmt 0 view .LVU134
+ 501 004a 6379     		ldrb	r3, [r4, #5]	@ zero_extendqisi2
+ 136:IO_drivers/rtc.c **** 	*UNIX_time =  (uint32_t	) mktime64(&TimeStamp); //перевод полученной даты в 
+ 502              		.loc 1 136 37 view .LVU135
+ 503 004c 6433     		adds	r3, r3, #100
+ 136:IO_drivers/rtc.c **** 	*UNIX_time =  (uint32_t	) mktime64(&TimeStamp); //перевод полученной даты в 
+ 504              		.loc 1 136 20 view .LVU136
+ 505 004e 4361     		str	r3, [r0, #20]
+ 137:IO_drivers/rtc.c **** }
+ 506              		.loc 1 137 2 is_stmt 1 view .LVU137
+ 137:IO_drivers/rtc.c **** }
+ 507              		.loc 1 137 28 is_stmt 0 view .LVU138
+ 508 0050 FFF7FEFF 		bl	mktime64
+ 509              	.LVL35:
+ 137:IO_drivers/rtc.c **** }
+ 510              		.loc 1 137 13 view .LVU139
+ 511 0054 2860     		str	r0, [r5]
+ 138:IO_drivers/rtc.c **** 
+ 512              		.loc 1 138 1 view .LVU140
+ 513 0056 07B0     		add	sp, sp, #28
+ 514              	.LCFI6:
+ 515              		.cfi_def_cfa_offset 20
+ 516              		@ sp needed
+ 517 0058 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 518              	.LVL36:
+ 519              	.L33:
+ 138:IO_drivers/rtc.c **** 
+ 520              		.loc 1 138 1 view .LVU141
+ 521 005a 00BF     		.align	2
+ 522              	.L32:
+ 523 005c 00000000 		.word	DBG_buffer
+ 524 0060 00000000 		.word	.LC0
+ 525 0064 00000000 		.word	.LANCHOR0
+ 526              		.cfi_endproc
+ 527              	.LFE824:
+ 529              		.section	.text.CalcTimeStamp_from_UART,"ax",%progbits
+ 530              		.align	1
+ 531              		.syntax unified
+ 532              		.thumb
+ 533              		.thumb_func
+ 535              	CalcTimeStamp_from_UART:
+ 536              	.LVL37:
+ 537              	.LFB826:
+ 159:IO_drivers/rtc.c **** 	int64_t buf = (uint64_t)UART_UNIXtime;
+ 538              		.loc 1 159 1 is_stmt 1 view -0
+ 539              		.cfi_startproc
+ 540              		@ args = 0, pretend = 0, frame = 8
+ 541              		@ frame_needed = 0, uses_anonymous_args = 0
+ 159:IO_drivers/rtc.c **** 	int64_t buf = (uint64_t)UART_UNIXtime;
+ 542              		.loc 1 159 1 is_stmt 0 view .LVU143
+ 543 0000 10B5     		push	{r4, lr}
+ 544              	.LCFI7:
+ 545              		.cfi_def_cfa_offset 8
+ 546              		.cfi_offset 4, -8
+ 547              		.cfi_offset 14, -4
+ 548 0002 82B0     		sub	sp, sp, #8
+ARM GAS  /tmp/ccBVJHev.s 			page 15
+
+
+ 549              	.LCFI8:
+ 550              		.cfi_def_cfa_offset 16
+ 160:IO_drivers/rtc.c **** 	TimeStamp = *gmtime64_r (&buf, &TimeStamp);
+ 551              		.loc 1 160 2 is_stmt 1 view .LVU144
+ 160:IO_drivers/rtc.c **** 	TimeStamp = *gmtime64_r (&buf, &TimeStamp);
+ 552              		.loc 1 160 10 is_stmt 0 view .LVU145
+ 553 0004 0090     		str	r0, [sp]
+ 554 0006 0023     		movs	r3, #0
+ 555 0008 0193     		str	r3, [sp, #4]
+ 161:IO_drivers/rtc.c **** 
+ 556              		.loc 1 161 2 is_stmt 1 view .LVU146
+ 161:IO_drivers/rtc.c **** 
+ 557              		.loc 1 161 15 is_stmt 0 view .LVU147
+ 558 000a 094C     		ldr	r4, .L36
+ 559 000c 2146     		mov	r1, r4
+ 560 000e 6846     		mov	r0, sp
+ 561              	.LVL38:
+ 161:IO_drivers/rtc.c **** 
+ 562              		.loc 1 161 15 view .LVU148
+ 563 0010 FFF7FEFF 		bl	gmtime64_r
+ 564              	.LVL39:
+ 161:IO_drivers/rtc.c **** 
+ 565              		.loc 1 161 12 view .LVU149
+ 566 0014 A446     		mov	ip, r4
+ 567 0016 0446     		mov	r4, r0
+ 568 0018 0FCC     		ldmia	r4!, {r0, r1, r2, r3}
+ 569 001a ACE80F00 		stmia	ip!, {r0, r1, r2, r3}
+ 570 001e 0FCC     		ldmia	r4!, {r0, r1, r2, r3}
+ 571 0020 ACE80F00 		stmia	ip!, {r0, r1, r2, r3}
+ 572 0024 2368     		ldr	r3, [r4]
+ 573 0026 CCF80030 		str	r3, [ip]
+ 163:IO_drivers/rtc.c **** 
+ 574              		.loc 1 163 1 view .LVU150
+ 575 002a 02B0     		add	sp, sp, #8
+ 576              	.LCFI9:
+ 577              		.cfi_def_cfa_offset 8
+ 578              		@ sp needed
+ 579 002c 10BD     		pop	{r4, pc}
+ 580              	.L37:
+ 581 002e 00BF     		.align	2
+ 582              	.L36:
+ 583 0030 00000000 		.word	.LANCHOR0
+ 584              		.cfi_endproc
+ 585              	.LFE826:
+ 587              		.section	.text.SetTimeDS3231,"ax",%progbits
+ 588              		.align	1
+ 589              		.syntax unified
+ 590              		.thumb
+ 591              		.thumb_func
+ 593              	SetTimeDS3231:
+ 594              	.LVL40:
+ 595              	.LFB819:
   72:IO_drivers/rtc.c **** 	uint8_t count = 0;
- 549              		.loc 1 72 1 is_stmt 1 view -0
- 550              		.cfi_startproc
- 551              		@ args = 0, pretend = 0, frame = 0
- 552              		@ frame_needed = 0, uses_anonymous_args = 0
+ 596              		.loc 1 72 1 is_stmt 1 view -0
+ 597              		.cfi_startproc
+ 598              		@ args = 0, pretend = 0, frame = 0
+ 599              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  /tmp/ccBVJHev.s 			page 16
+
+
   72:IO_drivers/rtc.c **** 	uint8_t count = 0;
- 553              		.loc 1 72 1 is_stmt 0 view .LVU144
- 554 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
- 555              	.LCFI8:
- 556              		.cfi_def_cfa_offset 24
- 557              		.cfi_offset 3, -24
- 558              		.cfi_offset 4, -20
- 559              		.cfi_offset 5, -16
-ARM GAS  /tmp/ccAGdX81.s 			page 15
-
-
- 560              		.cfi_offset 6, -12
- 561              		.cfi_offset 7, -8
- 562              		.cfi_offset 14, -4
- 563 0002 0F46     		mov	r7, r1
- 564 0004 1546     		mov	r5, r2
- 565 0006 1E46     		mov	r6, r3
+ 600              		.loc 1 72 1 is_stmt 0 view .LVU152
+ 601 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 602              	.LCFI10:
+ 603              		.cfi_def_cfa_offset 24
+ 604              		.cfi_offset 3, -24
+ 605              		.cfi_offset 4, -20
+ 606              		.cfi_offset 5, -16
+ 607              		.cfi_offset 6, -12
+ 608              		.cfi_offset 7, -8
+ 609              		.cfi_offset 14, -4
+ 610 0002 0F46     		mov	r7, r1
+ 611 0004 1546     		mov	r5, r2
+ 612 0006 1E46     		mov	r6, r3
   73:IO_drivers/rtc.c **** 	status = I2C_OK;
- 566              		.loc 1 73 2 is_stmt 1 view .LVU145
- 567              	.LVL38:
+ 613              		.loc 1 73 2 is_stmt 1 view .LVU153
+ 614              	.LVL41:
   74:IO_drivers/rtc.c **** 
- 568              		.loc 1 74 2 view .LVU146
+ 615              		.loc 1 74 2 view .LVU154
   74:IO_drivers/rtc.c **** 
- 569              		.loc 1 74 9 is_stmt 0 view .LVU147
- 570 0008 0024     		movs	r4, #0
- 571 000a 0D4B     		ldr	r3, .L44
- 572              	.LVL39:
+ 616              		.loc 1 74 9 is_stmt 0 view .LVU155
+ 617 0008 0024     		movs	r4, #0
+ 618 000a 0D4B     		ldr	r3, .L44
+ 619              	.LVL42:
   74:IO_drivers/rtc.c **** 
- 573              		.loc 1 74 9 view .LVU148
- 574 000c 1C70     		strb	r4, [r3]
+ 620              		.loc 1 74 9 view .LVU156
+ 621 000c 1C70     		strb	r4, [r3]
   76:IO_drivers/rtc.c **** 		*(RTC_buffer+count)  = RTC_ConvertToBinDec(*(RTC_buffer+count));  //перевод числа в 
- 575              		.loc 1 76 2 is_stmt 1 view .LVU149
+ 622              		.loc 1 76 2 is_stmt 1 view .LVU157
   76:IO_drivers/rtc.c **** 		*(RTC_buffer+count)  = RTC_ConvertToBinDec(*(RTC_buffer+count));  //перевод числа в 
- 576              		.loc 1 76 2 is_stmt 0 view .LVU150
- 577 000e 05E0     		b	.L39
- 578              	.LVL40:
- 579              	.L40:
+ 623              		.loc 1 76 2 is_stmt 0 view .LVU158
+ 624 000e 05E0     		b	.L39
+ 625              	.LVL43:
+ 626              	.L40:
   77:IO_drivers/rtc.c **** 	}
- 580              		.loc 1 77 3 is_stmt 1 discriminator 3 view .LVU151
+ 627              		.loc 1 77 3 is_stmt 1 discriminator 3 view .LVU159
   77:IO_drivers/rtc.c **** 	}
- 581              		.loc 1 77 26 is_stmt 0 discriminator 3 view .LVU152
- 582 0010 305D     		ldrb	r0, [r6, r4]	@ zero_extendqisi2
- 583 0012 FFF7FEFF 		bl	RTC_ConvertToBinDec
- 584              	.LVL41:
+ 628              		.loc 1 77 26 is_stmt 0 discriminator 3 view .LVU160
+ 629 0010 305D     		ldrb	r0, [r6, r4]	@ zero_extendqisi2
+ 630 0012 FFF7FEFF 		bl	RTC_ConvertToBinDec
+ 631              	.LVL44:
   77:IO_drivers/rtc.c **** 	}
- 585              		.loc 1 77 24 discriminator 3 view .LVU153
- 586 0016 3055     		strb	r0, [r6, r4]
+ 632              		.loc 1 77 24 discriminator 3 view .LVU161
+ 633 0016 3055     		strb	r0, [r6, r4]
   76:IO_drivers/rtc.c **** 		*(RTC_buffer+count)  = RTC_ConvertToBinDec(*(RTC_buffer+count));  //перевод числа в 
- 587              		.loc 1 76 35 is_stmt 1 discriminator 3 view .LVU154
+ 634              		.loc 1 76 35 is_stmt 1 discriminator 3 view .LVU162
   76:IO_drivers/rtc.c **** 		*(RTC_buffer+count)  = RTC_ConvertToBinDec(*(RTC_buffer+count));  //перевод числа в 
- 588              		.loc 1 76 40 is_stmt 0 discriminator 3 view .LVU155
- 589 0018 0134     		adds	r4, r4, #1
- 590              	.LVL42:
+ 635              		.loc 1 76 40 is_stmt 0 discriminator 3 view .LVU163
+ 636 0018 0134     		adds	r4, r4, #1
+ 637              	.LVL45:
   76:IO_drivers/rtc.c **** 		*(RTC_buffer+count)  = RTC_ConvertToBinDec(*(RTC_buffer+count));  //перевод числа в 
- 591              		.loc 1 76 40 discriminator 3 view .LVU156
- 592 001a E4B2     		uxtb	r4, r4
- 593              	.LVL43:
- 594              	.L39:
+ 638              		.loc 1 76 40 discriminator 3 view .LVU164
+ 639 001a E4B2     		uxtb	r4, r4
+ 640              	.LVL46:
+ 641              	.L39:
   76:IO_drivers/rtc.c **** 		*(RTC_buffer+count)  = RTC_ConvertToBinDec(*(RTC_buffer+count));  //перевод числа в 
- 595              		.loc 1 76 18 is_stmt 1 discriminator 1 view .LVU157
-  76:IO_drivers/rtc.c **** 		*(RTC_buffer+count)  = RTC_ConvertToBinDec(*(RTC_buffer+count));  //перевод числа в 
- 596              		.loc 1 76 2 is_stmt 0 discriminator 1 view .LVU158
- 597 001c AC42     		cmp	r4, r5
- 598 001e F7D3     		bcc	.L40
-  80:IO_drivers/rtc.c **** 	{	 
- 599              		.loc 1 80 13 view .LVU159
- 600 0020 0024     		movs	r4, #0
- 601              	.LVL44:
-ARM GAS  /tmp/ccAGdX81.s 			page 16
+ 642              		.loc 1 76 18 is_stmt 1 discriminator 1 view .LVU165
+ARM GAS  /tmp/ccBVJHev.s 			page 17
 
 
+  76:IO_drivers/rtc.c **** 		*(RTC_buffer+count)  = RTC_ConvertToBinDec(*(RTC_buffer+count));  //перевод числа в 
+ 643              		.loc 1 76 2 is_stmt 0 discriminator 1 view .LVU166
+ 644 001c AC42     		cmp	r4, r5
+ 645 001e F7D3     		bcc	.L40
   80:IO_drivers/rtc.c **** 	{	 
- 602              		.loc 1 80 13 view .LVU160
- 603 0022 08E0     		b	.L41
- 604              	.LVL45:
- 605              	.L42:
+ 646              		.loc 1 80 13 view .LVU167
+ 647 0020 0024     		movs	r4, #0
+ 648              	.LVL47:
+  80:IO_drivers/rtc.c **** 	{	 
+ 649              		.loc 1 80 13 view .LVU168
+ 650 0022 08E0     		b	.L41
+ 651              	.LVL48:
+ 652              	.L42:
   82:IO_drivers/rtc.c **** 	}	
- 606              		.loc 1 82 3 is_stmt 1 discriminator 3 view .LVU161
+ 653              		.loc 1 82 3 is_stmt 1 discriminator 3 view .LVU169
   82:IO_drivers/rtc.c **** 	}	
- 607              		.loc 1 82 12 is_stmt 0 discriminator 3 view .LVU162
- 608 0024 2A46     		mov	r2, r5
- 609 0026 3146     		mov	r1, r6
- 610 0028 3846     		mov	r0, r7
- 611 002a FFF7FEFF 		bl	I2C_WriteBuffer
- 612              	.LVL46:
+ 654              		.loc 1 82 12 is_stmt 0 discriminator 3 view .LVU170
+ 655 0024 2A46     		mov	r2, r5
+ 656 0026 3146     		mov	r1, r6
+ 657 0028 3846     		mov	r0, r7
+ 658 002a FFF7FEFF 		bl	I2C_WriteBuffer
+ 659              	.LVL49:
   82:IO_drivers/rtc.c **** 	}	
- 613              		.loc 1 82 10 discriminator 3 view .LVU163
- 614 002e 044B     		ldr	r3, .L44
- 615 0030 1870     		strb	r0, [r3]
+ 660              		.loc 1 82 10 discriminator 3 view .LVU171
+ 661 002e 044B     		ldr	r3, .L44
+ 662 0030 1870     		strb	r0, [r3]
   80:IO_drivers/rtc.c **** 	{	 
- 616              		.loc 1 80 35 is_stmt 1 discriminator 3 view .LVU164
+ 663              		.loc 1 80 35 is_stmt 1 discriminator 3 view .LVU172
   80:IO_drivers/rtc.c **** 	{	 
- 617              		.loc 1 80 40 is_stmt 0 discriminator 3 view .LVU165
- 618 0032 0134     		adds	r4, r4, #1
- 619              	.LVL47:
+ 664              		.loc 1 80 40 is_stmt 0 discriminator 3 view .LVU173
+ 665 0032 0134     		adds	r4, r4, #1
+ 666              	.LVL50:
   80:IO_drivers/rtc.c **** 	{	 
- 620              		.loc 1 80 40 discriminator 3 view .LVU166
- 621 0034 E4B2     		uxtb	r4, r4
- 622              	.LVL48:
- 623              	.L41:
+ 667              		.loc 1 80 40 discriminator 3 view .LVU174
+ 668 0034 E4B2     		uxtb	r4, r4
+ 669              	.LVL51:
+ 670              	.L41:
   80:IO_drivers/rtc.c **** 	{	 
- 624              		.loc 1 80 18 is_stmt 1 discriminator 1 view .LVU167
+ 671              		.loc 1 80 18 is_stmt 1 discriminator 1 view .LVU175
   80:IO_drivers/rtc.c **** 	{	 
- 625              		.loc 1 80 2 is_stmt 0 discriminator 1 view .LVU168
- 626 0036 AC42     		cmp	r4, r5
- 627 0038 F4D3     		bcc	.L42
+ 672              		.loc 1 80 2 is_stmt 0 discriminator 1 view .LVU176
+ 673 0036 AC42     		cmp	r4, r5
+ 674 0038 F4D3     		bcc	.L42
   85:IO_drivers/rtc.c **** }
- 628              		.loc 1 85 2 is_stmt 1 view .LVU169
+ 675              		.loc 1 85 2 is_stmt 1 view .LVU177
   86:IO_drivers/rtc.c **** 
- 629              		.loc 1 86 1 is_stmt 0 view .LVU170
- 630 003a 014B     		ldr	r3, .L44
- 631 003c 1878     		ldrb	r0, [r3]	@ zero_extendqisi2
- 632 003e F8BD     		pop	{r3, r4, r5, r6, r7, pc}
- 633              	.LVL49:
- 634              	.L45:
+ 676              		.loc 1 86 1 is_stmt 0 view .LVU178
+ 677 003a 014B     		ldr	r3, .L44
+ 678 003c 1878     		ldrb	r0, [r3]	@ zero_extendqisi2
+ 679 003e F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 680              	.LVL52:
+ 681              	.L45:
   86:IO_drivers/rtc.c **** 
- 635              		.loc 1 86 1 view .LVU171
- 636              		.align	2
- 637              	.L44:
- 638 0040 00000000 		.word	.LANCHOR1
- 639              		.cfi_endproc
- 640              	.LFE819:
- 642              		.section	.text.GetTempDS3231,"ax",%progbits
- 643              		.align	1
- 644              		.global	GetTempDS3231
- 645              		.syntax unified
- 646              		.thumb
- 647              		.thumb_func
-ARM GAS  /tmp/ccAGdX81.s 			page 17
+ 682              		.loc 1 86 1 view .LVU179
+ 683              		.align	2
+ 684              	.L44:
+ 685 0040 00000000 		.word	.LANCHOR1
+ARM GAS  /tmp/ccBVJHev.s 			page 18
 
 
- 649              	GetTempDS3231:
- 650              	.LVL50:
- 651              	.LFB818:
+ 686              		.cfi_endproc
+ 687              	.LFE819:
+ 689              		.section	.text.GetTempDS3231,"ax",%progbits
+ 690              		.align	1
+ 691              		.global	GetTempDS3231
+ 692              		.syntax unified
+ 693              		.thumb
+ 694              		.thumb_func
+ 696              	GetTempDS3231:
+ 697              	.LVL53:
+ 698              	.LFB818:
   63:IO_drivers/rtc.c **** 	status = I2C_OK;
- 652              		.loc 1 63 1 is_stmt 1 view -0
- 653              		.cfi_startproc
- 654              		@ args = 0, pretend = 0, frame = 0
- 655              		@ frame_needed = 0, uses_anonymous_args = 0
+ 699              		.loc 1 63 1 is_stmt 1 view -0
+ 700              		.cfi_startproc
+ 701              		@ args = 0, pretend = 0, frame = 0
+ 702              		@ frame_needed = 0, uses_anonymous_args = 0
   63:IO_drivers/rtc.c **** 	status = I2C_OK;
- 656              		.loc 1 63 1 is_stmt 0 view .LVU173
- 657 0000 38B5     		push	{r3, r4, r5, lr}
- 658              	.LCFI9:
- 659              		.cfi_def_cfa_offset 16
- 660              		.cfi_offset 3, -16
- 661              		.cfi_offset 4, -12
- 662              		.cfi_offset 5, -8
- 663              		.cfi_offset 14, -4
- 664 0002 0846     		mov	r0, r1
- 665              	.LVL51:
+ 703              		.loc 1 63 1 is_stmt 0 view .LVU181
+ 704 0000 38B5     		push	{r3, r4, r5, lr}
+ 705              	.LCFI11:
+ 706              		.cfi_def_cfa_offset 16
+ 707              		.cfi_offset 3, -16
+ 708              		.cfi_offset 4, -12
+ 709              		.cfi_offset 5, -8
+ 710              		.cfi_offset 14, -4
+ 711 0002 0846     		mov	r0, r1
+ 712              	.LVL54:
   63:IO_drivers/rtc.c **** 	status = I2C_OK;
- 666              		.loc 1 63 1 view .LVU174
- 667 0004 1446     		mov	r4, r2
+ 713              		.loc 1 63 1 view .LVU182
+ 714 0004 1446     		mov	r4, r2
   64:IO_drivers/rtc.c **** 	if ((status = I2C_ReadByte (registr_adress,  temp_buffer)) != I2C_OK)
- 668              		.loc 1 64 2 is_stmt 1 view .LVU175
+ 715              		.loc 1 64 2 is_stmt 1 view .LVU183
   64:IO_drivers/rtc.c **** 	if ((status = I2C_ReadByte (registr_adress,  temp_buffer)) != I2C_OK)
- 669              		.loc 1 64 9 is_stmt 0 view .LVU176
- 670 0006 064D     		ldr	r5, .L49
- 671 0008 0023     		movs	r3, #0
- 672 000a 2B70     		strb	r3, [r5]
+ 716              		.loc 1 64 9 is_stmt 0 view .LVU184
+ 717 0006 064D     		ldr	r5, .L49
+ 718 0008 0023     		movs	r3, #0
+ 719 000a 2B70     		strb	r3, [r5]
   65:IO_drivers/rtc.c **** 	{	*temp_buffer = 0;	}	
- 673              		.loc 1 65 2 is_stmt 1 view .LVU177
+ 720              		.loc 1 65 2 is_stmt 1 view .LVU185
   65:IO_drivers/rtc.c **** 	{	*temp_buffer = 0;	}	
- 674              		.loc 1 65 16 is_stmt 0 view .LVU178
- 675 000c 1146     		mov	r1, r2
- 676              	.LVL52:
+ 721              		.loc 1 65 16 is_stmt 0 view .LVU186
+ 722 000c 1146     		mov	r1, r2
+ 723              	.LVL55:
   65:IO_drivers/rtc.c **** 	{	*temp_buffer = 0;	}	
- 677              		.loc 1 65 16 view .LVU179
- 678 000e FFF7FEFF 		bl	I2C_ReadByte
- 679              	.LVL53:
+ 724              		.loc 1 65 16 view .LVU187
+ 725 000e FFF7FEFF 		bl	I2C_ReadByte
+ 726              	.LVL56:
   65:IO_drivers/rtc.c **** 	{	*temp_buffer = 0;	}	
- 680              		.loc 1 65 14 view .LVU180
- 681 0012 2870     		strb	r0, [r5]
+ 727              		.loc 1 65 14 view .LVU188
+ 728 0012 2870     		strb	r0, [r5]
   65:IO_drivers/rtc.c **** 	{	*temp_buffer = 0;	}	
- 682              		.loc 1 65 5 view .LVU181
- 683 0014 08B1     		cbz	r0, .L47
+ 729              		.loc 1 65 5 view .LVU189
+ 730 0014 08B1     		cbz	r0, .L47
   66:IO_drivers/rtc.c **** 	return  status;
- 684              		.loc 1 66 4 is_stmt 1 view .LVU182
+ 731              		.loc 1 66 4 is_stmt 1 view .LVU190
   66:IO_drivers/rtc.c **** 	return  status;
- 685              		.loc 1 66 17 is_stmt 0 view .LVU183
- 686 0016 0023     		movs	r3, #0
- 687 0018 2370     		strb	r3, [r4]
- 688              	.L47:
+ 732              		.loc 1 66 17 is_stmt 0 view .LVU191
+ARM GAS  /tmp/ccBVJHev.s 			page 19
+
+
+ 733 0016 0023     		movs	r3, #0
+ 734 0018 2370     		strb	r3, [r4]
+ 735              	.L47:
   67:IO_drivers/rtc.c **** }
- 689              		.loc 1 67 2 is_stmt 1 view .LVU184
+ 736              		.loc 1 67 2 is_stmt 1 view .LVU192
   68:IO_drivers/rtc.c **** 
- 690              		.loc 1 68 1 is_stmt 0 view .LVU185
- 691 001a 014B     		ldr	r3, .L49
-ARM GAS  /tmp/ccAGdX81.s 			page 18
-
-
- 692 001c 1878     		ldrb	r0, [r3]	@ zero_extendqisi2
- 693 001e 38BD     		pop	{r3, r4, r5, pc}
- 694              	.LVL54:
- 695              	.L50:
+ 737              		.loc 1 68 1 is_stmt 0 view .LVU193
+ 738 001a 014B     		ldr	r3, .L49
+ 739 001c 1878     		ldrb	r0, [r3]	@ zero_extendqisi2
+ 740 001e 38BD     		pop	{r3, r4, r5, pc}
+ 741              	.LVL57:
+ 742              	.L50:
   68:IO_drivers/rtc.c **** 
- 696              		.loc 1 68 1 view .LVU186
- 697              		.align	2
- 698              	.L49:
- 699 0020 00000000 		.word	.LANCHOR1
- 700              		.cfi_endproc
- 701              	.LFE818:
- 703              		.section	.text.GetUnixTime_from_DS3231,"ax",%progbits
- 704              		.align	1
- 705              		.global	GetUnixTime_from_DS3231
- 706              		.syntax unified
- 707              		.thumb
- 708              		.thumb_func
- 710              	GetUnixTime_from_DS3231:
- 711              	.LFB825:
- 136:IO_drivers/rtc.c **** 	status = I2C_OK;
- 712              		.loc 1 136 1 is_stmt 1 view -0
- 713              		.cfi_startproc
- 714              		@ args = 0, pretend = 0, frame = 0
- 715              		@ frame_needed = 0, uses_anonymous_args = 0
- 716 0000 10B5     		push	{r4, lr}
- 717              	.LCFI10:
- 718              		.cfi_def_cfa_offset 8
- 719              		.cfi_offset 4, -8
- 720              		.cfi_offset 14, -4
- 137:IO_drivers/rtc.c ****     status = GetTime_DS3231 ();
- 721              		.loc 1 137 2 view .LVU188
- 137:IO_drivers/rtc.c ****     status = GetTime_DS3231 ();
- 722              		.loc 1 137 9 is_stmt 0 view .LVU189
- 723 0002 0B4C     		ldr	r4, .L56
- 724 0004 0023     		movs	r3, #0
- 725 0006 2370     		strb	r3, [r4]
- 138:IO_drivers/rtc.c **** 
- 726              		.loc 1 138 5 is_stmt 1 view .LVU190
- 138:IO_drivers/rtc.c **** 
- 727              		.loc 1 138 14 is_stmt 0 view .LVU191
- 728 0008 FFF7FEFF 		bl	GetTime_DS3231
- 729              	.LVL55:
- 138:IO_drivers/rtc.c **** 
- 730              		.loc 1 138 12 view .LVU192
- 731 000c 2070     		strb	r0, [r4]
- 140:IO_drivers/rtc.c **** 	{	
- 732              		.loc 1 140 2 is_stmt 1 view .LVU193
- 140:IO_drivers/rtc.c **** 	{	
- 733              		.loc 1 140 5 is_stmt 0 view .LVU194
- 734 000e 08B1     		cbz	r0, .L55
- 147:IO_drivers/rtc.c **** 
- 735              		.loc 1 147 11 view .LVU195
- 736 0010 0020     		movs	r0, #0
- 737              	.L51:
- 149:IO_drivers/rtc.c **** 
- 738              		.loc 1 149 1 view .LVU196
- 739 0012 10BD     		pop	{r4, pc}
-ARM GAS  /tmp/ccAGdX81.s 			page 19
+ 743              		.loc 1 68 1 view .LVU194
+ 744              		.align	2
+ 745              	.L49:
+ 746 0020 00000000 		.word	.LANCHOR1
+ 747              		.cfi_endproc
+ 748              	.LFE818:
+ 750              		.section	.text.GetUnixTime_from_DS3231,"ax",%progbits
+ 751              		.align	1
+ 752              		.global	GetUnixTime_from_DS3231
+ 753              		.syntax unified
+ 754              		.thumb
+ 755              		.thumb_func
+ 757              	GetUnixTime_from_DS3231:
+ 758              	.LFB825:
+ 142:IO_drivers/rtc.c **** 	status = I2C_OK;
+ 759              		.loc 1 142 1 is_stmt 1 view -0
+ 760              		.cfi_startproc
+ 761              		@ args = 0, pretend = 0, frame = 0
+ 762              		@ frame_needed = 0, uses_anonymous_args = 0
+ 763 0000 10B5     		push	{r4, lr}
+ 764              	.LCFI12:
+ 765              		.cfi_def_cfa_offset 8
+ 766              		.cfi_offset 4, -8
+ 767              		.cfi_offset 14, -4
+ 143:IO_drivers/rtc.c ****     status = GetTime_DS3231 ();
+ 768              		.loc 1 143 2 view .LVU196
+ 143:IO_drivers/rtc.c ****     status = GetTime_DS3231 ();
+ 769              		.loc 1 143 9 is_stmt 0 view .LVU197
+ 770 0002 0B4C     		ldr	r4, .L56
+ 771 0004 0023     		movs	r3, #0
+ 772 0006 2370     		strb	r3, [r4]
+ 144:IO_drivers/rtc.c **** 
+ 773              		.loc 1 144 5 is_stmt 1 view .LVU198
+ 144:IO_drivers/rtc.c **** 
+ 774              		.loc 1 144 14 is_stmt 0 view .LVU199
+ 775 0008 FFF7FEFF 		bl	GetTime_DS3231
+ 776              	.LVL58:
+ 144:IO_drivers/rtc.c **** 
+ 777              		.loc 1 144 12 view .LVU200
+ 778 000c 2070     		strb	r0, [r4]
+ 146:IO_drivers/rtc.c **** 	{	
+ 779              		.loc 1 146 2 is_stmt 1 view .LVU201
+ 146:IO_drivers/rtc.c **** 	{	
+ 780              		.loc 1 146 5 is_stmt 0 view .LVU202
+ARM GAS  /tmp/ccBVJHev.s 			page 20
 
 
- 740              	.L55:
- 142:IO_drivers/rtc.c **** 		CalcUNIXtime_from_DS3231 (&data.DS3231_UNIXtime, data.DS3231_getdata);  //расчёт UNIX вр�
- 741              		.loc 1 142 3 is_stmt 1 view .LVU197
- 742 0014 074C     		ldr	r4, .L56+4
- 743 0016 0322     		movs	r2, #3
- 744 0018 2146     		mov	r1, r4
- 745 001a 04F10C00 		add	r0, r4, #12
- 746 001e FFF7FEFF 		bl	convert_time
- 747              	.LVL56:
- 143:IO_drivers/rtc.c **** 		return data.DS3231_UNIXtime;
- 748              		.loc 1 143 3 view .LVU198
- 749 0022 2146     		mov	r1, r4
- 750 0024 04F11400 		add	r0, r4, #20
- 751 0028 FFF7FEFF 		bl	CalcUNIXtime_from_DS3231
- 752              	.LVL57:
- 144:IO_drivers/rtc.c **** 	}
- 753              		.loc 1 144 3 view .LVU199
- 144:IO_drivers/rtc.c **** 	}
- 754              		.loc 1 144 14 is_stmt 0 view .LVU200
- 755 002c 6069     		ldr	r0, [r4, #20]
- 756 002e F0E7     		b	.L51
- 757              	.L57:
- 758              		.align	2
- 759              	.L56:
- 760 0030 00000000 		.word	.LANCHOR1
- 761 0034 00000000 		.word	.LANCHOR2
- 762              		.cfi_endproc
- 763              	.LFE825:
- 765              		.section	.text.PrepareSendTimedata_to_DS3231,"ax",%progbits
- 766              		.align	1
- 767              		.global	PrepareSendTimedata_to_DS3231
- 768              		.syntax unified
- 769              		.thumb
- 770              		.thumb_func
- 772              	PrepareSendTimedata_to_DS3231:
- 773              	.LVL58:
- 774              	.LFB828:
- 169:IO_drivers/rtc.c **** 
- 170:IO_drivers/rtc.c **** //------------перевод UNIX времени в структуру и запись получе
- 171:IO_drivers/rtc.c **** uint8_t PrepareSendTimedata_to_DS3231 (uint32_t UART_UnixTime)
- 172:IO_drivers/rtc.c **** {
- 775              		.loc 1 172 1 is_stmt 1 view -0
- 776              		.cfi_startproc
- 777              		@ args = 0, pretend = 0, frame = 0
- 778              		@ frame_needed = 0, uses_anonymous_args = 0
- 779              		.loc 1 172 1 is_stmt 0 view .LVU202
- 780 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
- 781              	.LCFI11:
- 782              		.cfi_def_cfa_offset 24
- 783              		.cfi_offset 3, -24
- 784              		.cfi_offset 4, -20
- 785              		.cfi_offset 5, -16
- 786              		.cfi_offset 6, -12
- 787              		.cfi_offset 7, -8
- 788              		.cfi_offset 14, -4
- 173:IO_drivers/rtc.c **** 	status = I2C_OK;
- 789              		.loc 1 173 2 is_stmt 1 view .LVU203
-ARM GAS  /tmp/ccAGdX81.s 			page 20
+ 781 000e 08B1     		cbz	r0, .L55
+ 153:IO_drivers/rtc.c **** 
+ 782              		.loc 1 153 11 view .LVU203
+ 783 0010 0020     		movs	r0, #0
+ 784              	.L51:
+ 155:IO_drivers/rtc.c **** 
+ 785              		.loc 1 155 1 view .LVU204
+ 786 0012 10BD     		pop	{r4, pc}
+ 787              	.L55:
+ 148:IO_drivers/rtc.c **** 		CalcUNIXtime_from_DS3231 (&data.DS3231_UNIXtime, data.DS3231_getdata);  //расчёт UNIX вр�
+ 788              		.loc 1 148 3 is_stmt 1 view .LVU205
+ 789 0014 074C     		ldr	r4, .L56+4
+ 790 0016 0322     		movs	r2, #3
+ 791 0018 2146     		mov	r1, r4
+ 792 001a 04F10C00 		add	r0, r4, #12
+ 793 001e FFF7FEFF 		bl	convert_time
+ 794              	.LVL59:
+ 149:IO_drivers/rtc.c **** 		return data.DS3231_UNIXtime;
+ 795              		.loc 1 149 3 view .LVU206
+ 796 0022 2146     		mov	r1, r4
+ 797 0024 04F11400 		add	r0, r4, #20
+ 798 0028 FFF7FEFF 		bl	CalcUNIXtime_from_DS3231
+ 799              	.LVL60:
+ 150:IO_drivers/rtc.c **** 	}
+ 800              		.loc 1 150 3 view .LVU207
+ 150:IO_drivers/rtc.c **** 	}
+ 801              		.loc 1 150 14 is_stmt 0 view .LVU208
+ 802 002c 6069     		ldr	r0, [r4, #20]
+ 803 002e F0E7     		b	.L51
+ 804              	.L57:
+ 805              		.align	2
+ 806              	.L56:
+ 807 0030 00000000 		.word	.LANCHOR1
+ 808 0034 00000000 		.word	.LANCHOR2
+ 809              		.cfi_endproc
+ 810              	.LFE825:
+ 812              		.section	.text.PrepareSendTimedata_to_DS3231,"ax",%progbits
+ 813              		.align	1
+ 814              		.global	PrepareSendTimedata_to_DS3231
+ 815              		.syntax unified
+ 816              		.thumb
+ 817              		.thumb_func
+ 819              	PrepareSendTimedata_to_DS3231:
+ 820              	.LVL61:
+ 821              	.LFB828:
+ 175:IO_drivers/rtc.c **** 
+ 176:IO_drivers/rtc.c **** //------------перевод UNIX времени в структуру и запись получе
+ 177:IO_drivers/rtc.c **** uint8_t PrepareSendTimedata_to_DS3231 (uint32_t UART_UnixTime)
+ 178:IO_drivers/rtc.c **** {
+ 822              		.loc 1 178 1 is_stmt 1 view -0
+ 823              		.cfi_startproc
+ 824              		@ args = 0, pretend = 0, frame = 0
+ 825              		@ frame_needed = 0, uses_anonymous_args = 0
+ 826              		.loc 1 178 1 is_stmt 0 view .LVU210
+ 827 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 828              	.LCFI13:
+ 829              		.cfi_def_cfa_offset 24
+ARM GAS  /tmp/ccBVJHev.s 			page 21
 
 
- 790              		.loc 1 173 9 is_stmt 0 view .LVU204
- 791 0002 0D4C     		ldr	r4, .L60
- 792 0004 0026     		movs	r6, #0
- 793 0006 2670     		strb	r6, [r4]
- 174:IO_drivers/rtc.c **** 	CalcTimeStamp_from_UART (UART_UnixTime);
- 794              		.loc 1 174 2 is_stmt 1 view .LVU205
- 795 0008 FFF7FEFF 		bl	CalcTimeStamp_from_UART
- 796              	.LVL59:
- 175:IO_drivers/rtc.c **** 	copy_TMdata(data.DS3231_putdata);
- 797              		.loc 1 175 2 view .LVU206
- 798 000c 0B4D     		ldr	r5, .L60+4
- 799 000e AF1D     		adds	r7, r5, #6
- 800 0010 3846     		mov	r0, r7
- 801 0012 FFF7FEFF 		bl	copy_TMdata
- 802              	.LVL60:
- 176:IO_drivers/rtc.c ****     status = SetTimeDS3231 (RTC_ADDRESS, FIRST_REGISTR_TIME, TIME_NUMBER, data.DS3231_putdata);
- 803              		.loc 1 176 5 view .LVU207
- 804              		.loc 1 176 14 is_stmt 0 view .LVU208
- 805 0016 3B46     		mov	r3, r7
- 806 0018 0322     		movs	r2, #3
- 807 001a 3146     		mov	r1, r6
- 808 001c D020     		movs	r0, #208
- 809 001e FFF7FEFF 		bl	SetTimeDS3231
- 810              	.LVL61:
- 811              		.loc 1 176 12 view .LVU209
- 812 0022 2070     		strb	r0, [r4]
- 177:IO_drivers/rtc.c ****     status = SetTimeDS3231 (RTC_ADDRESS, FIRST_REGISTR_DATE, TIME_NUMBER, data.DS3231_putdata+3);
- 813              		.loc 1 177 5 is_stmt 1 view .LVU210
- 814              		.loc 1 177 14 is_stmt 0 view .LVU211
- 815 0024 05F10903 		add	r3, r5, #9
- 816 0028 0322     		movs	r2, #3
- 817 002a 0421     		movs	r1, #4
- 818 002c D020     		movs	r0, #208
- 819 002e FFF7FEFF 		bl	SetTimeDS3231
- 820              	.LVL62:
- 821              		.loc 1 177 12 view .LVU212
- 822 0032 2070     		strb	r0, [r4]
- 178:IO_drivers/rtc.c **** 	return status;
- 823              		.loc 1 178 2 is_stmt 1 view .LVU213
- 179:IO_drivers/rtc.c **** }
- 824              		.loc 1 179 1 is_stmt 0 view .LVU214
- 825 0034 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
- 826              	.L61:
- 827 0036 00BF     		.align	2
- 828              	.L60:
- 829 0038 00000000 		.word	.LANCHOR1
- 830 003c 00000000 		.word	.LANCHOR2
- 831              		.cfi_endproc
- 832              	.LFE828:
- 834              		.section	.text.return_HandleTimeBuff,"ax",%progbits
- 835              		.align	1
- 836              		.global	return_HandleTimeBuff
- 837              		.syntax unified
- 838              		.thumb
- 839              		.thumb_func
- 841              	return_HandleTimeBuff:
- 842              	.LFB829:
-ARM GAS  /tmp/ccAGdX81.s 			page 21
+ 830              		.cfi_offset 3, -24
+ 831              		.cfi_offset 4, -20
+ 832              		.cfi_offset 5, -16
+ 833              		.cfi_offset 6, -12
+ 834              		.cfi_offset 7, -8
+ 835              		.cfi_offset 14, -4
+ 179:IO_drivers/rtc.c **** 	status = I2C_OK;
+ 836              		.loc 1 179 2 is_stmt 1 view .LVU211
+ 837              		.loc 1 179 9 is_stmt 0 view .LVU212
+ 838 0002 0D4C     		ldr	r4, .L60
+ 839 0004 0026     		movs	r6, #0
+ 840 0006 2670     		strb	r6, [r4]
+ 180:IO_drivers/rtc.c **** 	CalcTimeStamp_from_UART (UART_UnixTime);
+ 841              		.loc 1 180 2 is_stmt 1 view .LVU213
+ 842 0008 FFF7FEFF 		bl	CalcTimeStamp_from_UART
+ 843              	.LVL62:
+ 181:IO_drivers/rtc.c **** 	copy_TMdata(data.DS3231_putdata);
+ 844              		.loc 1 181 2 view .LVU214
+ 845 000c 0B4D     		ldr	r5, .L60+4
+ 846 000e AF1D     		adds	r7, r5, #6
+ 847 0010 3846     		mov	r0, r7
+ 848 0012 FFF7FEFF 		bl	copy_TMdata
+ 849              	.LVL63:
+ 182:IO_drivers/rtc.c **** 
+ 183:IO_drivers/rtc.c ****     status = SetTimeDS3231 (RTC_ADDRESS, FIRST_REGISTR_TIME, TIME_NUMBER, data.DS3231_putdata);
+ 850              		.loc 1 183 5 view .LVU215
+ 851              		.loc 1 183 14 is_stmt 0 view .LVU216
+ 852 0016 3B46     		mov	r3, r7
+ 853 0018 0322     		movs	r2, #3
+ 854 001a 3146     		mov	r1, r6
+ 855 001c D020     		movs	r0, #208
+ 856 001e FFF7FEFF 		bl	SetTimeDS3231
+ 857              	.LVL64:
+ 858              		.loc 1 183 12 view .LVU217
+ 859 0022 2070     		strb	r0, [r4]
+ 184:IO_drivers/rtc.c ****     status = SetTimeDS3231 (RTC_ADDRESS, FIRST_REGISTR_DATE, TIME_NUMBER, data.DS3231_putdata+3);
+ 860              		.loc 1 184 5 is_stmt 1 view .LVU218
+ 861              		.loc 1 184 14 is_stmt 0 view .LVU219
+ 862 0024 05F10903 		add	r3, r5, #9
+ 863 0028 0322     		movs	r2, #3
+ 864 002a 0421     		movs	r1, #4
+ 865 002c D020     		movs	r0, #208
+ 866 002e FFF7FEFF 		bl	SetTimeDS3231
+ 867              	.LVL65:
+ 868              		.loc 1 184 12 view .LVU220
+ 869 0032 2070     		strb	r0, [r4]
+ 185:IO_drivers/rtc.c **** 	return status;
+ 870              		.loc 1 185 2 is_stmt 1 view .LVU221
+ 186:IO_drivers/rtc.c **** }
+ 871              		.loc 1 186 1 is_stmt 0 view .LVU222
+ 872 0034 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 873              	.L61:
+ 874 0036 00BF     		.align	2
+ 875              	.L60:
+ 876 0038 00000000 		.word	.LANCHOR1
+ 877 003c 00000000 		.word	.LANCHOR2
+ 878              		.cfi_endproc
+ARM GAS  /tmp/ccBVJHev.s 			page 22
 
 
- 180:IO_drivers/rtc.c **** 
- 181:IO_drivers/rtc.c **** //----------возврат указателя на символьный массив с данны�
- 182:IO_drivers/rtc.c **** char * return_HandleTimeBuff (void)
- 183:IO_drivers/rtc.c **** {
- 843              		.loc 1 183 1 is_stmt 1 view -0
- 844              		.cfi_startproc
- 845              		@ args = 0, pretend = 0, frame = 0
- 846              		@ frame_needed = 0, uses_anonymous_args = 0
- 847              		@ link register save eliminated.
- 184:IO_drivers/rtc.c **** 	return data.time; 
- 848              		.loc 1 184 2 view .LVU216
- 185:IO_drivers/rtc.c **** }
- 849              		.loc 1 185 1 is_stmt 0 view .LVU217
- 850 0000 0048     		ldr	r0, .L63
- 851 0002 7047     		bx	lr
- 852              	.L64:
- 853              		.align	2
- 854              	.L63:
- 855 0004 0C000000 		.word	.LANCHOR2+12
- 856              		.cfi_endproc
- 857              	.LFE829:
- 859              		.global	pred_sum
- 860              		.global	status
- 861              		.global	data
- 862              		.global	TimeStamp
- 863              		.section	.bss.TimeStamp,"aw",%nobits
- 864              		.align	2
- 865              		.set	.LANCHOR0,. + 0
- 868              	TimeStamp:
- 869 0000 00000000 		.space	36
- 869      00000000 
- 869      00000000 
- 869      00000000 
- 869      00000000 
- 870              		.section	.bss.data,"aw",%nobits
- 871              		.align	2
- 872              		.set	.LANCHOR2,. + 0
- 875              	data:
- 876 0000 00000000 		.space	24
- 876      00000000 
- 876      00000000 
- 876      00000000 
- 876      00000000 
- 877              		.section	.bss.status,"aw",%nobits
- 878              		.set	.LANCHOR1,. + 0
- 881              	status:
- 882 0000 00       		.space	1
- 883              		.section	.rodata.pred_sum,"a"
- 884              		.align	2
- 887              	pred_sum:
- 888 0000 00000000 		.word	0
- 889 0004 1F000000 		.word	31
- 890 0008 3B000000 		.word	59
- 891 000c 5A000000 		.word	90
- 892 0010 78000000 		.word	120
- 893 0014 97000000 		.word	151
- 894 0018 B5000000 		.word	181
-ARM GAS  /tmp/ccAGdX81.s 			page 22
+ 879              	.LFE828:
+ 881              		.section	.text.return_HandleTimeBuff,"ax",%progbits
+ 882              		.align	1
+ 883              		.global	return_HandleTimeBuff
+ 884              		.syntax unified
+ 885              		.thumb
+ 886              		.thumb_func
+ 888              	return_HandleTimeBuff:
+ 889              	.LFB829:
+ 187:IO_drivers/rtc.c **** 
+ 188:IO_drivers/rtc.c **** //----------возврат указателя на символьный массив с данны�
+ 189:IO_drivers/rtc.c **** char * return_HandleTimeBuff (void)
+ 190:IO_drivers/rtc.c **** {
+ 890              		.loc 1 190 1 is_stmt 1 view -0
+ 891              		.cfi_startproc
+ 892              		@ args = 0, pretend = 0, frame = 0
+ 893              		@ frame_needed = 0, uses_anonymous_args = 0
+ 894              		@ link register save eliminated.
+ 191:IO_drivers/rtc.c **** 	return data.time; 
+ 895              		.loc 1 191 2 view .LVU224
+ 192:IO_drivers/rtc.c **** }
+ 896              		.loc 1 192 1 is_stmt 0 view .LVU225
+ 897 0000 0048     		ldr	r0, .L63
+ 898 0002 7047     		bx	lr
+ 899              	.L64:
+ 900              		.align	2
+ 901              	.L63:
+ 902 0004 0C000000 		.word	.LANCHOR2+12
+ 903              		.cfi_endproc
+ 904              	.LFE829:
+ 906              		.global	pred_sum
+ 907              		.global	status
+ 908              		.global	data
+ 909              		.global	TimeStamp
+ 910              		.section	.bss.TimeStamp,"aw",%nobits
+ 911              		.align	2
+ 912              		.set	.LANCHOR0,. + 0
+ 915              	TimeStamp:
+ 916 0000 00000000 		.space	36
+ 916      00000000 
+ 916      00000000 
+ 916      00000000 
+ 916      00000000 
+ 917              		.section	.bss.data,"aw",%nobits
+ 918              		.align	2
+ 919              		.set	.LANCHOR2,. + 0
+ 922              	data:
+ 923 0000 00000000 		.space	24
+ 923      00000000 
+ 923      00000000 
+ 923      00000000 
+ 923      00000000 
+ 924              		.section	.bss.status,"aw",%nobits
+ 925              		.set	.LANCHOR1,. + 0
+ 928              	status:
+ 929 0000 00       		.space	1
+ 930              		.section	.rodata.pred_sum,"a"
+ARM GAS  /tmp/ccBVJHev.s 			page 23
 
 
- 895 001c D4000000 		.word	212
- 896 0020 F3000000 		.word	243
- 897 0024 11010000 		.word	273
- 898 0028 30010000 		.word	304
- 899 002c 4E010000 		.word	334
- 900 0030 00000000 		.word	0
- 901 0034 1F000000 		.word	31
- 902 0038 3C000000 		.word	60
- 903 003c 5B000000 		.word	91
- 904 0040 79000000 		.word	121
- 905 0044 98000000 		.word	152
- 906 0048 B6000000 		.word	182
- 907 004c D5000000 		.word	213
- 908 0050 F4000000 		.word	244
- 909 0054 12010000 		.word	274
- 910 0058 31010000 		.word	305
- 911 005c 4F010000 		.word	335
- 912              		.text
- 913              	.Letext0:
- 914              		.file 2 "/home/arashamf/soft/ARM_toolchains/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/m
- 915              		.file 3 "/home/arashamf/soft/ARM_toolchains/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/s
- 916              		.file 4 "Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h"
- 917              		.file 5 "Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_tim.h"
- 918              		.file 6 "Core/Inc/i2c.h"
- 919              		.file 7 "Core/Inc/typedef.h"
- 920              		.file 8 "/home/arashamf/soft/ARM_toolchains/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/t
- 921              		.file 9 "timer64/time64.h"
-ARM GAS  /tmp/ccAGdX81.s 			page 23
+ 931              		.align	2
+ 934              	pred_sum:
+ 935 0000 00000000 		.word	0
+ 936 0004 1F000000 		.word	31
+ 937 0008 3B000000 		.word	59
+ 938 000c 5A000000 		.word	90
+ 939 0010 78000000 		.word	120
+ 940 0014 97000000 		.word	151
+ 941 0018 B5000000 		.word	181
+ 942 001c D4000000 		.word	212
+ 943 0020 F3000000 		.word	243
+ 944 0024 11010000 		.word	273
+ 945 0028 30010000 		.word	304
+ 946 002c 4E010000 		.word	334
+ 947 0030 00000000 		.word	0
+ 948 0034 1F000000 		.word	31
+ 949 0038 3C000000 		.word	60
+ 950 003c 5B000000 		.word	91
+ 951 0040 79000000 		.word	121
+ 952 0044 98000000 		.word	152
+ 953 0048 B6000000 		.word	182
+ 954 004c D5000000 		.word	213
+ 955 0050 F4000000 		.word	244
+ 956 0054 12010000 		.word	274
+ 957 0058 31010000 		.word	305
+ 958 005c 4F010000 		.word	335
+ 959              		.text
+ 960              	.Letext0:
+ 961              		.file 2 "/home/arashamf/soft/ARM_toolchains/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/m
+ 962              		.file 3 "/home/arashamf/soft/ARM_toolchains/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/s
+ 963              		.file 4 "Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h"
+ 964              		.file 5 "Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_tim.h"
+ 965              		.file 6 "Core/Inc/i2c.h"
+ 966              		.file 7 "Core/Inc/typedef.h"
+ 967              		.file 8 "/home/arashamf/soft/ARM_toolchains/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/t
+ 968              		.file 9 "Core/Inc/usart.h"
+ 969              		.file 10 "timer64/time64.h"
+ 970              		.file 11 "/home/arashamf/soft/ARM_toolchains/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/
+ARM GAS  /tmp/ccBVJHev.s 			page 24
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 rtc.c
-     /tmp/ccAGdX81.s:18     .text.RTC_ConvertToDec:0000000000000000 $t
-     /tmp/ccAGdX81.s:23     .text.RTC_ConvertToDec:0000000000000000 RTC_ConvertToDec
-     /tmp/ccAGdX81.s:51     .text.RTC_ConvertToBinDec:0000000000000000 $t
-     /tmp/ccAGdX81.s:56     .text.RTC_ConvertToBinDec:0000000000000000 RTC_ConvertToBinDec
-     /tmp/ccAGdX81.s:88     .text.RTC_ConvertToBinDec:000000000000001c $d
-     /tmp/ccAGdX81.s:93     .text.convert_time:0000000000000000 $t
-     /tmp/ccAGdX81.s:98     .text.convert_time:0000000000000000 convert_time
-     /tmp/ccAGdX81.s:178    .text.convert_time:0000000000000050 $d
-     /tmp/ccAGdX81.s:183    .text.copy_TMdata:0000000000000000 $t
-     /tmp/ccAGdX81.s:188    .text.copy_TMdata:0000000000000000 copy_TMdata
-     /tmp/ccAGdX81.s:236    .text.copy_TMdata:0000000000000020 $d
-     /tmp/ccAGdX81.s:241    .text.GetDataDS3231:0000000000000000 $t
-     /tmp/ccAGdX81.s:246    .text.GetDataDS3231:0000000000000000 GetDataDS3231
-     /tmp/ccAGdX81.s:348    .text.GetDataDS3231:0000000000000044 $d
-     /tmp/ccAGdX81.s:354    .text.GetTime_DS3231:0000000000000000 $t
-     /tmp/ccAGdX81.s:359    .text.GetTime_DS3231:0000000000000000 GetTime_DS3231
-     /tmp/ccAGdX81.s:403    .text.GetTime_DS3231:0000000000000028 $d
-     /tmp/ccAGdX81.s:409    .text.CalcUNIXtime_from_DS3231:0000000000000000 $t
-     /tmp/ccAGdX81.s:414    .text.CalcUNIXtime_from_DS3231:0000000000000000 CalcUNIXtime_from_DS3231
-     /tmp/ccAGdX81.s:478    .text.CalcUNIXtime_from_DS3231:000000000000002c $d
-     /tmp/ccAGdX81.s:483    .text.CalcTimeStamp_from_UART:0000000000000000 $t
-     /tmp/ccAGdX81.s:488    .text.CalcTimeStamp_from_UART:0000000000000000 CalcTimeStamp_from_UART
-     /tmp/ccAGdX81.s:536    .text.CalcTimeStamp_from_UART:0000000000000030 $d
-     /tmp/ccAGdX81.s:541    .text.SetTimeDS3231:0000000000000000 $t
-     /tmp/ccAGdX81.s:546    .text.SetTimeDS3231:0000000000000000 SetTimeDS3231
-     /tmp/ccAGdX81.s:638    .text.SetTimeDS3231:0000000000000040 $d
-     /tmp/ccAGdX81.s:643    .text.GetTempDS3231:0000000000000000 $t
-     /tmp/ccAGdX81.s:649    .text.GetTempDS3231:0000000000000000 GetTempDS3231
-     /tmp/ccAGdX81.s:699    .text.GetTempDS3231:0000000000000020 $d
-     /tmp/ccAGdX81.s:704    .text.GetUnixTime_from_DS3231:0000000000000000 $t
-     /tmp/ccAGdX81.s:710    .text.GetUnixTime_from_DS3231:0000000000000000 GetUnixTime_from_DS3231
-     /tmp/ccAGdX81.s:760    .text.GetUnixTime_from_DS3231:0000000000000030 $d
-     /tmp/ccAGdX81.s:766    .text.PrepareSendTimedata_to_DS3231:0000000000000000 $t
-     /tmp/ccAGdX81.s:772    .text.PrepareSendTimedata_to_DS3231:0000000000000000 PrepareSendTimedata_to_DS3231
-     /tmp/ccAGdX81.s:829    .text.PrepareSendTimedata_to_DS3231:0000000000000038 $d
-     /tmp/ccAGdX81.s:835    .text.return_HandleTimeBuff:0000000000000000 $t
-     /tmp/ccAGdX81.s:841    .text.return_HandleTimeBuff:0000000000000000 return_HandleTimeBuff
-     /tmp/ccAGdX81.s:855    .text.return_HandleTimeBuff:0000000000000004 $d
-     /tmp/ccAGdX81.s:887    .rodata.pred_sum:0000000000000000 pred_sum
-     /tmp/ccAGdX81.s:881    .bss.status:0000000000000000 status
-     /tmp/ccAGdX81.s:875    .bss.data:0000000000000000 data
-     /tmp/ccAGdX81.s:868    .bss.TimeStamp:0000000000000000 TimeStamp
-     /tmp/ccAGdX81.s:864    .bss.TimeStamp:0000000000000000 $d
-     /tmp/ccAGdX81.s:871    .bss.data:0000000000000000 $d
-     /tmp/ccAGdX81.s:882    .bss.status:0000000000000000 $d
-     /tmp/ccAGdX81.s:884    .rodata.pred_sum:0000000000000000 $d
+     /tmp/ccBVJHev.s:18     .text.RTC_ConvertToDec:0000000000000000 $t
+     /tmp/ccBVJHev.s:23     .text.RTC_ConvertToDec:0000000000000000 RTC_ConvertToDec
+     /tmp/ccBVJHev.s:51     .text.RTC_ConvertToBinDec:0000000000000000 $t
+     /tmp/ccBVJHev.s:56     .text.RTC_ConvertToBinDec:0000000000000000 RTC_ConvertToBinDec
+     /tmp/ccBVJHev.s:88     .text.RTC_ConvertToBinDec:000000000000001c $d
+     /tmp/ccBVJHev.s:93     .text.convert_time:0000000000000000 $t
+     /tmp/ccBVJHev.s:98     .text.convert_time:0000000000000000 convert_time
+     /tmp/ccBVJHev.s:178    .text.convert_time:0000000000000050 $d
+     /tmp/ccBVJHev.s:183    .text.copy_TMdata:0000000000000000 $t
+     /tmp/ccBVJHev.s:188    .text.copy_TMdata:0000000000000000 copy_TMdata
+     /tmp/ccBVJHev.s:236    .text.copy_TMdata:0000000000000020 $d
+     /tmp/ccBVJHev.s:241    .text.GetDataDS3231:0000000000000000 $t
+     /tmp/ccBVJHev.s:246    .text.GetDataDS3231:0000000000000000 GetDataDS3231
+     /tmp/ccBVJHev.s:348    .text.GetDataDS3231:0000000000000044 $d
+     /tmp/ccBVJHev.s:354    .text.GetTime_DS3231:0000000000000000 $t
+     /tmp/ccBVJHev.s:359    .text.GetTime_DS3231:0000000000000000 GetTime_DS3231
+     /tmp/ccBVJHev.s:403    .text.GetTime_DS3231:0000000000000028 $d
+     /tmp/ccBVJHev.s:409    .rodata.CalcUNIXtime_from_DS3231.str1.4:0000000000000000 $d
+     /tmp/ccBVJHev.s:413    .text.CalcUNIXtime_from_DS3231:0000000000000000 $t
+     /tmp/ccBVJHev.s:418    .text.CalcUNIXtime_from_DS3231:0000000000000000 CalcUNIXtime_from_DS3231
+     /tmp/ccBVJHev.s:523    .text.CalcUNIXtime_from_DS3231:000000000000005c $d
+     /tmp/ccBVJHev.s:530    .text.CalcTimeStamp_from_UART:0000000000000000 $t
+     /tmp/ccBVJHev.s:535    .text.CalcTimeStamp_from_UART:0000000000000000 CalcTimeStamp_from_UART
+     /tmp/ccBVJHev.s:583    .text.CalcTimeStamp_from_UART:0000000000000030 $d
+     /tmp/ccBVJHev.s:588    .text.SetTimeDS3231:0000000000000000 $t
+     /tmp/ccBVJHev.s:593    .text.SetTimeDS3231:0000000000000000 SetTimeDS3231
+     /tmp/ccBVJHev.s:685    .text.SetTimeDS3231:0000000000000040 $d
+     /tmp/ccBVJHev.s:690    .text.GetTempDS3231:0000000000000000 $t
+     /tmp/ccBVJHev.s:696    .text.GetTempDS3231:0000000000000000 GetTempDS3231
+     /tmp/ccBVJHev.s:746    .text.GetTempDS3231:0000000000000020 $d
+     /tmp/ccBVJHev.s:751    .text.GetUnixTime_from_DS3231:0000000000000000 $t
+     /tmp/ccBVJHev.s:757    .text.GetUnixTime_from_DS3231:0000000000000000 GetUnixTime_from_DS3231
+     /tmp/ccBVJHev.s:807    .text.GetUnixTime_from_DS3231:0000000000000030 $d
+     /tmp/ccBVJHev.s:813    .text.PrepareSendTimedata_to_DS3231:0000000000000000 $t
+     /tmp/ccBVJHev.s:819    .text.PrepareSendTimedata_to_DS3231:0000000000000000 PrepareSendTimedata_to_DS3231
+     /tmp/ccBVJHev.s:876    .text.PrepareSendTimedata_to_DS3231:0000000000000038 $d
+     /tmp/ccBVJHev.s:882    .text.return_HandleTimeBuff:0000000000000000 $t
+     /tmp/ccBVJHev.s:888    .text.return_HandleTimeBuff:0000000000000000 return_HandleTimeBuff
+     /tmp/ccBVJHev.s:902    .text.return_HandleTimeBuff:0000000000000004 $d
+     /tmp/ccBVJHev.s:934    .rodata.pred_sum:0000000000000000 pred_sum
+     /tmp/ccBVJHev.s:928    .bss.status:0000000000000000 status
+     /tmp/ccBVJHev.s:922    .bss.data:0000000000000000 data
+     /tmp/ccBVJHev.s:915    .bss.TimeStamp:0000000000000000 TimeStamp
+     /tmp/ccBVJHev.s:911    .bss.TimeStamp:0000000000000000 $d
+     /tmp/ccBVJHev.s:918    .bss.data:0000000000000000 $d
+     /tmp/ccBVJHev.s:929    .bss.status:0000000000000000 $d
+     /tmp/ccBVJHev.s:931    .rodata.pred_sum:0000000000000000 $d
 
 UNDEFINED SYMBOLS
 I2C_ReadBuffer
+snprintf
+DBG_PutString
 mktime64
+DBG_buffer
 gmtime64_r
+ARM GAS  /tmp/ccBVJHev.s 			page 25
+
+
 I2C_WriteBuffer
 I2C_ReadByte

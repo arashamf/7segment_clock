@@ -29,7 +29,6 @@ extern "C" {
 #include "main.h"
 
 /* USER CODE BEGIN Includes */
-
 /* USER CODE END Includes */
 
 /* USER CODE BEGIN Private defines */
@@ -57,7 +56,6 @@ void MX_GPIO_Init(void);
 #define NUMBER_3(x) ((x)? (LL_GPIO_SetOutputPin (A3_GPIO_Port, A3_Pin)) : (LL_GPIO_ResetOutputPin (A3_GPIO_Port, A3_Pin)))
 #define NUMBER_4(x) ((x)? (LL_GPIO_SetOutputPin (A4_GPIO_Port, A4_Pin)) : (LL_GPIO_ResetOutputPin (A4_GPIO_Port, A4_Pin)))
 #define NUMBER_5(x) ((x)? (LL_GPIO_SetOutputPin (A5_GPIO_Port, A5_Pin)) : (LL_GPIO_ResetOutputPin (A5_GPIO_Port, A5_Pin)))
-
 
 /* USER CODE END Prototypes */
 

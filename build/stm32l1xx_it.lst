@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccl9zzO1.s 			page 1
+ARM GAS  /tmp/ccREkuJ1.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccl9zzO1.s 			page 1
   30:Core/Src/stm32l1xx_it.c **** 
   31:Core/Src/stm32l1xx_it.c **** /* USER CODE END TD */
   32:Core/Src/stm32l1xx_it.c **** 
-ARM GAS  /tmp/ccl9zzO1.s 			page 2
+ARM GAS  /tmp/ccREkuJ1.s 			page 2
 
 
   33:Core/Src/stm32l1xx_it.c **** /* Private define ------------------------------------------------------------*/
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccl9zzO1.s 			page 1
   79:Core/Src/stm32l1xx_it.c ****   }
   35              		.loc 1 79 3 discriminator 1 view .LVU2
   77:Core/Src/stm32l1xx_it.c ****   {
-ARM GAS  /tmp/ccl9zzO1.s 			page 3
+ARM GAS  /tmp/ccREkuJ1.s 			page 3
 
 
   36              		.loc 1 77 10 discriminator 1 view .LVU3
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccl9zzO1.s 			page 1
  100:Core/Src/stm32l1xx_it.c ****   */
  101:Core/Src/stm32l1xx_it.c **** void MemManage_Handler(void)
  102:Core/Src/stm32l1xx_it.c **** {
-ARM GAS  /tmp/ccl9zzO1.s 			page 4
+ARM GAS  /tmp/ccREkuJ1.s 			page 4
 
 
   73              		.loc 1 102 1 view -0
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccl9zzO1.s 			page 1
  121:Core/Src/stm32l1xx_it.c ****   {
  105              		.loc 1 121 9 discriminator 1 view .LVU15
  106 0000 FEE7     		b	.L8
-ARM GAS  /tmp/ccl9zzO1.s 			page 5
+ARM GAS  /tmp/ccREkuJ1.s 			page 5
 
 
  107              		.cfi_endproc
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccl9zzO1.s 			page 1
  142              		.loc 1 147 1 view -0
  143              		.cfi_startproc
  144              		@ args = 0, pretend = 0, frame = 0
-ARM GAS  /tmp/ccl9zzO1.s 			page 6
+ARM GAS  /tmp/ccREkuJ1.s 			page 6
 
 
  145              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccl9zzO1.s 			page 1
    2:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   ******************************************************************************
    3:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   * @file    stm32l1xx_ll_usart.h
    4:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   * @author  MCD Application Team
-ARM GAS  /tmp/ccl9zzO1.s 			page 7
+ARM GAS  /tmp/ccREkuJ1.s 			page 7
 
 
    5:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   * @brief   Header file of USART LL module.
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccl9zzO1.s 			page 1
   59:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h **** /**
   60:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   * @}
   61:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   */
-ARM GAS  /tmp/ccl9zzO1.s 			page 8
+ARM GAS  /tmp/ccREkuJ1.s 			page 8
 
 
   62:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h **** #endif /*USE_FULL_LL_DRIVER*/
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccl9zzO1.s 			page 1
  116:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   uint32_t ClockOutput;               /*!< Specifies whether the USART clock is enabled or disabled
  117:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****                                            This parameter can be a value of @ref USART_LL_EC_CLOCK.
  118:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h **** 
-ARM GAS  /tmp/ccl9zzO1.s 			page 9
+ARM GAS  /tmp/ccREkuJ1.s 			page 9
 
 
  119:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****                                            USART HW configuration can be modified afterwards using 
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccl9zzO1.s 			page 1
  173:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   * @brief    IT defines which can be used with LL_USART_ReadReg and  LL_USART_WriteReg functions
  174:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   * @{
  175:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   */
-ARM GAS  /tmp/ccl9zzO1.s 			page 10
+ARM GAS  /tmp/ccREkuJ1.s 			page 10
 
 
  176:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h **** #define LL_USART_CR1_IDLEIE                     USART_CR1_IDLEIE              /*!< IDLE interrupt e
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccl9zzO1.s 			page 1
  230:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h **** #define LL_USART_OVERSAMPLING_16                0x00000000U            /*!< Oversampling by 16 */
  231:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h **** #define LL_USART_OVERSAMPLING_8                 USART_CR1_OVER8        /*!< Oversampling by 8 */
  232:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h **** /**
-ARM GAS  /tmp/ccl9zzO1.s 			page 11
+ARM GAS  /tmp/ccREkuJ1.s 			page 11
 
 
  233:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   * @}
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccl9zzO1.s 			page 1
  287:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   * @{
  288:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   */
  289:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h **** #define LL_USART_HWCONTROL_NONE                 0x00000000U                          /*!< CTS and R
-ARM GAS  /tmp/ccl9zzO1.s 			page 12
+ARM GAS  /tmp/ccREkuJ1.s 			page 12
 
 
  290:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h **** #define LL_USART_HWCONTROL_RTS                  USART_CR3_RTSE                       /*!< RTS outpu
@@ -718,7 +718,7 @@ ARM GAS  /tmp/ccl9zzO1.s 			page 1
  344:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h **** /**
  345:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   * @}
  346:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   */
-ARM GAS  /tmp/ccl9zzO1.s 			page 13
+ARM GAS  /tmp/ccREkuJ1.s 			page 13
 
 
  347:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h **** 
@@ -778,7 +778,7 @@ ARM GAS  /tmp/ccl9zzO1.s 			page 1
  401:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   * @{
  402:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   */
  403:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h **** 
-ARM GAS  /tmp/ccl9zzO1.s 			page 14
+ARM GAS  /tmp/ccREkuJ1.s 			page 14
 
 
  404:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h **** /**
@@ -838,7 +838,7 @@ ARM GAS  /tmp/ccl9zzO1.s 			page 1
  458:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h **** {
  459:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   ATOMIC_CLEAR_BIT(USARTx->CR1, USART_CR1_RE);
  460:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h **** }
-ARM GAS  /tmp/ccl9zzO1.s 			page 15
+ARM GAS  /tmp/ccREkuJ1.s 			page 15
 
 
  461:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h **** 
@@ -898,7 +898,7 @@ ARM GAS  /tmp/ccl9zzO1.s 			page 1
  515:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   return (uint32_t)(READ_BIT(USARTx->CR1, USART_CR1_RE | USART_CR1_TE));
  516:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h **** }
  517:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h **** 
-ARM GAS  /tmp/ccl9zzO1.s 			page 16
+ARM GAS  /tmp/ccREkuJ1.s 			page 16
 
 
  518:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h **** /**
@@ -958,7 +958,7 @@ ARM GAS  /tmp/ccl9zzO1.s 			page 1
  572:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   *         @arg @ref LL_USART_WAKEUP_ADDRESSMARK
  573:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   */
  574:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h **** __STATIC_INLINE uint32_t LL_USART_GetWakeUpMethod(const USART_TypeDef *USARTx)
-ARM GAS  /tmp/ccl9zzO1.s 			page 17
+ARM GAS  /tmp/ccREkuJ1.s 			page 17
 
 
  575:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h **** {
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/ccl9zzO1.s 			page 1
  629:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h **** {
  630:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   return (uint32_t)(READ_BIT(USARTx->CR1, USART_CR1_OVER8));
  631:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h **** }
-ARM GAS  /tmp/ccl9zzO1.s 			page 18
+ARM GAS  /tmp/ccREkuJ1.s 			page 18
 
 
  632:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h **** 
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/ccl9zzO1.s 			page 1
  686:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   * @param  USARTx USART Instance
  687:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   * @retval Returned value can be one of the following values:
  688:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   *         @arg @ref LL_USART_PHASE_1EDGE
-ARM GAS  /tmp/ccl9zzO1.s 			page 19
+ARM GAS  /tmp/ccREkuJ1.s 			page 19
 
 
  689:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   *         @arg @ref LL_USART_PHASE_2EDGE
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/ccl9zzO1.s 			page 1
  743:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   *         @arg @ref LL_USART_POLARITY_LOW
  744:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   *         @arg @ref LL_USART_POLARITY_HIGH
  745:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   * @param  LBCPOutput This parameter can be one of the following values:
-ARM GAS  /tmp/ccl9zzO1.s 			page 20
+ARM GAS  /tmp/ccREkuJ1.s 			page 20
 
 
  746:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   *         @arg @ref LL_USART_LASTCLKPULSE_NO_OUTPUT
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/ccl9zzO1.s 			page 1
  800:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   *         @arg @ref LL_USART_STOPBITS_1
  801:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   *         @arg @ref LL_USART_STOPBITS_1_5
  802:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   *         @arg @ref LL_USART_STOPBITS_2
-ARM GAS  /tmp/ccl9zzO1.s 			page 21
+ARM GAS  /tmp/ccREkuJ1.s 			page 21
 
 
  803:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   * @retval None
@@ -1258,7 +1258,7 @@ ARM GAS  /tmp/ccl9zzO1.s 			page 1
  857:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h **** /**
  858:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   * @brief  Set Address of the USART node.
  859:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   * @note   This is used in multiprocessor communication during Mute mode or Stop mode,
-ARM GAS  /tmp/ccl9zzO1.s 			page 22
+ARM GAS  /tmp/ccREkuJ1.s 			page 22
 
 
  860:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   *         for wake up with address mark detection.
@@ -1318,7 +1318,7 @@ ARM GAS  /tmp/ccl9zzO1.s 			page 1
  914:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   * @param  USARTx USART Instance
  915:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   * @retval None
  916:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   */
-ARM GAS  /tmp/ccl9zzO1.s 			page 23
+ARM GAS  /tmp/ccREkuJ1.s 			page 23
 
 
  917:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h **** __STATIC_INLINE void LL_USART_EnableCTSHWFlowCtrl(USART_TypeDef *USARTx)
@@ -1378,7 +1378,7 @@ ARM GAS  /tmp/ccl9zzO1.s 			page 1
  971:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h **** 
  972:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h **** /**
  973:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   * @brief  Enable One bit sampling method
-ARM GAS  /tmp/ccl9zzO1.s 			page 24
+ARM GAS  /tmp/ccREkuJ1.s 			page 24
 
 
  974:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   * @rmtoll CR3          ONEBIT        LL_USART_EnableOneBitSamp
@@ -1438,7 +1438,7 @@ ARM GAS  /tmp/ccl9zzO1.s 			page 1
 1028:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   {
 1029:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****     USARTx->BRR = (uint16_t)(__LL_USART_DIV_SAMPLING16(PeriphClk, BaudRate));
 1030:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   }
-ARM GAS  /tmp/ccl9zzO1.s 			page 25
+ARM GAS  /tmp/ccREkuJ1.s 			page 25
 
 
 1031:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h **** }
@@ -1498,7 +1498,7 @@ ARM GAS  /tmp/ccl9zzO1.s 			page 1
 1085:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   */
 1086:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h **** __STATIC_INLINE void LL_USART_EnableIrda(USART_TypeDef *USARTx)
 1087:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h **** {
-ARM GAS  /tmp/ccl9zzO1.s 			page 26
+ARM GAS  /tmp/ccREkuJ1.s 			page 26
 
 
 1088:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   SET_BIT(USARTx->CR3, USART_CR3_IREN);
@@ -1558,7 +1558,7 @@ ARM GAS  /tmp/ccl9zzO1.s 			page 1
 1142:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   */
 1143:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h **** __STATIC_INLINE uint32_t LL_USART_GetIrdaPowerMode(const USART_TypeDef *USARTx)
 1144:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h **** {
-ARM GAS  /tmp/ccl9zzO1.s 			page 27
+ARM GAS  /tmp/ccREkuJ1.s 			page 27
 
 
 1145:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   return (uint32_t)(READ_BIT(USARTx->CR3, USART_CR3_IRLP));
@@ -1618,7 +1618,7 @@ ARM GAS  /tmp/ccl9zzO1.s 			page 1
 1199:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   * @brief  Disable Smartcard NACK transmission
 1200:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   * @note   Macro IS_SMARTCARD_INSTANCE(USARTx) can be used to check whether or not
 1201:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   *         Smartcard feature is supported by the USARTx instance.
-ARM GAS  /tmp/ccl9zzO1.s 			page 28
+ARM GAS  /tmp/ccREkuJ1.s 			page 28
 
 
 1202:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   * @rmtoll CR3          NACK          LL_USART_DisableSmartcardNACK
@@ -1678,7 +1678,7 @@ ARM GAS  /tmp/ccl9zzO1.s 			page 1
 1256:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   * @retval State of bit (1 or 0).
 1257:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   */
 1258:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h **** __STATIC_INLINE uint32_t LL_USART_IsEnabledSmartcard(const USART_TypeDef *USARTx)
-ARM GAS  /tmp/ccl9zzO1.s 			page 29
+ARM GAS  /tmp/ccREkuJ1.s 			page 29
 
 
 1259:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h **** {
@@ -1738,7 +1738,7 @@ ARM GAS  /tmp/ccl9zzO1.s 			page 1
 1313:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   * @param  USARTx USART Instance
 1314:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   * @retval Smartcard Guard time value (Value between Min_Data=0x00 and Max_Data=0xFF)
 1315:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   */
-ARM GAS  /tmp/ccl9zzO1.s 			page 30
+ARM GAS  /tmp/ccREkuJ1.s 			page 30
 
 
 1316:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h **** __STATIC_INLINE uint32_t LL_USART_GetSmartcardGuardTime(const USART_TypeDef *USARTx)
@@ -1798,7 +1798,7 @@ ARM GAS  /tmp/ccl9zzO1.s 			page 1
 1370:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   */
 1371:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h **** 
 1372:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h **** /** @defgroup USART_LL_EF_Configuration_LIN Configuration functions related to LIN feature
-ARM GAS  /tmp/ccl9zzO1.s 			page 31
+ARM GAS  /tmp/ccREkuJ1.s 			page 31
 
 
 1373:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   * @{
@@ -1858,7 +1858,7 @@ ARM GAS  /tmp/ccl9zzO1.s 			page 1
 1427:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   */
 1428:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h **** __STATIC_INLINE void LL_USART_DisableLIN(USART_TypeDef *USARTx)
 1429:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h **** {
-ARM GAS  /tmp/ccl9zzO1.s 			page 32
+ARM GAS  /tmp/ccREkuJ1.s 			page 32
 
 
 1430:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   CLEAR_BIT(USARTx->CR2, USART_CR2_LINEN);
@@ -1918,7 +1918,7 @@ ARM GAS  /tmp/ccl9zzO1.s 			page 1
 1484:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   CLEAR_BIT(USARTx->CR2, (USART_CR2_LINEN | USART_CR2_CLKEN));
 1485:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   CLEAR_BIT(USARTx->CR3, (USART_CR3_SCEN | USART_CR3_IREN | USART_CR3_HDSEL));
 1486:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h **** }
-ARM GAS  /tmp/ccl9zzO1.s 			page 33
+ARM GAS  /tmp/ccREkuJ1.s 			page 33
 
 
 1487:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h **** 
@@ -1978,7 +1978,7 @@ ARM GAS  /tmp/ccl9zzO1.s 			page 1
 1541:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   *         - Clear HDSEL in CR3 using @ref LL_USART_DisableHalfDuplex() function
 1542:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   *         - Set LINEN in CR2 using @ref LL_USART_EnableLIN() function
 1543:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   * @note   Other remaining configurations items related to LIN Mode
-ARM GAS  /tmp/ccl9zzO1.s 			page 34
+ARM GAS  /tmp/ccREkuJ1.s 			page 34
 
 
 1544:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   *         (as Baud Rate, Word length, LIN Break Detection Length, ...) should be set using
@@ -2038,7 +2038,7 @@ ARM GAS  /tmp/ccl9zzO1.s 			page 1
 1598:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   CLEAR_BIT(USARTx->CR2, (USART_CR2_LINEN | USART_CR2_CLKEN));
 1599:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   CLEAR_BIT(USARTx->CR3, (USART_CR3_SCEN | USART_CR3_IREN));
 1600:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   /* set the UART/USART in Half Duplex mode */
-ARM GAS  /tmp/ccl9zzO1.s 			page 35
+ARM GAS  /tmp/ccREkuJ1.s 			page 35
 
 
 1601:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   SET_BIT(USARTx->CR3, USART_CR3_HDSEL);
@@ -2098,7 +2098,7 @@ ARM GAS  /tmp/ccl9zzO1.s 			page 1
 1655:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   * @note   Macro IS_IRDA_INSTANCE(USARTx) can be used to check whether or not
 1656:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   *         IrDA feature is supported by the USARTx instance.
 1657:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   * @note   Call of this function is equivalent to following function call sequence :
-ARM GAS  /tmp/ccl9zzO1.s 			page 36
+ARM GAS  /tmp/ccREkuJ1.s 			page 36
 
 
 1658:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   *         - Clear LINEN in CR2 using @ref LL_USART_DisableLIN() function
@@ -2158,7 +2158,7 @@ ARM GAS  /tmp/ccl9zzO1.s 			page 1
 1712:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   * @retval None
 1713:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   */
 1714:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h **** __STATIC_INLINE void LL_USART_ConfigMultiProcessMode(USART_TypeDef *USARTx)
-ARM GAS  /tmp/ccl9zzO1.s 			page 37
+ARM GAS  /tmp/ccREkuJ1.s 			page 37
 
 
 1715:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h **** {
@@ -2218,7 +2218,7 @@ ARM GAS  /tmp/ccl9zzO1.s 			page 1
 1769:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   */
 1770:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h **** __STATIC_INLINE uint32_t LL_USART_IsActiveFlag_ORE(const USART_TypeDef *USARTx)
 1771:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h **** {
-ARM GAS  /tmp/ccl9zzO1.s 			page 38
+ARM GAS  /tmp/ccREkuJ1.s 			page 38
 
 
 1772:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   return (READ_BIT(USARTx->SR, USART_SR_ORE) == (USART_SR_ORE));
@@ -2278,7 +2278,7 @@ ARM GAS  /tmp/ccl9zzO1.s 			page 1
 1798:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   * @brief  Check if the USART Transmission Complete Flag is set or not
 1799:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   * @rmtoll SR           TC            LL_USART_IsActiveFlag_TC
 1800:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   * @param  USARTx USART Instance
-ARM GAS  /tmp/ccl9zzO1.s 			page 39
+ARM GAS  /tmp/ccREkuJ1.s 			page 39
 
 
 1801:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   * @retval State of bit (1 or 0).
@@ -2338,7 +2338,7 @@ ARM GAS  /tmp/ccl9zzO1.s 			page 1
 1855:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h **** 
 1856:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h **** /**
 1857:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   * @brief  Check if the USART Receive Wake Up from mute mode Flag is set or not
-ARM GAS  /tmp/ccl9zzO1.s 			page 40
+ARM GAS  /tmp/ccREkuJ1.s 			page 40
 
 
 1858:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   * @rmtoll CR1          RWU           LL_USART_IsActiveFlag_RWU
@@ -2398,7 +2398,7 @@ ARM GAS  /tmp/ccl9zzO1.s 			page 1
 1912:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   * @param  USARTx USART Instance
 1913:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   * @retval None
 1914:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   */
-ARM GAS  /tmp/ccl9zzO1.s 			page 41
+ARM GAS  /tmp/ccREkuJ1.s 			page 41
 
 
 1915:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h **** __STATIC_INLINE void LL_USART_ClearFlag_NE(USART_TypeDef *USARTx)
@@ -2458,7 +2458,7 @@ ARM GAS  /tmp/ccl9zzO1.s 			page 1
 1969:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h **** {
 1970:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h ****   WRITE_REG(USARTx->SR, ~(USART_SR_TC));
 1971:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h **** }
-ARM GAS  /tmp/ccl9zzO1.s 			page 42
+ARM GAS  /tmp/ccREkuJ1.s 			page 42
 
 
 1972:Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h **** 
@@ -2518,7 +2518,7 @@ ARM GAS  /tmp/ccl9zzO1.s 			page 1
  235              		.cfi_offset 14, -4
  185:Core/Src/stm32l1xx_it.c ****   /* USER CODE BEGIN TIM6_IRQn 0 */
  186:Core/Src/stm32l1xx_it.c **** 
-ARM GAS  /tmp/ccl9zzO1.s 			page 43
+ARM GAS  /tmp/ccREkuJ1.s 			page 43
 
 
  187:Core/Src/stm32l1xx_it.c ****   /* USER CODE END TIM6_IRQn 0 */
@@ -2550,29 +2550,29 @@ ARM GAS  /tmp/ccl9zzO1.s 			page 1
  257              		.file 9 "Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h"
  258              		.file 10 "Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_tim.h"
  259              		.file 11 "Core/Inc/usart.h"
-ARM GAS  /tmp/ccl9zzO1.s 			page 44
+ARM GAS  /tmp/ccREkuJ1.s 			page 44
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 stm32l1xx_it.c
-     /tmp/ccl9zzO1.s:18     .text.NMI_Handler:0000000000000000 $t
-     /tmp/ccl9zzO1.s:24     .text.NMI_Handler:0000000000000000 NMI_Handler
-     /tmp/ccl9zzO1.s:42     .text.HardFault_Handler:0000000000000000 $t
-     /tmp/ccl9zzO1.s:48     .text.HardFault_Handler:0000000000000000 HardFault_Handler
-     /tmp/ccl9zzO1.s:65     .text.MemManage_Handler:0000000000000000 $t
-     /tmp/ccl9zzO1.s:71     .text.MemManage_Handler:0000000000000000 MemManage_Handler
-     /tmp/ccl9zzO1.s:88     .text.BusFault_Handler:0000000000000000 $t
-     /tmp/ccl9zzO1.s:94     .text.BusFault_Handler:0000000000000000 BusFault_Handler
-     /tmp/ccl9zzO1.s:111    .text.UsageFault_Handler:0000000000000000 $t
-     /tmp/ccl9zzO1.s:117    .text.UsageFault_Handler:0000000000000000 UsageFault_Handler
-     /tmp/ccl9zzO1.s:134    .text.DebugMon_Handler:0000000000000000 $t
-     /tmp/ccl9zzO1.s:140    .text.DebugMon_Handler:0000000000000000 DebugMon_Handler
-     /tmp/ccl9zzO1.s:153    .text.USART1_IRQHandler:0000000000000000 $t
-     /tmp/ccl9zzO1.s:159    .text.USART1_IRQHandler:0000000000000000 USART1_IRQHandler
-     /tmp/ccl9zzO1.s:214    .text.USART1_IRQHandler:000000000000001c $d
-     /tmp/ccl9zzO1.s:219    .text.TIM6_IRQHandler:0000000000000000 $t
-     /tmp/ccl9zzO1.s:225    .text.TIM6_IRQHandler:0000000000000000 TIM6_IRQHandler
-     /tmp/ccl9zzO1.s:245    .text.TIM6_IRQHandler:000000000000000c $d
+     /tmp/ccREkuJ1.s:18     .text.NMI_Handler:0000000000000000 $t
+     /tmp/ccREkuJ1.s:24     .text.NMI_Handler:0000000000000000 NMI_Handler
+     /tmp/ccREkuJ1.s:42     .text.HardFault_Handler:0000000000000000 $t
+     /tmp/ccREkuJ1.s:48     .text.HardFault_Handler:0000000000000000 HardFault_Handler
+     /tmp/ccREkuJ1.s:65     .text.MemManage_Handler:0000000000000000 $t
+     /tmp/ccREkuJ1.s:71     .text.MemManage_Handler:0000000000000000 MemManage_Handler
+     /tmp/ccREkuJ1.s:88     .text.BusFault_Handler:0000000000000000 $t
+     /tmp/ccREkuJ1.s:94     .text.BusFault_Handler:0000000000000000 BusFault_Handler
+     /tmp/ccREkuJ1.s:111    .text.UsageFault_Handler:0000000000000000 $t
+     /tmp/ccREkuJ1.s:117    .text.UsageFault_Handler:0000000000000000 UsageFault_Handler
+     /tmp/ccREkuJ1.s:134    .text.DebugMon_Handler:0000000000000000 $t
+     /tmp/ccREkuJ1.s:140    .text.DebugMon_Handler:0000000000000000 DebugMon_Handler
+     /tmp/ccREkuJ1.s:153    .text.USART1_IRQHandler:0000000000000000 $t
+     /tmp/ccREkuJ1.s:159    .text.USART1_IRQHandler:0000000000000000 USART1_IRQHandler
+     /tmp/ccREkuJ1.s:214    .text.USART1_IRQHandler:000000000000001c $d
+     /tmp/ccREkuJ1.s:219    .text.TIM6_IRQHandler:0000000000000000 $t
+     /tmp/ccREkuJ1.s:225    .text.TIM6_IRQHandler:0000000000000000 TIM6_IRQHandler
+     /tmp/ccREkuJ1.s:245    .text.TIM6_IRQHandler:000000000000000c $d
 
 UNDEFINED SYMBOLS
 UART_CharReception_Callback

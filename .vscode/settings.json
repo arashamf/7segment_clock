@@ -63,6 +63,9 @@
         "typedef.h": "c",
         "usart.h": "c",
         "stdio.h": "c",
-        "time_protocol.h": "c"
+        "time_protocol.h": "c",
+        "bitset": "c",
+        "chrono": "c",
+        "algorithm": "c"
     }
 }
